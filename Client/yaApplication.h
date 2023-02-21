@@ -22,6 +22,14 @@ namespace ya
 		HWND mHwnd;
 		HDC mHdc;
 
+		// 백버퍼
+		HBITMAP mBackBuffer;
+		HDC mBackHdc;
+
+		// 해상도
+		UINT mWidth;
+		UINT mHeight;
+
 		Vector2 mPos;
 	};
 }
