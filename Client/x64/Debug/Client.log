@@ -1,0 +1,14 @@
+﻿  yaApplication.cpp
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMath.h(16,7): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMath.h(17,7): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  yaMessageOnCursur.cpp
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMath.h(16,7): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMath.h(17,7): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(30,20): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(31,20): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(45,55): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(45,41): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(45,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\Client\yaMessageOnCursur.cpp(45,22): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  Client.vcxproj -> C:\Users\leebh\Desktop\어소트락\WinAPI\WinAPI\x64\Debug\Client.exe

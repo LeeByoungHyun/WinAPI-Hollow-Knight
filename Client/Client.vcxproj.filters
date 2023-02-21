@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{746b46bf-8f80-487e-82be-5bee9181c874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{87717b6d-6213-4dde-b2f5-9563e8b958f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{a6566301-8b41-49ed-a858-829fee67bc73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{1bdc5aa9-e413-49f4-bf8a-2cfde68c09b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\High Level interface">
+      <UniqueIdentifier>{b2193420-4131-4a43-9c69-cb64ccdddd8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Scene">
+      <UniqueIdentifier>{858b6d1d-481d-45d5-b31e-d3181108ec06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{9ad17739-051e-4569-a168-2ce03653b0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Layer">
+      <UniqueIdentifier>{3d88a3bc-f618-41ac-a580-e71d17a69040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{cc139d29-1dd9-4cea-a489-26494770e5d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{05328646-7174-40c6-8906-5379aba1b30c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes">
+      <UniqueIdentifier>{15293e48-db26-4049-a862-8e1203e2b38b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\TitleScene">
+      <UniqueIdentifier>{7a7f5fca-22a9-4098-bc2b-49fa06fd5950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\PlayScene">
+      <UniqueIdentifier>{eec00e91-033a-47d6-87ce-39bb4d384c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects">
+      <UniqueIdentifier>{7418d05b-f9f1-46d1-97c4-e156b8505bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Cuphead">
+      <UniqueIdentifier>{de7ee8a8-60ac-468e-934d-b0a32d36f2c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\MessageOnCursur">
+      <UniqueIdentifier>{80e3243c-75fa-499d-bd9c-b0e4a79cf10c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{31902e4b-e39f-47a1-a2f9-c24fc3c3b207}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Mugman">
+      <UniqueIdentifier>{b76ff0ea-5a38-459d-8316-d8b8c8c2f5dc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Client.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonInclude.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaEnums.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yamyamEngine.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMath.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaApplication.h">
+      <Filter>Engine\High Level interface</Filter>
+    </ClInclude>
+    <ClInclude Include="yaEntity.h">
+      <Filter>Engine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="yaScene.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSceneManager.h">
+      <Filter>Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLayer.h">
+      <Filter>Engine\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Contents\Scenes\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPlayScene.h">
+      <Filter>Contents\Scenes\PlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCuphead.h">
+      <Filter>Contents\Objects\Cuphead</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTime.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMessageOnCursur.h">
+      <Filter>Contents\Objects\MessageOnCursur</Filter>
+    </ClInclude>
+    <ClInclude Include="yaInput.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMugman.h">
+      <Filter>Contents\Objects\Mugman</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMath.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaApplication.cpp">
+      <Filter>Engine\High Level interface</Filter>
+    </ClCompile>
+    <ClCompile Include="yaEntity.cpp">
+      <Filter>Engine\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="yaScene.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSceneManager.cpp">
+      <Filter>Engine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLayer.cpp">
+      <Filter>Engine\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Contents\Scenes\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayScene.cpp">
+      <Filter>Contents\Scenes\PlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCuphead.cpp">
+      <Filter>Contents\Objects\Cuphead</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTime.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMessageOnCursur.cpp">
+      <Filter>Contents\Objects\MessageOnCursur</Filter>
+    </ClCompile>
+    <ClCompile Include="yaInput.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMugman.cpp">
+      <Filter>Contents\Objects\Mugman</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Client.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
