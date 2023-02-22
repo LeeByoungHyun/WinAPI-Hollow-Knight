@@ -59,6 +59,9 @@
     <Filter Include="Contents\Objects\Mugman">
       <UniqueIdentifier>{b76ff0ea-5a38-459d-8316-d8b8c8c2f5dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{5a15fc2f-b1fb-45fa-a72d-898889f30903}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -127,6 +130,15 @@
     <ClInclude Include="yaMugman.h">
       <Filter>Contents\Objects\Mugman</Filter>
     </ClInclude>
+    <ClInclude Include="yaResource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaResourceManager.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaImage.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -176,6 +188,15 @@
     </ClCompile>
     <ClCompile Include="yaMugman.cpp">
       <Filter>Contents\Objects\Mugman</Filter>
+    </ClCompile>
+    <ClCompile Include="yaResource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaResourceManager.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaImage.cpp">
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
