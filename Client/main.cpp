@@ -4,6 +4,8 @@
 #include "framework.h"
 #include "Client.h"
 #include "yaApplication.h"
+#include "yaSceneManager.h"
+#include "yaResourceManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -77,27 +79,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,         /* 실행 된 프로세�
         }
     }
 
-    // 기본 메시지 루프입니다:
-
-    // GetMessage
-    // 메세지 큐에서 메세지가 없으면 메세지가 확인될때까지 대기
-    // 게임을 만드는데는 어울리지 않는다
-    /*
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        // msg.message == WM_QUIT 인 경우 false 반환 -> 프로그램 종료
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
-    */
-
-    if (msg.message == WM_QUIT)
-    {
-        
-    }
+    ya::SceneManager::Release();
+    ya::ResourceManager::Release();
 
     return (int) msg.wParam;
 }

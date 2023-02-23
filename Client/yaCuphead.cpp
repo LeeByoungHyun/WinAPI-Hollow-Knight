@@ -2,6 +2,9 @@
 #include "yaTime.h"
 #include "yaInput.h"
 #include "yaResourceManager.h"
+#include "yaSceneManager.h"
+#include "yaTransform.h"
+
 
 namespace ya
 {
@@ -26,36 +29,44 @@ namespace ya
 	{
 		GameObject::Update();
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
 		if (Input::GetKeyState(eKeyCode::A) == eKeyState::Pressed)
 		{
-			mPos.x -= 100.0f * Time::DeltaTime();
+			pos.x -= 100.0f * Time::DeltaTime();
 
 		}
 
 		if (Input::GetKeyState(eKeyCode::D) == eKeyState::Pressed)
 		{
-			mPos.x += 100.0f * Time::DeltaTime();
+			pos.x += 100.0f * Time::DeltaTime();
 
 		}
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Pressed)
 		{
-			mPos.y -= 100.0f * Time::DeltaTime();
+			pos.y -= 100.0f * Time::DeltaTime();
 
 		}
 
 		if (Input::GetKeyState(eKeyCode::S) == eKeyState::Pressed)
 		{
-			mPos.y += 100.0f * Time::DeltaTime();
+			pos.y += 100.0f * Time::DeltaTime();
 
 		}
+
+		tr->SetPos(pos);
 	}
 
 	void Cuphead::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, mPos.x, mPos.y, mImage->GetWidth(), mImage->GetHeight() , mImage->GetHdc(), 0, 0, SRCCOPY);
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight() , mImage->GetHdc(), 0, 0, SRCCOPY);
 
 	}
 

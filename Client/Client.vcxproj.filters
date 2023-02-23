@@ -50,17 +50,17 @@
     <Filter Include="Contents\Objects\Cuphead">
       <UniqueIdentifier>{de7ee8a8-60ac-468e-934d-b0a32d36f2c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\MessageOnCursur">
-      <UniqueIdentifier>{80e3243c-75fa-499d-bd9c-b0e4a79cf10c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{31902e4b-e39f-47a1-a2f9-c24fc3c3b207}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Mugman">
-      <UniqueIdentifier>{b76ff0ea-5a38-459d-8316-d8b8c8c2f5dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Resource">
       <UniqueIdentifier>{5a15fc2f-b1fb-45fa-a72d-898889f30903}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Transform">
+      <UniqueIdentifier>{0e96e9fb-666e-4fd1-b3f0-2bd1c9c733a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\BackBoard">
+      <UniqueIdentifier>{d726dc2e-c03b-4ed9-a749-9bfbc8ef578d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +109,7 @@
     <ClInclude Include="yaLayer.h">
       <Filter>Engine\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
+    <ClInclude Include="yaTitleScene.h">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="yaPlayScene.h">
@@ -121,14 +121,8 @@
     <ClInclude Include="yaTime.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
-    <ClInclude Include="yaMessageOnCursur.h">
-      <Filter>Contents\Objects\MessageOnCursur</Filter>
-    </ClInclude>
     <ClInclude Include="yaInput.h">
       <Filter>Engine\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="yaMugman.h">
-      <Filter>Contents\Objects\Mugman</Filter>
     </ClInclude>
     <ClInclude Include="yaResource.h">
       <Filter>Engine\Resource</Filter>
@@ -138,6 +132,12 @@
     </ClInclude>
     <ClInclude Include="yaImage.h">
       <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTransform.h">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBackBoard.h">
+      <Filter>Contents\Objects\BackBoard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +168,7 @@
     <ClCompile Include="yaLayer.cpp">
       <Filter>Engine\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
+    <ClCompile Include="yaTitleScene.cpp">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="yaPlayScene.cpp">
@@ -180,14 +180,8 @@
     <ClCompile Include="yaTime.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
-    <ClCompile Include="yaMessageOnCursur.cpp">
-      <Filter>Contents\Objects\MessageOnCursur</Filter>
-    </ClCompile>
     <ClCompile Include="yaInput.cpp">
       <Filter>Engine\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="yaMugman.cpp">
-      <Filter>Contents\Objects\Mugman</Filter>
     </ClCompile>
     <ClCompile Include="yaResource.cpp">
       <Filter>Engine\Resource</Filter>
@@ -197,6 +191,12 @@
     </ClCompile>
     <ClCompile Include="yaImage.cpp">
       <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTransform.cpp">
+      <Filter>Engine\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBackBoard.cpp">
+      <Filter>Contents\Objects\BackBoard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

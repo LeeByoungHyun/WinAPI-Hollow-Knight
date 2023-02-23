@@ -49,4 +49,14 @@ namespace ya
 		mLayers[(UINT)layer].AddGameObject(obj);
 	}
 
+	void Scene::Enter()
+	{
+
+	}
+
+	void Scene::Exit()
+	{
+
+	}
+
 }

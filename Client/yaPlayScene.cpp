@@ -1,6 +1,7 @@
 #include "yaPlayScene.h"
 #include "yaCuphead.h"
-#include "yaMessageOnCursur.h"
+#include "yaSceneManager.h"
+#include "yaInput.h"
 
 namespace ya
 {
@@ -16,11 +17,9 @@ namespace ya
 
 	void PlayScene::Initialize()
 	{
-		Cuphead* cuphead = new Cuphead();
-		AddGameObject(cuphead, eLayerType::Player);
-
-		MessageOnCursur* mouse = new MessageOnCursur();
-		AddGameObject(mouse, eLayerType::Player);
+		mCuphead = new Cuphead();
+		AddGameObject(mCuphead, eLayerType::Player);
+		mCuphead->SetName(L"Player");
 
 		Scene::Initialize();
 	}
@@ -29,6 +28,10 @@ namespace ya
 	{
 		Scene::Update();
 
+		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Title);
+		}
 	}
 
 	void PlayScene::Render(HDC hdc)
@@ -40,6 +43,16 @@ namespace ya
 	void PlayScene::Release()
 	{
 		Scene::Release();
+
+	}
+
+	void PlayScene::Enter()
+	{
+
+	}
+
+	void PlayScene::Exit()
+	{
 
 	}
 }

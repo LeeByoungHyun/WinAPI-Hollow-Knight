@@ -1,4 +1,5 @@
 #pragma once
+#include "yaEntity.h"
 #include "yaGameObject.h"
 
 namespace ya

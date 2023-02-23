@@ -6,25 +6,31 @@ struct Vector2
 	float y;
 
 	Vector2()
+		: x(0.0f)
+		, y(0.0f)
 	{
-		x = 0.0f;
-		y = 0.0f;
+
 	}
 
 	Vector2(int _x, int _y)
+		: x(x)
+		, y(y)
 	{
-		x = _x;
-		y = _y;
+
 	}
 
-	Vector2(Vector2* other)
+	Vector2(float _x, float _y)
+		: x(x)
+		, y(y)
 	{
-		x = other->x;
-		y = other->y;
+
 	}
 
+	Vector2(const Vector2&) = default;
+	Vector2& operator=(const Vector2&) = default;
 
-
+	Vector2(Vector2&&) = default;
+	Vector2& operator=(Vector2&&) = default;
 
 };
 

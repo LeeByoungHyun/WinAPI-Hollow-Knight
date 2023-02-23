@@ -25,15 +25,4 @@ namespace ya
 
 	};
 
-	/*
-	class Image : public Resource
-	{
-
-	};
-
-	class Sound : public Resource
-	{
-
-	};
-	*/
 }

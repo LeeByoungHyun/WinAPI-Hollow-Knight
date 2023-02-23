@@ -9,7 +9,11 @@ namespace ya
 
 	Layer::~Layer()
 	{
-
+		for (GameObject* gameObj : mGameObjects)
+		{
+			delete gameObj;
+			gameObj = nullptr;
+		}
 	}
 
 	void Layer::Initialize()
