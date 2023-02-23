@@ -1,6 +1,7 @@
 #pragma once
 #include "yaScene.h"
 #include "yaBackBoard.h"
+#include "yaCursor.h"
 
 namespace ya
 {
@@ -17,6 +18,7 @@ namespace ya
 
 	private:
 		BackBoard* mBackBoard;
+		Cursor* mCursor;
 	};
 }
 

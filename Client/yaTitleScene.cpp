@@ -1,7 +1,6 @@
 #include "yaTitleScene.h"
 #include "yaInput.h"
 #include "yaSceneManager.h"
-#include "yaBackBoard.h"
 
 namespace ya
 {
@@ -21,11 +20,17 @@ namespace ya
 		AddGameObject(mBackBoard, eLayerType::BG);
 		mBackBoard->SetName(L"backBoard");
 
+		mCursor = new Cursor();
+		AddGameObject(mCursor, eLayerType::UI);
+		mCursor->SetName(L"cursor");
+
 		Scene::Initialize();
 	}
 
 	void TitleScene::Update()
 	{
+		Scene::Update();
+
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Play);

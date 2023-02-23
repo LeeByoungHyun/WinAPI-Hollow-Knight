@@ -1,6 +1,7 @@
 #pragma once
 #include "yaScene.h"
-#include "yaCuphead.h"
+#include "yaPlayer.h"
+#include "yaBackBoard.h"
 
 namespace ya
 {
@@ -20,7 +21,8 @@ namespace ya
 		virtual void Exit() override;
 
 	private:
-		Cuphead* mCuphead;
+		Player* mPlayer;
+		BackBoard* mBackBoard;
 	};
 }
 

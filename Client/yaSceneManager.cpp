@@ -18,7 +18,7 @@ namespace ya
         mScenes[(UINT)eSceneType::Title] = new TitleScene();
         mScenes[(UINT)eSceneType::Title]->SetName(L"TitleScene");
 
-        mActiveScene = mScenes[(UINT)eSceneType::Play];
+        mActiveScene = mScenes[(UINT)eSceneType::Title];
 
         for (Scene* scene : mScenes)
         {

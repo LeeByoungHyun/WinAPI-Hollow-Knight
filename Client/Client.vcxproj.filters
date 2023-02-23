@@ -47,9 +47,6 @@
     <Filter Include="Contents\Objects">
       <UniqueIdentifier>{7418d05b-f9f1-46d1-97c4-e156b8505bce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Cuphead">
-      <UniqueIdentifier>{de7ee8a8-60ac-468e-934d-b0a32d36f2c5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{31902e4b-e39f-47a1-a2f9-c24fc3c3b207}</UniqueIdentifier>
     </Filter>
@@ -61,6 +58,12 @@
     </Filter>
     <Filter Include="Contents\Objects\BackBoard">
       <UniqueIdentifier>{d726dc2e-c03b-4ed9-a749-9bfbc8ef578d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Player">
+      <UniqueIdentifier>{33bd0678-aa21-4031-ab0c-30f3d8bea85d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Cursor">
+      <UniqueIdentifier>{2caf598b-e7bc-444e-ad13-fc283498f741}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +118,6 @@
     <ClInclude Include="yaPlayScene.h">
       <Filter>Contents\Scenes\PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="yaCuphead.h">
-      <Filter>Contents\Objects\Cuphead</Filter>
-    </ClInclude>
     <ClInclude Include="yaTime.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
@@ -138,6 +138,12 @@
     </ClInclude>
     <ClInclude Include="yaBackBoard.h">
       <Filter>Contents\Objects\BackBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPlayer.h">
+      <Filter>Contents\Objects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCursor.h">
+      <Filter>Contents\Objects\Cursor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +180,6 @@
     <ClCompile Include="yaPlayScene.cpp">
       <Filter>Contents\Scenes\PlayScene</Filter>
     </ClCompile>
-    <ClCompile Include="yaCuphead.cpp">
-      <Filter>Contents\Objects\Cuphead</Filter>
-    </ClCompile>
     <ClCompile Include="yaTime.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
@@ -197,6 +200,12 @@
     </ClCompile>
     <ClCompile Include="yaBackBoard.cpp">
       <Filter>Contents\Objects\BackBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayer.cpp">
+      <Filter>Contents\Objects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCursor.cpp">
+      <Filter>Contents\Objects\Cursor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

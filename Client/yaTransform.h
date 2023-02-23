@@ -20,9 +20,6 @@ namespace ya
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 
-
-
-
 	private:
 		Vector2 mPos;
 		Vector2 mSize;

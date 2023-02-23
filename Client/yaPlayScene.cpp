@@ -1,7 +1,7 @@
 #include "yaPlayScene.h"
-#include "yaCuphead.h"
 #include "yaSceneManager.h"
 #include "yaInput.h"
+
 
 namespace ya
 {
@@ -17,9 +17,14 @@ namespace ya
 
 	void PlayScene::Initialize()
 	{
-		mCuphead = new Cuphead();
-		AddGameObject(mCuphead, eLayerType::Player);
-		mCuphead->SetName(L"Player");
+		// 게임오브젝트 추가는 이곳에
+		mPlayer = new Player();
+		AddGameObject(mPlayer, eLayerType::Player);
+		mPlayer->SetName(L"Player");
+
+		mBackBoard = new BackBoard();
+		AddGameObject(mBackBoard, eLayerType::BG);
+		mBackBoard->SetName(L"backboard");
 
 		Scene::Initialize();
 	}
