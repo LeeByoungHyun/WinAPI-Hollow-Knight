@@ -16,7 +16,6 @@ namespace ya
 
 	void TitleScene::Initialize()
 	{
-
 		mMenuBG = new MenuBG();
 		AddGameObject(mMenuBG, eLayerType::BG);
 		mMenuBG->SetName(L"MenuBG");
@@ -40,15 +39,26 @@ namespace ya
 		{
 			SceneManager::LoadScene(eSceneType::MainHall);
 		}
+
+		
 	}
 
 	void TitleScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
 	}
 
 	void TitleScene::Release()
+	{
+		Scene::Release();
+	}
+
+	void TitleScene::Enter()
+	{
+
+	}
+
+	void TitleScene::Exit()
 	{
 
 	}

@@ -34,7 +34,7 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 0, 0, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, -30, -30, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void Backboard::Release()

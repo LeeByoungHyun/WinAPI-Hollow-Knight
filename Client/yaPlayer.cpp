@@ -5,7 +5,6 @@
 #include "yaSceneManager.h"
 #include "yaTransform.h"
 
-
 namespace ya
 {
 	Player::Player()
@@ -35,25 +34,21 @@ namespace ya
 		if (Input::GetKeyState(eKeyCode::A) == eKeyState::Pressed)
 		{
 			pos.x -= 100.0f * Time::DeltaTime();
-
 		}
 
 		if (Input::GetKeyState(eKeyCode::D) == eKeyState::Pressed)
 		{
 			pos.x += 100.0f * Time::DeltaTime();
-
 		}
 
 		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Pressed)
 		{
 			pos.y -= 100.0f * Time::DeltaTime();
-
 		}
 
 		if (Input::GetKeyState(eKeyCode::S) == eKeyState::Pressed)
 		{
 			pos.y += 100.0f * Time::DeltaTime();
-
 		}
 
 		tr->SetPos(pos);
@@ -75,4 +70,12 @@ namespace ya
 		GameObject::Release();
 
 	}
+
+	/*
+	void Player::SetPos(Vector2 pos)
+	{
+		tr = GetComponent<Transform>();
+		tr->SetPos(pos);
+	}
+	*/
 }

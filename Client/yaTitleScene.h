@@ -5,7 +5,6 @@
 #include "yaCursor.h"
 #include "yaMenuTitle.h"
 
-
 namespace ya
 {
 	class TitleScene : public Scene
@@ -18,6 +17,9 @@ namespace ya
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+
+		virtual void Enter() override;
+		virtual void Exit() override;
 
 	private:
 		MenuBG* mMenuBG;

@@ -18,6 +18,8 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		// void SetPos(Vector2 pos);
+
 	private:
 		Image* mImage;
 		Transform* tr;

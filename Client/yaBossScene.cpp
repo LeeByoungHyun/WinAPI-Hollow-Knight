@@ -37,6 +37,11 @@ namespace ya
 		{
 			SceneManager::LoadScene(eSceneType::MainHall);
 		}
+
+		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Title);
+		}
 	}
 
 	void BossScene::Render(HDC hdc)
@@ -53,11 +58,11 @@ namespace ya
 
 	void BossScene::Enter()
 	{
-
+		Scene::Enter();
 	}
 
 	void BossScene::Exit()
 	{
-
+		Scene::Exit();
 	}
 }
