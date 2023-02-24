@@ -3,7 +3,9 @@
 enum class eSceneType
 {
 	Title,
-	Play,
+	MainHall,
+	Romm1,
+	Boss,
 	Ending,
 	End
 };

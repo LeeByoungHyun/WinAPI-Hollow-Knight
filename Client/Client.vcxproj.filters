@@ -41,9 +41,6 @@
     <Filter Include="Contents\Scenes\TitleScene">
       <UniqueIdentifier>{7a7f5fca-22a9-4098-bc2b-49fa06fd5950}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scenes\PlayScene">
-      <UniqueIdentifier>{eec00e91-033a-47d6-87ce-39bb4d384c43}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects">
       <UniqueIdentifier>{7418d05b-f9f1-46d1-97c4-e156b8505bce}</UniqueIdentifier>
     </Filter>
@@ -56,14 +53,32 @@
     <Filter Include="Engine\Component\Transform">
       <UniqueIdentifier>{0e96e9fb-666e-4fd1-b3f0-2bd1c9c733a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\BackBoard">
-      <UniqueIdentifier>{d726dc2e-c03b-4ed9-a749-9bfbc8ef578d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects\Player">
       <UniqueIdentifier>{33bd0678-aa21-4031-ab0c-30f3d8bea85d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Objects\Cursor">
       <UniqueIdentifier>{2caf598b-e7bc-444e-ad13-fc283498f741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\menu_BG">
+      <UniqueIdentifier>{d05532e2-c454-494d-b314-5643dc744493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\backboard">
+      <UniqueIdentifier>{ad9049c2-3f8c-4986-8300-074182bce96f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\menu_title">
+      <UniqueIdentifier>{7fb95708-5933-4f22-9bb4-f93e9f672f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\GrimRoom_BG">
+      <UniqueIdentifier>{16fa389a-6a44-47e3-886c-5731de99f579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\MainHallScene">
+      <UniqueIdentifier>{e8d86363-73f2-428d-a40a-d0b8ec2b2ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\BossScene">
+      <UniqueIdentifier>{eec00e91-033a-47d6-87ce-39bb4d384c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\Room1Scene">
+      <UniqueIdentifier>{d868db69-3b8b-4a6f-866d-c2a49c1a3ee8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,8 +130,8 @@
     <ClInclude Include="yaTitleScene.h">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="yaPlayScene.h">
-      <Filter>Contents\Scenes\PlayScene</Filter>
+    <ClInclude Include="yaBossScene.h">
+      <Filter>Contents\Scenes\BossScene</Filter>
     </ClInclude>
     <ClInclude Include="yaTime.h">
       <Filter>Engine\Time</Filter>
@@ -136,14 +151,26 @@
     <ClInclude Include="yaTransform.h">
       <Filter>Engine\Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="yaBackBoard.h">
-      <Filter>Contents\Objects\BackBoard</Filter>
-    </ClInclude>
     <ClInclude Include="yaPlayer.h">
       <Filter>Contents\Objects\Player</Filter>
     </ClInclude>
     <ClInclude Include="yaCursor.h">
       <Filter>Contents\Objects\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMenuBG.h">
+      <Filter>Contents\Objects\menu_BG</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMenuTitle.h">
+      <Filter>Contents\Objects\menu_title</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBackboard.h">
+      <Filter>Contents\Objects\backboard</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGrimRoomBG.h">
+      <Filter>Contents\Objects\GrimRoom_BG</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMainHallScene.h">
+      <Filter>Contents\Scenes\MainHallScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -177,8 +204,8 @@
     <ClCompile Include="yaTitleScene.cpp">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="yaPlayScene.cpp">
-      <Filter>Contents\Scenes\PlayScene</Filter>
+    <ClCompile Include="yaBossScene.cpp">
+      <Filter>Contents\Scenes\BossScene</Filter>
     </ClCompile>
     <ClCompile Include="yaTime.cpp">
       <Filter>Engine\Time</Filter>
@@ -198,14 +225,26 @@
     <ClCompile Include="yaTransform.cpp">
       <Filter>Engine\Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="yaBackBoard.cpp">
-      <Filter>Contents\Objects\BackBoard</Filter>
-    </ClCompile>
     <ClCompile Include="yaPlayer.cpp">
       <Filter>Contents\Objects\Player</Filter>
     </ClCompile>
     <ClCompile Include="yaCursor.cpp">
       <Filter>Contents\Objects\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMenuBG.cpp">
+      <Filter>Contents\Objects\menu_BG</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMenuTitle.cpp">
+      <Filter>Contents\Objects\menu_title</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBackboard.cpp">
+      <Filter>Contents\Objects\backboard</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGrimRoomBG.cpp">
+      <Filter>Contents\Objects\GrimRoom_BG</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMainHallScene.cpp">
+      <Filter>Contents\Scenes\MainHallScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

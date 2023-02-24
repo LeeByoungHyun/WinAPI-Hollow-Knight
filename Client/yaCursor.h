@@ -1,6 +1,7 @@
 #pragma once
 #include "yaGameObject.h"
 #include "yaImage.h"
+#include "yaTransform.h"
 
 namespace ya
 {
@@ -18,6 +19,7 @@ namespace ya
 
 	private:
 		Image* mImage;
+		Transform* tr;
 	};
 }
 

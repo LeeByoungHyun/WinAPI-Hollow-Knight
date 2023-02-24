@@ -3,7 +3,6 @@
 #include "yaInput.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
-#include "yaTransform.h"
 #include <windowsx.h>
 
 namespace ya
@@ -29,14 +28,14 @@ namespace ya
 	{
 		GameObject::Update();
 
-		Transform* tr = GetComponent<Transform>();
+		tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
 		POINT mouse;
 		::GetCursorPos(&mouse);
 
-		pos.x = mouse.x;
-		pos.y = mouse.y;
+		pos.x = mouse.x - 105;
+		pos.y = mouse.y - 100;
 
 		tr->SetPos(pos);
 	}
@@ -45,7 +44,7 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		Transform* tr = GetComponent<Transform>();
+		tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
 		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);

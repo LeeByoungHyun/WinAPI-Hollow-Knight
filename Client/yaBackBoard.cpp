@@ -1,4 +1,4 @@
-#include "yaBackBoard.h"
+#include "yaBackboard.h"
 #include "yaTime.h"
 #include "yaInput.h"
 #include "yaResourceManager.h"
@@ -8,36 +8,36 @@
 
 namespace ya
 {
-	BackBoard::BackBoard()
+	Backboard::Backboard()
 	{
 
 	}
 
-	BackBoard::~BackBoard()
+	Backboard::~Backboard()
 	{
 
 	}
 
-	void BackBoard::Initialize()
+	void Backboard::Initialize()
 	{
 		mImage = ResourceManager::Load<Image>(L"backboard", L"..\\Resources\\backboard.bmp");
 
 		GameObject::Initialize();
 	}
 	
-	void BackBoard::Update()
+	void Backboard::Update()
 	{
 		GameObject::Update();
 	}
 
-	void BackBoard::Render(HDC hdc)
+	void Backboard::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
 		BitBlt(hdc, 0, 0, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 
-	void BackBoard::Release()
+	void Backboard::Release()
 	{
 		GameObject::Release();
 

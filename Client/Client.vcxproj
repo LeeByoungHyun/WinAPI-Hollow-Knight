@@ -133,8 +133,12 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="yaBackBoard.h" />
+    <ClInclude Include="yaBackboard.h" />
     <ClInclude Include="yaCursor.h" />
+    <ClInclude Include="yaGrimRoomBG.h" />
+    <ClInclude Include="yaMainHallScene.h" />
+    <ClInclude Include="yaMenuBG.h" />
+    <ClInclude Include="yaMenuTitle.h" />
     <ClInclude Include="yaPlayer.h" />
     <ClInclude Include="yaTitleScene.h" />
     <ClInclude Include="yaApplication.h" />
@@ -147,7 +151,7 @@
     <ClInclude Include="yaLayer.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="yamyamEngine.h" />
-    <ClInclude Include="yaPlayScene.h" />
+    <ClInclude Include="yaBossScene.h" />
     <ClInclude Include="yaResource.h" />
     <ClInclude Include="yaResourceManager.h" />
     <ClInclude Include="yaScene.h" />
@@ -157,8 +161,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="yaBackBoard.cpp" />
+    <ClCompile Include="yaBackboard.cpp" />
     <ClCompile Include="yaCursor.cpp" />
+    <ClCompile Include="yaGrimRoomBG.cpp" />
+    <ClCompile Include="yaMainHallScene.cpp" />
+    <ClCompile Include="yaMenuBG.cpp" />
+    <ClCompile Include="yaMenuTitle.cpp" />
     <ClCompile Include="yaPlayer.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
     <ClCompile Include="yaApplication.cpp" />
@@ -169,7 +177,7 @@
     <ClCompile Include="yaInput.cpp" />
     <ClCompile Include="yaLayer.cpp" />
     <ClCompile Include="yaMath.cpp" />
-    <ClCompile Include="yaPlayScene.cpp" />
+    <ClCompile Include="yaBossScene.cpp" />
     <ClCompile Include="yaResource.cpp" />
     <ClCompile Include="yaResourceManager.cpp" />
     <ClCompile Include="yaScene.cpp" />

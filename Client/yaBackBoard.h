@@ -4,12 +4,12 @@
 
 namespace ya
 {
-	class BackBoard : public GameObject
+	class Backboard : public GameObject
 	{
 	public:
 
-		BackBoard();
-		~BackBoard();
+		Backboard();
+		~Backboard();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,6 +20,4 @@ namespace ya
 		Image* mImage;
 	};
 }
-
-
 

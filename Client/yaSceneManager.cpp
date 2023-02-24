@@ -1,6 +1,7 @@
 #include "yaSceneManager.h"
-#include "yaPlayScene.h"
+#include "yaBossScene.h"
 #include "yaTitleScene.h"
+#include "yaMainHallScene.h"
 
 namespace ya
 {
@@ -12,11 +13,15 @@ namespace ya
         mScenes.resize((UINT)eSceneType::End);
 
         // ¾À ¸Å´ÏÀú¿¡ ¾À Ãß°¡
-        mScenes[(UINT)eSceneType::Play] = new PlayScene();
-        mScenes[(UINT)eSceneType::Play]->SetName(L"PlayScene");
 
         mScenes[(UINT)eSceneType::Title] = new TitleScene();
         mScenes[(UINT)eSceneType::Title]->SetName(L"TitleScene");
+
+        mScenes[(UINT)eSceneType::Boss] = new BossScene();
+        mScenes[(UINT)eSceneType::Boss]->SetName(L"BossScene");
+
+        mScenes[(UINT)eSceneType::MainHall] = new MainHallScene();
+        mScenes[(UINT)eSceneType::MainHall]->SetName(L"MainHallScene");
 
         mActiveScene = mScenes[(UINT)eSceneType::Title];
 

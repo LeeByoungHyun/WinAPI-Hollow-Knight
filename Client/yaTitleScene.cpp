@@ -16,9 +16,14 @@ namespace ya
 
 	void TitleScene::Initialize()
 	{
-		mBackBoard = new BackBoard();
-		AddGameObject(mBackBoard, eLayerType::BG);
-		mBackBoard->SetName(L"backBoard");
+
+		mMenuBG = new MenuBG();
+		AddGameObject(mMenuBG, eLayerType::BG);
+		mMenuBG->SetName(L"MenuBG");
+
+		mMenuTitle = new MenuTitle();
+		AddGameObject(mMenuTitle, eLayerType::BG);
+		mMenuTitle->SetName(L"MenuTitle");
 
 		mCursor = new Cursor();
 		AddGameObject(mCursor, eLayerType::UI);
@@ -33,7 +38,7 @@ namespace ya
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::MainHall);
 		}
 	}
 

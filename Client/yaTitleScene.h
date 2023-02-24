@@ -1,7 +1,10 @@
 #pragma once
 #include "yaScene.h"
-#include "yaBackBoard.h"
+
+#include "yaMenuBG.h"
 #include "yaCursor.h"
+#include "yaMenuTitle.h"
+
 
 namespace ya
 {
@@ -17,8 +20,9 @@ namespace ya
 		virtual void Release() override;
 
 	private:
-		BackBoard* mBackBoard;
+		MenuBG* mMenuBG;
 		Cursor* mCursor;
+		MenuTitle* mMenuTitle;
 	};
 }
 
