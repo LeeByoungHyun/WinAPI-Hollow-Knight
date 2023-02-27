@@ -80,6 +80,9 @@
     <Filter Include="Contents\Scenes\Room1Scene">
       <UniqueIdentifier>{d868db69-3b8b-4a6f-866d-c2a49c1a3ee8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Animation">
+      <UniqueIdentifier>{ceff0711-6a30-4e9b-a2c9-5d153de03624}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -172,6 +175,12 @@
     <ClInclude Include="yaMainHallScene.h">
       <Filter>Contents\Scenes\MainHallScene</Filter>
     </ClInclude>
+    <ClInclude Include="yaAnimation.h">
+      <Filter>Engine\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="yaAnimator.h">
+      <Filter>Engine\Component\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -245,6 +254,12 @@
     </ClCompile>
     <ClCompile Include="yaMainHallScene.cpp">
       <Filter>Contents\Scenes\MainHallScene</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAnimation.cpp">
+      <Filter>Engine\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAnimator.cpp">
+      <Filter>Engine\Component\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

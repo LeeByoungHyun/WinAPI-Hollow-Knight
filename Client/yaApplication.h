@@ -18,6 +18,8 @@ namespace ya
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }
 
+	private:
+		void Clear();
 
 	private:
 		HWND mHwnd;

@@ -69,4 +69,9 @@ namespace ya
 		// 백버퍼에 있는 그림을 원본버퍼에 그려준다
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
 	}
+
+	void Application::Clear()
+	{
+
+	}
 }

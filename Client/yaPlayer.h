@@ -3,7 +3,6 @@
 #include "yaImage.h"
 #include "yaTransform.h"
 
-
 namespace ya
 {
 	class Player : public GameObject
@@ -18,7 +17,7 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		// void SetPos(Vector2 pos);
+		void SetPos(Vector2 pos);
 
 	private:
 		Image* mImage;

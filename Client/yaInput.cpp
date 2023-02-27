@@ -6,7 +6,7 @@ namespace ya
 	{
 		'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
 		'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 
-		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
+		'Z', 'X', 'C', 'V', 'B', 'N', 'M', 
 	};
 
 	std::vector <Input::Key> Input::mKeys;
@@ -17,7 +17,6 @@ namespace ya
 		for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 		{
 			Key keyInfo;
-			// keyInfo.key = (eKeyCode)i;
 			keyInfo.key = (eKeyCode)i;
 			keyInfo.state = eKeyState::None;
 			keyInfo.bePressed = false;

@@ -133,6 +133,8 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="yaAnimation.h" />
+    <ClInclude Include="yaAnimator.h" />
     <ClInclude Include="yaBackboard.h" />
     <ClInclude Include="yaCursor.h" />
     <ClInclude Include="yaGrimRoomBG.h" />
@@ -161,6 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="yaAnimation.cpp" />
+    <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaBackboard.cpp" />
     <ClCompile Include="yaCursor.cpp" />
     <ClCompile Include="yaGrimRoomBG.cpp" />
