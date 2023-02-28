@@ -8,10 +8,8 @@ namespace ya
 	class Animator : public Component
 	{
 	public:
-		// 
 		struct Event
 		{
-			// 연산자 오퍼레이터
 			void operator=(std::function<void()> func)
 			{
 				mEvent = std::move(func);
@@ -19,21 +17,21 @@ namespace ya
 			void operator()()
 			{
 				if (mEvent)
-				{
 					mEvent();
-				}
 			}
 
-			// void(*name)(int, int)	// 함수포인터 기본문법
-			std::function<void()> mEvent;	// functional 문법
+			//void(*name)(int, int);
+			std::function<void()> mEvent;
 		};
 
-		// 
 		struct Events
 		{
 			Event mStartEvent;
 			Event mCompleteEvent;
 			Event mEndEvent;
+
+			//mStartEvent();
+			//mStartEvent = test;
 		};
 
 		Animator();
@@ -44,21 +42,29 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void CreateAnimation();	// 스프라이트 파일 한장에 다 모여있는 경우
-		void Createanimations();	// 프레임별로 각각의 파일로 만들어진 경우
+		//완성된 스프라이트 시트를 지정해서 애니메이션 제작하는 함수
+		void CreateAnimation(const std::wstring& name
+			, Image* sheet
+			, Vector2 leftTop
+			, UINT coulmn, UINT row, UINT spriteLength
+			, Vector2 offset, float duration);
 
-		Animation* FindAnimation(const std::wstring* name);
-		void play(const std::wstring& name, bool loop);
+		// 폴더에 들어있는 스프라이트들을 이용해서 애니메이션 제작해주는 함수
+		void CreateAnimations();
+
+		Animation* FindAnimation(const std::wstring& name);
+		void Play(const std::wstring& name, bool loop);
 
 		Events* FindEvents(const std::wstring& name);
-		std::function<void>& GetStartEvent(const std::wstring& name);
+		/*std::function<void>& GetStartEvent(const std::wstring& name);
 		std::function<void>& GetCompleteEvent(const std::wstring& name);
-		std::function<void>& GetEndEvent(const std::wstring& name);
+		std::function<void>& GetEndEvent(const std::wstring& name);*/
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
-		std::map<std::wstring, Event*> mEvents;
+		std::map<std::wstring, Events*> mEvents;
 		Animation* mActiveAnimation;
 		Image* mSpriteSheet;
+		bool mbLoop;
 	};
 }
