@@ -2,12 +2,21 @@
 #include "yaGameObject.h"
 #include "yaImage.h"
 #include "yaTransform.h"
+#include "yaAnimator.h"
 
 namespace ya
 {
+	// class Animator;
 	class Player : public GameObject
 	{
 	public:
+		enum class ePlayerState
+		{
+			Idle,
+			Move,
+			Slash,
+			Death,
+		};
 
 		Player();
 		~Player();
@@ -17,11 +26,11 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void SetPos(Vector2 pos);
-
 	private:
+		ePlayerState mState;
 		Image* mImage;
 		Transform* tr;
+		Animator* mAnimator;
 	};
 }
 

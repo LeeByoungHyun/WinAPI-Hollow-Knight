@@ -74,10 +74,12 @@ namespace ya
 
 	}
 
+	/*
 	void Player::SetPos(Vector2 pos)
 	{
 		tr = GetComponent<Transform>();
 		tr->SetPos(pos);
 	}
+	*/
 	
 }
