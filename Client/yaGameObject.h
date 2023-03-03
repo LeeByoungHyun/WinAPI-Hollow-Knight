@@ -20,7 +20,7 @@ namespace ya
 		{
 			T* comp = new T();
 			UINT compType = (UINT)comp->GetType();
-			mcomponents[compType] = comp;
+			mComponents[compType] = comp;
 			comp->SetOwner(this);
 
 			return comp;
@@ -29,7 +29,7 @@ namespace ya
 		template <typename T>
 		T* GetComponent()
 		{
-			for (Component* comp : mcomponents)
+			for (Component* comp : mComponents)
 			{
 				// RTTI
 				if (dynamic_cast<T*>(comp))
@@ -42,7 +42,7 @@ namespace ya
 		}
 
 	private:
-		std::vector<Component*> mcomponents;
+		std::vector<Component*> mComponents;
 	};
 }
 

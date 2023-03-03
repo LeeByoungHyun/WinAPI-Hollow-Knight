@@ -83,6 +83,9 @@
     <Filter Include="Engine\Component\Animation">
       <UniqueIdentifier>{ceff0711-6a30-4e9b-a2c9-5d153de03624}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\SlashEffect">
+      <UniqueIdentifier>{e7f81400-5a77-4b4c-8eea-df41d5fa1743}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -181,6 +184,9 @@
     <ClInclude Include="yaAnimator.h">
       <Filter>Engine\Component\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="yaSlashEffect.h">
+      <Filter>Contents\Objects\Player\SlashEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -243,9 +249,6 @@
     <ClCompile Include="yaMenuBG.cpp">
       <Filter>Contents\Objects\menu_BG</Filter>
     </ClCompile>
-    <ClCompile Include="yaMenuTitle.cpp">
-      <Filter>Contents\Objects\menu_title</Filter>
-    </ClCompile>
     <ClCompile Include="yaBackboard.cpp">
       <Filter>Contents\Objects\backboard</Filter>
     </ClCompile>
@@ -260,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="yaAnimator.cpp">
       <Filter>Engine\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMenuTitle.cpp">
+      <Filter>Contents\Objects\menu_title</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSlashEffect.cpp">
+      <Filter>Contents\Objects\Player\SlashEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

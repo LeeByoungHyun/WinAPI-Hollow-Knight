@@ -21,7 +21,6 @@ namespace ya
 		mPlayer = new Player();
 		AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->SetName(L"Player");
-
 		mPlayer->GetComponent<Transform>()->SetPos( { 800.0f, 800.0f } );
 
 		mBackboard = new Backboard();

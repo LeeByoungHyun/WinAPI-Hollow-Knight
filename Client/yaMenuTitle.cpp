@@ -19,7 +19,7 @@ namespace ya
 
 	void MenuTitle::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"menu_title", L"..\\Resources\\Main_Menu\\vheart_title.bmp");
+		mImage = ResourceManager::Load<Image>(L"menu_title", L"..\\Resources\\TitleScene\\title.bmp");
 
 		GameObject::Initialize();
 	}
@@ -33,7 +33,10 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 500, 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		TransparentBlt(hdc, 500, 100, mImage->GetWidth(), mImage->GetHeight()
+			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
+
+		// BitBlt(hdc, 500, 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void MenuTitle::Release()

@@ -142,6 +142,7 @@
     <ClInclude Include="yaMenuBG.h" />
     <ClInclude Include="yaMenuTitle.h" />
     <ClInclude Include="yaPlayer.h" />
+    <ClInclude Include="yaSlashEffect.h" />
     <ClInclude Include="yaTitleScene.h" />
     <ClInclude Include="yaApplication.h" />
     <ClInclude Include="yaComponent.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="yaMenuBG.cpp" />
     <ClCompile Include="yaMenuTitle.cpp" />
     <ClCompile Include="yaPlayer.cpp" />
+    <ClCompile Include="yaSlashEffect.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
     <ClCompile Include="yaApplication.cpp" />
     <ClCompile Include="yaComponent.cpp" />
