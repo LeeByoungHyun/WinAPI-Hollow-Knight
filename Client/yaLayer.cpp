@@ -1,5 +1,6 @@
 #include "yaLayer.h"
 
+
 namespace ya
 {
 	Layer::Layer()
@@ -18,46 +19,40 @@ namespace ya
 
 	void Layer::Initialize()
 	{
-		for (GameObject* gameObject : mGameObjects)
+		for (GameObject* gameObj : mGameObjects)
 		{
-			if (gameObject == nullptr)
+			if (gameObj == nullptr)
 				continue;
 
-			gameObject->Initialize();
+			gameObj->Initialize();
 		}
 	}
 
 	void Layer::Update()
 	{
-		for (GameObject* gameObject : mGameObjects)
+		for (GameObject* gameObj : mGameObjects)
 		{
-			if (gameObject == nullptr)
+			if (gameObj == nullptr)
 				continue;
 
-			gameObject->Update();
+			gameObj->Update();
 		}
 	}
 
 	void Layer::Render(HDC hdc)
 	{
-		for (GameObject* gameObject : mGameObjects)
+		for (GameObject* gameObj : mGameObjects)
 		{
-			if (gameObject == nullptr)
+			if (gameObj == nullptr)
 				continue;
 
-			gameObject->Render(hdc);
+			gameObj->Render(hdc);
 		}
 	}
 
 	void Layer::Release()
 	{
-		for (GameObject* gameObject : mGameObjects)
-		{
-			if (gameObject == nullptr)
-				continue;
 
-			gameObject->Release();
-		}
 	}
 
 	void Layer::AddGameObject(GameObject* gameObj)

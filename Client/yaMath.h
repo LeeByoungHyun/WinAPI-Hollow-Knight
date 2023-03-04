@@ -1,5 +1,6 @@
 #pragma once
 
+
 struct Vector2
 {
 	static Vector2 Up;
@@ -17,17 +18,15 @@ struct Vector2
 	{
 
 	}
-
-	Vector2(int _x, int _y)
-		: x(_x)
-		, y(_y)
+	Vector2(float x, float y)
+		: x(x)
+		, y(y)
 	{
 
 	}
-
-	Vector2(float _x, float _y)
-		: x(_x)
-		, y(_y)
+	Vector2(int x, int y)
+		: x(x)
+		, y(y)
 	{
 
 	}
@@ -56,6 +55,15 @@ struct Vector2
 		return temp;
 	}
 
+	Vector2 operator*(const Vector2& other)
+	{
+		Vector2 temp;
+		temp.x = x * other.x;
+		temp.y = y * other.y;
+
+		return temp;
+	}
+
 	void operator+=(const Vector2& other)
 	{
 		x += other.x;
@@ -67,11 +75,5 @@ struct Vector2
 		x -= other.x;
 		y -= other.y;
 	}
-};
-
-
-class Math
-{
-
 };
 

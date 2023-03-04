@@ -86,6 +86,9 @@
     <Filter Include="Contents\Objects\Player\SlashEffect">
       <UniqueIdentifier>{e7f81400-5a77-4b4c-8eea-df41d5fa1743}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Collider">
+      <UniqueIdentifier>{cd5b3cfd-af48-46c4-9c87-9d4584c97ebe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -187,6 +190,12 @@
     <ClInclude Include="yaSlashEffect.h">
       <Filter>Contents\Objects\Player\SlashEffect</Filter>
     </ClInclude>
+    <ClInclude Include="yaCollider.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCollisionManager.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -269,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="yaSlashEffect.cpp">
       <Filter>Contents\Objects\Player\SlashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCollider.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCollisionManager.cpp">
+      <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

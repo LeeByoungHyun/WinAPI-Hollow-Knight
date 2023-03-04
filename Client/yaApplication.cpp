@@ -2,18 +2,22 @@
 #include "yaSceneManager.h"
 #include "yaTime.h"
 #include "yaInput.h"
+#include "yaCollisionManager.h"
 
 namespace ya
 {
 	Application::Application()
+		: mHwnd(NULL)
+		, mHdc(NULL)
 	{
-		mHwnd = NULL;
-		mHdc = NULL;
+		// mHwnd = NULL;
+		// mHdc = NULL;
 	}
 
 	Application::~Application()
 	{
-
+		//SceneManager::Release();
+		//Time::Release();
 	}
 
 	void Application::Initialize(HWND hWnd)
@@ -55,6 +59,7 @@ namespace ya
 		Input::Update();
 		Time::Update();
 		SceneManager::Update();
+		CollisionManager::Update();
 	}
 
 	void Application::Render()

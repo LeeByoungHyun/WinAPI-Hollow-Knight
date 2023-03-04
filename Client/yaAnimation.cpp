@@ -48,7 +48,8 @@ namespace ya
 
     void Animation::Render(HDC hdc)
     {
-        Transform* tr = mAnimator->GetOwner()->GetComponent<Transform>();
+        Transform* tr
+            = mAnimator->GetOwner()->GetComponent<Transform>();
         Vector2 scale = tr->GetScale();
 
         // 이미지가 그려질 좌표는 오브젝트 좌표의 위쪽 중간에 그려진다.
