@@ -89,6 +89,15 @@
     <Filter Include="Engine\Component\Collider">
       <UniqueIdentifier>{cd5b3cfd-af48-46c4-9c87-9d4584c97ebe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Crawlid">
+      <UniqueIdentifier>{921e3477-ec64-484a-a6a7-ce1be6c6c37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\Mantis_Lords_Boss_Scene">
+      <UniqueIdentifier>{2c55d5a9-5504-40f6-acc5-f52a89b53026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\AscentWall">
+      <UniqueIdentifier>{8f249d29-3e8b-4729-b723-042c580329c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -196,6 +205,12 @@
     <ClInclude Include="yaCollisionManager.h">
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="yaCrawlid.h">
+      <Filter>Contents\Objects\Crawlid</Filter>
+    </ClInclude>
+    <ClInclude Include="yaAscent_Wall_02.h">
+      <Filter>Contents\Objects\AscentWall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -284,6 +299,12 @@
     </ClCompile>
     <ClCompile Include="yaCollisionManager.cpp">
       <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCrawlid.cpp">
+      <Filter>Contents\Objects\Crawlid</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAscent_Wall_02.cpp">
+      <Filter>Contents\Objects\AscentWall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

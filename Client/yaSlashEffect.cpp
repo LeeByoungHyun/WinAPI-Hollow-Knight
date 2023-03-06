@@ -1,6 +1,7 @@
 #include "yaSlashEffect.h"
 #include "yaTransform.h"
 #include "yaAnimator.h"
+#include "yaCollider.h"
 
 namespace ya
 {
@@ -21,6 +22,11 @@ namespace ya
 		mAnimator->SetName(L"SlashEffectAnimator");
 
 		mAnimator->Play(L"Knight007.SlashEffect", false);
+
+		Collider* mCollider = AddComponent<Collider>();
+		mCollider->SetName(L"PlayerSlashCollider");
+		mCollider->SetCenter(Vector2(-60.0f, -80.0f));
+		mCollider->SetSize(Vector2(120.0f, 60.0f));
 
 		GameObject::Initialize();
 	}

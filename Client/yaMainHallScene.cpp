@@ -1,7 +1,11 @@
 #include "yaMainHallScene.h"
 #include "yaSceneManager.h"
 #include "yaInput.h"
-
+#include "yaPlayer.h"
+#include "yaBackBoard.h"
+#include "yaTransform.h"
+#include "yaCrawlid.h"
+#include "yaCollisionManager.h"
 
 namespace ya
 {
@@ -18,14 +22,22 @@ namespace ya
 	void MainHallScene::Initialize()
 	{
 		// 게임오브젝트 추가는 이곳에
-		mPlayer = new Player();
+		Player* mPlayer = new Player();
 		AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->SetName(L"Player");
-		mPlayer->GetComponent<Transform>()->SetPos( { 800.0f, 800.0f } );
+		mPlayer->GetComponent<Transform>()->SetPos( { 600.0f, 800.0f } );
 
-		mBackboard = new Backboard();
+		Crawlid* mCrawlid = new Crawlid();
+		AddGameObject(mCrawlid, eLayerType::Monster);
+		mCrawlid->SetName(L"Crawlid");
+		mCrawlid->GetComponent<Transform>()->SetPos({ 800.0f, 800.0f });
+
+		Backboard* mBackboard = new Backboard();
 		AddGameObject(mBackboard, eLayerType::BG);
 		mBackboard->SetName(L"backboard");
+
+		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 
 		Scene::Initialize();
 	}

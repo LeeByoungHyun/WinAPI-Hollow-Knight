@@ -1,11 +1,11 @@
 #pragma once
 #include "yaScene.h"
 
-#include "yaPlayer.h"
-#include "yaBackboard.h"
-
 namespace ya
 {
+	class Player;
+	class Backboard;
+	class Crawlid;
 	class MainHallScene : public Scene
 	{
 	public:
@@ -21,8 +21,9 @@ namespace ya
 		virtual void Exit() override;
 
 	private:
-		Player* mPlayer;
-		Backboard* mBackboard;
+		// Player* mPlayer;
+		// Crawlid* mCrawlid;
+		// Backboard* mBackboard;
 	};
 }
 

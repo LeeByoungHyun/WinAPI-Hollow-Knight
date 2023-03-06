@@ -3,9 +3,11 @@
 #include "yaInput.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
-#include "yaTransform.h"
 #include "yaSlashEffect.h"
 #include "yaScene.h"
+#include "yaTransform.h"
+#include "yaAnimator.h"
+#include "yaCollider.h"
 
 namespace ya
 {
@@ -21,13 +23,28 @@ namespace ya
 
 	void Player::Initialize()
 	{
-		// mImage = ResourceManager::Load<Image>(L"Player", L"..\\Resources\\Knight\\001.Idle\\001-00-007.bmp");
+		Transform* tr = GetComponent<Transform>();
+		tr->SetName(L"PlayerTransform");
+		//tr->SetPos(Vector2(400.0f, 400.0f));
 
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\\Knight\\001.Idle", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\\Knight\\056.Walk", Vector2::Zero, 0.1f);
+		//mAnimator->CreateAnimations(L"..\\Resources\\\Knight\\001.Idle", Vector2::Zero, 0.1f);
+		//mAnimator->CreateAnimations(L"..\\Resources\\\Knight\\056.Walk", Vector2::Zero, 0.1f);
+		//mAnimator->CreateAnimations(L"..\\Resources\\\Knight\\006.Slash", Vector2::Zero, 0.1f);
 
-		mAnimator->Play(L"Knight001.Idle", true);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.1f); 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.1f);
+
+		mAnimator->Play(L"Knight_Idleright", true);
+
+		Collider* mCollider = AddComponent<Collider>();
+		mCollider->SetName(L"PlayerCollider");
+		mCollider->SetCenter(Vector2(-30.0f, -100.0f));
+		mCollider->SetSize(Vector2(60.0f, 100.0f));
 
 		mState = ePlayerState::Idle;
 
@@ -42,6 +59,7 @@ namespace ya
 		{
 		case ya::Player::ePlayerState::Idle:
 			idle();
+			break;
 
 		case ya::Player::ePlayerState::Walk:
 			walk();
@@ -59,23 +77,11 @@ namespace ya
 	void Player::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
-
-		/*
-		tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
-		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight()
-			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
-
-		// BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
-		*/
-
 	}
 
 	void Player::Release()
 	{
 		GameObject::Release();
-
 	}
 
 	void Player::idle()
@@ -85,15 +91,25 @@ namespace ya
 			|| Input::GetKeyDown(eKeyCode::S)
 			|| Input::GetKeyDown(eKeyCode::W))
 		{
+			if (Input::GetKeyDown(eKeyCode::A))
+				direction = 0;
+			if (Input::GetKeyDown(eKeyCode::D))
+				direction = 1;
+			
 			mState = ePlayerState::Walk;
-			mAnimator->Play(L"Knight056.Walk", true);
+			if (direction == 0)
+				mAnimator->Play(L"Knight_Walkleft", true);
+			else
+				mAnimator->Play(L"Knight_Walkright", true);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
 			mState = ePlayerState::Slash;
-			// mAnimator->Play(L"", true);
-
+			if (direction == 0)
+				mAnimator->Play(L"Knight_Slashleft", true);
+			else
+				mAnimator->Play(L"Knight_Slashright", true);
 		}
 	}
 
@@ -104,8 +120,16 @@ namespace ya
 			|| Input::GetKeyUp(eKeyCode::S)
 			|| Input::GetKeyUp(eKeyCode::W))
 		{
+			if (Input::GetKeyDown(eKeyCode::A))
+				direction = 0;
+			if (Input::GetKeyDown(eKeyCode::D))
+				direction = 1;
+
 			mState = ePlayerState::Idle;
-			mAnimator->Play(L"Knight001.Idle", true);
+			if (direction == 0)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else
+				mAnimator->Play(L"Knight_Idleright", true);
 		}
 
 		Transform* tr = GetComponent<Transform>();
@@ -133,17 +157,29 @@ namespace ya
 		if (Input::GetKeyUp(eKeyCode::K))
 		{
 			mState = ePlayerState::Idle;
-			mAnimator->Play(L"Knight001.Idle", true);
+			if (direction == 0)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else
+				mAnimator->Play(L"Knight_Idleright", true);
 		}
+		
+		if (Input::GetKeyDown(eKeyCode::A))
+			direction = 0;
+		if (Input::GetKeyDown(eKeyCode::D))
+			direction = 1;
 
 		if (Input::GetKey(eKeyCode::K))
 		{
+			if (direction == 0)
+				mAnimator->Play(L"Knight_Slashleft", true);
+			else
+				mAnimator->Play(L"Knight_Slashright", true);
+
 			Scene* curScene = SceneManager::GetActiveScene();
 			SlashEffect* slash = new SlashEffect();
 			slash->Initialize();
-			slash->GetComponent<Transform>()->SetPos(tr->GetPos());
+			slash->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-30.0f, 0.0f));
 			curScene->AddGameObject(slash, eLayerType::Effect);
-
 		}
 
 		// slash 끝나면 idle 상태로 돌아가야 함

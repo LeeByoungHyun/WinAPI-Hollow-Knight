@@ -1,44 +1,19 @@
 #pragma once
 #include "yaGameObject.h"
 #include "yaImage.h"
-#include "yaTransform.h"
-#include "yaAnimator.h"
 
 namespace ya
 {
-	// class Animator;
+	class Animator;
 	class Player : public GameObject
 	{
 	public:
 		enum class ePlayerState
 		{
 			Idle,
-			Dash,
-			Airborne,
+			Walk,
 			Slash,
 			SlashAlt,
-			UpSlash,
-			DownSlash,
-			Walk,
-			Run,
-			Fall,
-			DoubleJump,
-			Land,
-			Recoil,
-			Enter,
-			Sit,
-			GetOff,
-			Turn,
-			RunToIdle,
-			Focus,
-			FocusGet,
-			FocusEnd,
-			WallSlide,
-			WallJump,
-			Fireball1Cast,
-			FireballAntic,
-			Death,
-			RespawnWake
 		};
 
 		Player();
@@ -57,9 +32,8 @@ namespace ya
 
 	private:
 		ePlayerState mState;
-		Image* mImage;
-		Transform* tr;
 		Animator* mAnimator;
+		int direction = 1;	// 0 = left, 1 = right
 	};
 }
 

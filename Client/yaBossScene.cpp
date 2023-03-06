@@ -22,7 +22,7 @@ namespace ya
 		AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->SetName(L"Player");
 		// mPlayer->SetPos({ 800.0f, 700.0f });
-		mPlayer->GetComponent<Transform>()->SetPos({ 800.0f, 700.0f });
+		// mPlayer->GetComponent<Transform>()->SetPos({ 800.0f, 700.0f });
 
 		mGrimRoomBG = new GrimRoomBG();
 		AddGameObject(mGrimRoomBG, eLayerType::BG);
