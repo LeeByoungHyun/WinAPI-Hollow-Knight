@@ -8,7 +8,6 @@
 #include "yaCollider.h"
 #include "yaScene.h"
 
-
 namespace ya
 {
 	Crawlid::Crawlid()

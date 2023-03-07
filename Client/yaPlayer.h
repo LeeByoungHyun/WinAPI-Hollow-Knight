@@ -14,6 +14,7 @@ namespace ya
 			Walk,
 			Slash,
 			SlashAlt,
+			UpSlash
 		};
 
 		Player();
@@ -29,6 +30,11 @@ namespace ya
 		void walk();
 		void slash();
 		void slashAlt();
+		void upSlash();
+
+		void SlashEndEvent();
+		void SlashAltEndEvent();
+		void UpSlashEndEvent();
 
 	private:
 		ePlayerState mState;
