@@ -101,6 +101,9 @@
     <Filter Include="Contents\Objects\Player\UpSlashEffect">
       <UniqueIdentifier>{8e9b62d6-b367-4536-92f9-0bcfce778248}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\SlashAltEffect">
+      <UniqueIdentifier>{3b78b24d-a251-4a90-8f71-1a22fd2b0f35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -220,6 +223,12 @@
     <ClInclude Include="yaUpSlashEffect.h">
       <Filter>Contents\Objects\Player\UpSlashEffect</Filter>
     </ClInclude>
+    <ClInclude Include="yaSlashAltEffectLeft.h">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSlashAltEffectRight.h">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -320,6 +329,12 @@
     </ClCompile>
     <ClCompile Include="yaUpSlashEffect.cpp">
       <Filter>Contents\Objects\Player\UpSlashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSlashAltEffectLeft.cpp">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSlashAltEffectRight.cpp">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

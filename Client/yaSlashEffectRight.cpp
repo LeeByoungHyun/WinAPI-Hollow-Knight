@@ -19,12 +19,10 @@ namespace ya
 	{
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashEffect\\right", Vector2::Zero, 0.1f);
-		mAnimator->SetName(L"SlashEffectAnimator");
 
 		mAnimator->Play(L"Knight_SlashEffectright", false);
 
 		Collider* mCollider = AddComponent<Collider>();
-		mCollider->SetName(L"PlayerSlashCollider");
 		mCollider->SetCenter(Vector2(-60.0f, -80.0f));
 		mCollider->SetSize(Vector2(120.0f, 60.0f));
 

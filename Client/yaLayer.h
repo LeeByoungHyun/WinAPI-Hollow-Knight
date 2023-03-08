@@ -21,7 +21,7 @@ namespace ya
 	private:
 		std::vector<GameObject*> mGameObjects;
 
-		void RemoveGameObject(GameObject* obj);
+		//void RemoveGameObject(GameObject* obj);
 
 	};
 }

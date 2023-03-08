@@ -133,6 +133,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="mySlashEffectLeft.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="yaSlashAltEffectRight.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="yaAnimation.h" />
     <ClInclude Include="yaAnimator.h" />
@@ -147,6 +148,7 @@
     <ClInclude Include="yaMenuBG.h" />
     <ClInclude Include="yaMenuTitle.h" />
     <ClInclude Include="yaPlayer.h" />
+    <ClInclude Include="yaSlashAltEffectLeft.h" />
     <ClInclude Include="yaSlashEffectRight.h" />
     <ClInclude Include="yaTitleScene.h" />
     <ClInclude Include="yaApplication.h" />
@@ -171,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mySlashEffectLeft.cpp" />
+    <ClCompile Include="yaSlashAltEffectRight.cpp" />
     <ClCompile Include="yaAnimation.cpp" />
     <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaAscent_Wall_02.cpp" />
@@ -184,6 +187,7 @@
     <ClCompile Include="yaMenuBG.cpp" />
     <ClCompile Include="yaMenuTitle.cpp" />
     <ClCompile Include="yaPlayer.cpp" />
+    <ClCompile Include="yaSlashAltEffectLeft.cpp" />
     <ClCompile Include="yaSlashEffectRight.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
     <ClCompile Include="yaApplication.cpp" />

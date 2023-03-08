@@ -17,6 +17,12 @@ namespace ya
 			UpSlash
 		};
 
+		enum class eDirection
+		{
+			Left,
+			Right
+		};
+
 		Player();
 		~Player();
 
@@ -24,6 +30,11 @@ namespace ya
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
+
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
 
 	private:
 		void idle();
@@ -39,7 +50,7 @@ namespace ya
 	private:
 		ePlayerState mState;
 		Animator* mAnimator;
-		int direction = 1;	// 0 = left, 1 = right
+		eDirection mDirection = eDirection::Right;
 	};
 }
 
