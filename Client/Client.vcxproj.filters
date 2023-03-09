@@ -235,6 +235,9 @@
     <ClInclude Include="yaCamera.h">
       <Filter>Engine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="yaObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -38,6 +38,7 @@ namespace ya
     void SceneManager::Update()
     {
         mActiveScene->Update();
+        mActiveScene->Destroy();
     }
 
     void SceneManager::Render(HDC hdc)

@@ -3,6 +3,7 @@
 #include "yaTime.h"
 #include "yaInput.h"
 #include "yaCollisionManager.h"
+#include "yaCamera.h"
 
 namespace ya
 {
@@ -46,6 +47,7 @@ namespace ya
 		Input::Initialize();
 		Time::Initialize();
 		SceneManager::Initialize();
+		Camera::Initialize();
 	}
 
 	void Application::Run()
@@ -58,6 +60,7 @@ namespace ya
 	{
 		Input::Update();
 		Time::Update();
+		Camera::Update();
 		SceneManager::Update();
 		CollisionManager::Update();
 	}

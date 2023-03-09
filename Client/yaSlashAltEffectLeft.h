@@ -16,6 +16,9 @@ namespace ya
 		virtual void Release() override;
 
 	private:
+		void slashAltEffectLeftComplateEvent();
+
+	private:
 		Animator* mAnimator;
 	};
 }

@@ -34,8 +34,8 @@ namespace ya
 		POINT mouse;
 		::GetCursorPos(&mouse);
 
-		pos.x = mouse.x - 105;
-		pos.y = mouse.y - 100;
+		pos.x = mouse.x;
+		pos.y = mouse.y;
 
 		tr->SetPos(pos);
 	}

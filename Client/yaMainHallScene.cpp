@@ -7,6 +7,7 @@
 #include "yaCrawlid.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
+#include "yaObject.h"
 
 namespace ya
 {
@@ -36,8 +37,13 @@ namespace ya
 		Backboard* mBackboard = new Backboard();
 		AddGameObject(mBackboard, eLayerType::BG);
 		mBackboard->SetName(L"backboard");
+		
+	
+		//object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
+		//object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		//object::Instantiate<Backboard>(eLayerType::BG);
 
-		Camera::SetTarget(mPlayer);
+		//Camera::SetTarget(mPlayer);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
@@ -70,6 +76,11 @@ namespace ya
 	{
 		Scene::Release();
 
+	}
+
+	void MainHallScene::Destroy()
+	{
+		Scene::Destroy();
 	}
 
 	void MainHallScene::Enter()

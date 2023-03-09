@@ -91,6 +91,7 @@ struct Vector2
 	{
 		return sqrtf((x * x) + (y * y));
 	}
+
 	Vector2& Normalize()
 	{
 		float length = Length();

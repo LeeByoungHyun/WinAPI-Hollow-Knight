@@ -1,6 +1,7 @@
 #include "yaTitleScene.h"
 #include "yaInput.h"
 #include "yaSceneManager.h"
+#include "yaObject.h"
 
 namespace ya
 {
@@ -27,6 +28,10 @@ namespace ya
 		mCursor = new Cursor();
 		AddGameObject(mCursor, eLayerType::UI);
 		mCursor->SetName(L"cursor");
+
+		//object::Instantiate<MenuBG>(eLayerType::BG);
+		//object::Instantiate<MenuTitle>(eLayerType::BG);
+		//object::Instantiate<Cursor>(eLayerType::UI);
 
 		Scene::Initialize();
 	}

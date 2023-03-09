@@ -2,6 +2,7 @@
 #include "yaTransform.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
+#include "yaObject.h"
 
 namespace ya
 {
@@ -18,9 +19,11 @@ namespace ya
 	void SlashAltEffectLeft::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\left", Vector2::Zero, 0.05f);
 
-		mAnimator->Play(L"Knight_SlashAltEffectleft", false);
+		mAnimator->GetCompleteEvent(L"Knight_SlashAltEffectleft") = std::bind(&SlashAltEffectLeft::slashAltEffectLeftComplateEvent, this);
+
+		mAnimator->Play(L"Knight_SlashAltEffectleft", true);
 
 		Collider* mCollider = AddComponent<Collider>();
 		mCollider->SetCenter(Vector2(-60.0f, -80.0f));
@@ -43,5 +46,10 @@ namespace ya
 	{
 		GameObject::Release();
 
+	}
+
+	void SlashAltEffectLeft::slashAltEffectLeftComplateEvent()
+	{
+		object::Destroy(this);
 	}
 }

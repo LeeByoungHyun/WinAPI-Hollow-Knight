@@ -14,9 +14,10 @@ namespace ya
 		virtual void Update();
 		virtual void Render(HDC hdc);
 		virtual void Release();
+		virtual void Destroy();
 
 		void AddGameObject(GameObject* obj, eLayerType layer);
-		const std::vector<GameObject*>& GetGameObjects(eLayerType layer);
+		std::vector<GameObject*>& GetGameObjects(eLayerType layer);
 
 		virtual void Enter();
 		virtual void Exit();

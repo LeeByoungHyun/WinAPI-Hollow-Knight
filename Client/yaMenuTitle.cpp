@@ -33,7 +33,7 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		TransparentBlt(hdc, 500, 100, mImage->GetWidth(), mImage->GetHeight()
+		TransparentBlt(hdc, 400, 100, mImage->GetWidth(), mImage->GetHeight()
 			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 
 		// BitBlt(hdc, 500, 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);

@@ -44,12 +44,42 @@ namespace ya
 		}
 	}
 
+	void Scene::Destroy()
+	{
+		std::vector<GameObject*> deleteGameObjects = {};
+		for (Layer& layer : mLayers)
+		{
+			std::vector<GameObject*>& gameObjects
+				= layer.GetGameObjects();
+
+			for (std::vector<GameObject*>::iterator iter = gameObjects.begin()
+				; iter != gameObjects.end(); )
+			{
+				if ((*iter)->GetState() == GameObject::eState::Death)
+				{
+					deleteGameObjects.push_back((*iter));
+					iter = gameObjects.erase(iter);
+				}
+				else
+				{
+					iter++;
+				}
+			}
+		}
+
+		for (GameObject* deathObj : deleteGameObjects)
+		{
+			delete deathObj;
+			deathObj = nullptr;
+		}
+	}
+
 	void Scene::AddGameObject(GameObject* obj, eLayerType layer)
 	{
 		mLayers[(UINT)layer].AddGameObject(obj);
 	}
 
-	const std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)
+	std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)
 	{
 		return mLayers[(UINT)layer].GetGameObjects();
 	}

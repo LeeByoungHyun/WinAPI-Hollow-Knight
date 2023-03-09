@@ -134,6 +134,7 @@
     <ClInclude Include="mySlashEffectLeft.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="yaCamera.h" />
+    <ClInclude Include="yaObject.h" />
     <ClInclude Include="yaSlashAltEffectRight.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="yaAnimation.h" />

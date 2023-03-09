@@ -12,6 +12,7 @@
 #include "yaTransform.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
+#include "yaObject.h"
 
 namespace ya
 {
@@ -32,22 +33,22 @@ namespace ya
 
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.05f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.1f); 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.05f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.025f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.025f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.05f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.05f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.05f);
 		
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::SlashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::SlashEndEvent, this);
@@ -159,7 +160,7 @@ namespace ya
 		}
 
 		// 대시키 입력시 dash 상태로 변경
-		if (Input::GetKey(eKeyCode::L))
+		if (Input::GetKeyDown(eKeyCode::L))
 		{
 			mState = ePlayerState::Dash;
 
@@ -192,15 +193,16 @@ namespace ya
 		{
 			mState = ePlayerState::Slash;
 
+			
 			if (mDirection == eDirection::Left)
 			{
 				mAnimator->Play(L"Knight_Slashleft", true);
 
 				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectLeft* slasheffect = new SlashEffectLeft();
-				slasheffect->Initialize();
-				slasheffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
-				curScene->AddGameObject(slasheffect, eLayerType::Effect);
+				SlashEffectLeft* slashEffect = new SlashEffectLeft();
+				slashEffect->Initialize();
+				slashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
+				curScene->AddGameObject(slashEffect, eLayerType::Effect);
 			}
 
 			else if (mDirection == eDirection::Right)
@@ -208,12 +210,12 @@ namespace ya
 				mAnimator->Play(L"Knight_Slashright", true);
 
 				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectRight* slasheffect = new SlashEffectRight();
-				slasheffect->Initialize();
-				slasheffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
-				curScene->AddGameObject(slasheffect, eLayerType::Effect);
+				SlashEffectRight* slashEffect = new SlashEffectRight();
+				slashEffect->Initialize();
+				slashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
+				curScene->AddGameObject(slashEffect, eLayerType::Effect);
 			}
-
+			
 			return;
 		}
 	}
@@ -227,6 +229,19 @@ namespace ya
 			mDirection = eDirection::Left;
 		else if (Input::GetKeyDown(eKeyCode::D))
 			mDirection = eDirection::Right;
+
+		/*
+		// ㄴ테스트
+		if (mAnimator->IsComplte())
+		{
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Walkleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Walkright", true);
+		}
+		*/
+		
+		
 
 		// 이동키에서 손을 땔 경우 Idle상태로 변경
 		if (Input::GetKeyUp(eKeyCode::A) || Input::GetKeyUp(eKeyCode::D))
@@ -242,7 +257,7 @@ namespace ya
 		}
 
 		// 대시키 입력시 dash 상태로 변경
-		if (Input::GetKey(eKeyCode::L))
+		if (Input::GetKeyDown(eKeyCode::L))
 		{
 			mState = ePlayerState::Dash;
 
@@ -423,12 +438,12 @@ namespace ya
 
 		if (mDirection == eDirection::Left)
 		{
-			pos.x -= 400.0f * Time::DeltaTime();
+			pos.x -= 800.0f * Time::DeltaTime();
 		}
 
 		else if (mDirection == eDirection::Right)
 		{
-			pos.x += 400.0f * Time::DeltaTime();
+			pos.x += 800.0f * Time::DeltaTime();
 		}
 
 		tr->SetPos(pos);
@@ -451,6 +466,7 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
+		
 	}
 
 	void Player::SlashAltEndEvent()

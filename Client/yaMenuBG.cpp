@@ -19,7 +19,7 @@ namespace ya
 
 	void MenuBG::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"menu_BG", L"..\\Resources\\Main_Menu\\Voidheart_menu_BG.bmp");
+		mImage = ResourceManager::Load<Image>(L"menu_BG", L"..\\Resources\\TitleScene\\Voidheart_menu_BG.bmp");
 
 		GameObject::Initialize();
 	}
