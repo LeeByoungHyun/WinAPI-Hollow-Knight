@@ -133,6 +133,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="mySlashEffectLeft.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaSlashAltEffectRight.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="yaAnimation.h" />
@@ -173,6 +174,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mySlashEffectLeft.cpp" />
+    <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaSlashAltEffectRight.cpp" />
     <ClCompile Include="yaAnimation.cpp" />
     <ClCompile Include="yaAnimator.cpp" />

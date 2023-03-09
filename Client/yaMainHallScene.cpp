@@ -6,6 +6,7 @@
 #include "yaTransform.h"
 #include "yaCrawlid.h"
 #include "yaCollisionManager.h"
+#include "yaCamera.h"
 
 namespace ya
 {
@@ -35,6 +36,8 @@ namespace ya
 		Backboard* mBackboard = new Backboard();
 		AddGameObject(mBackboard, eLayerType::BG);
 		mBackboard->SetName(L"backboard");
+
+		Camera::SetTarget(mPlayer);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);

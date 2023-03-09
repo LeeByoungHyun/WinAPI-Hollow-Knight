@@ -12,6 +12,9 @@ namespace ya
 		{
 			Idle,
 			Walk,
+			Jump,
+			Fall,
+			Dash,
 			Slash,
 			SlashAlt,
 			UpSlash
@@ -35,17 +38,21 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-
 	private:
 		void idle();
 		void walk();
 		void slash();
 		void slashAlt();
 		void upSlash();
+		void dash();
+		void jump();
+		void fall();
 
 		void SlashEndEvent();
 		void SlashAltEndEvent();
 		void UpSlashEndEvent();
+
+		void DashEndEvent();
 
 	private:
 		ePlayerState mState;

@@ -66,6 +66,15 @@ struct Vector2
 		return temp;
 	}
 
+	Vector2 operator/(const float ratio)
+	{
+		Vector2 temp;
+		temp.x = x / ratio;
+		temp.y = y / ratio;
+
+		return temp;
+	}
+
 	void operator+=(const Vector2& other)
 	{
 		x += other.x;
@@ -94,6 +103,7 @@ struct Vector2
 
 namespace ya::math
 {
+	// È¸Àü
 	inline static Vector2 Rotate(Vector2 vector, float degree)
 	{
 		float radian = (degree / 180.0f) * PI;

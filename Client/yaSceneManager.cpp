@@ -2,6 +2,7 @@
 #include "yaBossScene.h"
 #include "yaTitleScene.h"
 #include "yaMainHallScene.h"
+#include "yaCollisionManager.h"
 
 namespace ya
 {
@@ -59,6 +60,7 @@ namespace ya
     {
         // 현재씬이 종료될 때 실행
         mActiveScene->Exit();
+        CollisionManager::Clear();
 
         // 새로운 씬이 실행될 때 실행
         mActiveScene = mScenes[(UINT)type];

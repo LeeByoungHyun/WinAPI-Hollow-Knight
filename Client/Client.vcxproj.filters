@@ -104,6 +104,9 @@
     <Filter Include="Contents\Objects\Player\SlashAltEffect">
       <UniqueIdentifier>{3b78b24d-a251-4a90-8f71-1a22fd2b0f35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{0705624a-70ff-4038-98a8-345751da50b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -229,6 +232,9 @@
     <ClInclude Include="yaSlashAltEffectRight.h">
       <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClInclude>
+    <ClInclude Include="yaCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -335,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="yaSlashAltEffectRight.cpp">
       <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCamera.cpp">
+      <Filter>Engine\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
