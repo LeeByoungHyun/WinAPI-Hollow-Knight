@@ -1,13 +1,14 @@
 #include "yaMainHallScene.h"
 #include "yaSceneManager.h"
 #include "yaInput.h"
-#include "yaPlayer.h"
-#include "yaBackBoard.h"
 #include "yaTransform.h"
-#include "yaCrawlid.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaObject.h"
+#include "yaPlayer.h"
+#include "yaCrawlid.h"
+#include "yaBackBoard.h"
+#include "yaGrimRoomBG.h"
 
 namespace ya
 {
@@ -34,10 +35,15 @@ namespace ya
 		mCrawlid->SetName(L"Crawlid");
 		mCrawlid->GetComponent<Transform>()->SetPos({ 800.0f, 800.0f });
 
+		GrimRoomBG* mGrimRoomBG = new GrimRoomBG();
+		AddGameObject(mGrimRoomBG, eLayerType::BG);
+		mGrimRoomBG->SetName(L"mGrimRoomBG");
+
+		/*
 		Backboard* mBackboard = new Backboard();
 		AddGameObject(mBackboard, eLayerType::BG);
 		mBackboard->SetName(L"backboard");
-		
+		*/
 	
 		//object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
 		//object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
