@@ -1,6 +1,11 @@
 #include "yaPlayer.h"
 #include "yaTime.h"
 #include "yaInput.h"
+#include "yaScene.h"
+#include "yaTransform.h"
+#include "yaAnimator.h"
+#include "yaCollider.h"
+#include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "mySlashEffectLeft.h"
@@ -8,11 +13,8 @@
 #include "yaSlashAltEffectLeft.h"
 #include "yaSlashAltEffectRight.h"
 #include "yaUpSlashEffect.h"
-#include "yaScene.h"
-#include "yaTransform.h"
-#include "yaAnimator.h"
-#include "yaCollider.h"
-#include "yaObject.h"
+#include "yaDashEffectLeft.h"
+#include "yaDashEffectRight.h"
 
 namespace ya
 {
@@ -141,9 +143,9 @@ namespace ya
 	{
 		Transform* tr = GetComponent<Transform>();
 
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
-		if (Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
 
 		// 좌우 이동키 입력시 Walk 상태로 변경
@@ -165,9 +167,26 @@ namespace ya
 			mState = ePlayerState::Dash;
 
 			if (mDirection == eDirection::Left)
+			{
 				mAnimator->Play(L"Knight_Dashleft", true);
+
+				Scene* curScene = SceneManager::GetActiveScene();
+				DashEffectLeft* dashEffectLeft = new DashEffectLeft();
+				dashEffectLeft->Initialize();
+				dashEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(130.0f, 30.0f));
+				curScene->AddGameObject(dashEffectLeft, eLayerType::Effect);
+			}
+
 			else if (mDirection == eDirection::Right)
+			{
 				mAnimator->Play(L"Knight_Dashright", true);
+
+				Scene* curScene = SceneManager::GetActiveScene();
+				DashEffectRight* dashEffectRight = new DashEffectRight();
+				dashEffectRight->Initialize();
+				dashEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-130.0f, 30.0f));
+				curScene->AddGameObject(dashEffectRight, eLayerType::Effect);
+			}
 
 			return;
 		}
@@ -225,9 +244,9 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
-		else if (Input::GetKeyDown(eKeyCode::D))
+		else if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
 
 		/*
@@ -262,9 +281,26 @@ namespace ya
 			mState = ePlayerState::Dash;
 
 			if (mDirection == eDirection::Left)
+			{
 				mAnimator->Play(L"Knight_Dashleft", true);
+
+				Scene* curScene = SceneManager::GetActiveScene();
+				DashEffectLeft* dashEffectLeft = new DashEffectLeft();
+				dashEffectLeft->Initialize();
+				dashEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(130.0f, 30.0f));
+				curScene->AddGameObject(dashEffectLeft, eLayerType::Effect);
+			}
+
 			else if (mDirection == eDirection::Right)
+			{
 				mAnimator->Play(L"Knight_Dashright", true);
+
+				Scene* curScene = SceneManager::GetActiveScene();
+				DashEffectRight* dashEffectRight = new DashEffectRight();
+				dashEffectRight->Initialize();
+				dashEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-130.0f, 30.0f));
+				curScene->AddGameObject(dashEffectRight, eLayerType::Effect);
+			}
 
 			return;
 		}
@@ -327,10 +363,26 @@ namespace ya
 	{
 		Transform* tr = GetComponent<Transform>();
 		
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
-		if (Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
+
+		// W + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		{
+			mState = ePlayerState::UpSlash;
+
+			mAnimator->Play(L"Knight_UpSlashneutral", true);
+
+			Scene* curScene = SceneManager::GetActiveScene();
+			UpSlashEffect* upSlashEffect = new UpSlashEffect();
+			upSlashEffect->Initialize();
+			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
+			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+
+			return;
+		}
 
 		// slash 상태에서 한번 더 공격시 slashAlt 상대로 변경
 		if (Input::GetKeyDown(eKeyCode::K))
@@ -371,6 +423,22 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::D))
 			mDirection = eDirection::Right;
 
+		// W + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		{
+			mState = ePlayerState::UpSlash;
+
+			mAnimator->Play(L"Knight_UpSlashneutral", true);
+
+			Scene* curScene = SceneManager::GetActiveScene();
+			UpSlashEffect* upSlashEffect = new UpSlashEffect();
+			upSlashEffect->Initialize();
+			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
+			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+
+			return;
+		}
+
 		// slashAlt 상태에서 한번 더 공격시 slash 상태로 변경
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
@@ -403,38 +471,16 @@ namespace ya
 
 	void Player::upSlash()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
 		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
 		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
-
-		/*
-		// upSlash 상태에서는 좌우로 이동 가능
-		if (Input::GetKey(eKeyCode::A))
-			pos.x -= 200.0f * Time::DeltaTime();
-
-		if (Input::GetKey(eKeyCode::D))
-			pos.x += 200.0f * Time::DeltaTime();
-		
-
-		tr->SetPos(pos);
-		*/
 	}
 
 	void Player::dash()
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-
-		/*
-		if (Input::GetKeyDown(eKeyCode::A))
-			mDirection = eDirection::Left;
-		else if (Input::GetKeyDown(eKeyCode::D))
-			mDirection = eDirection::Right;
-		*/
 
 		if (mDirection == eDirection::Left)
 		{
@@ -466,7 +512,6 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
-		
 	}
 
 	void Player::SlashAltEndEvent()

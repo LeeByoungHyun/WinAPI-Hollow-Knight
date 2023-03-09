@@ -107,6 +107,9 @@
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{0705624a-70ff-4038-98a8-345751da50b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\DashEffect">
+      <UniqueIdentifier>{e919e1c4-0c40-40c8-9d15-bd6e7f5a153b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -238,6 +241,12 @@
     <ClInclude Include="yaObject.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="yaDashEffectLeft.h">
+      <Filter>Contents\Objects\Player\DashEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="yaDashEffectRight.h">
+      <Filter>Contents\Objects\Player\DashEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -347,6 +356,12 @@
     </ClCompile>
     <ClCompile Include="yaCamera.cpp">
       <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDashEffectLeft.cpp">
+      <Filter>Contents\Objects\Player\DashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDashEffectRight.cpp">
+      <Filter>Contents\Objects\Player\DashEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
