@@ -20,17 +20,6 @@ namespace ya
 		Scene::Initialize();
 
 		// 게임오브젝트 추가는 이곳에
-		/*
-		mPlayer = new Player();
-		AddGameObject(mPlayer, eLayerType::Player);
-		mPlayer->SetName(L"Player");
-		// mPlayer->SetPos({ 800.0f, 700.0f });
-		// mPlayer->GetComponent<Transform>()->SetPos({ 800.0f, 700.0f });
-
-		mGrimRoomBG = new GrimRoomBG();
-		AddGameObject(mGrimRoomBG, eLayerType::BG);
-		mGrimRoomBG->SetName(L"grimRoomBG");
-		*/
 
 		object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);

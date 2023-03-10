@@ -35,11 +35,11 @@ namespace ya
 
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.1f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.025f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.025f);
@@ -51,6 +51,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.05f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.05f);
+
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
 		
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::SlashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::SlashEndEvent, this);
@@ -67,8 +70,8 @@ namespace ya
 
 		Collider* mCollider = AddComponent<Collider>();
 		mCollider->SetName(L"PlayerCollider");
-		mCollider->SetCenter(Vector2(-30.0f, -100.0f));
-		mCollider->SetSize(Vector2(60.0f, 100.0f));
+		mCollider->SetCenter(Vector2(-30.0f, -120.0f));
+		mCollider->SetSize(Vector2(60.0f, 120.0f));
 
 		mState = ePlayerState::Idle;
 
@@ -287,7 +290,7 @@ namespace ya
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
 			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -341,7 +344,7 @@ namespace ya
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
 			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -387,7 +390,7 @@ namespace ya
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
 			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
 
 			return;
 		}

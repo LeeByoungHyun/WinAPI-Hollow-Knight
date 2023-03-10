@@ -24,26 +24,10 @@ namespace ya
 
 	void MainHallScene::Initialize()
 	{
-		// 게임오브젝트 추가는 이곳에
-		/*
-		Player* mPlayer = new Player();
-		AddGameObject(mPlayer, eLayerType::Player);
-		mPlayer->SetName(L"Player");
-		mPlayer->GetComponent<Transform>()->SetPos( { 600.0f, 800.0f } );
-
-		Crawlid* mCrawlid = new Crawlid();
-		AddGameObject(mCrawlid, eLayerType::Monster);
-		mCrawlid->SetName(L"Crawlid");
-		mCrawlid->GetComponent<Transform>()->SetPos({ 800.0f, 800.0f });
-
-		GrimRoomBG* mGrimRoomBG = new GrimRoomBG();
-		AddGameObject(mGrimRoomBG, eLayerType::BG);
-		mGrimRoomBG->SetName(L"mGrimRoomBG");
-		*/
-	
 		Scene::Initialize();
 
-		object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
+		// 게임오브젝트 추가는 이곳에	
+		Player* mPlayer = object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
 		object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 
@@ -71,13 +55,11 @@ namespace ya
 	void MainHallScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
 	}
 
 	void MainHallScene::Release()
 	{
 		Scene::Release();
-
 	}
 
 	void MainHallScene::Destroy()
