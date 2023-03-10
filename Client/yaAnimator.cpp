@@ -46,6 +46,7 @@ namespace ya
 				if (events != nullptr)
 					events->mCompleteEvent();
 			}
+		
 			if (mbLoop && mActiveAnimation->IsComplete())
 				mActiveAnimation->Reset();
 		}
@@ -162,7 +163,12 @@ namespace ya
 		}
 
 		mActiveAnimation = FindAnimation(name);
-		mActiveAnimation->Reset();
+
+		// 애니메이션이 끝났을 때만 리셋해주어야 함
+		if (mActiveAnimation->IsComplete())
+		{
+			mActiveAnimation->Reset();
+		}
 		mbLoop = loop;
 
 		Animator::Events* events = FindEvents(mActiveAnimation->GetName());

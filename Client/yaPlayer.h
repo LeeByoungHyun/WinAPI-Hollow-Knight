@@ -62,6 +62,15 @@ namespace ya
 		Animator* mAnimator;
 		Scene* curScene;
 		eDirection mDirection = eDirection::Right;
+
+		double mSlashTime;
+		double mSlashAltTime;
+		double mUpSlashTime;
+
+		bool slashFlag;
+		bool slashAltFlag;
+		bool upSlashFlag;
+		bool dashFlag;
 	};
 }
 
