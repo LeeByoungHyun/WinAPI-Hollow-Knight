@@ -49,7 +49,7 @@ namespace ya
 		//object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
 		//object::Instantiate<Backboard>(eLayerType::BG);
 
-		//Camera::SetTarget(mPlayer);
+		Camera::SetTarget(mPlayer);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);

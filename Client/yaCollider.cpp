@@ -2,6 +2,7 @@
 #include "yaCollider.h"
 #include "yaTransform.h"
 #include "yaGameObject.h"
+#include "yaCamera.h"
 
 namespace ya
 {
@@ -39,6 +40,7 @@ namespace ya
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
+		Vector2 pos = Camera::CalculatePos(mPos);
 		Rectangle(hdc, mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
 
 		(HPEN)SelectObject(hdc, oldPen);
