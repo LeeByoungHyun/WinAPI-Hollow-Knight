@@ -1,7 +1,7 @@
 #include "yaBossScene.h"
 #include "yaSceneManager.h"
 #include "yaInput.h"
-
+#include "yaObject.h"
 
 namespace ya
 {
@@ -17,7 +17,10 @@ namespace ya
 
 	void BossScene::Initialize()
 	{
+		Scene::Initialize();
+
 		// 게임오브젝트 추가는 이곳에
+		/*
 		mPlayer = new Player();
 		AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->SetName(L"Player");
@@ -27,8 +30,10 @@ namespace ya
 		mGrimRoomBG = new GrimRoomBG();
 		AddGameObject(mGrimRoomBG, eLayerType::BG);
 		mGrimRoomBG->SetName(L"grimRoomBG");
+		*/
 
-		Scene::Initialize();
+		object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
+		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 	}
 
 	void BossScene::Update()
@@ -55,7 +60,6 @@ namespace ya
 	void BossScene::Release()
 	{
 		Scene::Release();
-
 	}
 
 	void BossScene::Enter()

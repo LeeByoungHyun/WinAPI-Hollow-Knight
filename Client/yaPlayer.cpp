@@ -79,6 +79,9 @@ namespace ya
 	{
 		GameObject::Update();
 
+		curScene = SceneManager::GetActiveScene();
+		tr = GetComponent<Transform>();
+
 		switch (mState)
 		{
 		case ya::Player::ePlayerState::Idle:
@@ -141,8 +144,6 @@ namespace ya
 
 	void Player::idle()
 	{
-		Transform* tr = GetComponent<Transform>();
-
 		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
 		if (Input::GetKey(eKeyCode::D))
@@ -170,22 +171,16 @@ namespace ya
 			{
 				mAnimator->Play(L"Knight_Dashleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				DashEffectLeft* dashEffectLeft = new DashEffectLeft();
-				dashEffectLeft->Initialize();
-				dashEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(130.0f, 30.0f));
-				curScene->AddGameObject(dashEffectLeft, eLayerType::Effect);
+				DashEffectLeft* dashEffectLeft = 
+					object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
 			}
 
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_Dashright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				DashEffectRight* dashEffectRight = new DashEffectRight();
-				dashEffectRight->Initialize();
-				dashEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-130.0f, 30.0f));
-				curScene->AddGameObject(dashEffectRight, eLayerType::Effect);
+				DashEffectRight* dashEffectRight =
+					object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
 			}
 
 			return;
@@ -198,11 +193,8 @@ namespace ya
 
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
-			Scene* curScene = SceneManager::GetActiveScene();
-			UpSlashEffect* upSlashEffect = new UpSlashEffect();
-			upSlashEffect->Initialize();
-			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
-			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+			UpSlashEffect* upSlashEffect =
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -212,27 +204,20 @@ namespace ya
 		{
 			mState = ePlayerState::Slash;
 
-			
 			if (mDirection == eDirection::Left)
 			{
 				mAnimator->Play(L"Knight_Slashleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectLeft* slashEffect = new SlashEffectLeft();
-				slashEffect->Initialize();
-				slashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
-				curScene->AddGameObject(slashEffect, eLayerType::Effect);
+				SlashEffectLeft* slashEffectLeft =
+					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
 			}
 
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_Slashright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectRight* slashEffect = new SlashEffectRight();
-				slashEffect->Initialize();
-				slashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
-				curScene->AddGameObject(slashEffect, eLayerType::Effect);
+				SlashEffectRight* slashEffectRight =
+					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
 			}
 			
 			return;
@@ -241,9 +226,6 @@ namespace ya
 
 	void Player::walk()
 	{
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
 		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
 		else if (Input::GetKey(eKeyCode::D))
@@ -260,8 +242,6 @@ namespace ya
 		}
 		*/
 		
-		
-
 		// 이동키에서 손을 땔 경우 Idle상태로 변경
 		if (Input::GetKeyUp(eKeyCode::A) || Input::GetKeyUp(eKeyCode::D))
 		{
@@ -284,22 +264,16 @@ namespace ya
 			{
 				mAnimator->Play(L"Knight_Dashleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				DashEffectLeft* dashEffectLeft = new DashEffectLeft();
-				dashEffectLeft->Initialize();
-				dashEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(130.0f, 30.0f));
-				curScene->AddGameObject(dashEffectLeft, eLayerType::Effect);
+				DashEffectLeft* dashEffectLeft =
+					object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
 			}
 
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_Dashright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				DashEffectRight* dashEffectRight = new DashEffectRight();
-				dashEffectRight->Initialize();
-				dashEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-130.0f, 30.0f));
-				curScene->AddGameObject(dashEffectRight, eLayerType::Effect);
+				DashEffectRight* dashEffectRight =
+					object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
 			}
 
 			return;
@@ -312,11 +286,8 @@ namespace ya
 
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
-			Scene* curScene = SceneManager::GetActiveScene();
-			UpSlashEffect* upSlashEffect = new UpSlashEffect();
-			upSlashEffect->Initialize();
-			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
-			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+			UpSlashEffect* upSlashEffect =
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -330,25 +301,21 @@ namespace ya
 			{
 				mAnimator->Play(L"Knight_Slashleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectLeft* slasheffect = new SlashEffectLeft();
-				slasheffect->Initialize();
-				slasheffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
-				curScene->AddGameObject(slasheffect, eLayerType::Effect);
+				SlashEffectLeft* slashEffectLeft =
+					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_Slashright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectRight* slasheffect = new SlashEffectRight();
-				slasheffect->Initialize();
-				slasheffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
-				curScene->AddGameObject(slasheffect, eLayerType::Effect);
+				SlashEffectRight* slashEffectRight =
+					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
 			}
 
 			return;
 		}
+
+		Vector2 pos = tr->GetPos();
 
 		if (Input::GetKey(eKeyCode::A))
 			pos.x -= 200.0f * Time::DeltaTime();
@@ -361,8 +328,6 @@ namespace ya
 
 	void Player::slash()
 	{
-		Transform* tr = GetComponent<Transform>();
-		
 		if (Input::GetKey(eKeyCode::A))
 			mDirection = eDirection::Left;
 		if (Input::GetKey(eKeyCode::D))
@@ -375,11 +340,8 @@ namespace ya
 
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
-			Scene* curScene = SceneManager::GetActiveScene();
-			UpSlashEffect* upSlashEffect = new UpSlashEffect();
-			upSlashEffect->Initialize();
-			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
-			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+			UpSlashEffect* upSlashEffect =
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -393,21 +355,15 @@ namespace ya
 			{
 				mAnimator->Play(L"Knight_SlashAltleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashAltEffectLeft* slashAltEffectLeft = new SlashAltEffectLeft();
-				slashAltEffectLeft->Initialize();
-				slashAltEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
-				curScene->AddGameObject(slashAltEffectLeft, eLayerType::Effect);
+				SlashAltEffectLeft* slashAltEffectLeft =
+					object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_SlashAltright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashAltEffectRight* slashAltEffectRight = new SlashAltEffectRight();
-				slashAltEffectRight->Initialize();
-				slashAltEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
-				curScene->AddGameObject(slashAltEffectRight, eLayerType::Effect);
+				SlashAltEffectRight* slashAltEffectRight =
+					object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
 			}
 
 			return;
@@ -430,11 +386,8 @@ namespace ya
 
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 
-			Scene* curScene = SceneManager::GetActiveScene();
-			UpSlashEffect* upSlashEffect = new UpSlashEffect();
-			upSlashEffect->Initialize();
-			upSlashEffect->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, -60.0f));
-			curScene->AddGameObject(upSlashEffect, eLayerType::Effect);
+			UpSlashEffect* upSlashEffect =
+				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -60.0f), eLayerType::Effect);
 
 			return;
 		}
@@ -448,21 +401,15 @@ namespace ya
 			{
 				mAnimator->Play(L"Knight_Slashleft", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectLeft* slashEffectLeft = new SlashEffectLeft();
-				slashEffectLeft->Initialize();
-				slashEffectLeft->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(-60.0f, 0.0f));
-				curScene->AddGameObject(slashEffectLeft, eLayerType::Effect);
+				SlashEffectLeft* slashEffectLeft =
+					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mAnimator->Play(L"Knight_Slashright", true);
 
-				Scene* curScene = SceneManager::GetActiveScene();
-				SlashEffectRight* slashEffectRight = new SlashEffectRight();
-				slashEffectRight->Initialize();
-				slashEffectRight->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(60.0f, 0.0f));
-				curScene->AddGameObject(slashEffectRight, eLayerType::Effect);
+				SlashEffectRight* slashEffectRight =
+					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
 			}
 
 			return;
@@ -479,18 +426,13 @@ namespace ya
 
 	void Player::dash()
 	{
-		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
-		{
 			pos.x -= 800.0f * Time::DeltaTime();
-		}
 
 		else if (mDirection == eDirection::Right)
-		{
 			pos.x += 800.0f * Time::DeltaTime();
-		}
 
 		tr->SetPos(pos);
 	}

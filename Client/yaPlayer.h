@@ -4,7 +4,9 @@
 
 namespace ya
 {
+	class Transform;
 	class Animator;
+	class Scene;
 	class Player : public GameObject
 	{
 	public:
@@ -56,7 +58,9 @@ namespace ya
 
 	private:
 		ePlayerState mState;
+		Transform* tr;
 		Animator* mAnimator;
+		Scene* curScene;
 		eDirection mDirection = eDirection::Right;
 	};
 }

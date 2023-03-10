@@ -17,6 +17,9 @@ namespace ya
 
 	void TitleScene::Initialize()
 	{
+		Scene::Initialize();
+
+		/*
 		mMenuBG = new MenuBG();
 		AddGameObject(mMenuBG, eLayerType::BG);
 		mMenuBG->SetName(L"MenuBG");
@@ -28,12 +31,11 @@ namespace ya
 		mCursor = new Cursor();
 		AddGameObject(mCursor, eLayerType::UI);
 		mCursor->SetName(L"cursor");
+		*/
 
-		//object::Instantiate<MenuBG>(eLayerType::BG);
-		//object::Instantiate<MenuTitle>(eLayerType::BG);
-		//object::Instantiate<Cursor>(eLayerType::UI);
-
-		Scene::Initialize();
+		object::Instantiate<MenuBG>(eLayerType::BG);
+		object::Instantiate<MenuTitle>(eLayerType::BG);
+		object::Instantiate<Cursor>(eLayerType::UI);
 	}
 
 	void TitleScene::Update()
@@ -44,8 +46,6 @@ namespace ya
 		{
 			SceneManager::LoadScene(eSceneType::MainHall);
 		}
-
-		
 	}
 
 	void TitleScene::Render(HDC hdc)

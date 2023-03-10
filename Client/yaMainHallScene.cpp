@@ -25,6 +25,7 @@ namespace ya
 	void MainHallScene::Initialize()
 	{
 		// 게임오브젝트 추가는 이곳에
+		/*
 		Player* mPlayer = new Player();
 		AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->SetName(L"Player");
@@ -38,23 +39,18 @@ namespace ya
 		GrimRoomBG* mGrimRoomBG = new GrimRoomBG();
 		AddGameObject(mGrimRoomBG, eLayerType::BG);
 		mGrimRoomBG->SetName(L"mGrimRoomBG");
-
-		/*
-		Backboard* mBackboard = new Backboard();
-		AddGameObject(mBackboard, eLayerType::BG);
-		mBackboard->SetName(L"backboard");
 		*/
 	
-		//object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
-		//object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
-		//object::Instantiate<Backboard>(eLayerType::BG);
+		Scene::Initialize();
+
+		object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
+		object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 
 		//Camera::SetTarget(mPlayer);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-
-		Scene::Initialize();
 	}
 
 	void MainHallScene::Update()

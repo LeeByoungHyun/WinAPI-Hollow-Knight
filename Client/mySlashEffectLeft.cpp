@@ -26,8 +26,8 @@ namespace ya
 		mAnimator->Play(L"Knight_SlashEffectleft", true);
 
 		Collider* mCollider = AddComponent<Collider>();
-		mCollider->SetCenter(Vector2(-60.0f, -80.0f));
-		mCollider->SetSize(Vector2(120.0f, 60.0f));
+		mCollider->SetCenter(Vector2(-70.0f, -100.0f));
+		mCollider->SetSize(Vector2(120.0f, 90.0f));
 
 		GameObject::Initialize();
 	}
