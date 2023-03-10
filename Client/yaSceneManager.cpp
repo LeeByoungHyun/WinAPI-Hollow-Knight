@@ -24,7 +24,6 @@ namespace ya
         mScenes[(UINT)eSceneType::MainHall] = new MainHallScene();
         mScenes[(UINT)eSceneType::MainHall]->SetName(L"MainHallScene");
 
-        mActiveScene = mScenes[(UINT)eSceneType::Title];
 
         for (Scene* scene : mScenes)
         {
@@ -33,6 +32,8 @@ namespace ya
 
             scene->Initialize();
         }
+
+        mActiveScene = mScenes[(UINT)eSceneType::Title];
     }
 
     void SceneManager::Update()

@@ -1,4 +1,5 @@
 #include "yaScene.h"
+#include "yaSceneManager.h"
 
 namespace ya
 {
@@ -14,10 +15,13 @@ namespace ya
 
 	void Scene::Initialize()
 	{
+		
 		for (Layer& layer : mLayers)
 		{
 			layer.Initialize();
 		}
+		
+		SceneManager::SetActiveScene(this);
 	}
 
 	void Scene::Update()
