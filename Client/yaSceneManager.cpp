@@ -38,12 +38,16 @@ namespace ya
     void SceneManager::Update()
     {
         mActiveScene->Update();
-        mActiveScene->Destroy();
     }
 
     void SceneManager::Render(HDC hdc)
     {
         mActiveScene->Render(hdc);
+    }
+
+    void SceneManager::Destroy()
+    {
+        mActiveScene->Destroy();
     }
 
     void SceneManager::Release()
