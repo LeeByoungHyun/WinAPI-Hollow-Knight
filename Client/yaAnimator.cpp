@@ -38,15 +38,16 @@ namespace ya
 		{
 			mActiveAnimation->Update();
 
-			if (mbLoop && mActiveAnimation->IsComplete())
+			if (mActiveAnimation->IsComplete())
 			{
-				Animator::Events* events = FindEvents(mActiveAnimation->GetName());
+				Animator::Events* events
+					= FindEvents(mActiveAnimation->GetName());
 
 				if (events != nullptr)
 					events->mCompleteEvent();
-
-				mActiveAnimation->Reset();
 			}
+			if (mbLoop && mActiveAnimation->IsComplete())
+				mActiveAnimation->Reset();
 		}
 	}
 
