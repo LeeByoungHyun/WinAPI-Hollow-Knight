@@ -28,12 +28,13 @@ namespace ya
 
 		// 게임오브젝트 추가는 이곳에	
 		Player* mPlayer = object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
-		object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c1 = object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c2 = object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 
 		//Camera::SetTarget(mPlayer);
-
-		
 	}
 
 	void MainHallScene::Update()
@@ -69,6 +70,11 @@ namespace ya
 	void MainHallScene::Enter()
 	{
 		Scene::Enter();
+
+		Crawlid* c1 = object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c2 = object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
+		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);

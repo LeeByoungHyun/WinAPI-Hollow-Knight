@@ -50,6 +50,7 @@ namespace ya
 		*/
 
 		deathFlag = false;
+		invincibilityFlag = false;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -182,8 +183,10 @@ namespace ya
 		if (mState != ePlayerState::Death)
 		{
 			// 몬스터 콜라이더와 접촉시 피격 애니메이션
-			if (other->GetOwner()->GetType() == eLayerType::Monster)
+			if (other->GetOwner()->GetType() == eLayerType::Monster && invincibilityFlag == false)
 			{
+				invincibilityFlag = true;
+
 				mState = ePlayerState::Recoil;
 				hp -= 1;
 
@@ -579,6 +582,8 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
+
+		invincibilityFlag = false;
 	}
 
 	void Player::DashEndEvent()

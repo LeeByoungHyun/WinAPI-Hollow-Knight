@@ -84,6 +84,7 @@ namespace ya
 		bool upSlashFlag;
 		bool dashFlag;
 		bool deathFlag;
+		bool invincibilityFlag;
 	};
 }
 
