@@ -165,10 +165,14 @@ namespace ya
 		mActiveAnimation = FindAnimation(name);
 
 		// 애니메이션이 끝났을 때만 리셋해주어야 함
+		/*
 		if (mActiveAnimation->IsComplete())
 		{
 			mActiveAnimation->Reset();
 		}
+		*/
+
+		mActiveAnimation->Reset();
 		mbLoop = loop;
 
 		Animator::Events* events = FindEvents(mActiveAnimation->GetName());

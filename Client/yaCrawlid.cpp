@@ -7,6 +7,7 @@
 #include "yaAnimator.h"
 #include "yaCollider.h"
 #include "yaScene.h"
+#include "yaObject.h"
 
 namespace ya
 {
@@ -18,6 +19,8 @@ namespace ya
 	}
 	void Crawlid::Initialize()
 	{
+		hp = 3;
+
 		Transform* tr = GetComponent<Transform>();
 		//tr->SetSize(Vector2(0.5f, 0.5f));
 		//tr->SetPos(Vector2(700.0f, 400.0f));
@@ -37,6 +40,11 @@ namespace ya
 	void Crawlid::Update()
 	{
 		GameObject::Update();
+
+		if (hp <= 0)
+		{
+			object::Destroy(this);
+		}
 	}
 	void Crawlid::Render(HDC hdc)
 	{
@@ -45,5 +53,15 @@ namespace ya
 	void Crawlid::Release()
 	{
 		GameObject::Release();
+	}
+	void Crawlid::OnCollisionEnter(Collider* other)
+	{
+		hp -= 1;
+	}
+	void Crawlid::OnCollisionStay(Collider* other)
+	{
+	}
+	void Crawlid::OnCollisionExit(Collider* other)
+	{
 	}
 }

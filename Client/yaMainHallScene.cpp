@@ -33,8 +33,7 @@ namespace ya
 
 		//Camera::SetTarget(mPlayer);
 
-		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		
 	}
 
 	void MainHallScene::Update()
@@ -70,6 +69,9 @@ namespace ya
 	void MainHallScene::Enter()
 	{
 		Scene::Enter();
+
+		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void MainHallScene::Exit()

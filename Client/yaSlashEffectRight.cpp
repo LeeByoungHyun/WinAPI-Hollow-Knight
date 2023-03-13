@@ -48,6 +48,19 @@ namespace ya
 
 	}
 
+	void SlashEffectRight::OnCollisionEnter(Collider* other)
+	{
+		int a = 0;
+	}
+
+	void SlashEffectRight::OnCollisionStay(Collider* other)
+	{
+	}
+
+	void SlashEffectRight::OnCollisionExit(Collider* other)
+	{
+	}
+
 	void SlashEffectRight::slashEffectRightComplateEvent()
 	{
 		object::Destroy(this);

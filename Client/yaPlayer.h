@@ -49,6 +49,7 @@ namespace ya
 		void dash();
 		void jump();
 		void fall();
+		void castFireball();
 
 		void SlashEndEvent();
 		void SlashAltEndEvent();
