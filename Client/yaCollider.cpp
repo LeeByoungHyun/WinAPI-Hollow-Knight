@@ -41,6 +41,13 @@ namespace ya
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
 		Vector2 pos = Camera::CalculatePos(mPos);
+
+		/*
+		pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
+        pos.y -= mSpriteSheet[mSpriteIndex].size.y;
+		*/
+
+		//Rectangle(hdc, mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
 		Rectangle(hdc, mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
 
 		(HPEN)SelectObject(hdc, oldPen);

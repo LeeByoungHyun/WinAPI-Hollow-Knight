@@ -101,6 +101,10 @@ namespace ya
 		Vector2 leftPos = left->GetPos();
 		Vector2 rightPos = right->GetPos();
 
+		// gameobject 최초 initialize시 좌표 (0, 0)에 생성되면 충돌 x
+		if ((leftPos == Vector2::Zero) && (rightPos == Vector2::Zero))
+			return false;
+
 		// 두 충돌체 간의 거리와, 각면적의 절반끼리의 합을 비교해서
 		// 거리가 더 길다면 충돌 X, 거리가 더 짧다면 충돌 O
 		Vector2 leftSize = left->GetSize();

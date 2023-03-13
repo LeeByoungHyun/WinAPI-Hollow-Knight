@@ -87,6 +87,14 @@ struct Vector2
 		y -= other.y;
 	}
 
+	bool operator==(const Vector2& other)
+	{
+		if (other.x == x && other.y == y)
+			return true;
+		else
+			return false;
+	}
+
 	float Length()
 	{
 		return sqrtf((x * x) + (y * y));

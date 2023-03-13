@@ -33,6 +33,9 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		tr->SetName(L"PlayerTransform");
 
+		hp = 5;
+		atk = 1;
+
 		/*
 		mSlashTime = 0.0f;
 		mSlashAltTime = 0.0f;
@@ -45,6 +48,8 @@ namespace ya
 		upSlashFlag = false;
 		dashFlag = false;
 		*/
+
+		deathFlag = false;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -71,6 +76,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Death\\neutral", Vector2::Zero, 0.066f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::SlashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::SlashEndEvent, this);
@@ -85,6 +91,9 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Knight_Recoilleft") = std::bind(&Player::RecoilEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Recoilright") = std::bind(&Player::RecoilEndEvent, this);
+
+		mAnimator->GetCompleteEvent(L"Knight_Deathneutral") = std::bind(&Player::DeathEndEvent, this);
+
 
 		mAnimator->Play(L"Knight_Idleright", true);
 
@@ -104,6 +113,16 @@ namespace ya
 
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
+
+		// HP가 0이하가 되면 죽음
+		if (hp <= 0 && deathFlag == false)
+		{
+			mState = ePlayerState::Death;
+
+			mAnimator->Play(L"Knight_Deathneutral", false);
+
+			deathFlag = true;
+		}
 
 		switch (mState)
 		{
@@ -139,6 +158,10 @@ namespace ya
 			recoil();
 			break;
 
+		case ya::Player::ePlayerState::Death:
+			death();
+			break;
+
 		default:
 			break;
 		}
@@ -156,23 +179,28 @@ namespace ya
 
 	void Player::OnCollisionEnter(Collider* other)
 	{
-		// 몬스터 콜라이더와 접촉시 피격 애니메이션
-		if (other->GetOwner()->GetType() == eLayerType::Monster)
+		if (mState != ePlayerState::Death)
 		{
-			mState = ePlayerState::Recoil;
-
-			if (mDirection == eDirection::Left)
+			// 몬스터 콜라이더와 접촉시 피격 애니메이션
+			if (other->GetOwner()->GetType() == eLayerType::Monster)
 			{
-				mAnimator->Play(L"Knight_Recoilleft", true);
-			}
+				mState = ePlayerState::Recoil;
+				hp -= 1;
 
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_Recoilright", true);
-			}
+				if (mDirection == eDirection::Left)
+				{
+					mAnimator->Play(L"Knight_Recoilleft", true);
+				}
 
-			return;
+				else if (mDirection == eDirection::Right)
+				{
+					mAnimator->Play(L"Knight_Recoilright", true);
+				}
+
+				return;
+			}
 		}
+		
 	}
 
 	void Player::OnCollisionStay(Collider* other)
@@ -512,6 +540,11 @@ namespace ya
 		tr->SetPos(pos);
 	}
 
+	void Player::death()
+	{
+		
+	}
+
 	void Player::SlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
@@ -556,5 +589,9 @@ namespace ya
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
 
+	}
+	void Player::DeathEndEvent()
+	{
+		object::Destroy(this);
 	}
 }

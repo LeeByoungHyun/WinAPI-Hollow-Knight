@@ -20,7 +20,8 @@ namespace ya
 			Slash,
 			SlashAlt,
 			UpSlash,
-			Recoil
+			Recoil,
+			Death
 		};
 
 		enum class eDirection
@@ -41,7 +42,7 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		int GetAtk() { return 1; }
+		int GetAtk() { return atk; }
 
 	private:
 		void idle();
@@ -54,6 +55,7 @@ namespace ya
 		void fall();
 		void castFireball();
 		void recoil();
+		void death();
 
 		void SlashEndEvent();
 		void SlashAltEndEvent();
@@ -61,6 +63,7 @@ namespace ya
 		void RecoilEndEvent();
 
 		void DashEndEvent();
+		void DeathEndEvent();
 
 	private:
 		ePlayerState mState;
@@ -68,6 +71,9 @@ namespace ya
 		Animator* mAnimator;
 		Scene* curScene;
 		eDirection mDirection = eDirection::Right;
+
+		int hp;
+		int atk;
 
 		double mSlashTime;
 		double mSlashAltTime;
@@ -77,6 +83,7 @@ namespace ya
 		bool slashAltFlag;
 		bool upSlashFlag;
 		bool dashFlag;
+		bool deathFlag;
 	};
 }
 
