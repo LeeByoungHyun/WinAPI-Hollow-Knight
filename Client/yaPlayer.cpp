@@ -68,6 +68,10 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
+
+
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::SlashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::SlashEndEvent, this);
 
@@ -78,6 +82,9 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Knight_Dashleft") = std::bind(&Player::DashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Dashright") = std::bind(&Player::DashEndEvent, this);
+
+		mAnimator->GetCompleteEvent(L"Knight_Recoilleft") = std::bind(&Player::RecoilEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Recoilright") = std::bind(&Player::RecoilEndEvent, this);
 
 		mAnimator->Play(L"Knight_Idleright", true);
 
@@ -128,6 +135,10 @@ namespace ya
 			jump();
 			break;
 
+		case ya::Player::ePlayerState::Recoil:
+			recoil();
+			break;
+
 		default:
 			break;
 		}
@@ -145,7 +156,20 @@ namespace ya
 
 	void Player::OnCollisionEnter(Collider* other)
 	{
+		// 피격시 피격모션
+		mState = ePlayerState::Recoil;
 
+		if (mDirection == eDirection::Left)
+		{
+			mAnimator->Play(L"Knight_Recoilleft", true);
+		}
+
+		else if (mDirection == eDirection::Right)
+		{
+			mAnimator->Play(L"Knight_Recoilright", true);
+		}
+
+		return;
 	}
 
 	void Player::OnCollisionStay(Collider* other)
@@ -468,6 +492,23 @@ namespace ya
 
 	}
 
+	void Player::castFireball()
+	{
+	}
+
+	void Player::recoil()
+	{
+		Vector2 pos = tr->GetPos();
+
+		if (mDirection == eDirection::Left)
+			pos.x += 100.0f * Time::DeltaTime();
+
+		else if (mDirection == eDirection::Right)
+			pos.x -= 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+	}
+
 	void Player::SlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
@@ -487,6 +528,15 @@ namespace ya
 	}
 
 	void Player::UpSlashEndEvent()
+	{
+		mState = ePlayerState::Idle;
+		if (mDirection == eDirection::Left)
+			mAnimator->Play(L"Knight_Idleleft", true);
+		else if (mDirection == eDirection::Right)
+			mAnimator->Play(L"Knight_Idleright", true);
+	}
+
+	void Player::RecoilEndEvent()
 	{
 		mState = ePlayerState::Idle;
 		if (mDirection == eDirection::Left)

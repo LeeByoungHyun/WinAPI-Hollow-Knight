@@ -57,6 +57,8 @@ namespace ya
 	void Crawlid::OnCollisionEnter(Collider* other)
 	{
 		hp -= 1;
+
+	
 		
 	}
 	void Crawlid::OnCollisionStay(Collider* other)

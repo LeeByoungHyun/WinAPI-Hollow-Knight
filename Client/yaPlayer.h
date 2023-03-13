@@ -19,7 +19,8 @@ namespace ya
 			Dash,
 			Slash,
 			SlashAlt,
-			UpSlash
+			UpSlash,
+			Recoil
 		};
 
 		enum class eDirection
@@ -40,6 +41,8 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		int GetAtk() { return 1; }
+
 	private:
 		void idle();
 		void walk();
@@ -50,10 +53,12 @@ namespace ya
 		void jump();
 		void fall();
 		void castFireball();
+		void recoil();
 
 		void SlashEndEvent();
 		void SlashAltEndEvent();
 		void UpSlashEndEvent();
+		void RecoilEndEvent();
 
 		void DashEndEvent();
 
