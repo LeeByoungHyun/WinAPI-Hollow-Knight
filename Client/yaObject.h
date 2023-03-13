@@ -13,6 +13,7 @@ namespace ya::object
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(gameObj, type);
 		gameObj->Initialize();
+		gameObj->SetType(type);
 		return gameObj;
 	}
 
@@ -23,6 +24,7 @@ namespace ya::object
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(gameObj, type);
 		gameObj->Initialize();
+		gameObj->SetType(type);
 		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		return gameObj;
 	}

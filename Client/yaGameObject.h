@@ -51,9 +51,13 @@ namespace ya
 
 		eState GetState() { return mState; }
 		void SetState(eState state) { mState = state; }
+		eLayerType GetType() { return mType; }
+		void SetType(eLayerType type) { mType = type; }
+
 
 	private:
 		std::vector<Component*> mComponents;
 		eState mState;
+		eLayerType mType;
 	};
 }

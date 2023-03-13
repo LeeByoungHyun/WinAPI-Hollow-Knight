@@ -56,9 +56,11 @@ namespace ya
 	}
 	void Crawlid::OnCollisionEnter(Collider* other)
 	{
-		hp -= 1;
-
-	
+		// 플레이어에게 공격당하면 체력감소
+		if (other->GetOwner()->GetType() == eLayerType::Effect)
+		{
+			hp -= 1;
+		}
 		
 	}
 	void Crawlid::OnCollisionStay(Collider* other)

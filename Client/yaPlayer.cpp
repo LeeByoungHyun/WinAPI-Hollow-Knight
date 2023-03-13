@@ -156,20 +156,23 @@ namespace ya
 
 	void Player::OnCollisionEnter(Collider* other)
 	{
-		// 피격시 피격모션
-		mState = ePlayerState::Recoil;
-
-		if (mDirection == eDirection::Left)
+		// 몬스터 콜라이더와 접촉시 피격 애니메이션
+		if (other->GetOwner()->GetType() == eLayerType::Monster)
 		{
-			mAnimator->Play(L"Knight_Recoilleft", true);
-		}
+			mState = ePlayerState::Recoil;
 
-		else if (mDirection == eDirection::Right)
-		{
-			mAnimator->Play(L"Knight_Recoilright", true);
-		}
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Knight_Recoilleft", true);
+			}
 
-		return;
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Knight_Recoilright", true);
+			}
+
+			return;
+		}
 	}
 
 	void Player::OnCollisionStay(Collider* other)
