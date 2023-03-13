@@ -131,6 +131,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="MantisLords.h" />
     <ClInclude Include="mySlashEffectLeft.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="yaCamera.h" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MantisLords.cpp" />
     <ClCompile Include="mySlashEffectLeft.cpp" />
     <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaDashEffectLeft.cpp" />

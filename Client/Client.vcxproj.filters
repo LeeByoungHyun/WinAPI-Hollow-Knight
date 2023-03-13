@@ -110,6 +110,9 @@
     <Filter Include="Contents\Objects\Player\DashEffect">
       <UniqueIdentifier>{e919e1c4-0c40-40c8-9d15-bd6e7f5a153b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Mantis_Lords">
+      <UniqueIdentifier>{0d3c9e98-9c87-484c-a0d3-b845e1fb5541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -247,6 +250,9 @@
     <ClInclude Include="yaDashEffectRight.h">
       <Filter>Contents\Objects\Player\DashEffect</Filter>
     </ClInclude>
+    <ClInclude Include="MantisLords.h">
+      <Filter>Contents\Objects\Mantis_Lords</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -362,6 +368,9 @@
     </ClCompile>
     <ClCompile Include="yaDashEffectRight.cpp">
       <Filter>Contents\Objects\Player\DashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisLords.cpp">
+      <Filter>Contents\Objects\Mantis_Lords</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
