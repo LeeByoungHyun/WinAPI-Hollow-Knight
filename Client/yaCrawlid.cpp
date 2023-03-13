@@ -57,10 +57,7 @@ namespace ya
 	void Crawlid::OnCollisionEnter(Collider* other)
 	{
 		hp -= 1;
-		if (other->GetOwner(). )
-		{
-
-		}
+		
 	}
 	void Crawlid::OnCollisionStay(Collider* other)
 	{
