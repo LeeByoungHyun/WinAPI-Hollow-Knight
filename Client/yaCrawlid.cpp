@@ -61,12 +61,15 @@ namespace ya
 		{
 			hp -= 1;
 		}
-		
+
+		GameObject::OnCollisionEnter(other);
 	}
 	void Crawlid::OnCollisionStay(Collider* other)
 	{
+		GameObject::OnCollisionStay(other);
 	}
 	void Crawlid::OnCollisionExit(Collider* other)
 	{
+		GameObject::OnCollisionExit(other);
 	}
 }

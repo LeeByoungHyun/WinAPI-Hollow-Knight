@@ -20,15 +20,13 @@ namespace ya
 
 		void SetCenter(Vector2 center) { mCenter = center; };
 		void SetSize(Vector2 size) { mSize = size; };
-		//void SetPos(Vector2 pos) { mPos = pos; };
-
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }
 
-
 	private:
 		static UINT ColliderNumber;
+		UINT mCollisionCount;
 		UINT mID;
 		Vector2 mCenter;
 		Vector2 mSize;

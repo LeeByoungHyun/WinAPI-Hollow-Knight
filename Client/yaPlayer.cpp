@@ -203,16 +203,20 @@ namespace ya
 				return;
 			}
 		}
+
+		GameObject::OnCollisionEnter(other);
 		
 	}
 
 	void Player::OnCollisionStay(Collider* other)
 	{
+		GameObject::OnCollisionStay(other);
 
 	}
 
 	void Player::OnCollisionExit(Collider* other)
 	{
+		GameObject::OnCollisionExit(other);
 
 	}
 

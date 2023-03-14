@@ -24,6 +24,9 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
+
+		GameObject* CollisionObj;
+
 	};
 }
 

@@ -50,7 +50,7 @@ namespace ya
 
 	void SlashEffectRight::OnCollisionEnter(Collider* other)
 	{
-		int a = 0;
+		CollisionObj = other->GetOwner();
 	}
 
 	void SlashEffectRight::OnCollisionStay(Collider* other)
@@ -63,6 +63,7 @@ namespace ya
 
 	void SlashEffectRight::slashEffectRightComplateEvent()
 	{
+
 		object::Destroy(this);
 	}
 }

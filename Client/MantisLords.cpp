@@ -81,14 +81,16 @@ namespace ya
 	}
 	void MantisLords::OnCollisionEnter(Collider* other)
 	{
-
+		GameObject::OnCollisionEnter(other);
 	}
 	void MantisLords::OnCollisionStay(Collider* other)
 	{
+		GameObject::OnCollisionStay(other);
 
 	}
 	void MantisLords::OnCollisionExit(Collider* other)
 	{
+		GameObject::OnCollisionExit(other);
 
 	}
 
