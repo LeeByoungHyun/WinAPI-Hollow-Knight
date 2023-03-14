@@ -6,6 +6,7 @@ enum class eSceneType
 	MainHall,
 	Romm1,
 	Boss,
+	MantisLordsBoss,
 	Ending,
 	End
 };

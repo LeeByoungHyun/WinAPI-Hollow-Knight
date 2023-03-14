@@ -72,6 +72,30 @@ namespace ya
 		void death();
 		void deathLeave();
 
+		void dashArriveEndEvent();
+		void dashAnticipateEndEvent();
+		void dashEndEvent();
+		void dashRecoverEndEnent();
+		void dashLeaveEndEvent();
+
+		void deathEndEvent();
+		void deathLeaveEndEvent();
+
+		void dstabArriveEndEvent();
+		void dstabEndEvent();
+		void dstabLandEndEvent();
+		void dstabLeaveEndEvent();
+
+		void throneBowEndEvent();
+		void throneStandEndEvent();
+		void throneLeaveEndEvent();
+
+		void wallArriveEndEvent();
+		void wallReadyEndEvent();
+		void wallThrowEndEvent();
+		void WallLeave1EndEvent();
+		void WallLeave2EndEvent();
+
 	private:
 		eMantisLordsState mState;
 		Transform* tr;

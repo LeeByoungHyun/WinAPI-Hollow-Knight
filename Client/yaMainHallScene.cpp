@@ -43,7 +43,7 @@ namespace ya
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Boss);
+			SceneManager::LoadScene(eSceneType::MantisLordsBoss);
 		}
 
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)

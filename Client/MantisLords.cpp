@@ -62,18 +62,22 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
+
+		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", true);
+
+		GameObject::Initialize();
 	}
 	void MantisLords::Update()
 	{
-
+		GameObject::Update();
 	}
 	void MantisLords::Render(HDC hdc)
 	{
-
+		GameObject::Render(hdc);
 	}
 	void MantisLords::Release()
 	{
-
+		GameObject::Release();
 	}
 	void MantisLords::OnCollisionEnter(Collider* other)
 	{
@@ -153,6 +157,82 @@ namespace ya
 	}
 
 	void MantisLords::deathLeave()
+	{
+	}
+
+	void MantisLords::dashArriveEndEvent()
+	{
+	}
+
+	void MantisLords::dashAnticipateEndEvent()
+	{
+	}
+
+	void MantisLords::dashEndEvent()
+	{
+	}
+
+	void MantisLords::dashRecoverEndEnent()
+	{
+	}
+
+	void MantisLords::dashLeaveEndEvent()
+	{
+	}
+
+	void MantisLords::deathEndEvent()
+	{
+	}
+
+	void MantisLords::deathLeaveEndEvent()
+	{
+	}
+
+	void MantisLords::dstabArriveEndEvent()
+	{
+	}
+
+	void MantisLords::dstabEndEvent()
+	{
+	}
+
+	void MantisLords::dstabLandEndEvent()
+	{
+	}
+
+	void MantisLords::dstabLeaveEndEvent()
+	{
+	}
+
+	void MantisLords::throneBowEndEvent()
+	{
+	}
+
+	void MantisLords::throneStandEndEvent()
+	{
+	}
+
+	void MantisLords::throneLeaveEndEvent()
+	{
+	}
+
+	void MantisLords::wallArriveEndEvent()
+	{
+	}
+
+	void MantisLords::wallReadyEndEvent()
+	{
+	}
+
+	void MantisLords::wallThrowEndEvent()
+	{
+	}
+
+	void MantisLords::WallLeave1EndEvent()
+	{
+	}
+
+	void MantisLords::WallLeave2EndEvent()
 	{
 	}
 	

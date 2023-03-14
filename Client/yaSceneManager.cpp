@@ -1,8 +1,9 @@
 #include "yaSceneManager.h"
-#include "yaBossScene.h"
+#include "yaCollisionManager.h"
+
+#include "MantisLordsBossScene.h"
 #include "yaTitleScene.h"
 #include "yaMainHallScene.h"
-#include "yaCollisionManager.h"
 
 namespace ya
 {
@@ -16,14 +17,10 @@ namespace ya
         // ¾À ¸Å´ÏÀú¿¡ ¾À Ãß°¡
 
         mScenes[(UINT)eSceneType::Title] = new TitleScene();
-        mScenes[(UINT)eSceneType::Title]->SetName(L"TitleScene");
 
-        mScenes[(UINT)eSceneType::Boss] = new BossScene();
-        mScenes[(UINT)eSceneType::Boss]->SetName(L"BossScene");
+        mScenes[(UINT)eSceneType::MantisLordsBoss] = new MantisLordsBossScene();
 
         mScenes[(UINT)eSceneType::MainHall] = new MainHallScene();
-        mScenes[(UINT)eSceneType::MainHall]->SetName(L"MainHallScene");
-
 
         for (Scene* scene : mScenes)
         {

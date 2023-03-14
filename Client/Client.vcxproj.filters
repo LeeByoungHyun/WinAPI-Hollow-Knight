@@ -253,6 +253,9 @@
     <ClInclude Include="MantisLords.h">
       <Filter>Contents\Objects\Mantis_Lords</Filter>
     </ClInclude>
+    <ClInclude Include="MantisLordsBossScene.h">
+      <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -371,6 +374,9 @@
     </ClCompile>
     <ClCompile Include="MantisLords.cpp">
       <Filter>Contents\Objects\Mantis_Lords</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisLordsBossScene.cpp">
+      <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
