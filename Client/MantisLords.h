@@ -12,6 +12,7 @@ namespace ya
 	public:
 		enum class eMantisLordsState
 		{
+			Idle,
 			ThroneIdle,
 			ThroneBow,
 			ThroneStand,
@@ -54,6 +55,7 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 	private:
+		void idle();
 		void throneIdle();
 		void throneBow();
 		void throneStand();
@@ -70,40 +72,40 @@ namespace ya
 		void wallLeave1();
 		void wallLeave2();
 		void death();
-		void deathLeave();
-
-		void dashArriveEndEvent();
-		void dashAnticipateEndEvent();
-		void dashEndEvent();
-		void dashRecoverEndEnent();
-		void dashLeaveEndEvent();
-
-		void deathEndEvent();
-		void deathLeaveEndEvent();
-
-		void dstabArriveEndEvent();
-		void dstabEndEvent();
-		void dstabLandEndEvent();
-		void dstabLeaveEndEvent();
-
-		void throneBowEndEvent();
-		void throneStandEndEvent();
-		void throneLeaveEndEvent();
-
-		void wallArriveEndEvent();
-		void wallReadyEndEvent();
-		void wallThrowEndEvent();
-		void WallLeave1EndEvent();
-		void WallLeave2EndEvent();
+		void deathLeave();	
+		void dStabArrive();
+		void dStab();
+		void dStabLand();
+		void dStabLeave();
 
 	private:
 		eMantisLordsState mState;
 		Transform* tr;
 		Animator* mAnimator;
 		Scene* curScene;
-		eDirection mDirection = eDirection::Right;
 
 		int hp;
+		eDirection mDirection;
+		double mTime = 0.0f;
+		
+		bool throneStandFlag	= false;
+		bool throneBowFlag		= false;
+		bool throneLeaveFlag	= false;
+		bool throneWoundedFlag	= false;
+		bool dashArriveFlag		= false;
+		bool dashAnticipateFlag = false;
+		bool dashFlag			= false;
+		bool dashRecoverFlag	= false;
+		bool dashLeaveFlag		= false;
+		bool dStabArriveFlag	= false;
+		bool dStabFlag			= false;
+		bool dStabLandFlag		= false;
+		bool dStabLeaveFlag		= false;
+		bool wallArriveFlag		= false;
+		bool wallReadyFlag		= false;
+		bool throwFlag			= false;
+		bool wallLeave1Flag		= false;
+		bool wallLeave2Flag		= false;
 	};
 }
 
