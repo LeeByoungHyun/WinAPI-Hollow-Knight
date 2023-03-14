@@ -113,6 +113,12 @@
     <Filter Include="Contents\Objects\Mantis_Lords">
       <UniqueIdentifier>{0d3c9e98-9c87-484c-a0d3-b845e1fb5541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\FadeIn">
+      <UniqueIdentifier>{5c874558-8ef3-487f-8e27-ef4579702b25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\FadeOut">
+      <UniqueIdentifier>{1101fd54-7f36-42c8-821b-d97e300175d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -256,6 +262,12 @@
     <ClInclude Include="MantisLordsBossScene.h">
       <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
     </ClInclude>
+    <ClInclude Include="FadeIn.h">
+      <Filter>Contents\Objects\FadeIn</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeOut.h">
+      <Filter>Contents\Objects\FadeOut</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -377,6 +389,12 @@
     </ClCompile>
     <ClCompile Include="MantisLordsBossScene.cpp">
       <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeIn.cpp">
+      <Filter>Contents\Objects\FadeIn</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeOut.cpp">
+      <Filter>Contents\Objects\FadeOut</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

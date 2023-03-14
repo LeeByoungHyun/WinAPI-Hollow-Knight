@@ -18,6 +18,7 @@ enum class eLayerType
 	Player,
 	Effect,
 	UI, 
+	Fade,
 	End
 };
 

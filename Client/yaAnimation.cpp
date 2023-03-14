@@ -62,13 +62,34 @@ namespace ya
         pos.x -= mSpriteSheet[mSpriteIndex].size.x / 2.0f;
         pos.y -= mSpriteSheet[mSpriteIndex].size.y;
 
-        TransparentBlt(hdc, pos.x, pos.y
-            , mSpriteSheet[mSpriteIndex].size.x * scale.x
-            , mSpriteSheet[mSpriteIndex].size.y * scale.y
-            , mSheetImage->GetHdc()
-            , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
-            , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
-            RGB(255, 0, 255));
+        if (mAnimator->GetOwner()->GetType() != eLayerType::Fade)
+        {
+            TransparentBlt(hdc, pos.x, pos.y
+                , mSpriteSheet[mSpriteIndex].size.x * scale.x
+                , mSpriteSheet[mSpriteIndex].size.y * scale.y
+                , mSheetImage->GetHdc()
+                , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
+                , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
+                RGB(255, 0, 255));
+        }
+
+        else
+        {
+            // 연산량이 많다.
+            BLENDFUNCTION func = {};
+            func.BlendOp = AC_SRC_OVER;
+            func.BlendFlags = 0;
+            func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
+            func.SourceConstantAlpha = 128; // 0(투명) ~ 255(불투명) 알파값
+
+            AlphaBlend(hdc, pos.x, pos.y
+                , mSpriteSheet[mSpriteIndex].size.x * scale.x
+                , mSpriteSheet[mSpriteIndex].size.y * scale.y
+                , mSheetImage->GetHdc()
+                , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
+                , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y
+                , func);
+        }
     }
 
     void Animation::Create(Image* sheet, Vector2 leftTop

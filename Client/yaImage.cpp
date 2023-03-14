@@ -51,6 +51,8 @@ namespace ya
 		ResourceManager::Insert<Image>(name, image);
 
 		return image;
+
+
 	}
 
 	HRESULT Image::Load(const std::wstring& path)
