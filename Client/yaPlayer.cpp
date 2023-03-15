@@ -539,13 +539,13 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_FireballCastleft", false);
-				object::Instantiate<FireballEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
+				object::Instantiate<FireballEffectLeft>(tr->GetPos() + Vector2(0.0f, 0.0f), eLayerType::Effect);
 				castFireballFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_FireballCastright", false);
-				object::Instantiate<FireballEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
+				object::Instantiate<FireballEffectRight>(tr->GetPos() + Vector2(0.0f, 0.0f), eLayerType::Effect);
 				castFireballFlag = true;
 				break;
 

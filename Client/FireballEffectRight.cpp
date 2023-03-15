@@ -23,6 +23,10 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_FireballEffectright") = std::bind(&FireballEffectRight::fireballEffectRightEndEvent, this);
 		mAnimator->Play(L"Knight_FireballEffectright", true);
 
+		Collider* mCollider = AddComponent<Collider>();
+		mCollider->SetCenter(Vector2(-50.0f, -100.0f));
+		mCollider->SetSize(Vector2(120.0f, 90.0f));
+
 		GameObject::Initialize();
 	}
 
