@@ -36,19 +36,6 @@ namespace ya
 		hp = 5;
 		atk = 1;
 
-		/*
-		mSlashTime = 0.0f;
-		mSlashAltTime = 0.0f;
-		mUpSlashTime = 0.0f;
-		*/
-
-		/*
-		slashFlag = false;
-		slashAltFlag = false;
-		upSlashFlag = false;
-		dashFlag = false;
-		*/
-
 		deathFlag = false;
 		invincibilityFlag = false;
 
@@ -95,7 +82,6 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Knight_Deathneutral") = std::bind(&Player::DeathEndEvent, this);
 
-
 		mAnimator->Play(L"Knight_Idleright", true);
 
 		Collider* mCollider = AddComponent<Collider>();
@@ -119,10 +105,20 @@ namespace ya
 		if (hp <= 0 && deathFlag == false)
 		{
 			mState = ePlayerState::Death;
-
 			mAnimator->Play(L"Knight_Deathneutral", false);
-
 			deathFlag = true;
+		}
+
+		// 중립 상태로 돌아오면 모든 상태변수 초기화
+		if (mState == ePlayerState::Idle)
+		{
+			walkFlag = false;
+			slashFlag = false;
+			slashAltFlag = false;
+			upSlashFlag = false;
+			dashFlag = false;
+
+			mTime = 0.0f;
 		}
 
 		switch (mState)
@@ -205,19 +201,16 @@ namespace ya
 		}
 
 		GameObject::OnCollisionEnter(other);
-		
 	}
 
 	void Player::OnCollisionStay(Collider* other)
 	{
 		GameObject::OnCollisionStay(other);
-
 	}
 
 	void Player::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionExit(other);
-
 	}
 
 	void Player::idle()
@@ -227,19 +220,14 @@ namespace ya
 		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
 
-		mSlashTime = 0.0f;
-		mSlashAltTime = 0.0f;
-
 		// 좌우 이동키 입력시 Walk 상태로 변경
 		if (Input::GetKey(eKeyCode::A) || Input::GetKey(eKeyCode::D))
 		{
 			mState = ePlayerState::Walk;
-
 			if (mDirection == eDirection::Left)
 				mAnimator->Play(L"Knight_Walkleft", true);
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Walkright", true);
-
 			return;
 		}
 
@@ -247,23 +235,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::L))
 		{
 			mState = ePlayerState::Dash;
-
-			if (mDirection == eDirection::Left)
-			{
-				mAnimator->Play(L"Knight_Dashleft", true);
-
-				DashEffectLeft* dashEffectLeft =
-					object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
-			}
-
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_Dashright", true);
-
-				DashEffectRight* dashEffectRight =
-					object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
-			}
-
 			return;
 		}
 
@@ -271,12 +242,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
 		{
 			mState = ePlayerState::UpSlash;
-
-			mAnimator->Play(L"Knight_UpSlashneutral", true);
-
-			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
-
 			return;
 		}
 
@@ -284,23 +249,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
 			mState = ePlayerState::Slash;
-
-			if (mDirection == eDirection::Left)
-			{
-				mAnimator->Play(L"Knight_Slashleft", true);
-
-				SlashEffectLeft* slashEffectLeft =
-					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
-			}
-
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_Slashright", true);
-
-				SlashEffectRight* slashEffectRight =
-					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
-			}
-
 			return;
 		}
 	}
@@ -329,23 +277,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::L))
 		{
 			mState = ePlayerState::Dash;
-
-			if (mDirection == eDirection::Left)
-			{
-				mAnimator->Play(L"Knight_Dashleft", true);
-
-				DashEffectLeft* dashEffectLeft =
-					object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
-			}
-
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_Dashright", true);
-
-				DashEffectRight* dashEffectRight =
-					object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
-			}
-
 			return;
 		}
 
@@ -353,12 +284,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
 		{
 			mState = ePlayerState::UpSlash;
-
-			mAnimator->Play(L"Knight_UpSlashneutral", true);
-
-			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
-
 			return;
 		}
 
@@ -366,23 +291,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
 			mState = ePlayerState::Slash;
-
-			if (mDirection == eDirection::Left)
-			{
-				mAnimator->Play(L"Knight_Slashleft", true);
-
-				SlashEffectLeft* slashEffectLeft =
-					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
-			}
-
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_Slashright", true);
-
-				SlashEffectRight* slashEffectRight =
-					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
-			}
-
 			return;
 		}
 
@@ -404,45 +312,48 @@ namespace ya
 		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
 
-		mSlashTime += Time::DeltaTime();
-		//slashAltFlag = false;
-
-		// W + 공격키 누르면 UpSlash
-		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		if (slashFlag == false)
 		{
-			mState = ePlayerState::UpSlash;
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_Slashleft", true);
+				object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
+				slashFlag = true;
+				break;
 
-			mAnimator->Play(L"Knight_UpSlashneutral", true);
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_Slashright", true);
+				object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
+				slashFlag = true;
+				break;
 
-			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
+			default:
+				break;
+			}
 
-			return;
 		}
 
-		// slash 상태에서 한번 더 공격시 slashAlt 상대로 변경
-		if (Input::GetKeyDown(eKeyCode::K) && mSlashTime >= 0.3f)
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.3f)
 		{
-			mState = ePlayerState::SlashAlt;
-
-			if (mDirection == eDirection::Left)
+			// W + 공격키 누르면 UpSlash
+			if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
 			{
-				mAnimator->Play(L"Knight_SlashAltleft", true);
-
-				SlashAltEffectLeft* slashAltEffectLeft =
-					object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
-			}
-			else if (mDirection == eDirection::Right)
-			{
-				mAnimator->Play(L"Knight_SlashAltright", true);
-
-				SlashAltEffectRight* slashAltEffectRight =
-					object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
+				mState = ePlayerState::UpSlash;
+				mTime = 0.0f;
+				slashFlag = false;
+				return;
 			}
 
-			mSlashTime = 0.0f;
-
-			return;
+			// slash 상태에서 한번 더 공격시 slashAlt 상대로 변경
+			if (Input::GetKeyDown(eKeyCode::K))
+			{
+				mState = ePlayerState::SlashAlt;
+				mTime = 0.0f;
+				slashFlag = false;
+				return;
+			}
 		}
 	}
 
@@ -455,46 +366,48 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::D))
 			mDirection = eDirection::Right;
 
-		mSlashAltTime += Time::DeltaTime();
-		//slashFlag = false;
-
-		// W + 공격키 누르면 UpSlash
-		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		if (slashAltFlag == false)
 		{
-			mState = ePlayerState::UpSlash;
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_SlashAltleft", true);
+				object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
+				slashAltFlag = true;
+				break;
 
-			mAnimator->Play(L"Knight_UpSlashneutral", true);
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_SlashAltright", true);
+				object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
+				slashAltFlag = true;
+				break;
 
-			UpSlashEffect* upSlashEffect =
-				object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
+			default:
+				break;
+			}
 
-			return;
 		}
 
-		// slashAlt 상태에서 한번 더 공격시 slash 상태로 변경
-		if (Input::GetKeyDown(eKeyCode::K) && mSlashAltTime >= 0.3f)
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.3f)
 		{
-			mState = ePlayerState::Slash;
-
-			if (mDirection == eDirection::Left)
+			// W + 공격키 누르면 UpSlash
+			if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
 			{
-				mAnimator->Play(L"Knight_Slashleft", true);
-
-				SlashEffectLeft* slashEffectLeft =
-					object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
+				mState = ePlayerState::UpSlash;
+				mTime = 0.0f;
+				slashAltFlag = false;
+				return;
 			}
 
-			else if (mDirection == eDirection::Right)
+			// slashAlt 상태에서 한번 더 공격시 slash 상태로 변경
+			if (Input::GetKeyDown(eKeyCode::K))
 			{
-				mAnimator->Play(L"Knight_Slashright", true);
-
-				SlashEffectRight* slashEffectRight =
-					object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
+				mState = ePlayerState::Slash;
+				mTime = 0.0f;
+				slashAltFlag = false;
+				return;
 			}
-
-			mSlashAltTime = 0.0f;
-
-			return;
 		}
 	}
 
@@ -505,10 +418,37 @@ namespace ya
 		if (Input::GetKey(eKeyCode::D))
 			mDirection = eDirection::Right;
 
+		if (upSlashFlag == false)
+		{
+			mAnimator->Play(L"Knight_UpSlashneutral", true);
+			object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
+			upSlashFlag = true;
+		}
 	}
 
 	void Player::dash()
 	{
+		if (dashFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_Dashleft", false);
+				object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
+				dashFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_Dashright", false);
+				object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
+				dashFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
@@ -555,6 +495,7 @@ namespace ya
 	void Player::SlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
+
 		if (mDirection == eDirection::Left)
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
@@ -564,6 +505,7 @@ namespace ya
 	void Player::SlashAltEndEvent()
 	{
 		mState = ePlayerState::Idle;
+
 		if (mDirection == eDirection::Left)
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
@@ -573,6 +515,7 @@ namespace ya
 	void Player::UpSlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
+
 		if (mDirection == eDirection::Left)
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
@@ -582,6 +525,7 @@ namespace ya
 	void Player::RecoilEndEvent()
 	{
 		mState = ePlayerState::Idle;
+
 		if (mDirection == eDirection::Left)
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
@@ -593,12 +537,13 @@ namespace ya
 	void Player::DashEndEvent()
 	{
 		mState = ePlayerState::Idle;
+
 		if (mDirection == eDirection::Left)
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
-
 	}
+
 	void Player::DeathEndEvent()
 	{
 		object::Destroy(this);

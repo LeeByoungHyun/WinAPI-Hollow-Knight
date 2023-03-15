@@ -74,17 +74,15 @@ namespace ya
 
 		int hp;
 		int atk;
+		double mTime = 0.0f;
 
-		double mSlashTime;
-		double mSlashAltTime;
-		double mUpSlashTime;
-
-		bool slashFlag;
-		bool slashAltFlag;
-		bool upSlashFlag;
-		bool dashFlag;
-		bool deathFlag;
-		bool invincibilityFlag;
+		bool walkFlag			= false;
+		bool slashFlag			= false;
+		bool slashAltFlag		= false;
+		bool upSlashFlag		= false;
+		bool dashFlag			= false;
+		bool deathFlag			= false;
+		bool invincibilityFlag	= false;
 	};
 }
 
