@@ -62,6 +62,8 @@ namespace ya
 			hp -= 1;
 		}
 
+		//other->GetOwner()->
+
 		GameObject::OnCollisionEnter(other);
 	}
 	void Crawlid::OnCollisionStay(Collider* other)

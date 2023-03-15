@@ -7,7 +7,7 @@ namespace ya
 	class Transform;
 	class Animator;
 	class Scene;
-	class Player : public GameObject
+	static class Player : public GameObject
 	{
 	public:
 		enum class ePlayerState
@@ -87,7 +87,7 @@ namespace ya
 		eDirection mDirection = eDirection::Right;
 
 		int hp;
-		int atk;
+		int atk = 1;
 		double mTime = 0.0f;
 
 		bool walkFlag			= false;

@@ -122,6 +122,9 @@
     <Filter Include="Contents\Objects\Player\FireballEffect">
       <UniqueIdentifier>{1ed775da-a6af-4bff-b5f7-d8585684e7b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\PlayerSkull">
+      <UniqueIdentifier>{7371db15-b776-4b5d-93fb-d55a1458010d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -277,6 +280,9 @@
     <ClInclude Include="FireballEffectRight.h">
       <Filter>Contents\Objects\Player\FireballEffect</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerSkull.h">
+      <Filter>Contents\Objects\PlayerSkull</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -410,6 +416,9 @@
     </ClCompile>
     <ClCompile Include="FireballEffectRight.cpp">
       <Filter>Contents\Objects\Player\FireballEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSkull.cpp">
+      <Filter>Contents\Objects\PlayerSkull</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

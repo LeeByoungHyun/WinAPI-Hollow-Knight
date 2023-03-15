@@ -17,6 +17,7 @@
 #include "yaDashEffectRight.h"
 #include "FireballEffectLeft.h"
 #include "FireballEffectRight.h"
+#include "PlayerSkull.h"
 
 namespace ya
 {
@@ -119,11 +120,9 @@ namespace ya
 		tr = GetComponent<Transform>();
 
 		// HP가 0이하가 되면 죽음
-		if (hp <= 0 && deathFlag == false)
+		if (hp <= 0)
 		{
 			mState = ePlayerState::Death;
-			mAnimator->Play(L"Knight_Deathneutral", false);
-			deathFlag = true;
 		}
 
 		// 중립 상태로 돌아오면 모든 상태변수 초기화
@@ -587,7 +586,11 @@ namespace ya
 
 	void Player::death()
 	{
-		
+		if (deathFlag == false)
+		{
+			mAnimator->Play(L"Knight_Deathneutral", false);
+			deathFlag = true;
+		}
 	}
 
 	void Player::focus()
@@ -616,6 +619,7 @@ namespace ya
 		{
 			mState = ePlayerState::FocusEnd;
 			focusFlag = false;
+			mTime = 0.0f;
 			return;
 		}
 
@@ -700,6 +704,7 @@ namespace ya
 		{
 			mState = ePlayerState::FocusEnd;
 			focusGetOnceFlag = false;
+			mTime = 0.0f;
 			return;
 		}
 
@@ -769,6 +774,9 @@ namespace ya
 	void Player::deathEndEvent()
 	{
 		object::Destroy(this);
+
+		object::Instantiate<PlayerSkull>(tr->GetPos(), eLayerType::Player);
+
 	}
 
 	void Player::focusEndEvent()
@@ -809,6 +817,7 @@ namespace ya
 	{
 
 	}
+
 	void Player::castFireballEndEvent()
 	{
 		mState = ePlayerState::Idle;

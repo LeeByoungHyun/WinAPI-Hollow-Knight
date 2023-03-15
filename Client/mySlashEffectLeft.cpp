@@ -50,7 +50,8 @@ namespace ya
 
 	void SlashEffectLeft::OnCollisionEnter(Collider* other)
 	{
-		other->GetOwner();
+		//other->GetOwner();
+
 	}
 
 	void SlashEffectLeft::OnCollisionStay(Collider* other)
