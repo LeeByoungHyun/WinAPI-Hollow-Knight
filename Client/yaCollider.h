@@ -26,7 +26,7 @@ namespace ya
 
 	private:
 		static UINT ColliderNumber;
-		UINT mCollisionCount;
+		bool mCollisionCount;
 		UINT mID;
 		Vector2 mCenter;
 		Vector2 mSize;
