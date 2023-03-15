@@ -119,6 +119,9 @@
     <Filter Include="Contents\Objects\FadeOut">
       <UniqueIdentifier>{1101fd54-7f36-42c8-821b-d97e300175d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\FireballEffect">
+      <UniqueIdentifier>{1ed775da-a6af-4bff-b5f7-d8585684e7b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -268,6 +271,12 @@
     <ClInclude Include="FadeOut.h">
       <Filter>Contents\Objects\FadeOut</Filter>
     </ClInclude>
+    <ClInclude Include="FireballEffectLeft.h">
+      <Filter>Contents\Objects\Player\FireballEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireballEffectRight.h">
+      <Filter>Contents\Objects\Player\FireballEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -395,6 +404,12 @@
     </ClCompile>
     <ClCompile Include="FadeOut.cpp">
       <Filter>Contents\Objects\FadeOut</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballEffectLeft.cpp">
+      <Filter>Contents\Objects\Player\FireballEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballEffectRight.cpp">
+      <Filter>Contents\Objects\Player\FireballEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

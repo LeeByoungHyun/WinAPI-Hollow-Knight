@@ -15,6 +15,8 @@
 #include "yaUpSlashEffect.h"
 #include "yaDashEffectLeft.h"
 #include "yaDashEffectRight.h"
+#include "FireballEffectLeft.h"
+#include "FireballEffectRight.h"
 
 namespace ya
 {
@@ -30,7 +32,7 @@ namespace ya
 
 	void Player::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
+		tr = GetComponent<Transform>();
 		tr->SetName(L"PlayerTransform");
 
 		hp = 5;
@@ -94,6 +96,9 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceleft") = std::bind(&Player::focusGetOnceEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceright") = std::bind(&Player::focusGetOnceEndEvent, this);
 
+		mAnimator->GetCompleteEvent(L"Knight_FireballCastleft") = std::bind(&Player::castFireballEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FireballCastright") = std::bind(&Player::castFireballEndEvent, this);
+
 		mAnimator->Play(L"Knight_Idleright", true);
 
 		Collider* mCollider = AddComponent<Collider>();
@@ -129,10 +134,13 @@ namespace ya
 			slashAltFlag = false;
 			upSlashFlag = false;
 			dashFlag = false;
+			deathFlag = false;
+			invincibilityFlag = false;
 			focusFlag = false;
 			focusEndFlag = false;
 			focusGetFlag = false;
 			focusGetOnceFlag = false;
+			castFireballFlag = false;
 
 			mTime = 0.0f;
 		}
@@ -191,6 +199,10 @@ namespace ya
 			focusGetOnce();
 			break;
 
+		case ya::Player::ePlayerState::CastFireball:
+			castFireball();
+			break;
+
 		default:
 			break;
 		}
@@ -247,13 +259,13 @@ namespace ya
 
 	void Player::idle()
 	{
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			mDirection = eDirection::Left;
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
 		// 좌우 이동키 입력시 Walk 상태로 변경
-		if (Input::GetKey(eKeyCode::A) || Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
 		{
 			mState = ePlayerState::Walk;
 			if (mDirection == eDirection::Left)
@@ -264,28 +276,35 @@ namespace ya
 		}
 
 		// 대시키 입력시 dash 상태로 변경
-		if (Input::GetKeyDown(eKeyCode::L))
+		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
 			return;
 		}
 
-		// W + 공격키 누르면 UpSlash
-		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		// up + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
 			return;
 		}
 
 		// 공격 입력시 Slash 상태 변경
-		if (Input::GetKeyDown(eKeyCode::K))
+		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
 			return;
 		}
 
-		// H 입력시 체력회복
-		if (Input::GetKeyDown(eKeyCode::H))
+		// S 입력시 원거리 공격
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mState = ePlayerState::CastFireball;
+			return;
+		}
+
+		// A 입력시 체력회복
+		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			mState = ePlayerState::Focus;
 			return;
@@ -294,13 +313,13 @@ namespace ya
 
 	void Player::walk()
 	{
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			mDirection = eDirection::Left;
-		else if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
 		// 이동키에서 손을 땔 경우 Idle상태로 변경
-		if (Input::GetKeyUp(eKeyCode::A) || Input::GetKeyUp(eKeyCode::D))
+		if (Input::GetKeyUp(eKeyCode::LEFT) || Input::GetKeyUp(eKeyCode::RIGHT))
 		{
 			mState = ePlayerState::Idle;
 
@@ -313,32 +332,39 @@ namespace ya
 		}
 
 		// 대시키 입력시 dash 상태로 변경
-		if (Input::GetKeyDown(eKeyCode::L))
+		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
 			return;
 		}
 
-		// W + 공격키 누르면 UpSlash
-		if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+		// up + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
 			return;
 		}
 
 		// 공격 입력시 Slash 상태 변경
-		if (Input::GetKeyDown(eKeyCode::K))
+		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
 			return;
 		}
 
+		// A 입력시 체력회복
+		if (Input::GetKeyDown(eKeyCode::A))
+		{
+			mState = ePlayerState::Focus;
+			return;
+		}
+
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 200.0f * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 200.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
@@ -346,9 +372,9 @@ namespace ya
 
 	void Player::slash()
 	{
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			mDirection = eDirection::Left;
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
 		if (slashFlag == false)
@@ -370,14 +396,13 @@ namespace ya
 			default:
 				break;
 			}
-
 		}
 
 		mTime += Time::DeltaTime();
 		if (mTime >= 0.3f)
 		{
-			// W + 공격키 누르면 UpSlash
-			if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+			// up + 공격키 누르면 UpSlash
+			if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 			{
 				mState = ePlayerState::UpSlash;
 				mTime = 0.0f;
@@ -386,7 +411,7 @@ namespace ya
 			}
 
 			// slash 상태에서 한번 더 공격시 slashAlt 상대로 변경
-			if (Input::GetKeyDown(eKeyCode::K))
+			if (Input::GetKeyDown(eKeyCode::X))
 			{
 				mState = ePlayerState::SlashAlt;
 				mTime = 0.0f;
@@ -398,11 +423,9 @@ namespace ya
 
 	void Player::slashAlt()
 	{
-		Transform* tr = GetComponent<Transform>();
-
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			mDirection = eDirection::Left;
-		if (Input::GetKeyDown(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
 		if (slashAltFlag == false)
@@ -424,14 +447,13 @@ namespace ya
 			default:
 				break;
 			}
-
 		}
 
 		mTime += Time::DeltaTime();
 		if (mTime >= 0.3f)
 		{
-			// W + 공격키 누르면 UpSlash
-			if (Input::GetKeyDown(eKeyCode::K) && Input::GetKey(eKeyCode::W))
+			// up + 공격키 누르면 UpSlash
+			if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 			{
 				mState = ePlayerState::UpSlash;
 				mTime = 0.0f;
@@ -440,7 +462,7 @@ namespace ya
 			}
 
 			// slashAlt 상태에서 한번 더 공격시 slash 상태로 변경
-			if (Input::GetKeyDown(eKeyCode::K))
+			if (Input::GetKeyDown(eKeyCode::X))
 			{
 				mState = ePlayerState::Slash;
 				mTime = 0.0f;
@@ -452,9 +474,9 @@ namespace ya
 
 	void Player::upSlash()
 	{
-		if (Input::GetKey(eKeyCode::A))
+		if (Input::GetKey(eKeyCode::LEFT))
 			mDirection = eDirection::Left;
-		if (Input::GetKey(eKeyCode::D))
+		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
 		if (upSlashFlag == false)
@@ -511,6 +533,36 @@ namespace ya
 
 	void Player::castFireball()
 	{
+		if (castFireballFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_FireballCastleft", false);
+				object::Instantiate<FireballEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
+				castFireballFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_FireballCastright", false);
+				object::Instantiate<FireballEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
+				castFireballFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		Vector2 pos = tr->GetPos();
+
+		if (mDirection == eDirection::Left)
+			pos.x += 30.0f * Time::DeltaTime();
+
+		else if (mDirection == eDirection::Right)
+			pos.x -= 30.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
 	}
 
 	void Player::recoil()
@@ -553,7 +605,7 @@ namespace ya
 		}
 
 		// 회복키에서 손 때면 회복종료
-		if (Input::GetKeyUp(eKeyCode::H))
+		if (Input::GetKeyUp(eKeyCode::A))
 		{
 			mState = ePlayerState::FocusEnd;
 			focusFlag = false;
@@ -566,6 +618,7 @@ namespace ya
 		{
 			mState = ePlayerState::FocusGet;
 			focusFlag = false;
+			mTime = 0.0f;
 			return;
 		}
 	}
@@ -636,19 +689,20 @@ namespace ya
 		}
 
 		// 회복키에서 손 때면 회복종료
-		if (Input::GetKeyUp(eKeyCode::H))
+		if (Input::GetKeyUp(eKeyCode::A))
 		{
 			mState = ePlayerState::FocusEnd;
 			focusGetOnceFlag = false;
 			return;
 		}
 
-		// 21초 이상 회복모션 유지 성공시
+		// 1초 이상 회복모션 유지 성공시
 		mTime += Time::DeltaTime();
 		if (mTime >= 1)
 		{
 			mState = ePlayerState::FocusGet;
 			focusGetOnceFlag = false;
+			mTime = 0.0f;
 			return;
 		}
 	}
@@ -728,7 +782,7 @@ namespace ya
 	void Player::focusGetEndEvent()
 	{
 		// 회복키가 계속 눌려있을 경우 이어서 회복
-		if (Input::GetKey(eKeyCode::H))
+		if (Input::GetKey(eKeyCode::A))
 		{
 			mState = ePlayerState::FocusGetOnce;
 			focusGetFlag = false;
@@ -747,5 +801,14 @@ namespace ya
 	void Player::focusGetOnceEndEvent()
 	{
 
+	}
+	void Player::castFireballEndEvent()
+	{
+		mState = ePlayerState::Idle;
+
+		if (mDirection == eDirection::Left)
+			mAnimator->Play(L"Knight_Idleleft", true);
+		else if (mDirection == eDirection::Right)
+			mAnimator->Play(L"Knight_Idleright", true);
 	}
 }

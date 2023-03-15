@@ -25,6 +25,7 @@ namespace ya
 
 	void Camera::Update()
 	{
+		/*
 		if (Input::GetKey(eKeyCode::LEFT))
 			mLookPosition.x -= CameraSpeed * Time::DeltaTime();
 
@@ -36,6 +37,7 @@ namespace ya
 
 		if (Input::GetKey(eKeyCode::DOWN))
 			mLookPosition.y -= CameraSpeed * Time::DeltaTime();
+		*/
 
 		if (mTarget != nullptr)
 		{

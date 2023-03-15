@@ -25,7 +25,8 @@ namespace ya
 			FocusEnd,
 			FocusGet,
 			FocusGetOnce,
-			Death
+			Death,
+			CastFireball
 		};
 
 		enum class eDirection
@@ -75,6 +76,8 @@ namespace ya
 		void focusEndEndEvent();
 		void focusGetEndEvent();
 		void focusGetOnceEndEvent();
+		void castFireballEndEvent();
+
 
 	private:
 		ePlayerState mState;
@@ -98,6 +101,7 @@ namespace ya
 		bool focusEndFlag		= false;
 		bool focusGetFlag		= false;
 		bool focusGetOnceFlag	= false;
+		bool castFireballFlag	= false;
 	};
 }
 
