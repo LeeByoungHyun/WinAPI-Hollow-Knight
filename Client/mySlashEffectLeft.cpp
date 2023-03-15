@@ -19,7 +19,7 @@ namespace ya
 	void SlashEffectLeft::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashEffect\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashEffect\\left", Vector2::Zero, 0.033f);
 
 		mAnimator->GetCompleteEvent(L"Knight_SlashEffectleft") = std::bind(&SlashEffectLeft::slashEffectLeftComplateEvent, this);
 

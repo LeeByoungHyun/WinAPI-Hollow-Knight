@@ -52,11 +52,11 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.025f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.025f);
 
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.05f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.033f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
@@ -352,6 +352,13 @@ namespace ya
 			return;
 		}
 
+		// S 입력시 원거리 공격
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mState = ePlayerState::CastFireball;
+			return;
+		}
+
 		// A 입력시 체력회복
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -362,10 +369,10 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 
 		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 200.0f * Time::DeltaTime();
+			pos.x -= 300.0f * Time::DeltaTime();
 
 		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 200.0f * Time::DeltaTime();
+			pos.x += 300.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
 	}
@@ -399,7 +406,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.3f)
+		if (mTime >= 0.25f)
 		{
 			// up + 공격키 누르면 UpSlash
 			if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
@@ -450,7 +457,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.3f)
+		if (mTime >= 0.25f)
 		{
 			// up + 공격키 누르면 UpSlash
 			if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
