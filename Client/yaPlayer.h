@@ -21,6 +21,10 @@ namespace ya
 			SlashAlt,
 			UpSlash,
 			Recoil,
+			Focus,
+			FocusEnd,
+			FocusGet,
+			FocusGetOnce,
 			Death
 		};
 
@@ -56,14 +60,21 @@ namespace ya
 		void castFireball();
 		void recoil();
 		void death();
+		void focus();
+		void focusEnd();
+		void focusGet();
+		void focusGetOnce();
 
-		void SlashEndEvent();
-		void SlashAltEndEvent();
-		void UpSlashEndEvent();
-		void RecoilEndEvent();
-
-		void DashEndEvent();
-		void DeathEndEvent();
+		void slashEndEvent();
+		void slashAltEndEvent();
+		void upSlashEndEvent();
+		void recoilEndEvent();
+		void dashEndEvent();
+		void deathEndEvent();
+		void focusEndEvent();
+		void focusEndEndEvent();
+		void focusGetEndEvent();
+		void focusGetOnceEndEvent();
 
 	private:
 		ePlayerState mState;
@@ -83,6 +94,10 @@ namespace ya
 		bool dashFlag			= false;
 		bool deathFlag			= false;
 		bool invincibilityFlag	= false;
+		bool focusFlag			= false;
+		bool focusEndFlag		= false;
+		bool focusGetFlag		= false;
+		bool focusGetOnceFlag	= false;
 	};
 }
 

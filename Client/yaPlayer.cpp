@@ -52,10 +52,8 @@ namespace ya
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.05f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.05f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.05f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
@@ -63,24 +61,38 @@ namespace ya
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Death\\neutral", Vector2::Zero, 0.066f);
 
-		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::SlashEndEvent, this);
-		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::SlashEndEvent, this);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Focus\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Focus\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusEnd\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusEnd\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGet\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGet\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\right", Vector2::Zero, 0.1f);
 
-		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::SlashAltEndEvent, this);
-		mAnimator->GetCompleteEvent(L"Knight_SlashAltright") = std::bind(&Player::SlashAltEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::slashAltEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_SlashAltright") = std::bind(&Player::slashAltEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_UpSlashneutral") = std::bind(&Player::upSlashEndEvent, this);
 
-		mAnimator->GetCompleteEvent(L"Knight_UpSlashneutral") = std::bind(&Player::UpSlashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Dashleft") = std::bind(&Player::dashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Dashright") = std::bind(&Player::dashEndEvent, this);
 
-		mAnimator->GetCompleteEvent(L"Knight_Dashleft") = std::bind(&Player::DashEndEvent, this);
-		mAnimator->GetCompleteEvent(L"Knight_Dashright") = std::bind(&Player::DashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Recoilleft") = std::bind(&Player::recoilEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Recoilright") = std::bind(&Player::recoilEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Deathneutral") = std::bind(&Player::deathEndEvent, this);
 
-		mAnimator->GetCompleteEvent(L"Knight_Recoilleft") = std::bind(&Player::RecoilEndEvent, this);
-		mAnimator->GetCompleteEvent(L"Knight_Recoilright") = std::bind(&Player::RecoilEndEvent, this);
-
-		mAnimator->GetCompleteEvent(L"Knight_Deathneutral") = std::bind(&Player::DeathEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Focusleft") = std::bind(&Player::focusEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Focusright") = std::bind(&Player::focusEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusEndleft") = std::bind(&Player::focusEndEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusEndright") = std::bind(&Player::focusEndEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusGetleft") = std::bind(&Player::focusGetEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusGetright") = std::bind(&Player::focusGetEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceleft") = std::bind(&Player::focusGetOnceEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceright") = std::bind(&Player::focusGetOnceEndEvent, this);
 
 		mAnimator->Play(L"Knight_Idleright", true);
 
@@ -117,6 +129,10 @@ namespace ya
 			slashAltFlag = false;
 			upSlashFlag = false;
 			dashFlag = false;
+			focusFlag = false;
+			focusEndFlag = false;
+			focusGetFlag = false;
+			focusGetOnceFlag = false;
 
 			mTime = 0.0f;
 		}
@@ -157,6 +173,22 @@ namespace ya
 
 		case ya::Player::ePlayerState::Death:
 			death();
+			break;
+
+		case ya::Player::ePlayerState::Focus:
+			focus();
+			break;
+
+		case ya::Player::ePlayerState::FocusEnd:
+			focusEnd();
+			break;
+
+		case ya::Player::ePlayerState::FocusGet:
+			focusGet();
+			break;
+
+		case ya::Player::ePlayerState::FocusGetOnce:
+			focusGetOnce();
 			break;
 
 		default:
@@ -249,6 +281,13 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::K))
 		{
 			mState = ePlayerState::Slash;
+			return;
+		}
+
+		// H 입력시 체력회복
+		if (Input::GetKeyDown(eKeyCode::H))
+		{
+			mState = ePlayerState::Focus;
 			return;
 		}
 	}
@@ -492,7 +531,129 @@ namespace ya
 		
 	}
 
-	void Player::SlashEndEvent()
+	void Player::focus()
+	{
+		if (focusFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_Focusleft", false);
+				focusFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_Focusright", false);
+				focusFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		// 회복키에서 손 때면 회복종료
+		if (Input::GetKeyUp(eKeyCode::H))
+		{
+			mState = ePlayerState::FocusEnd;
+			focusFlag = false;
+			return;
+		}
+
+		// 1초 이상 회복모션 유지 성공시
+		mTime += Time::DeltaTime();
+		if (mTime >= 1)
+		{
+			mState = ePlayerState::FocusGet;
+			focusFlag = false;
+			return;
+		}
+	}
+
+	void Player::focusEnd()
+	{
+		if (focusEndFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_FocusEndleft", false);
+				focusEndFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_FocusEndleft", false);
+				focusEndFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	void Player::focusGet()
+	{
+		if (focusGetFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_FocusGetleft", false);
+				focusGetFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_FocusGetright", false);
+				focusGetFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+	void Player::focusGetOnce()
+	{
+		if (focusGetOnceFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_FocusGetOnceleft", false);
+				focusGetOnceFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_FocusGetOnceright", false);
+				focusGetOnceFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		// 회복키에서 손 때면 회복종료
+		if (Input::GetKeyUp(eKeyCode::H))
+		{
+			mState = ePlayerState::FocusEnd;
+			focusGetOnceFlag = false;
+			return;
+		}
+
+		// 21초 이상 회복모션 유지 성공시
+		mTime += Time::DeltaTime();
+		if (mTime >= 1)
+		{
+			mState = ePlayerState::FocusGet;
+			focusGetOnceFlag = false;
+			return;
+		}
+	}
+
+	void Player::slashEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
@@ -502,7 +663,7 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleright", true);
 	}
 
-	void Player::SlashAltEndEvent()
+	void Player::slashAltEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
@@ -512,7 +673,7 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleright", true);
 	}
 
-	void Player::UpSlashEndEvent()
+	void Player::upSlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
@@ -522,7 +683,7 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleright", true);
 	}
 
-	void Player::RecoilEndEvent()
+	void Player::recoilEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
@@ -534,7 +695,7 @@ namespace ya
 		invincibilityFlag = false;
 	}
 
-	void Player::DashEndEvent()
+	void Player::dashEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
@@ -544,8 +705,47 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleright", true);
 	}
 
-	void Player::DeathEndEvent()
+	void Player::deathEndEvent()
 	{
 		object::Destroy(this);
+	}
+
+	void Player::focusEndEvent()
+	{
+		
+	}
+
+	void Player::focusEndEndEvent()
+	{
+		mState = ePlayerState::Idle;
+
+		if (mDirection == eDirection::Left)
+			mAnimator->Play(L"Knight_Idleleft", true);
+		else if (mDirection == eDirection::Right)
+			mAnimator->Play(L"Knight_Idleright", true);
+	}
+
+	void Player::focusGetEndEvent()
+	{
+		// 회복키가 계속 눌려있을 경우 이어서 회복
+		if (Input::GetKey(eKeyCode::H))
+		{
+			mState = ePlayerState::FocusGetOnce;
+			focusGetFlag = false;
+			return;
+		}
+
+		// 아닐 경우 회복종료 모션으로 
+		else
+		{
+			mState = ePlayerState::FocusEnd;
+			focusGetFlag = false;
+			return;
+		}
+	}
+
+	void Player::focusGetOnceEndEvent()
+	{
+
 	}
 }
