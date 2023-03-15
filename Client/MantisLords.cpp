@@ -67,6 +67,11 @@ namespace ya
 
 		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", true);
 
+		Collider* mCollider = AddComponent<Collider>();
+		mCollider->SetName(L"MantisLordCollider");
+		mCollider->SetCenter(Vector2(-30.0f, -120.0f));
+		mCollider->SetSize(Vector2(70.0f, 120.0f));
+
 		mState = eMantisLordsState::ThroneIdle;
 
 		GameObject::Initialize();
@@ -75,14 +80,6 @@ namespace ya
 	void MantisLords::Update()
 	{
 		GameObject::Update();
-
-		// 테스트용 임시 코드
-		if (Input::GetKeyDown(eKeyCode::Z))
-		{
-			mState = eMantisLordsState::ThroneStand;
-			return;
-		}
-		// -----------------------------------
 
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
@@ -704,11 +701,11 @@ namespace ya
 		}
 
 		Vector2 pos = tr->GetPos();
-		pos.y += 2000.0f * Time::DeltaTime();
+		pos.y += 4000.0f * Time::DeltaTime();
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.2)
 		{
 			mState = eMantisLordsState::DstabLand;
 			dStabFlag = false;
