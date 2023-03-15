@@ -34,7 +34,7 @@ namespace ya
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		pos.x += 2000.0f * Time::DeltaTime();
+		pos.x += 3000.0f * Time::DeltaTime();
 		tr->SetPos(pos);
 
 		GameObject::Update();
