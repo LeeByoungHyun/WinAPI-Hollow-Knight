@@ -8,6 +8,8 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
+#include "yaRigidBody.h"
+
 #include "mySlashEffectLeft.h"
 #include "yaSlashEffectRight.h"
 #include "yaSlashAltEffectLeft.h"
@@ -33,16 +35,18 @@ namespace ya
 
 	void Player::Initialize()
 	{
-		tr = GetComponent<Transform>();
+		tr = AddComponent<Transform>();
 		tr->SetName(L"PlayerTransform");
+		mAnimator = AddComponent<Animator>();
+		mCollider = AddComponent<Collider>();
+		mRigidBody = AddComponent<RigidBody>();
+		curScene = SceneManager::GetActiveScene();
 
 		hp = 5;
 		atk = 1;
 
 		deathFlag = false;
 		invincibilityFlag = false;
-
-		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
@@ -75,6 +79,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\right", Vector2::Zero, 0.1f);
+
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::slashAltEndEvent, this);
@@ -101,11 +108,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_FireballCastright") = std::bind(&Player::castFireballEndEvent, this);
 
 		mAnimator->Play(L"Knight_Idleright", true);
-
-		Collider* mCollider = AddComponent<Collider>();
+		
 		mCollider->SetName(L"PlayerCollider");
 		mCollider->SetCenter(Vector2(-30.0f, -120.0f));
 		mCollider->SetSize(Vector2(60.0f, 120.0f));
+
+		mRigidBody->SetMass(1.0f);
 
 		mState = ePlayerState::Idle;
 
@@ -128,6 +136,7 @@ namespace ya
 		// 중립 상태로 돌아오면 모든 상태변수 초기화
 		if (mState == ePlayerState::Idle)
 		{
+			idleFlag = false;
 			walkFlag = false;
 			slashFlag = false;
 			slashAltFlag = false;
@@ -140,6 +149,8 @@ namespace ya
 			focusGetFlag = false;
 			focusGetOnceFlag = false;
 			castFireballFlag = false;
+			jumpFlag = false;
+			doubleJumpFlag = false;
 
 			mTime = 0.0f;
 		}
@@ -219,10 +230,43 @@ namespace ya
 
 	void Player::OnCollisionEnter(Collider* other)
 	{
+		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
 		if (mState != ePlayerState::Death)
 		{
-			// 몬스터 콜라이더와 접촉시 피격 애니메이션
-			if (other->GetOwner()->GetType() == eLayerType::Monster && invincibilityFlag == false)
+			switch (otherType)
+			{
+			case eLayerType::Monster:
+				if (!invincibilityFlag)
+				{
+					invincibilityFlag = true;
+
+					mState = ePlayerState::Recoil;
+					hp -= 1;
+
+					if (mDirection == eDirection::Left)
+					{
+						mAnimator->Play(L"Knight_Recoilleft", true);
+					}
+
+					else if (mDirection == eDirection::Right)
+					{
+						mAnimator->Play(L"Knight_Recoilright", true);
+					}
+				}
+				break;
+
+				// 충돌한 객체가 땅일 경우 idle
+			case eLayerType::Ground:
+				mState = ePlayerState::Idle;
+				if (mDirection == eDirection::Left)
+					mAnimator->Play(L"Knight_Idleleft", true);
+				else if (mDirection == eDirection::Right)
+					mAnimator->Play(L"Knight_Idleright", true);
+				break;
+			}
+
+			// 몬스터와 접촉시 피격 state
+			if (otherType == eLayerType::Monster && invincibilityFlag == false)
 			{
 				invincibilityFlag = true;
 
@@ -263,6 +307,16 @@ namespace ya
 		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
+		if (idleFlag = false)
+		{
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+
+			idleFlag = true;
+		}
+		
 		// 좌우 이동키 입력시 Walk 상태로 변경
 		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
 		{
@@ -271,6 +325,16 @@ namespace ya
 				mAnimator->Play(L"Knight_Walkleft", true);
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Walkright", true);
+			idleFlag = false;
+
+			return;
+		}
+
+		// Z 입력시 점프
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mState = ePlayerState::Jump;
+			idleFlag = false;
 			return;
 		}
 
@@ -278,6 +342,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			idleFlag = false;
 			return;
 		}
 
@@ -285,6 +350,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
+			idleFlag = false;
 			return;
 		}
 
@@ -292,6 +358,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
+			idleFlag = false;
 			return;
 		}
 
@@ -299,6 +366,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			mState = ePlayerState::CastFireball;
+			idleFlag = false;
 			return;
 		}
 
@@ -306,6 +374,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			mState = ePlayerState::Focus;
+			idleFlag = false;
 			return;
 		}
 	}
@@ -334,6 +403,13 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			return;
+		}
+
+		// Z 입력시 점프
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mState = ePlayerState::Jump;
 			return;
 		}
 
@@ -529,7 +605,60 @@ namespace ya
 
 	void Player::jump()
 	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
 
+		if (jumpFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_Airborneleft", false);
+				jumpFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_Airborneright", false);
+				jumpFlag = true;
+				break;
+
+			default:
+				break;
+			}
+
+			// 점프 물리가속도 설정
+			Vector2 velocity = mRigidBody->GetVelocity();
+			velocity.y -= 500.0f;
+			mRigidBody->SetVelocity(velocity);
+			mRigidBody->SetGround(false);
+		}
+
+		// 대시키 입력시 dash 상태로 변경
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			mState = ePlayerState::Dash;
+			return;
+		}
+
+		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
+		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
+		{
+			Vector2 pos = tr->GetPos();
+			switch (mDirection)
+			{
+			case eDirection::Left:
+				pos.x -= 300.0f * Time::DeltaTime();
+				break;
+
+			case eDirection::Right:
+				pos.x += 300.0f * Time::DeltaTime();
+				break;
+			}
+
+			tr->SetPos(pos);
+		}
 	}
 
 	void Player::fall()
@@ -769,6 +898,9 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
+
+		// 대쉬 끝났을 때 공중이면 fall 상태로 가야 함
+		// switch case 이용
 	}
 
 	void Player::deathEndEvent()

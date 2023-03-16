@@ -89,6 +89,9 @@ namespace ya
 		class Transform* tr;
 		class Animator* mAnimator;
 		class Scene* curScene;
+		class RigidBody* mRigidBody;
+		class Collider* mCollider;
+
 		ePlayerState mState;
 		eDirection mDirection = eDirection::Right;
 
@@ -96,6 +99,7 @@ namespace ya
 		int atk = 1;
 		double mTime = 0.0f;
 
+		bool idleFlag			= false;
 		bool walkFlag			= false;
 		bool slashFlag			= false;
 		bool slashAltFlag		= false;
@@ -108,6 +112,8 @@ namespace ya
 		bool focusGetFlag		= false;
 		bool focusGetOnceFlag	= false;
 		bool castFireballFlag	= false;
+		bool jumpFlag			= false;
+		bool doubleJumpFlag		= false;
 		
 		// ΩÃ±€≈Ê
 		//Player();

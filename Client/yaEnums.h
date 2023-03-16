@@ -14,6 +14,7 @@ enum class eSceneType
 enum class eLayerType	
 {
 	BG,
+	Ground,
 	Monster,
 	Player,
 	Effect,
@@ -26,6 +27,7 @@ enum class eComponentType
 {
 	Transform,
 	Collider,
+	RigidBody,
 	SpriteRenderer,
 	Animator,
 	Audio,

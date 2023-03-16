@@ -125,6 +125,12 @@
     <Filter Include="Contents\Objects\PlayerSkull">
       <UniqueIdentifier>{7371db15-b776-4b5d-93fb-d55a1458010d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\RigidBody">
+      <UniqueIdentifier>{e6fe1142-a42b-4b8c-8b76-1e4d991a458e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\GroundCollider">
+      <UniqueIdentifier>{d1e4dca1-9452-463a-963a-d11f82c2f3b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -283,6 +289,12 @@
     <ClInclude Include="PlayerSkull.h">
       <Filter>Contents\Objects\PlayerSkull</Filter>
     </ClInclude>
+    <ClInclude Include="yaRigidBody.h">
+      <Filter>Engine\Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="GroundCollider.h">
+      <Filter>Contents\Objects\GroundCollider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -419,6 +431,12 @@
     </ClCompile>
     <ClCompile Include="PlayerSkull.cpp">
       <Filter>Contents\Objects\PlayerSkull</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRigidBody.cpp">
+      <Filter>Engine\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="GroundCollider.cpp">
+      <Filter>Contents\Objects\GroundCollider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

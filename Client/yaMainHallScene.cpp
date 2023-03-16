@@ -5,10 +5,12 @@
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaObject.h"
+
 #include "yaPlayer.h"
 #include "yaCrawlid.h"
 #include "yaBackBoard.h"
 #include "yaGrimRoomBG.h"
+#include "GroundCollider.h"
 
 namespace ya
 {
@@ -33,6 +35,9 @@ namespace ya
 		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
 		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
+
+		object::Instantiate<GroundCollider>(Vector2(-100.0f, 850.0f), eLayerType::Ground);
+
 
 		/*
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
@@ -87,6 +92,8 @@ namespace ya
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+
 	}
 
 	void MainHallScene::Exit()
