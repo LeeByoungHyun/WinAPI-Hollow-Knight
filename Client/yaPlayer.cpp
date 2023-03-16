@@ -14,6 +14,7 @@
 #include "yaSlashEffectRight.h"
 #include "yaSlashAltEffectLeft.h"
 #include "yaSlashAltEffectRight.h"
+#include "DownSlashEffect.h"
 #include "yaUpSlashEffect.h"
 #include "yaDashEffectLeft.h"
 #include "yaDashEffectRight.h"
@@ -62,6 +63,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DownSlash\\neutral", Vector2::Zero, 0.033f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
@@ -93,6 +95,7 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::slashAltEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltright") = std::bind(&Player::slashAltEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_UpSlashneutral") = std::bind(&Player::upSlashEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_DownSlashneutral") = std::bind(&Player::downSlashEndEvent, this);
 
 		mAnimator->GetCompleteEvent(L"Knight_Dashleft") = std::bind(&Player::dashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Dashright") = std::bind(&Player::dashEndEvent, this);
@@ -150,6 +153,7 @@ namespace ya
 			slashFlag = false;
 			slashAltFlag = false;
 			upSlashFlag = false;
+			downSlashFlag = false;
 			dashFlag = false;
 			deathFlag = false;
 			invincibilityFlag = false;
@@ -171,7 +175,8 @@ namespace ya
 			if ((mState != ePlayerState::Dash) && (mState != ePlayerState::Jump) 
 				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil)
 				&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
-				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball))
+				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball)
+				&& (mState != ePlayerState::DownSlash))
 			{
 				mState = ePlayerState::Fall;
 			}
@@ -197,6 +202,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::UpSlash:
 			upSlash();
+			break;
+
+		case ya::Player::ePlayerState::DownSlash:
+			downSlash();
 			break;
 
 		case ya::Player::ePlayerState::Dash:
@@ -599,6 +608,21 @@ namespace ya
 		}
 	}
 
+	void Player::downSlash()
+	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
+
+		if (downSlashFlag == false)
+		{
+			mAnimator->Play(L"Knight_DownSlashneutral", true);
+			object::Instantiate<DownSlashEffect>(tr->GetPos() + Vector2(0.0f, 70.0f), eLayerType::Effect);
+			downSlashFlag = true;
+		}
+	}
+
 	void Player::dash()
 	{
 		if (dashFlag == false)
@@ -687,6 +711,13 @@ namespace ya
 			return;
 		}
 
+		// down + 공격 입력시 DownSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::DOWN))
+		{
+			mState = ePlayerState::DownSlash;
+			return;
+		}
+
 		// 공격 입력시 Slash 상태 변경
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
@@ -766,6 +797,13 @@ namespace ya
 		{
 			mState = ePlayerState::UpSlash;
 			idleFlag = false;
+			return;
+		}
+
+		// down + 공격 입력시 DownSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::DOWN))
+		{
+			mState = ePlayerState::DownSlash;
 			return;
 		}
 
@@ -849,6 +887,13 @@ namespace ya
 		{
 			mState = ePlayerState::UpSlash;
 			idleFlag = false;
+			return;
+		}
+
+		// down + 공격 입력시 DownSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::DOWN))
+		{
+			mState = ePlayerState::DownSlash;
 			return;
 		}
 
@@ -1090,6 +1135,16 @@ namespace ya
 	}
 
 	void Player::upSlashEndEvent()
+	{
+		mState = ePlayerState::Idle;
+
+		if (mDirection == eDirection::Left)
+			mAnimator->Play(L"Knight_Idleleft", true);
+		else if (mDirection == eDirection::Right)
+			mAnimator->Play(L"Knight_Idleright", true);
+	}
+
+	void Player::downSlashEndEvent()
 	{
 		mState = ePlayerState::Idle;
 

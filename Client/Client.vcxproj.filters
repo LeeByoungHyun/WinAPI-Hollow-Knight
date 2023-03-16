@@ -131,6 +131,9 @@
     <Filter Include="Contents\Objects\GroundCollider">
       <UniqueIdentifier>{d1e4dca1-9452-463a-963a-d11f82c2f3b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\DownSlashEffect">
+      <UniqueIdentifier>{c19873f0-5b7a-4e3e-88f9-d589cd983244}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -295,6 +298,9 @@
     <ClInclude Include="GroundCollider.h">
       <Filter>Contents\Objects\GroundCollider</Filter>
     </ClInclude>
+    <ClInclude Include="DownSlashEffect.h">
+      <Filter>Contents\Objects\Player\DownSlashEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -437,6 +443,9 @@
     </ClCompile>
     <ClCompile Include="GroundCollider.cpp">
       <Filter>Contents\Objects\GroundCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="DownSlashEffect.cpp">
+      <Filter>Contents\Objects\Player\DownSlashEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

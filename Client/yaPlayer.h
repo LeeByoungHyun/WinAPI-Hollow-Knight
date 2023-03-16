@@ -17,6 +17,7 @@ namespace ya
 			Slash,
 			SlashAlt,
 			UpSlash,
+			DownSlash,
 			Recoil,
 			Focus,
 			FocusEnd,
@@ -62,6 +63,7 @@ namespace ya
 		void slash();
 		void slashAlt();
 		void upSlash();
+		void downSlash();
 		void dash();
 		void jump();
 		void doubleJump();
@@ -77,6 +79,7 @@ namespace ya
 		void slashEndEvent();
 		void slashAltEndEvent();
 		void upSlashEndEvent();
+		void downSlashEndEvent();
 		void recoilEndEvent();
 		void dashEndEvent();
 		void deathEndEvent();
@@ -107,6 +110,7 @@ namespace ya
 		bool slashFlag			= false;
 		bool slashAltFlag		= false;
 		bool upSlashFlag		= false;
+		bool downSlashFlag		= false;
 		bool dashFlag			= false;
 		bool deathFlag			= false;
 		bool invincibilityFlag	= false;
