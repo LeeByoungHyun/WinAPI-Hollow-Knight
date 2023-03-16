@@ -15,5 +15,6 @@
 #include <assert.h>
 #include <functional>
 #include <filesystem>
+#include <iostream>
 
 #pragma comment(lib, "Msimg32.lib")

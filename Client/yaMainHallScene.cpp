@@ -34,6 +34,15 @@ namespace ya
 		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 
+		/*
+		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
+		mPlayer = ya::Player::GetInstance();
+		Scene* scene = SceneManager::GetActiveScene();
+		scene->AddGameObject(mPlayer, eLayerType::Player);
+		mPlayer->Initialize();
+		mPlayer->SetType(eLayerType::Player);
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(600.0f, 800.0f));
+		*/
 		//Camera::SetTarget(mPlayer);
 	}
 

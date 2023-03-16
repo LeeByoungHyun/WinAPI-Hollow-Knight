@@ -1,13 +1,9 @@
 #pragma once
 #include "yaGameObject.h"
-#include "yaImage.h"
 
 namespace ya
 {
-	class Transform;
-	class Animator;
-	class Scene;
-	static class Player : public GameObject
+	class Player : public GameObject
 	{
 	public:
 		enum class ePlayerState
@@ -38,6 +34,15 @@ namespace ya
 		Player();
 		~Player();
 
+		// 이미 인스턴스가 존재하면 인스턴스를 반환, 없다면 인스턴스 생성
+		static Player* GetInstance()
+		{
+			if (instance == nullptr)
+				instance = new Player();
+
+			return instance;
+		}
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -48,6 +53,7 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		int GetAtk() { return atk; }
+
 
 	private:
 		void idle();
@@ -80,10 +86,10 @@ namespace ya
 
 
 	private:
+		class Transform* tr;
+		class Animator* mAnimator;
+		class Scene* curScene;
 		ePlayerState mState;
-		Transform* tr;
-		Animator* mAnimator;
-		Scene* curScene;
 		eDirection mDirection = eDirection::Right;
 
 		int hp;
@@ -102,6 +108,13 @@ namespace ya
 		bool focusGetFlag		= false;
 		bool focusGetOnceFlag	= false;
 		bool castFireballFlag	= false;
+		
+		// 싱글톤
+		//Player();
+		//Player(const Player& other);
+		//~Player();
+
+		static Player* instance;
 	};
 }
 

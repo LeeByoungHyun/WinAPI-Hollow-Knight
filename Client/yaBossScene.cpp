@@ -21,7 +21,7 @@ namespace ya
 
 		// 게임오브젝트 추가는 이곳에
 
-		object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
+		//object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 	}
 

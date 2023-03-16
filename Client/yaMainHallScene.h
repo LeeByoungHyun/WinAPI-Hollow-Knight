@@ -3,9 +3,6 @@
 
 namespace ya
 {
-	class Player;
-	class Backboard;
-	class Crawlid;
 	class MainHallScene : public Scene
 	{
 	public:
@@ -22,9 +19,7 @@ namespace ya
 		virtual void Exit() override;
 
 	private:
-		// Player* mPlayer;
-		// Crawlid* mCrawlid;
-		// Backboard* mBackboard;
+		class Player* mPlayer;
 	};
 }
 

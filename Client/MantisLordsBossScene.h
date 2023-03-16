@@ -18,6 +18,7 @@ namespace ya
 		virtual void Exit() override;
 
 	private:
+		class Player* mPlayer;
 
 	};
 }
