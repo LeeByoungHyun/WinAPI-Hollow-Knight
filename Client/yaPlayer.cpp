@@ -85,6 +85,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\right", Vector2::Zero, 0.1f);
+
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::slashAltEndEvent, this);
@@ -109,6 +112,9 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Knight_FireballCastleft") = std::bind(&Player::castFireballEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FireballCastright") = std::bind(&Player::castFireballEndEvent, this);
+
+		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpleft") = std::bind(&Player::doubleJumpEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -162,8 +168,8 @@ namespace ya
 		// 현재 상태가 jump가 아니고 onGround = true 가 아닐 경우 fall 상태로 
 		if (mRigidBody->GetGround() == false)
 		{
-
-			if ((mState != ePlayerState::Dash) && (mState != ePlayerState::Jump) && (mState != ePlayerState::Recoil))
+			if ((mState != ePlayerState::Dash) && (mState != ePlayerState::Jump) 
+				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil))
 			{
 				mState = ePlayerState::Fall;
 			}
@@ -197,6 +203,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::Jump:
 			jump();
+			break; 
+		
+		case ya::Player::ePlayerState::DoubleJump:
+			doubleJump();
 			break;
 
 		case ya::Player::ePlayerState::Fall:
@@ -653,11 +663,69 @@ namespace ya
 			mRigidBody->SetGround(false);
 		}
 
+		// 한번 더 점프키 입력시 더블점프
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mState = ePlayerState::DoubleJump;
+			return;
+		}
+
 		// 대시키 입력시 dash 상태로 변경
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
 			return;
+		}
+
+		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
+		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
+		{
+			Vector2 pos = tr->GetPos();
+			switch (mDirection)
+			{
+			case eDirection::Left:
+				pos.x -= 300.0f * Time::DeltaTime();
+				break;
+
+			case eDirection::Right:
+				pos.x += 300.0f * Time::DeltaTime();
+				break;
+			}
+
+			tr->SetPos(pos);
+		}
+	}
+
+	void Player::doubleJump()
+	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
+
+		if (doubleJumpFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_DoubleJumpleft", false);
+				doubleJumpFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_DoubleJumpright", false);
+				doubleJumpFlag = true;
+				break;
+
+			default:
+				break;
+			}
+
+			// 점프 물리가속도 설정
+			Vector2 velocity = mRigidBody->GetVelocity();
+			velocity.y -= 500.0f;
+			mRigidBody->SetVelocity(velocity);
+			mRigidBody->SetGround(false);
 		}
 
 		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
@@ -1023,5 +1091,15 @@ namespace ya
 			mAnimator->Play(L"Knight_Idleleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Idleright", true);
+	}
+
+	void Player::doubleJumpEndEvent()
+	{
+		mState = ePlayerState::Fall;
+
+		if (mDirection == eDirection::Left)
+			mAnimator->Play(L"Knight_Fallleft", true);
+		else if (mDirection == eDirection::Right)
+			mAnimator->Play(L"Knight_Fallright", true);
 	}
 }

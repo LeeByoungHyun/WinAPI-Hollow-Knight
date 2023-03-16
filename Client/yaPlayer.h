@@ -11,6 +11,7 @@ namespace ya
 			Idle,
 			Walk,
 			Jump,
+			DoubleJump,
 			Fall,
 			Dash,
 			Slash,
@@ -63,6 +64,7 @@ namespace ya
 		void upSlash();
 		void dash();
 		void jump();
+		void doubleJump();
 		void fall();
 		void castFireball();
 		void recoil();
@@ -83,6 +85,7 @@ namespace ya
 		void focusGetEndEvent();
 		void focusGetOnceEndEvent();
 		void castFireballEndEvent();
+		void doubleJumpEndEvent();
 
 
 	private:
