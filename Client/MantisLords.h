@@ -1,12 +1,8 @@
 #pragma once
 #include "yaGameObject.h"
-#include "yaImage.h"
 
 namespace ya
 {
-	class Transform;
-	class Animator;
-	class Scene;
 	class MantisLords : public GameObject
 	{
 	public:
@@ -80,9 +76,10 @@ namespace ya
 
 	private:
 		eMantisLordsState mState;
-		Transform* tr;
-		Animator* mAnimator;
-		Scene* curScene;
+		class Transform* tr;
+		class Animator* mAnimator;
+		class Collider* mCollider;
+		class Scene* curScene;
 
 		int hp;
 		eDirection mDirection;
