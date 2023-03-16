@@ -26,7 +26,7 @@ namespace ya
 		mAnimator->Play(L"Knight_DownSlashEffectneutral", false);
 
 		Collider* mCollider = AddComponent<Collider>();
-		mCollider->SetCenter(Vector2(-60.0f, -180.0f));
+		mCollider->SetCenter(Vector2(-60.0f, -165.0f));
 		mCollider->SetSize(Vector2(120.0f, 150.0f));
 
 		GameObject::Initialize();

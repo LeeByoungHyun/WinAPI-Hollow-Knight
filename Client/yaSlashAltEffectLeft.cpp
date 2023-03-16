@@ -19,7 +19,7 @@ namespace ya
 	void SlashAltEffectLeft::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\left", Vector2::Zero, 0.033f);
 
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltEffectleft") = std::bind(&SlashAltEffectLeft::slashAltEffectLeftComplateEvent, this);
 

@@ -20,7 +20,7 @@ namespace ya
 	void DashEffectLeft::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DashEffect\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DashEffect\\left", Vector2::Zero, 0.033f);
 
 		mAnimator->GetCompleteEvent(L"Knight_DashEffectleft") = std::bind(&DashEffectLeft::dashEffectLeftComplateEvent, this);
 

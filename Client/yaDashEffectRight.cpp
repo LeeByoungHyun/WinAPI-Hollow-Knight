@@ -19,7 +19,7 @@ namespace ya
 
 	void DashEffectRight::Initialize()
 	{
-		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DashEffect\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DashEffect\\right", Vector2::Zero, 0.033f);
 		mAnimator->GetCompleteEvent(L"Knight_DashEffectright") = std::bind(&DashEffectRight::dashEffectRightComplateEvent, this);
 		mAnimator->Play(L"Knight_DashEffectright", true);
 
