@@ -165,11 +165,13 @@ namespace ya
 			mTime = 0.0f;
 		}
 
-		// 현재 상태가 jump가 아니고 onGround = true 가 아닐 경우 fall 상태로 
+		// 현재 상태가 특정 상태가 아니고 onGround = true 가 아닐 경우 fall 상태로 
 		if (mRigidBody->GetGround() == false)
 		{
 			if ((mState != ePlayerState::Dash) && (mState != ePlayerState::Jump) 
-				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil))
+				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil)
+				&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
+				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball))
 			{
 				mState = ePlayerState::Fall;
 			}
@@ -283,7 +285,7 @@ namespace ya
 				}
 				break;
 
-				// 충돌한 객체가 땅일 경우 idle
+			// 충돌한 객체가 땅일 경우 idle
 			case eLayerType::Ground:
 				mState = ePlayerState::Idle;
 				if (mDirection == eDirection::Left)
@@ -293,7 +295,7 @@ namespace ya
 				break;
 			}
 
-			// 몬스터와 접촉시 피격 state
+			// 몬스터와 접촉시 recoil state
 			if (otherType == eLayerType::Monster && invincibilityFlag == false)
 			{
 				invincibilityFlag = true;
@@ -677,6 +679,30 @@ namespace ya
 			return;
 		}
 
+		// up + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
+		{
+			mState = ePlayerState::UpSlash;
+			idleFlag = false;
+			return;
+		}
+
+		// 공격 입력시 Slash 상태 변경
+		if (Input::GetKeyDown(eKeyCode::X))
+		{
+			mState = ePlayerState::Slash;
+			idleFlag = false;
+			return;
+		}
+
+		// S 입력시 원거리 공격
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mState = ePlayerState::CastFireball;
+			idleFlag = false;
+			return;
+		}
+
 		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
 		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
 		{
@@ -728,6 +754,37 @@ namespace ya
 			mRigidBody->SetGround(false);
 		}
 
+		// 대시키 입력시 dash 상태로 변경
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			mState = ePlayerState::Dash;
+			return;
+		}
+
+		// up + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
+		{
+			mState = ePlayerState::UpSlash;
+			idleFlag = false;
+			return;
+		}
+
+		// 공격 입력시 Slash 상태 변경
+		if (Input::GetKeyDown(eKeyCode::X))
+		{
+			mState = ePlayerState::Slash;
+			idleFlag = false;
+			return;
+		}
+
+		// S 입력시 원거리 공격
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mState = ePlayerState::CastFireball;
+			idleFlag = false;
+			return;
+		}
+
 		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
 		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
 		{
@@ -773,10 +830,41 @@ namespace ya
 			}
 		}
 
+		// 한번 더 점프키 입력시 더블점프
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mState = ePlayerState::DoubleJump;
+			return;
+		}
+
 		// 대시키 입력시 dash 상태로 변경
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			return;
+		}
+
+		// up + 공격키 누르면 UpSlash
+		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
+		{
+			mState = ePlayerState::UpSlash;
+			idleFlag = false;
+			return;
+		}
+
+		// 공격 입력시 Slash 상태 변경
+		if (Input::GetKeyDown(eKeyCode::X))
+		{
+			mState = ePlayerState::Slash;
+			idleFlag = false;
+			return;
+		}
+
+		// S 입력시 원거리 공격
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			mState = ePlayerState::CastFireball;
+			idleFlag = false;
 			return;
 		}
 
