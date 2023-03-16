@@ -34,8 +34,10 @@ namespace ya
 		};
 
 		Player();
+		Player(const Player& other);
 		~Player();
 
+		// 싱글톤
 		// 이미 인스턴스가 존재하면 인스턴스를 반환, 없다면 인스턴스 생성
 		static Player* GetInstance()
 		{
@@ -123,11 +125,7 @@ namespace ya
 		bool doubleJumpFlag		= false;
 		bool fallFlag			= false;
 		
-		// 싱글톤
-		//Player();
-		//Player(const Player& other);
-		//~Player();
-
+		// 싱글톤 객체 인스턴스
 		static Player* instance;
 	};
 }

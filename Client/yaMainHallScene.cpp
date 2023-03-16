@@ -36,7 +36,7 @@ namespace ya
 		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<GrimRoomBG>(eLayerType::BG);
 
-		object::Instantiate<GroundCollider>(Vector2(-100.0f, 850.0f), eLayerType::Ground);
+		object::Instantiate<GroundCollider>(Vector2(-100.0f, 800.0f), eLayerType::Ground);
 
 
 		/*

@@ -8,6 +8,7 @@
 #include "yaGrimRoomBG.h"
 #include "MantisLords.h"
 #include "yaCrawlid.h"
+#include "GroundCollider.h"
 
 namespace ya
 {
@@ -33,7 +34,7 @@ namespace ya
 		object::Instantiate<MantisLords>(Vector2(500.0f, 400.0f), eLayerType::Monster);
 		object::Instantiate<MantisLords>(Vector2(1100.0f, 400.0f), eLayerType::Monster);
 
-		object::Instantiate<Crawlid>(Vector2(1000.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<GroundCollider>(Vector2(-100.0f, 800.0f), eLayerType::Ground);
 
 		/*
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
@@ -80,6 +81,7 @@ namespace ya
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 	}
 
 	void MantisLordsBossScene::Exit()
