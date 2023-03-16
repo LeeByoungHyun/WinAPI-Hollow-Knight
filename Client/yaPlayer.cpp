@@ -82,6 +82,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\right", Vector2::Zero, 0.1f);
+
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltleft") = std::bind(&Player::slashAltEndEvent, this);
@@ -151,8 +154,19 @@ namespace ya
 			castFireballFlag = false;
 			jumpFlag = false;
 			doubleJumpFlag = false;
+			fallFlag = false;
 
 			mTime = 0.0f;
+		}
+
+		// 현재 상태가 jump가 아니고 onGround = true 가 아닐 경우 fall 상태로 
+		if (mRigidBody->GetGround() == false)
+		{
+
+			if ((mState != ePlayerState::Dash) && (mState != ePlayerState::Jump) && (mState != ePlayerState::Recoil))
+			{
+				mState = ePlayerState::Fall;
+			}
 		}
 
 		switch (mState)
@@ -183,6 +197,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::Jump:
 			jump();
+			break;
+
+		case ya::Player::ePlayerState::Fall:
+			fall();
 			break;
 
 		case ya::Player::ePlayerState::Recoil:
@@ -663,7 +681,54 @@ namespace ya
 
 	void Player::fall()
 	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
 
+		if (fallFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_Fallleft", false);
+				fallFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_Fallright", false);
+				fallFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		// 대시키 입력시 dash 상태로 변경
+		if (Input::GetKeyDown(eKeyCode::C))
+		{
+			mState = ePlayerState::Dash;
+			return;
+		}
+
+		// 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
+		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
+		{
+			Vector2 pos = tr->GetPos();
+			switch (mDirection)
+			{
+			case eDirection::Left:
+				pos.x -= 300.0f * Time::DeltaTime();
+				break;
+
+			case eDirection::Right:
+				pos.x += 300.0f * Time::DeltaTime();
+				break;
+			}
+
+			tr->SetPos(pos);
+		}
 	}
 
 	void Player::castFireball()

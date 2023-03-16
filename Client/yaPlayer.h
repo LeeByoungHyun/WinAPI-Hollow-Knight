@@ -114,6 +114,7 @@ namespace ya
 		bool castFireballFlag	= false;
 		bool jumpFlag			= false;
 		bool doubleJumpFlag		= false;
+		bool fallFlag			= false;
 		
 		// ΩÃ±€≈Ê
 		//Player();
