@@ -696,9 +696,10 @@ namespace ya
 		}
 
 		// 한번 더 점프키 입력시 더블점프
-		if (Input::GetKeyDown(eKeyCode::Z))
+		if (Input::GetKeyDown(eKeyCode::Z) && doubleJumpFlag == false)
 		{
 			mState = ePlayerState::DoubleJump;
+			jumpFlag = false;
 			return;
 		}
 
@@ -706,6 +707,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			jumpFlag = false;
 			return;
 		}
 
@@ -713,7 +715,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
-			idleFlag = false;
+			jumpFlag = false;
 			return;
 		}
 
@@ -721,6 +723,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::DOWN))
 		{
 			mState = ePlayerState::DownSlash;
+			jumpFlag = false;
 			return;
 		}
 
@@ -728,7 +731,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
-			idleFlag = false;
+			jumpFlag = false;
 			return;
 		}
 
@@ -736,7 +739,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			mState = ePlayerState::CastFireball;
-			idleFlag = false;
+			jumpFlag = false;
 			return;
 		}
 
@@ -810,7 +813,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
-			idleFlag = false;
 			return;
 		}
 
@@ -825,7 +827,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
-			idleFlag = false;
 			return;
 		}
 
@@ -833,7 +834,6 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			mState = ePlayerState::CastFireball;
-			idleFlag = false;
 			return;
 		}
 
@@ -885,9 +885,10 @@ namespace ya
 		}
 
 		// 한번 더 점프키 입력시 더블점프
-		if (Input::GetKeyDown(eKeyCode::Z))
+		if (Input::GetKeyDown(eKeyCode::Z) && doubleJumpFlag == false)
 		{
 			mState = ePlayerState::DoubleJump;
+			fallFlag = false;
 			return;
 		}
 
@@ -895,6 +896,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			fallFlag = false;
 			return;
 		}
 
@@ -902,7 +904,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
-			idleFlag = false;
+			fallFlag = false;
 			return;
 		}
 
@@ -910,6 +912,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::DOWN))
 		{
 			mState = ePlayerState::DownSlash;
+			fallFlag = false;
 			return;
 		}
 
@@ -917,7 +920,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
-			idleFlag = false;
+			fallFlag = false;
 			return;
 		}
 
@@ -925,7 +928,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			mState = ePlayerState::CastFireball;
-			idleFlag = false;
+			fallFlag = false;
 			return;
 		}
 
@@ -1187,12 +1190,36 @@ namespace ya
 
 	void Player::dashEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 대쉬 끝나면 대쉬 재사용 가능하도록
+		dashFlag = false;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+		// 대쉬 끝났을 때 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
+
+		
 
 		// 대쉬 끝났을 때 공중이면 fall 상태로 가야 함
 		// switch case 이용
