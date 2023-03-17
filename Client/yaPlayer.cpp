@@ -649,6 +649,10 @@ namespace ya
 			}
 		}
 
+		// 대쉬 중에는 중력 영향 x
+		mRigidBody->SetGravity((Vector2::Zero));
+		mRigidBody->SetVelocity((Vector2::Zero));
+
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
@@ -784,9 +788,16 @@ namespace ya
 			// 중력 초기화 해줘야 함
 			// 점프 물리가속도 설정
 			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.y -= 300.0f;
+
+			velocity.y = -400.0f;
+
+			mRigidBody->SetVelocity((Vector2::Zero));
+			mRigidBody->SetGravity((Vector2::Zero));
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
+
+			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+
 		}
 
 		// 대시키 입력시 dash 상태로 변경
@@ -855,6 +866,8 @@ namespace ya
 
 		if (fallFlag == false)
 		{
+			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+			
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -958,6 +971,10 @@ namespace ya
 				break;
 			}
 		}
+
+		// 주문시전 중에는 중력 영향 x
+		mRigidBody->SetGravity((Vector2::Zero));
+		mRigidBody->SetVelocity((Vector2::Zero));
 
 		Vector2 pos = tr->GetPos();
 

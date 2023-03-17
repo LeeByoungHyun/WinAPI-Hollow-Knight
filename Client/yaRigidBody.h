@@ -18,6 +18,7 @@ namespace ya
 		void AddForce(Vector2 force);
 		void SetGround(bool ground) { mbGround = ground; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
+		void SetGravity(Vector2 gravity) { mGravity = gravity; }
 		Vector2 GetVelocity() { return mVelocity; }
 		bool GetGround() { return mbGround; }
 
