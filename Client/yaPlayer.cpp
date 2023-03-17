@@ -650,7 +650,6 @@ namespace ya
 		}
 
 		// 대쉬 중에는 중력 영향 x
-		mRigidBody->SetGravity((Vector2::Zero));
 		mRigidBody->SetVelocity((Vector2::Zero));
 
 		Vector2 pos = tr->GetPos();
@@ -973,7 +972,6 @@ namespace ya
 		}
 
 		// 주문시전 중에는 중력 영향 x
-		mRigidBody->SetGravity((Vector2::Zero));
 		mRigidBody->SetVelocity((Vector2::Zero));
 
 		Vector2 pos = tr->GetPos();
