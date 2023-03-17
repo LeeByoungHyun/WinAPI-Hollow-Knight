@@ -24,6 +24,9 @@
 
 namespace ya
 {
+	// 싱글톤 객체 초기화
+	Player* Player::instance = nullptr;
+
 	Player::Player()
 	{
 
@@ -778,9 +781,10 @@ namespace ya
 				break;
 			}
 
+			// 중력 초기화 해줘야 함
 			// 점프 물리가속도 설정
 			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.y -= 500.0f;
+			velocity.y -= 300.0f;
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
 		}
