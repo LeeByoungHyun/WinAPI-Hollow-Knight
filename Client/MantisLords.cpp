@@ -8,6 +8,7 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
+#include "yaPlayer.h"
 
 namespace ya
 {
@@ -27,14 +28,16 @@ namespace ya
 
 		hp = 100;
 
+		//Player* player = Player::GetInstance();
+
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Arrive\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Arrive\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\left", Vector2::Zero, 0.02f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\right", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Anticipate)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Anticipate)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Recover)\\left", Vector2::Zero, 0.1f);
@@ -46,7 +49,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Arrive\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Land\\neutral", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Leave\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Leave\\neutral", Vector2::Zero, 0.02f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Bow\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Idle\\neutral", Vector2::Zero, 0.1f);
@@ -60,8 +63,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Arrive\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 1)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 1)\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\left", Vector2::Zero, 0.02f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\right", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
 
@@ -83,6 +86,41 @@ namespace ya
 
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
+
+		/*
+		// 테스트
+		if (Input::GetKeyDown(eKeyCode::O))
+		{
+			throneStandFlag = false;
+			throneBowFlag = false;
+			throneLeaveFlag = false;
+			throneWoundedFlag = false;
+			dashArriveFlag = false;
+			dashAnticipateFlag = false;
+			dashFlag = false;
+			dashRecoverFlag = false;
+			dashLeaveFlag = false;
+			dStabArriveFlag = false;
+			dStabFlag = false;
+			dStabLandFlag = false;
+			dStabLeaveFlag = false;
+			wallArriveFlag = false;
+			wallReadyFlag = false;
+			throwFlag = false;
+			wallLeave1Flag = false;
+			wallLeave2Flag = false;
+
+			mState = eMantisLordsState::DstabArrive;
+			return;
+		}
+		*/
+
+		// 플레이어 사망시 옥좌로 귀환
+		player = Player::GetInstance();
+		if (mState == eMantisLordsState::Idle && player->GetPlayerState() == Player::ePlayerState::Death)
+		{
+			mState = eMantisLordsState::ThroneIdle;
+		}
 
 		switch (mState)
 		{
@@ -201,34 +239,37 @@ namespace ya
 		tr->SetPos(Vector2::Zero);
 		//mAnimator->Play(L"", false);
 
-		// 각 패턴이 종료되면 돌아오는 준비상태
-		// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
-		// 랜덤 함수 이용해 패턴 랜덤하게 호출
-		int pattern = rand() % 3;
-		switch (pattern)
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.0f)
 		{
-		case 0:	// Dash
-			mState = eMantisLordsState::DashArrive;
-			throneLeaveFlag = false;
-			break;
+			// 각 패턴이 종료되면 돌아오는 준비상태
+			// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
+			// 랜덤 함수 이용해 패턴 랜덤하게 호출
+			int pattern = rand() % 3;
+			switch (pattern)
+			{
+			case 0:	// Dash
+				mState = eMantisLordsState::DashArrive;
+				break;
 
-		case 1:	// Dstab
-			mState = eMantisLordsState::DstabArrive;
-			throneLeaveFlag = false;
-			break;
+			case 1:	// Dstab
+				mState = eMantisLordsState::DstabArrive;
+				break;
 
-		case 2:	// WallThrow
-			mState = eMantisLordsState::WallArrive;
-			throneLeaveFlag = false;
-			break;
+			case 2:	// WallThrow
+				mState = eMantisLordsState::WallArrive;
+				break;
 
-		default:
-			break;
+			default:
+				mState = eMantisLordsState::Idle;
+				break;
+			}
 		}
 	}
 
 	void MantisLords::throneIdle()
 	{
+		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", true);
 		// O입력시 일어남
 		// 임시
 		// 테스트 끝나면 보스룸 입장 후 일정 시간이 지나면 일어서게끔 수정할것
@@ -276,27 +317,35 @@ namespace ya
 			throneLeaveFlag = true;
 		}
 
-		// 랜덤 함수 이용해 패턴 랜덤하게 호출해야 함
-		int pattern = rand() % 3;
-		switch (pattern)
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.0f)
 		{
-		case 0:	// Dash
-			mState = eMantisLordsState::DashArrive;
-			throneLeaveFlag = false;
-			break;
+			mTime += Time::DeltaTime();
+			if (mTime >= 1.0f)
+			{
+				// 각 패턴이 종료되면 돌아오는 준비상태
+				// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
+				// 랜덤 함수 이용해 패턴 랜덤하게 호출
+				int pattern = rand() % 3;
+				switch (pattern)
+				{
+				case 0:	// Dash
+					mState = eMantisLordsState::DashArrive;
+					break;
 
-		case 1:	// Dstab
-			mState = eMantisLordsState::DstabArrive;
-			throneLeaveFlag = false;
-			break;
+				case 1:	// Dstab
+					mState = eMantisLordsState::DstabArrive;
+					break;
 
-		case 2:	// WallThrow
-			mState = eMantisLordsState::WallArrive;
-			throneLeaveFlag = false;
-			break;
+				case 2:	// WallThrow
+					mState = eMantisLordsState::WallArrive;
+					break;
 
-		default:
-			break;
+				default:
+					mState = eMantisLordsState::Idle;
+					break;
+				}
+			}
 		}
 	}
 
@@ -313,23 +362,26 @@ namespace ya
 	{
 		if (dashArriveFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
-
 			int direction = rand() % 2;
 			switch (direction)
 			{
 			case 0:	// left
+				mCollider->SetCenter(Vector2(-170.0f, -150.0f));
+				mCollider->SetSize(Vector2(300.0f, 150.0f));
+
 				mDirection = eDirection::Left;
-				tr->SetPos(Vector2(1500.0f, 800.0f));
+				tr->SetPos(Vector2(1400.0f, 800.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveleft", false);
 				dashArriveFlag = true;
 
 				break;
 
 			case 1:	// right
+				mCollider->SetCenter(Vector2(-130.0f, -150.0f));
+				mCollider->SetSize(Vector2(300.0f, 150.0f));
+
 				mDirection = eDirection::Right;
-				tr->SetPos(Vector2(100.0f, 800.0f));
+				tr->SetPos(Vector2(200.0f, 800.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveright", false);
 				dashArriveFlag = true;
 
@@ -354,18 +406,21 @@ namespace ya
 	{
 		if (dashAnticipateFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
-
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-90.0f, -300.0f));
+				mCollider->SetSize(Vector2(160.0f, 300.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash(Anticipate)left", false);
 				dashAnticipateFlag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(-70.0f, -300.0f));
+				mCollider->SetSize(Vector2(160.0f, 300.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash(Anticipate)right", false);
 				dashAnticipateFlag = true;
 
@@ -391,8 +446,8 @@ namespace ya
 	{
 		if (dashFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-150.0f, -150.0f));
-			mCollider->SetSize(Vector2(300.0f, 150.0f));
+			mCollider->SetCenter(Vector2(-200.0f, -150.0f));
+			mCollider->SetSize(Vector2(400.0f, 150.0f));
 
 			switch (mDirection)
 			{
@@ -416,15 +471,15 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
-			pos.x -= 1800.0f * Time::DeltaTime();
+			pos.x -= 5500.0f * Time::DeltaTime();
 
 		else if (mDirection == eDirection::Right)
-			pos.x += 1800.0f * Time::DeltaTime();
+			pos.x += 5500.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.8f)
+		if (mTime >= 0.2f)
 		{
 			mState = eMantisLordsState::DashRecover;
 			dashFlag = false;
@@ -436,20 +491,23 @@ namespace ya
 
 	void MantisLords::dashRecover()
 	{
-		mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-		mCollider->SetSize(Vector2(100.0f, 300.0f));
-
 		if (dashRecoverFlag == false)
 		{
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-50.0f, -150.0f));
+				mCollider->SetSize(Vector2(300.0f, 150.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash(Recover)left", false);
 				dashRecoverFlag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(-250.0f, -150.0f));
+				mCollider->SetSize(Vector2(300.0f, 150.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash(Recover)right", false);
 				dashRecoverFlag = true;
 
@@ -473,20 +531,31 @@ namespace ya
 
 	void MantisLords::dashLeave()
 	{
-		mCollider->SetCenter(Vector2(0.0f, 0.0f));
-		mCollider->SetSize(Vector2(0.0f, 0.0f));
-
 		if (dashLeaveFlag == false)
 		{
+			Vector2 pos = tr->GetPos();
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				// 세부위치조정
+				pos.x -= 30.0f;
+				tr->SetPos(pos);
+				mCollider->SetCenter(Vector2(0.0f, 0.0f));
+				mCollider->SetSize(Vector2(0.0f, 0.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash Leaveleft", false);
 				dashLeaveFlag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				// 세부위치조정
+				pos.x += 30.0f;
+				tr->SetPos(pos);
+				mCollider->SetCenter(Vector2(0.0f, 0.0f));
+				mCollider->SetSize(Vector2(0.0f, 0.0f));
+
 				mAnimator->Play(L"Mantis Lords_Dash Leaveright", false);
 				dashLeaveFlag = true;
 
@@ -497,13 +566,28 @@ namespace ya
 			}
 		}
 
+		Vector2 pos = tr->GetPos();
+		if (mDirection == eDirection::Left)
+		{
+			pos.x -= 2000.0f * Time::DeltaTime();
+			pos.y -= 2000.0f * Time::DeltaTime();
+		}
+			
+
+		else if (mDirection == eDirection::Right)
+		{
+			pos.x += 2000.0f * Time::DeltaTime();
+			pos.y -= 2000.0f * Time::DeltaTime();
+		}
+
+		tr->SetPos(pos);
+
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.1)
 		{
 			mState = eMantisLordsState::Idle;
 			dashLeaveFlag = false;
 			mTime = 0.0f;
-
 			return;
 		}
 	}
@@ -512,24 +596,27 @@ namespace ya
 	{
 		if (wallArriveFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-100.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
-
 			int direction = rand() % 2;
 
 			switch (direction)
 			{
 			case 0:	// left
+				mCollider->SetCenter(Vector2(-300.0f, -550.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+				tr->SetPos(Vector2(300.0f, 500.0f));
+
 				mDirection = eDirection::Left;
-				tr->SetPos(Vector2(100.0f, 400.0f));
 				mAnimator->Play(L"Mantis Lords_Wall Arriveleft", false);
 				wallArriveFlag = true;
 
 				break;
 
 			case 1:	// right
+				mCollider->SetCenter(Vector2(100.0f, -550.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+				tr->SetPos(Vector2(1200.0f, 500.0f));
+
 				mDirection = eDirection::Right;
-				tr->SetPos(Vector2(1500.0f, 400.0f));
 				mAnimator->Play(L"Mantis Lords_Wall Arriveright", false);
 				wallArriveFlag = true;
 
@@ -554,18 +641,26 @@ namespace ya
 	{
 		if (wallReadyFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-100.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y += 30.0f;
+			tr->SetPos(pos);
 
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-300.0f, -580.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Wall Readyleft", false);
 				wallReadyFlag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(100.0f, -580.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Wall Readyright", false);
 				wallReadyFlag = true;
 
@@ -590,18 +685,26 @@ namespace ya
 	{
 		if (throwFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-100.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y -= 35.0f;
+			tr->SetPos(pos);
 
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-300.0f, -545.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Throwleft", false);
 				throwFlag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(100.0f, -545.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Throwright", false);
 				throwFlag = true;
 
@@ -626,18 +729,26 @@ namespace ya
 	{
 		if (wallLeave1Flag == false)
 		{
-			mCollider->SetCenter(Vector2(-100.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y -= 35.0f;
+			tr->SetPos(pos);
 
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-300.0f, -510.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Wall Leave(Part 1)left", false);
 				wallLeave1Flag = true;
 
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(100.0f, -510.0f));
+				mCollider->SetSize(Vector2(200.0f, 400.0f));
+
 				mAnimator->Play(L"Mantis Lords_Wall Leave(Part 1)right", false);
 				wallLeave1Flag = true;
 
@@ -662,6 +773,11 @@ namespace ya
 	{
 		if (wallLeave2Flag == false)
 		{
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y -= 100.0f;
+			tr->SetPos(pos);
+
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 
@@ -685,7 +801,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.1)
 		{
 			mState = eMantisLordsState::Idle;
 			wallLeave2Flag = false;
@@ -706,17 +822,18 @@ namespace ya
 	{
 		if (dStabArriveFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			Vector2 pos = Player::GetInstance()->GetPos();
+			mCollider->SetCenter(Vector2(0.0f, -250.0f));
+			mCollider->SetSize(Vector2(150.0f, 200.0f));
 
 			// 플레이어 x좌표 위에 생성되야 함 지금은 임시
-			//tr->SetPos(Vector2(600.0f, 100.0f));
+			tr->SetPos(Vector2(pos.x, 250.0f));
 			mAnimator->Play(L"Mantis Lords_Dstab Arriveneutral", false);
 			dStabArriveFlag = true;
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 1.0)
 		{
 			mState = eMantisLordsState::Dstab;
 			dStabArriveFlag = false;
@@ -730,19 +847,24 @@ namespace ya
 	{
 		if (dStabFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.x += 30.0f;
+			tr->SetPos(pos);
+
+			mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+			mCollider->SetSize(Vector2(150.0f, 300.0f));
 
 			mAnimator->Play(L"Mantis Lords_Dstabneutral", false);
 			dStabFlag = true;
 		}
 
 		Vector2 pos = tr->GetPos();
-		pos.y += 4000.0f * Time::DeltaTime();
+		pos.y += 6000.0f * Time::DeltaTime();
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.2)
+		if (mTime >= 0.1)
 		{
 			mState = eMantisLordsState::DstabLand;
 			dStabFlag = false;
@@ -756,8 +878,13 @@ namespace ya
 	{
 		if (dStabLandFlag == false)
 		{
-			mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-			mCollider->SetSize(Vector2(100.0f, 300.0f));
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+
+			mCollider->SetCenter(Vector2(0.0f, -250.0f));
+			mCollider->SetSize(Vector2(150.0f, 200.0f));
 
 			mAnimator->Play(L"Mantis Lords_Dstab Landneutral", false);
 			dStabLandFlag = true;

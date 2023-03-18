@@ -1,5 +1,6 @@
 #pragma once
 #include "yaGameObject.h"
+#include "yaTransform.h"
 
 namespace ya
 {
@@ -57,7 +58,8 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		int GetAtk() { return atk; }
-
+		Vector2 GetPos() { return tr->GetPos(); }
+		ePlayerState GetPlayerState() { return mState; }
 
 	private:
 		void idle();

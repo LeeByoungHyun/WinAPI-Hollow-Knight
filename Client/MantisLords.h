@@ -80,6 +80,7 @@ namespace ya
 		class Animator* mAnimator;
 		class Collider* mCollider;
 		class Scene* curScene;
+		class Player* player;
 
 		int hp;
 		eDirection mDirection;
