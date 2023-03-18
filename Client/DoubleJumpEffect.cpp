@@ -55,7 +55,6 @@ namespace ya
 			Vector2 corPos = Vector2(95.0f, 210.0f);
 			tr->SetPos(player->GetPos() + corPos);
 		}
-		
 
 		GameObject::Update();
 	}

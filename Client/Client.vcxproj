@@ -134,6 +134,9 @@
     <ClInclude Include="DownSlashEffect.h" />
     <ClInclude Include="FadeIn.h" />
     <ClInclude Include="FadeOut.h" />
+    <ClInclude Include="FireballCastEffect.h" />
+    <ClInclude Include="FireballCastEffectLeft.h" />
+    <ClInclude Include="FireballCastEffectRight.h" />
     <ClInclude Include="FireballEffectLeft.h" />
     <ClInclude Include="FireballEffectRight.h" />
     <ClInclude Include="FocusEffect.h" />
@@ -191,6 +194,9 @@
     <ClCompile Include="DownSlashEffect.cpp" />
     <ClCompile Include="FadeIn.cpp" />
     <ClCompile Include="FadeOut.cpp" />
+    <ClCompile Include="FireballCastEffect.cpp" />
+    <ClCompile Include="FireballCastEffectLeft.cpp" />
+    <ClCompile Include="FireballCastEffectRight.cpp" />
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />

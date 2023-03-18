@@ -23,6 +23,9 @@
 #include "PlayerSkull.h"
 #include "FocusEffect.h"
 #include "DoubleJumpEffect.h"
+#include "FireballCastEffect.h"
+#include "FireballCastEffectLeft.h"
+#include "FireballCastEffectRight.h"
 
 namespace ya
 {
@@ -968,17 +971,20 @@ namespace ya
 	{
 		if (castFireballFlag == false)
 		{
+			object::Instantiate<FireballCastEffect>(tr->GetPos(), eLayerType::BackEffect);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_FireballCastleft", false);
 				object::Instantiate<FireballEffectLeft>(tr->GetPos(), eLayerType::Effect);
+				//object::Instantiate<FireballCastEffectLeft>(tr->GetPos(), eLayerType::BackEffect);
 				castFireballFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_FireballCastright", false);
 				object::Instantiate<FireballEffectRight>(tr->GetPos(), eLayerType::Effect);
+				//object::Instantiate<FireballCastEffectRight>(tr->GetPos(), eLayerType::BackEffect);
 				castFireballFlag = true;
 				break;
 

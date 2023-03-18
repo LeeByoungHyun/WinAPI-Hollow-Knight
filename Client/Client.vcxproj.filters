@@ -140,6 +140,9 @@
     <Filter Include="Contents\Objects\Player\DoubleJumpEffect">
       <UniqueIdentifier>{26e0690f-ffa0-44ba-985a-cb4d31ff6024}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\FireballCastEffect">
+      <UniqueIdentifier>{53c2bb92-10dd-480a-9160-703982d1d72b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -313,6 +316,15 @@
     <ClInclude Include="DoubleJumpEffect.h">
       <Filter>Contents\Objects\Player\DoubleJumpEffect</Filter>
     </ClInclude>
+    <ClInclude Include="FireballCastEffect.h">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireballCastEffectLeft.h">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FireballCastEffectRight.h">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -464,6 +476,15 @@
     </ClCompile>
     <ClCompile Include="DoubleJumpEffect.cpp">
       <Filter>Contents\Objects\Player\DoubleJumpEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballCastEffect.cpp">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballCastEffectLeft.cpp">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballCastEffectRight.cpp">
+      <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
