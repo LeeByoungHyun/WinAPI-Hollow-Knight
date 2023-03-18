@@ -21,6 +21,7 @@
 #include "FireballEffectLeft.h"
 #include "FireballEffectRight.h"
 #include "PlayerSkull.h"
+#include "FocusEffect.h"
 
 namespace ya
 {
@@ -634,13 +635,13 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_Dashleft", false);
-				object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::Effect);
+				object::Instantiate<DashEffectLeft>(tr->GetPos() + Vector2(130.0f, 30.0f), eLayerType::BackEffect);
 				dashFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_Dashright", false);
-				object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::Effect);
+				object::Instantiate<DashEffectRight>(tr->GetPos() + Vector2(-130.0f, 30.0f), eLayerType::BackEffect);
 				dashFlag = true;
 				break;
 
@@ -1037,6 +1038,7 @@ namespace ya
 			default:
 				break;
 			}
+			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
 		}
 
 		// 회복키에서 손 때면 회복종료
@@ -1100,6 +1102,26 @@ namespace ya
 			default:
 				break;
 			}
+			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
+		}
+
+		// 회복키에서 손 때면 회복종료
+		if (Input::GetKeyUp(eKeyCode::A))
+		{
+			mState = ePlayerState::FocusEnd;
+			focusGetFlag = false;
+			mTime = 0.0f;
+			return;
+		}
+
+		// 1초 이상 회복모션 유지 성공시
+		mTime += Time::DeltaTime();
+		if (mTime >= 1)
+		{
+			mState = ePlayerState::FocusGet;
+			focusGetFlag = false;
+			mTime = 0.0f;
+			return;
 		}
 	}
 
@@ -1122,6 +1144,7 @@ namespace ya
 			default:
 				break;
 			}
+			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
 		}
 
 		// 회복키에서 손 때면 회복종료
@@ -1137,7 +1160,7 @@ namespace ya
 		mTime += Time::DeltaTime();
 		if (mTime >= 1)
 		{
-			mState = ePlayerState::FocusGet;
+			mState = ePlayerState::FocusGetOnce;
 			focusGetOnceFlag = false;
 			mTime = 0.0f;
 			return;
@@ -1369,7 +1392,7 @@ namespace ya
 
 	void Player::focusGetOnceEndEvent()
 	{
-
+		
 	}
 
 	void Player::castFireballEndEvent()

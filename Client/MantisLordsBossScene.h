@@ -19,7 +19,6 @@ namespace ya
 
 	private:
 		class Player* mPlayer;
-
 	};
 }
 

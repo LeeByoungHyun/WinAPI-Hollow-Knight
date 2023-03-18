@@ -135,6 +135,7 @@
     <ClInclude Include="FadeOut.h" />
     <ClInclude Include="FireballEffectLeft.h" />
     <ClInclude Include="FireballEffectRight.h" />
+    <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GroundCollider.h" />
     <ClInclude Include="MantisLords.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="FadeOut.cpp" />
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
+    <ClCompile Include="FocusEffect.cpp" />
     <ClCompile Include="GroundCollider.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisLords.cpp" />

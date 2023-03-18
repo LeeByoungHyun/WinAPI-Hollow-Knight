@@ -15,6 +15,7 @@ enum class eLayerType
 {
 	BG,
 	Ground,
+	BackEffect,
 	Monster,
 	Player,
 	Effect,

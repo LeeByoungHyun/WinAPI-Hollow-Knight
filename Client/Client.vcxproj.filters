@@ -134,6 +134,9 @@
     <Filter Include="Contents\Objects\Player\DownSlashEffect">
       <UniqueIdentifier>{c19873f0-5b7a-4e3e-88f9-d589cd983244}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\FocusEffect">
+      <UniqueIdentifier>{55fc5714-cc63-4fa9-bd80-dac65c820601}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -301,6 +304,9 @@
     <ClInclude Include="DownSlashEffect.h">
       <Filter>Contents\Objects\Player\DownSlashEffect</Filter>
     </ClInclude>
+    <ClInclude Include="FocusEffect.h">
+      <Filter>Contents\Objects\Player\FocusEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -446,6 +452,9 @@
     </ClCompile>
     <ClCompile Include="DownSlashEffect.cpp">
       <Filter>Contents\Objects\Player\DownSlashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FocusEffect.cpp">
+      <Filter>Contents\Objects\Player\FocusEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

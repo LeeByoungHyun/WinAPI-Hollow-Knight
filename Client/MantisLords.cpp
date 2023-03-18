@@ -25,10 +25,9 @@ namespace ya
 	void MantisLords::Initialize()
 	{
 		Transform* tr = GetComponent<Transform>();
+		player = Player::GetInstance();
 
 		hp = 100;
-
-		//Player* player = Player::GetInstance();
 
 		mAnimator = AddComponent<Animator>();
 
@@ -116,7 +115,6 @@ namespace ya
 		*/
 
 		// ÇÃ·¹ÀÌ¾î »ç¸Á½Ã ¿ÁÁÂ·Î ±ÍÈ¯
-		player = Player::GetInstance();
 		if (mState == eMantisLordsState::Idle && player->GetPlayerState() == Player::ePlayerState::Death)
 		{
 			mState = eMantisLordsState::ThroneIdle;
@@ -822,7 +820,7 @@ namespace ya
 	{
 		if (dStabArriveFlag == false)
 		{
-			Vector2 pos = Player::GetInstance()->GetPos();
+			Vector2 pos = player->GetInstance()->GetPos();
 			mCollider->SetCenter(Vector2(0.0f, -250.0f));
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
 
