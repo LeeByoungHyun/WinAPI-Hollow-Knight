@@ -4,11 +4,11 @@
 namespace ya
 {
 	class Animator;
-	class DashEffectRight : public GameObject
+	class DoubleJumpEffect : public GameObject
 	{
 	public:
-		DashEffectRight();
-		~DashEffectRight();
+		DoubleJumpEffect();
+		~DoubleJumpEffect();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,10 +16,13 @@ namespace ya
 		virtual void Release() override;
 
 	private:
-		void dashEffectRightComplateEvent();
+		void doubleJumpEffectComplateEvent();
 
 	private:
 		Animator* mAnimator;
+		class Transform* tr;
 		class Player* player;
+
+		bool endFlag = false;
 	};
 }

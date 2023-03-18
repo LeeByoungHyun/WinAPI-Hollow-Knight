@@ -22,6 +22,7 @@
 #include "FireballEffectRight.h"
 #include "PlayerSkull.h"
 #include "FocusEffect.h"
+#include "DoubleJumpEffect.h"
 
 namespace ya
 {
@@ -772,6 +773,9 @@ namespace ya
 
 		if (doubleJumpFlag == false)
 		{
+			DoubleJumpEffect* effect = object::Instantiate<DoubleJumpEffect>(tr->GetPos() + Vector2(0.0f, 0.0f), eLayerType::BackEffect);
+			effect->GetComponent<Transform>()->SetSize(Vector2(0.5f, 0.5f));
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

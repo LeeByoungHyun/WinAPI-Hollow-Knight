@@ -137,6 +137,9 @@
     <Filter Include="Contents\Objects\Player\FocusEffect">
       <UniqueIdentifier>{55fc5714-cc63-4fa9-bd80-dac65c820601}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Player\DoubleJumpEffect">
+      <UniqueIdentifier>{26e0690f-ffa0-44ba-985a-cb4d31ff6024}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -307,6 +310,9 @@
     <ClInclude Include="FocusEffect.h">
       <Filter>Contents\Objects\Player\FocusEffect</Filter>
     </ClInclude>
+    <ClInclude Include="DoubleJumpEffect.h">
+      <Filter>Contents\Objects\Player\DoubleJumpEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -455,6 +461,9 @@
     </ClCompile>
     <ClCompile Include="FocusEffect.cpp">
       <Filter>Contents\Objects\Player\FocusEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleJumpEffect.cpp">
+      <Filter>Contents\Objects\Player\DoubleJumpEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

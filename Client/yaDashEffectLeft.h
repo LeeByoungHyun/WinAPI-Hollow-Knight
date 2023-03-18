@@ -20,5 +20,6 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
+		class Player* player;
 	};
 }

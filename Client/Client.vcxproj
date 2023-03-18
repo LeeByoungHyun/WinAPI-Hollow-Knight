@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
     <ClInclude Include="FadeIn.h" />
     <ClInclude Include="FadeOut.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="yaUpSlashEffect.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
     <ClCompile Include="FadeIn.cpp" />
     <ClCompile Include="FadeOut.cpp" />

@@ -60,6 +60,7 @@ namespace ya
 		int GetAtk() { return atk; }
 		Vector2 GetPos() { return tr->GetPos(); }
 		ePlayerState GetPlayerState() { return mState; }
+		eDirection GetPlayerDirection() { return mDirection; }
 
 	private:
 		void idle();

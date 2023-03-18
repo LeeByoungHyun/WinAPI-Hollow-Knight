@@ -4,12 +4,13 @@
 #include "yaCollider.h"
 #include "yaObject.h"
 #include "yaTime.h"
+#include "yaPlayer.h"
 
 namespace ya
 {
 	DashEffectRight::DashEffectRight()
 	{
-		mAnimator = AddComponent<Animator>();
+
 	}
 
 	DashEffectRight::~DashEffectRight()
@@ -19,6 +20,9 @@ namespace ya
 
 	void DashEffectRight::Initialize()
 	{
+		mAnimator = AddComponent<Animator>();
+		player = Player::GetInstance();
+
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DashEffect\\right", Vector2::Zero, 0.033f);
 		mAnimator->GetCompleteEvent(L"Knight_DashEffectright") = std::bind(&DashEffectRight::dashEffectRightComplateEvent, this);
 		mAnimator->Play(L"Knight_DashEffectright", true);
@@ -28,6 +32,9 @@ namespace ya
 
 	void DashEffectRight::Update()
 	{
+		if (player->GetPlayerState() != Player::ePlayerState::Dash)
+			object::Destroy(this);
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		pos.x += 800.0f * Time::DeltaTime();
