@@ -866,7 +866,7 @@ namespace ya
 		if (fallFlag == false)
 		{
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
-			
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -882,6 +882,14 @@ namespace ya
 			default:
 				break;
 			}
+
+			//공중 관련 플래그 초기화
+			dashFlag = false;
+			castFireballFlag = false;
+			slashFlag = false;
+			slashAltFlag = false;
+			upSlashFlag = false;
+			downSlashFlag = false;
 		}
 
 		// 한번 더 점프키 입력시 더블점프
@@ -1138,52 +1146,149 @@ namespace ya
 
 	void Player::slashEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 	}
 
 	void Player::slashAltEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 	}
 
 	void Player::upSlashEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 	}
 
 	void Player::downSlashEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 	}
 
 	void Player::recoilEndEvent()
 	{
 		mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 
 		invincibilityFlag = false;
 	}
@@ -1218,11 +1323,6 @@ namespace ya
 				mAnimator->Play(L"Knight_Idleright", true);
 			break;
 		}
-
-		
-
-		// 대쉬 끝났을 때 공중이면 fall 상태로 가야 함
-		// switch case 이용
 	}
 
 	void Player::deathEndEvent()
@@ -1274,12 +1374,31 @@ namespace ya
 
 	void Player::castFireballEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		// 공중, 지상일 경우 구분
+		switch (mRigidBody->GetGround())
+		{
+		case true:
+			mState = ePlayerState::Idle;
 
-		if (mDirection == eDirection::Left)
-			mAnimator->Play(L"Knight_Idleleft", true);
-		else if (mDirection == eDirection::Right)
-			mAnimator->Play(L"Knight_Idleright", true);
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+
+		case false:
+			mState = ePlayerState::Fall;
+			break;
+
+		default:
+			mState = ePlayerState::Idle;
+
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Idleleft", true);
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Idleright", true);
+			break;
+		}
 	}
 
 	void Player::doubleJumpEndEvent()
