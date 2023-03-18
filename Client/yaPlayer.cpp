@@ -1073,7 +1073,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mAnimator->Play(L"Knight_FocusEndleft", false);
+				mAnimator->Play(L"Knight_FocusEndright", false);
 				focusEndFlag = true;
 				break;
 
