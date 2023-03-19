@@ -8,6 +8,10 @@ namespace ya
 		'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M', 
 		VK_LEFT, VK_RIGHT, VK_UP, VK_DOWN, VK_SPACE,
+		VK_NUMPAD7, VK_NUMPAD8, VK_NUMPAD9,
+		VK_NUMPAD4, VK_NUMPAD5, VK_NUMPAD6,
+		VK_NUMPAD1, VK_NUMPAD2, VK_NUMPAD3, 
+		VK_NUMPAD0,
 	};
 
 	std::vector <Input::Key> Input::mKeys;

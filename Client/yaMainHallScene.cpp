@@ -5,6 +5,7 @@
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaObject.h"
+#include "yaResourceManager.h"
 
 #include "yaPlayer.h"
 #include "yaCrawlid.h"
@@ -28,24 +29,24 @@ namespace ya
 	{
 		Scene::Initialize();
 
-		// 게임오브젝트 추가는 이곳에	
-		//Player* mPlayer = object::Instantiate<Player>(Vector2(600.0f, 800.0f), eLayerType::Player);
-		Crawlid* c1 = object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c2 = object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
-		object::Instantiate<GrimRoomBG>(eLayerType::BG);
+		Scene* scene = SceneManager::GetActiveScene();
 
+		// 게임오브젝트 추가는 이곳에	
+		object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<GrimRoomBG>(Vector2(800.0f, 870.0f), eLayerType::BG);
 		object::Instantiate<GroundCollider>(Vector2(-100.0f, 800.0f), eLayerType::Ground);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
-		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(600.0f, 800.0f));
-		//Camera::SetTarget(mPlayer);
+
+		Camera::SetTarget(mPlayer);
 	}
 
 	void MainHallScene::Update()
@@ -82,10 +83,10 @@ namespace ya
 	{
 		Scene::Enter();
 
-		Crawlid* c1 = object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c2 = object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
-		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(400.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(800.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(950.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1100.0f, 800.0f), eLayerType::Monster);
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);

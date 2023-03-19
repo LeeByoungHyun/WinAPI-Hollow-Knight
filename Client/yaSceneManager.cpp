@@ -15,11 +15,8 @@ namespace ya
         mScenes.resize((UINT)eSceneType::End);
 
         // ¾À ¸Å´ÏÀú¿¡ ¾À Ãß°¡
-
         mScenes[(UINT)eSceneType::Title] = new TitleScene();
-
         mScenes[(UINT)eSceneType::MantisLordsBoss] = new MantisLordsBossScene();
-
         mScenes[(UINT)eSceneType::MainHall] = new MainHallScene();
 
         for (Scene* scene : mScenes)

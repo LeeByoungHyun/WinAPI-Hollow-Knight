@@ -4,7 +4,7 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "yaTransform.h"
-
+#include "yaAnimator.h"
 
 namespace ya
 {
@@ -20,7 +20,13 @@ namespace ya
 
 	void GrimRoomBG::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\room1.bmp");
+		//mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\room1.bmp");
+		tr = AddComponent<Transform>();
+
+		mAnimator = AddComponent<Animator>();
+		mAnimator->CreateAnimations(L"..\\Resources\\GrimBG\\test", Vector2::Zero, 1.0f);
+
+		mAnimator->Play(L"GrimBGtest", false);
 
 		GameObject::Initialize();
 	}
@@ -34,7 +40,7 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 0, -100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		//BitBlt(hdc, tr->GetPos().x, tr->GetPos().y - 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void GrimRoomBG::Release()

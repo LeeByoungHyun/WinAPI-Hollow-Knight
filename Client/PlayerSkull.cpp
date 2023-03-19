@@ -20,7 +20,7 @@ namespace ya
 
 	void PlayerSkull::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\Knight\\Knight_DeathSkull\\Neutral\\020-00-112.bmp");
+		//mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\Knight\\Knight_DeathSkull\\Neutral\\020-00-112.bmp");
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DeathSkull\\Neutral", Vector2::Zero, 0.033f);

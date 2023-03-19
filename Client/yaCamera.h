@@ -12,6 +12,7 @@ namespace ya
 
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
+		static void SetLookPosition(Vector2 pos) { mLookPosition = pos; }
 
 	private:
 		static Vector2 mResolution;

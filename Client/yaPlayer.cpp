@@ -9,6 +9,7 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
+#include "yaCamera.h"
 
 #include "DownSlashEffect.h"
 #include "yaUpSlashEffect.h"
@@ -1387,7 +1388,7 @@ namespace ya
 		object::Destroy(this);
 
 		object::Instantiate<PlayerSkull>(tr->GetPos(), eLayerType::Player);
-
+		Camera::SetTarget(nullptr);
 	}
 
 	void Player::focusEndEvent()

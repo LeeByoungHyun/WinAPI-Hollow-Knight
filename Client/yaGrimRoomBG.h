@@ -1,6 +1,7 @@
 #pragma once
 #include "yaGameObject.h"
 #include "yaImage.h"
+#include "yaTransform.h"
 
 namespace ya
 {
@@ -17,7 +18,9 @@ namespace ya
 		virtual void Release() override;
 
 	private:
-		Image* mImage;
+		Image* mImage; 
+		Transform* tr;
+		class Animator* mAnimator;
 	};
 }
 

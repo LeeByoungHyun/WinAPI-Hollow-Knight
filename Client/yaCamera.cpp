@@ -7,7 +7,7 @@
 
 extern ya::Application application;
 
-const float CameraSpeed = 100.0f;
+const float CameraSpeed = 200.0f;
 
 namespace ya
 {
@@ -25,24 +25,21 @@ namespace ya
 
 	void Camera::Update()
 	{
-		/*
-		if (Input::GetKey(eKeyCode::LEFT))
+		if (Input::GetKey(eKeyCode::NUM4))
 			mLookPosition.x -= CameraSpeed * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKey(eKeyCode::NUM6))
 			mLookPosition.x += CameraSpeed * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::UP))
+		if (Input::GetKey(eKeyCode::NUM8))
 			mLookPosition.y -= CameraSpeed * Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::DOWN))
-			mLookPosition.y -= CameraSpeed * Time::DeltaTime();
-		*/
+		if (Input::GetKey(eKeyCode::NUM5))
+			mLookPosition.y += CameraSpeed * Time::DeltaTime();
 
 		if (mTarget != nullptr)
 		{
-			mLookPosition
-				= mTarget->GetComponent<Transform>()->GetPos();
+			mLookPosition = mTarget->GetComponent<Transform>()->GetPos() + Vector2(0.0f, -300.0f);
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);
