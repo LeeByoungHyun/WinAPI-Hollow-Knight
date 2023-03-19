@@ -27,6 +27,8 @@ namespace ya
 		GameObject* CollisionObj;
 		class Player* player;
 		class Transform* tr;
+
+		bool hitFlag = false;
 	};
 }
 

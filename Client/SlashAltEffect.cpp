@@ -80,7 +80,20 @@ namespace ya
 
 	void SlashAltEffect::OnCollisionStay(Collider* other)
 	{
-
+		// 몬스터와 충돌시 1회에 한해 뒤로 넉백 + 충돌한 몬스터 체력 감소
+		if ((other->GetOwner()->GetType() == eLayerType::Monster) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			if (player->GetPlayerDirection() == Player::eDirection::Left)
+			{
+				player->SetPos(pos + Vector2(10.0f, 0.0f));
+			}
+			else if (player->GetPlayerDirection() == Player::eDirection::Right)
+			{
+				player->SetPos(pos + Vector2(-10.0f, 0.0f));
+			}
+			hitFlag = true;
+		}
 	}
 
 	void SlashAltEffect::OnCollisionExit(Collider* other)

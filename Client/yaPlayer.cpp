@@ -823,11 +823,7 @@ namespace ya
 			// 중력 초기화 해줘야 함
 			// 점프 물리가속도 설정
 			Vector2 velocity = mRigidBody->GetVelocity();
-
 			velocity.y = -800.0f;
-
-			mRigidBody->SetVelocity((Vector2::Zero));
-			mRigidBody->SetGravity((Vector2::Zero));
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
 

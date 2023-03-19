@@ -4,6 +4,7 @@
 #include "yaCollider.h"
 #include "yaObject.h"
 #include "yaPlayer.h"
+#include "yaRigidBody.h"
 
 namespace ya
 {
@@ -52,6 +53,28 @@ namespace ya
 	void DownSlashEffect::Release()
 	{
 		GameObject::Release();
+
+	}
+
+	void DownSlashEffect::OnCollisionEnter(Collider* other)
+	{
+
+	}
+
+	void DownSlashEffect::OnCollisionStay(Collider* other)
+	{
+		// 몬스터와 충돌시 1회에 한해 뒤로 넉백 + 충돌한 몬스터 체력 감소
+		if ((other->GetOwner()->GetType() == eLayerType::Monster) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -300.0f));
+
+			hitFlag = true;
+		}
+	}
+
+	void DownSlashEffect::OnCollisionExit(Collider* other)
+	{
 
 	}
 

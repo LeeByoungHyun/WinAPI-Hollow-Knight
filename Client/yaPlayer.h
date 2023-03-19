@@ -59,6 +59,7 @@ namespace ya
 
 		int GetAtk() { return atk; }
 		Vector2 GetPos() { return tr->GetPos(); }
+		void SetPos(Vector2 pos) { tr->SetPos(pos); }
 		ePlayerState GetPlayerState() { return mState; }
 		eDirection GetPlayerDirection() { return mDirection; }
 

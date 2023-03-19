@@ -15,6 +15,10 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		virtual void OnCollisionEnter(class Collider* other);
+		virtual void OnCollisionStay(class Collider* other);
+		virtual void OnCollisionExit(class Collider* other);
+
 	private:
 		void downSlashEffectComplateEvent();
 
@@ -22,6 +26,8 @@ namespace ya
 		Animator* mAnimator;
 		class Transform* tr;
 		class Player* player;
+
+		bool hitFlag = false;
 	};
 }
 
