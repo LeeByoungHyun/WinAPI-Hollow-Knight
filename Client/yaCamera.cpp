@@ -16,6 +16,11 @@ namespace ya
 	Vector2 Camera::mDistance = Vector2::Zero;
 	GameObject* Camera::mTarget = nullptr;
 
+	float Camera::MinX = 0.0f;
+	float Camera::MaxX = 0.0f;
+	float Camera::MinY = 0.0f;
+	float Camera::MaxY = 0.0f;
+
 	void Camera::Initialize()
 	{
 		mResolution.x = application.GetWidth();
@@ -40,6 +45,16 @@ namespace ya
 		if (mTarget != nullptr)
 		{
 			mLookPosition = mTarget->GetComponent<Transform>()->GetPos() + Vector2(0.0f, -300.0f);
+
+			// 카메라 최대 이동거리를 넘어가면 조정
+			if (mLookPosition.x <= MinX)
+				mLookPosition.x = MinX;
+			if (mLookPosition.x >= MaxX)
+				mLookPosition.x = MaxX;
+			if (mLookPosition.y >= MinY)
+				mLookPosition.y = MinY;
+			if (mLookPosition.y <= MaxY)
+				mLookPosition.y = MaxY;
 		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);

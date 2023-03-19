@@ -162,7 +162,7 @@
     <ClInclude Include="yaCollisionManager.h" />
     <ClInclude Include="yaCrawlid.h" />
     <ClInclude Include="yaCursor.h" />
-    <ClInclude Include="yaGrimRoomBG.h" />
+    <ClInclude Include="GodBG.h" />
     <ClInclude Include="yaMainHallScene.h" />
     <ClInclude Include="yaMenuBG.h" />
     <ClInclude Include="yaMenuTitle.h" />
@@ -178,7 +178,6 @@
     <ClInclude Include="yaLayer.h" />
     <ClInclude Include="yaMath.h" />
     <ClInclude Include="yamyamEngine.h" />
-    <ClInclude Include="yaBossScene.h" />
     <ClInclude Include="yaResource.h" />
     <ClInclude Include="yaResourceManager.h" />
     <ClInclude Include="yaScene.h" />
@@ -217,7 +216,7 @@
     <ClCompile Include="yaCollisionManager.cpp" />
     <ClCompile Include="yaCrawlid.cpp" />
     <ClCompile Include="yaCursor.cpp" />
-    <ClCompile Include="yaGrimRoomBG.cpp" />
+    <ClCompile Include="GodBG.cpp" />
     <ClCompile Include="yaMainHallScene.cpp" />
     <ClCompile Include="yaMenuBG.cpp" />
     <ClCompile Include="yaMenuTitle.cpp" />
@@ -231,7 +230,6 @@
     <ClCompile Include="yaInput.cpp" />
     <ClCompile Include="yaLayer.cpp" />
     <ClCompile Include="yaMath.cpp" />
-    <ClCompile Include="yaBossScene.cpp" />
     <ClCompile Include="yaResource.cpp" />
     <ClCompile Include="yaResourceManager.cpp" />
     <ClCompile Include="yaScene.cpp" />

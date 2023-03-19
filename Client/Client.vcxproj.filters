@@ -68,14 +68,8 @@
     <Filter Include="Contents\Objects\menu_title">
       <UniqueIdentifier>{7fb95708-5933-4f22-9bb4-f93e9f672f76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\GrimRoom_BG">
-      <UniqueIdentifier>{16fa389a-6a44-47e3-886c-5731de99f579}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scenes\MainHallScene">
       <UniqueIdentifier>{e8d86363-73f2-428d-a40a-d0b8ec2b2ed1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scenes\BossScene">
-      <UniqueIdentifier>{eec00e91-033a-47d6-87ce-39bb4d384c43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Scenes\Room1Scene">
       <UniqueIdentifier>{d868db69-3b8b-4a6f-866d-c2a49c1a3ee8}</UniqueIdentifier>
@@ -143,6 +137,9 @@
     <Filter Include="Contents\Objects\Player\FireballCastEffect">
       <UniqueIdentifier>{53c2bb92-10dd-480a-9160-703982d1d72b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\GodBG">
+      <UniqueIdentifier>{16fa389a-6a44-47e3-886c-5731de99f579}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -193,9 +190,6 @@
     <ClInclude Include="yaTitleScene.h">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="yaBossScene.h">
-      <Filter>Contents\Scenes\BossScene</Filter>
-    </ClInclude>
     <ClInclude Include="yaTime.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
@@ -229,8 +223,8 @@
     <ClInclude Include="yaBackboard.h">
       <Filter>Contents\Objects\backboard</Filter>
     </ClInclude>
-    <ClInclude Include="yaGrimRoomBG.h">
-      <Filter>Contents\Objects\GrimRoom_BG</Filter>
+    <ClInclude Include="GodBG.h">
+      <Filter>Contents\Objects\GodBG</Filter>
     </ClInclude>
     <ClInclude Include="yaMainHallScene.h">
       <Filter>Contents\Scenes\MainHallScene</Filter>
@@ -351,9 +345,6 @@
     <ClCompile Include="yaTitleScene.cpp">
       <Filter>Contents\Scenes\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="yaBossScene.cpp">
-      <Filter>Contents\Scenes\BossScene</Filter>
-    </ClCompile>
     <ClCompile Include="yaTime.cpp">
       <Filter>Engine\Time</Filter>
     </ClCompile>
@@ -384,8 +375,8 @@
     <ClCompile Include="yaBackboard.cpp">
       <Filter>Contents\Objects\backboard</Filter>
     </ClCompile>
-    <ClCompile Include="yaGrimRoomBG.cpp">
-      <Filter>Contents\Objects\GrimRoom_BG</Filter>
+    <ClCompile Include="GodBG.cpp">
+      <Filter>Contents\Objects\GodBG</Filter>
     </ClCompile>
     <ClCompile Include="yaMainHallScene.cpp">
       <Filter>Contents\Scenes\MainHallScene</Filter>
