@@ -79,6 +79,15 @@ namespace ya
 
 	void GroundCollider::OnCollisionExit(Collider* other)
 	{
-	}
+		eLayerType otherType = other->GetOwner()->GetType();
+		if (otherType == eLayerType::Player)
+		{
+			Player* mplayer = dynamic_cast<Player*>(other->GetOwner());
+			if (mplayer == nullptr)
+				return;
 
+			RigidBody* rb = mplayer->GetComponent<RigidBody>();
+			rb->SetGround(false);
+		}
+	}
 }
