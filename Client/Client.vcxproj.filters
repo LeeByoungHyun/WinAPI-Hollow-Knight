@@ -241,9 +241,6 @@
     <ClInclude Include="yaAnimator.h">
       <Filter>Engine\Component\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="yaSlashEffectRight.h">
-      <Filter>Contents\Objects\Player\SlashEffect</Filter>
-    </ClInclude>
     <ClInclude Include="yaCollider.h">
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
@@ -256,17 +253,8 @@
     <ClInclude Include="yaAscent_Wall_02.h">
       <Filter>Contents\Objects\AscentWall</Filter>
     </ClInclude>
-    <ClInclude Include="mySlashEffectLeft.h">
-      <Filter>Contents\Objects\Player\SlashEffect</Filter>
-    </ClInclude>
     <ClInclude Include="yaUpSlashEffect.h">
       <Filter>Contents\Objects\Player\UpSlashEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="yaSlashAltEffectLeft.h">
-      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="yaSlashAltEffectRight.h">
-      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClInclude>
     <ClInclude Include="yaCamera.h">
       <Filter>Engine\Camera</Filter>
@@ -324,6 +312,12 @@
     </ClInclude>
     <ClInclude Include="FireballCastEffectRight.h">
       <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SlashEffect.h">
+      <Filter>Contents\Objects\Player\SlashEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SlashAltEffect.h">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -405,9 +399,6 @@
     <ClCompile Include="yaMenuTitle.cpp">
       <Filter>Contents\Objects\menu_title</Filter>
     </ClCompile>
-    <ClCompile Include="yaSlashEffectRight.cpp">
-      <Filter>Contents\Objects\Player\SlashEffect</Filter>
-    </ClCompile>
     <ClCompile Include="yaCollider.cpp">
       <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
@@ -420,17 +411,8 @@
     <ClCompile Include="yaAscent_Wall_02.cpp">
       <Filter>Contents\Objects\AscentWall</Filter>
     </ClCompile>
-    <ClCompile Include="mySlashEffectLeft.cpp">
-      <Filter>Contents\Objects\Player\SlashEffect</Filter>
-    </ClCompile>
     <ClCompile Include="yaUpSlashEffect.cpp">
       <Filter>Contents\Objects\Player\UpSlashEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="yaSlashAltEffectLeft.cpp">
-      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="yaSlashAltEffectRight.cpp">
-      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClCompile>
     <ClCompile Include="yaCamera.cpp">
       <Filter>Engine\Camera</Filter>
@@ -485,6 +467,12 @@
     </ClCompile>
     <ClCompile Include="FireballCastEffectRight.cpp">
       <Filter>Contents\Objects\Player\FireballCastEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SlashEffect.cpp">
+      <Filter>Contents\Objects\Player\SlashEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SlashAltEffect.cpp">
+      <Filter>Contents\Objects\Player\SlashAltEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

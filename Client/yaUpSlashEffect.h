@@ -17,8 +17,11 @@ namespace ya
 
 	private:
 		void upSlashEffectComplateEvent();
+
 	private:
 		Animator* mAnimator;
+		class Transform* tr;
+		class Player* player;
 	};
 }
 

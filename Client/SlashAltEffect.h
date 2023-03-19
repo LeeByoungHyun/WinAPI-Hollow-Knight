@@ -1,14 +1,19 @@
 #pragma once
+class SlashAltEffect
+{
+};
+
+#pragma once
 #include "yaGameObject.h"
 
 namespace ya
 {
 	class Animator;
-	class SlashEffectRight : public GameObject
+	class SlashAltEffect : public GameObject
 	{
 	public:
-		SlashEffectRight();
-		~SlashEffectRight();
+		SlashAltEffect();
+		~SlashAltEffect();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,13 +25,13 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other);
 
 	private:
-		void slashEffectRightComplateEvent();
+		void slashAltEffectComplateEvent();
 
 	private:
 		Animator* mAnimator;
-
 		GameObject* CollisionObj;
-
+		class Player* player;
+		class Transform* tr;
 	};
 }
 

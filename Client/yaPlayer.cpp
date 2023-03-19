@@ -10,10 +10,6 @@
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
 
-#include "mySlashEffectLeft.h"
-#include "yaSlashEffectRight.h"
-#include "yaSlashAltEffectLeft.h"
-#include "yaSlashAltEffectRight.h"
 #include "DownSlashEffect.h"
 #include "yaUpSlashEffect.h"
 #include "yaDashEffectLeft.h"
@@ -26,6 +22,8 @@
 #include "FireballCastEffect.h"
 #include "FireballCastEffectLeft.h"
 #include "FireballCastEffectRight.h"
+#include "SlashEffect.h"
+#include "SlashAltEffect.h"
 
 namespace ya
 {
@@ -488,13 +486,10 @@ namespace ya
 		}
 
 		Vector2 pos = tr->GetPos();
-
 		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 300.0f * Time::DeltaTime();
-
 		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 300.0f * Time::DeltaTime();
-
 		tr->SetPos(pos);
 	}
 
@@ -511,19 +506,20 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_Slashleft", true);
-				object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
+				//object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
 				slashFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_Slashright", true);
-				object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
+				//object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
 				slashFlag = true;
 				break;
 
 			default:
 				break;
 			}
+			object::Instantiate<SlashEffect>(eLayerType::Effect);
 		}
 
 		mTime += Time::DeltaTime();
@@ -547,6 +543,13 @@ namespace ya
 				return;
 			}
 		}
+
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 
 	void Player::slashAlt()
@@ -562,19 +565,20 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_SlashAltleft", true);
-				object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
+				//object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
 				slashAltFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_SlashAltright", true);
-				object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
+				//object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
 				slashAltFlag = true;
 				break;
 
 			default:
 				break;
 			}
+			object::Instantiate<SlashAltEffect>(eLayerType::Effect);
 		}
 
 		mTime += Time::DeltaTime();
@@ -598,6 +602,13 @@ namespace ya
 				return;
 			}
 		}
+
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 
 	void Player::upSlash()
@@ -610,9 +621,16 @@ namespace ya
 		if (upSlashFlag == false)
 		{
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
-			object::Instantiate<UpSlashEffect>(tr->GetPos() + Vector2(0.0f, -0.0f), eLayerType::Effect);
+			object::Instantiate<UpSlashEffect>(eLayerType::Effect);
 			upSlashFlag = true;
 		}
+
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 
 	void Player::downSlash()
@@ -625,9 +643,16 @@ namespace ya
 		if (downSlashFlag == false)
 		{
 			mAnimator->Play(L"Knight_DownSlashneutral", true);
-			object::Instantiate<DownSlashEffect>(tr->GetPos() + Vector2(0.0f, 70.0f), eLayerType::Effect);
+			object::Instantiate<DownSlashEffect>(eLayerType::Effect);
 			downSlashFlag = true;
 		}
+
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 
 	void Player::dash()

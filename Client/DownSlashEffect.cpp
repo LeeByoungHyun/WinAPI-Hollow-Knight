@@ -3,6 +3,7 @@
 #include "yaAnimator.h"
 #include "yaCollider.h"
 #include "yaObject.h"
+#include "yaPlayer.h"
 
 namespace ya
 {
@@ -19,13 +20,16 @@ namespace ya
 	void DownSlashEffect::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
+		player = Player::GetInstance();
+		Collider* mCollider = AddComponent<Collider>();
+		tr = AddComponent<Transform>();
+
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DownSlashEffect\\neutral", Vector2::Zero, 0.033f);
 
 		mAnimator->GetCompleteEvent(L"Knight_DownSlashEffectneutral") = std::bind(&DownSlashEffect::downSlashEffectComplateEvent, this);
 
 		mAnimator->Play(L"Knight_DownSlashEffectneutral", false);
 
-		Collider* mCollider = AddComponent<Collider>();
 		mCollider->SetCenter(Vector2(-60.0f, -165.0f));
 		mCollider->SetSize(Vector2(120.0f, 150.0f));
 
@@ -34,6 +38,9 @@ namespace ya
 
 	void DownSlashEffect::Update()
 	{
+		Vector2 corPos = Vector2(0.0f, 70.0f);
+		tr->SetPos(player->GetPos() + corPos);
+
 		GameObject::Update();
 	}
 

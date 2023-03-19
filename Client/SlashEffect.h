@@ -4,11 +4,11 @@
 namespace ya
 {
 	class Animator;
-	class SlashEffectLeft : public GameObject
+	class SlashEffect : public GameObject
 	{
 	public:
-		SlashEffectLeft();
-		~SlashEffectLeft();
+		SlashEffect();
+		~SlashEffect();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,12 +20,13 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other);
 
 	private:
-		void slashEffectLeftComplateEvent();
+		void slashEffectComplateEvent();
 
 	private:
 		Animator* mAnimator;
-
 		GameObject* CollisionObj;
+		class Player* player;
+		class Transform* tr;
 	};
 }
 
