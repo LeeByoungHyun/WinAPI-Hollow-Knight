@@ -45,7 +45,6 @@ namespace ya
 	void Player::Initialize()
 	{
 		tr = AddComponent<Transform>();
-		tr->SetName(L"PlayerTransform");
 		mAnimator = AddComponent<Animator>();
 		mCollider = AddComponent<Collider>();
 		mRigidBody = AddComponent<RigidBody>();
@@ -133,8 +132,8 @@ namespace ya
 		mCollider->SetCenter(Vector2(-30.0f, -120.0f));
 		mCollider->SetSize(Vector2(60.0f, 120.0f));
 
-		mRigidBody->SetMass(1.0f);
-
+		mRigidBody->SetMass(0.01f);
+		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 		mState = ePlayerState::Idle;
 
 		GameObject::Initialize();
@@ -695,7 +694,7 @@ namespace ya
 
 			// 점프 물리가속도 설정
 			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.y -= 500.0f;
+			velocity.y -= 900.0f;
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
 		}
@@ -799,14 +798,14 @@ namespace ya
 			// 점프 물리가속도 설정
 			Vector2 velocity = mRigidBody->GetVelocity();
 
-			velocity.y = -400.0f;
+			velocity.y = -800.0f;
 
 			mRigidBody->SetVelocity((Vector2::Zero));
 			mRigidBody->SetGravity((Vector2::Zero));
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
 
-			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+			mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 
 		}
 
@@ -873,7 +872,7 @@ namespace ya
 
 		if (fallFlag == false)
 		{
-			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+			mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 
 			switch (mDirection)
 			{
