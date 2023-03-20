@@ -86,8 +86,8 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
 
-		/*
 		// 테스트
+		/*
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
 			throneStandFlag = false;
@@ -368,7 +368,7 @@ namespace ya
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
 				mDirection = eDirection::Left;
-				tr->SetPos(Vector2(1400.0f, 1300.0f));
+				tr->SetPos(Vector2(2200.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveleft", false);
 				dashArriveFlag = true;
 
@@ -379,7 +379,7 @@ namespace ya
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
 				mDirection = eDirection::Right;
-				tr->SetPos(Vector2(200.0f, 1300.0f));
+				tr->SetPos(Vector2(2200.0f - 1183.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveright", false);
 				dashArriveFlag = true;
 
@@ -469,10 +469,10 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
-			pos.x -= 5500.0f * Time::DeltaTime();
+			pos.x -= 6000.0f * Time::DeltaTime();
 
 		else if (mDirection == eDirection::Right)
-			pos.x += 5500.0f * Time::DeltaTime();
+			pos.x += 6000.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
 
@@ -571,7 +571,6 @@ namespace ya
 			pos.y -= 2000.0f * Time::DeltaTime();
 		}
 			
-
 		else if (mDirection == eDirection::Right)
 		{
 			pos.x += 2000.0f * Time::DeltaTime();
@@ -601,7 +600,7 @@ namespace ya
 			case 0:	// left
 				mCollider->SetCenter(Vector2(-300.0f, -550.0f));
 				mCollider->SetSize(Vector2(200.0f, 400.0f));
-				tr->SetPos(Vector2(300.0f, 1000.0f));
+				tr->SetPos(Vector2(2200.0f - 1183.0f, 1100.0f));
 
 				mDirection = eDirection::Left;
 				mAnimator->Play(L"Mantis Lords_Wall Arriveleft", false);
@@ -612,7 +611,7 @@ namespace ya
 			case 1:	// right
 				mCollider->SetCenter(Vector2(100.0f, -550.0f));
 				mCollider->SetSize(Vector2(200.0f, 400.0f));
-				tr->SetPos(Vector2(1200.0f, 1000.0f));
+				tr->SetPos(Vector2(2200.0f, 1100.0f));
 
 				mDirection = eDirection::Right;
 				mAnimator->Play(L"Mantis Lords_Wall Arriveright", false);
@@ -825,7 +824,7 @@ namespace ya
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
 
 			// 플레이어 x좌표 위에 생성되야 함 지금은 임시
-			tr->SetPos(Vector2(pos.x, 600.0f));
+			tr->SetPos(Vector2(pos.x, 650.0f));
 			mAnimator->Play(L"Mantis Lords_Dstab Arriveneutral", false);
 			dStabArriveFlag = true;
 		}

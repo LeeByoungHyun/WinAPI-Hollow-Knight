@@ -151,6 +151,15 @@ namespace ya
 			mState = ePlayerState::Death;
 		}
 
+		// 'L' 누르면 무적모드 다시 누르면 해제
+		if (Input::GetKeyDown(eKeyCode::L))
+		{
+			if (invincibilityFlag == false)
+				invincibilityFlag = true;
+			else
+				invincibilityFlag = false;
+		}
+
 		// 중립 상태로 돌아오면 모든 상태변수 초기화
 		if (mState == ePlayerState::Idle)
 		{

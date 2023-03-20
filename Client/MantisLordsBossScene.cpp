@@ -31,13 +31,13 @@ namespace ya
 
 		// 게임오브젝트 추가는 이곳에
 		//object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
-		object::Instantiate<MantisLords>(Vector2(1300.0f, 800.0f), eLayerType::Monster);
-		object::Instantiate<MantisLords>(Vector2(1600.0f, 800.0f), eLayerType::Monster);
-		object::Instantiate<MantisLords>(Vector2(1900.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<MantisLords>(Vector2(1524.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<MantisLords>(Vector2(1724.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<MantisLords>(Vector2(1924.0f, 800.0f), eLayerType::Monster);
 
-		object::Instantiate<MantisThrone>(Vector2(1300.0f, 1300.0f), eLayerType::BGObject);
-		object::Instantiate<MantisThrone>(Vector2(1600.0f, 1300.0f), eLayerType::BGObject);
-		object::Instantiate<MantisThrone>(Vector2(1900.0f, 1300.0f), eLayerType::BGObject);
+		object::Instantiate<MantisThrone>(Vector2(1524.0f, 1300.0f), eLayerType::BGObject);
+		object::Instantiate<MantisThrone>(Vector2(1724.0f, 1300.0f), eLayerType::BGObject);
+		object::Instantiate<MantisThrone>(Vector2(1924.0f, 1300.0f), eLayerType::BGObject);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<LongFlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
