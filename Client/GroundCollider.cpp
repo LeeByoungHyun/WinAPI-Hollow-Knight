@@ -60,14 +60,14 @@ namespace ya
 			// 충돌한 콜라이더가 가속도로 인해 1프레임 사이에 콜라이더 안으로 들어갈 경우 콜라이더 위치 초기화
 			if (fLen < fSize)
 			{
-				Transform* cupTr = mplayer->GetComponent<Transform>();
+				Transform* playerTr = mplayer->GetComponent<Transform>();
 				Transform* grTr = this->GetComponent<Transform>();
 
-				Vector2 cupPos = cupTr->GetPos();
+				Vector2 playerPos = playerTr->GetPos();
 				Vector2 grPos = grTr->GetPos();
 
-				cupPos -= (fSize - fLen) - 1.0f;
-				cupTr->SetPos(cupPos);
+				playerPos -= (fSize - fLen) - 1.0f;
+				playerTr->SetPos(playerPos);
 			}
 		}
 	}

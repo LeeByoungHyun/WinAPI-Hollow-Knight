@@ -14,6 +14,7 @@ enum class eSceneType
 enum class eLayerType	
 {
 	BG,
+	BGObject,
 	Ground,
 	BackEffect,
 	Monster,

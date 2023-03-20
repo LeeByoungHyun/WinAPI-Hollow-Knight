@@ -142,8 +142,10 @@
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GroundCollider.h" />
+    <ClInclude Include="LongFlatform.h" />
     <ClInclude Include="MantisLords.h" />
     <ClInclude Include="MantisLordsBossScene.h" />
+    <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="PlayerSkull.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SlashAltEffect.h" />
@@ -198,9 +200,11 @@
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
     <ClCompile Include="GroundCollider.cpp" />
+    <ClCompile Include="LongFlatform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisLords.cpp" />
     <ClCompile Include="MantisLordsBossScene.cpp" />
+    <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="PlayerSkull.cpp" />
     <ClCompile Include="SlashAltEffect.cpp" />
     <ClCompile Include="SlashEffect.cpp" />
