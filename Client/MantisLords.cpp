@@ -909,8 +909,13 @@ namespace ya
 			dStabLeaveFlag = true;
 		}
 
+		Vector2 pos = tr->GetPos();
+		pos.x += 2000.0f * Time::DeltaTime();
+		pos.y -= 2000.0f * Time::DeltaTime();
+		tr->SetPos(pos);
+
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.1)
 		{
 			mState = eMantisLordsState::Idle;
 			dStabLeaveFlag = false;
