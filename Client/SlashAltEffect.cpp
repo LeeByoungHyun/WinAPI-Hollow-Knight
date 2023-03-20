@@ -86,11 +86,11 @@ namespace ya
 			Vector2 pos = player->GetPos();
 			if (player->GetPlayerDirection() == Player::eDirection::Left)
 			{
-				player->SetPos(pos + Vector2(10.0f, 0.0f));
+				player->SetPos(pos + Vector2(15.0f, 0.0f));
 			}
 			else if (player->GetPlayerDirection() == Player::eDirection::Right)
 			{
-				player->SetPos(pos + Vector2(-10.0f, 0.0f));
+				player->SetPos(pos + Vector2(-15.0f, 0.0f));
 			}
 			hitFlag = true;
 		}

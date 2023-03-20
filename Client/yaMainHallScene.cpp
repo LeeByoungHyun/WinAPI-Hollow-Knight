@@ -33,10 +33,10 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에	
-		Crawlid* c1 = object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f), eLayerType::Monster);
-		Crawlid* c2 = object::Instantiate<Crawlid>(Vector2(1800.0f, 1300.0f), eLayerType::Monster);
-		Crawlid* c3 = object::Instantiate<Crawlid>(Vector2(1950.0f, 1300.0f), eLayerType::Monster);
-		Crawlid* c4 = object::Instantiate<Crawlid>(Vector2(2100.0f, 1300.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1800.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1950.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(2100.0f, 1300.0f - 103.0f), eLayerType::Monster);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<LongFlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);

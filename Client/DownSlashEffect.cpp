@@ -67,7 +67,7 @@ namespace ya
 		if ((other->GetOwner()->GetType() == eLayerType::Monster) && hitFlag == false)
 		{
 			Vector2 pos = player->GetPos();
-			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -300.0f));
+			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -400.0f));
 
 			hitFlag = true;
 		}

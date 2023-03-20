@@ -11,6 +11,7 @@
 #include "GroundCollider.h"
 #include "LongFlatform.h"
 #include "MantisThrone.h"
+#include "MantisThroneBack.h"
 
 namespace ya
 {
@@ -30,11 +31,13 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에
-		//object::Instantiate<Player>(Vector2(800.0f, 800.0f), eLayerType::Player);
 		object::Instantiate<MantisLords>(Vector2(1524.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<MantisLords>(Vector2(1724.0f, 800.0f), eLayerType::Monster);
 		object::Instantiate<MantisLords>(Vector2(1924.0f, 800.0f), eLayerType::Monster);
 
+		object::Instantiate<MantisThroneBack>(Vector2(1524.0f, 670.0f), eLayerType::BGObject);
+		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
+		object::Instantiate<MantisThroneBack>(Vector2(1924.0f, 670.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1524.0f, 1300.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1724.0f, 1300.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1924.0f, 1300.0f), eLayerType::BGObject);

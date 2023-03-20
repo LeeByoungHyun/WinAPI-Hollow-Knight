@@ -146,6 +146,9 @@
     <Filter Include="Contents\Objects\MantisThrone">
       <UniqueIdentifier>{46a6e8f2-350b-4287-b054-798b69507f6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\MantisThroneBack">
+      <UniqueIdentifier>{503ccd0f-5361-474d-aee5-4e9a257b26e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -325,6 +328,9 @@
     <ClInclude Include="MantisThrone.h">
       <Filter>Contents\Objects\MantisThrone</Filter>
     </ClInclude>
+    <ClInclude Include="MantisThroneBack.h">
+      <Filter>Contents\Objects\MantisThroneBack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -482,6 +488,9 @@
     </ClCompile>
     <ClCompile Include="MantisThrone.cpp">
       <Filter>Contents\Objects\MantisThrone</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisThroneBack.cpp">
+      <Filter>Contents\Objects\MantisThroneBack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
