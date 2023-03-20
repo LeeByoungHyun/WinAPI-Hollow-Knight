@@ -61,6 +61,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Run\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Run\\right", Vector2::Zero, 0.1f);
+
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.025f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.025f);
 
@@ -1000,8 +1003,7 @@ namespace ya
 	{
 		if (castFireballFlag == false)
 		{
-			// 왼쪽 버그 미해결
-			//object::Instantiate<FireballCastEffect>(tr->GetPos(), eLayerType::BackEffect);
+			object::Instantiate<FireballCastEffect>(tr->GetPos(), eLayerType::BackEffect);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
