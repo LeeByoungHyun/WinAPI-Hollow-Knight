@@ -121,17 +121,25 @@ struct Vector2
 		y -= value;
 	}
 
+	void operator+=(const float& value)
+	{
+		x += value;
+		y += value;
+	}
+
 	void Clear()
 	{
 		x = 0.0f;
 		y = 0.0f;
 	}
 
+	// 벡터의 길이
 	float Length()
 	{
 		return sqrtf(x * x + y * y);
 	}
 
+	// 벡터의 방향
 	Vector2& Normalize()
 	{
 		float length = Length();
@@ -156,11 +164,14 @@ namespace ya::math
 		return Vector2(x, y);
 	}
 
+	// 내적
 	inline static float Dot(Vector2& v1, Vector2& v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}
 
+
+	// 외적
 	inline static float Cross(Vector2& v1, Vector2& v2)
 	{
 		return v1.x * v2.y - v1.y * v2.x;
