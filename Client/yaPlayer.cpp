@@ -1000,7 +1000,8 @@ namespace ya
 	{
 		if (castFireballFlag == false)
 		{
-			object::Instantiate<FireballCastEffect>(tr->GetPos(), eLayerType::BackEffect);
+			// 왼쪽 버그 미해결
+			//object::Instantiate<FireballCastEffect>(tr->GetPos(), eLayerType::BackEffect);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

@@ -21,6 +21,7 @@ namespace ya
 		Image* mImage; 
 		Transform* tr;
 		class Animator* mAnimator;
+		HDC* mHdc;
 	};
 }
 
