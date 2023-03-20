@@ -171,7 +171,6 @@ namespace ya
 			downSlashFlag = false;
 			dashFlag = false;
 			deathFlag = false;
-			invincibilityFlag = false;
 			focusFlag = false;
 			focusEndFlag = false;
 			focusGetFlag = false;
