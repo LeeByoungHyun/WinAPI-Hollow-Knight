@@ -149,6 +149,15 @@
     <Filter Include="Contents\Objects\MantisThroneBack">
       <UniqueIdentifier>{503ccd0f-5361-474d-aee5-4e9a257b26e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Mantis_Lords\MantisLord1">
+      <UniqueIdentifier>{669393db-5017-4eee-8025-edcca8079da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Mantis_Lords\MantisLord2">
+      <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Mantis_Lords\MantisLord3">
+      <UniqueIdentifier>{ff38d3fb-344b-42c1-9b21-127d3477408b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -331,6 +340,15 @@
     <ClInclude Include="MantisThroneBack.h">
       <Filter>Contents\Objects\MantisThroneBack</Filter>
     </ClInclude>
+    <ClInclude Include="MantisLord1.h">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord1</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisLord2.h">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord2</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisLord3.h">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -491,6 +509,15 @@
     </ClCompile>
     <ClCompile Include="MantisThroneBack.cpp">
       <Filter>Contents\Objects\MantisThroneBack</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisLord1.cpp">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord1</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisLord2.cpp">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord2</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisLord3.cpp">
+      <Filter>Contents\Objects\Mantis_Lords\MantisLord3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

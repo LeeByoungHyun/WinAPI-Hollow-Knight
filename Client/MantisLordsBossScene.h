@@ -19,6 +19,9 @@ namespace ya
 
 	private:
 		class Player* mPlayer;
+
+
+		bool mantis1DefeatFlag = false;
 	};
 }
 
