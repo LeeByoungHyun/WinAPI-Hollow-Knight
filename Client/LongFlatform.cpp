@@ -56,6 +56,7 @@ namespace ya
 		GameObject::Release();
 
 	}
+
 	void LongFlatform::OnCollisionEnter(Collider* other)
 	{
 		eLayerType otherType = other->GetOwner()->GetType();
@@ -66,35 +67,82 @@ namespace ya
 				return;
 
 			RigidBody* rb = mplayer->GetComponent<RigidBody>();
-			rb->SetGround(true);
 
 			// 충돌한 콜라이더가 가속도로 인해 1프레임 사이에 콜라이더 안으로 들어갈 경우 콜라이더 위치 초기화
+			// 상 하 좌 우 플레이어 벡터 방향에 따라 다르게 밀어내야 함
+			Vector2 dir = mplayer->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
+
 			Collider* playerCol = mplayer->GetComponent<Collider>();
-			Vector2 playerPos = playerCol->GetPos();
+			Vector2 playerColPos = playerCol->GetPos();
 
-			Collider* groundCol = this->GetComponent<Collider>();
-			Vector2 groundPos = groundCol->GetPos();
+			Collider* objectCol = this->GetComponent<Collider>();
+			Vector2 objectColPos = objectCol->GetPos();
 
-			float fLen = fabs(playerPos.y - groundPos.y);
-			float fSize = (playerCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
+			Transform* playerTr = mplayer->GetComponent<Transform>();
+			Transform* objectTr = this->GetComponent<Transform>();
 
-			if (fLen < fSize)
+			Vector2 playerPos = playerTr->GetPos();
+			Vector2 objectPos = objectTr->GetPos();
+
+			float fXLen = fabs(playerColPos.x - objectColPos.x);
+			float fXSize = (playerCol->GetSize().x / 2.0f) + (objectCol->GetSize().x / 2.0f);
+			float fYLen = fabs(playerColPos.y - objectColPos.y);
+			float fYSize = (playerCol->GetSize().y / 2.0f) + (objectCol->GetSize().y / 2.0f);
+
+			/*
+			// 픽셀 충돌 이후로 수정
+			// to right
+			if (0.0f <= dir.x && dir.x <= 1.0f)
 			{
-				Transform* playerTr = mplayer->GetComponent<Transform>();
-				Transform* grTr = this->GetComponent<Transform>();
-
-				Vector2 pPos = playerTr->GetPos();
-				Vector2 grPos = grTr->GetPos();
-
-				pPos -= (fSize - fLen) - 1.0f;
-				playerTr->SetPos(pPos);
+				if (fXLen < fXSize)	// 여기가 문제
+				{
+					playerPos.x = objectColPos.x - (playerCol->GetSize().x / 2.0f) - (objectCol->GetSize().x / 2.0f);
+					playerTr->SetPos(playerPos);
+				}
 			}
+
+			// to left
+			// dir >= -1
+			if (0.0f >= dir.x && dir.x >= -1.0f)
+			{
+				if (fXLen < fXSize)
+				{
+					playerPos.x = objectColPos.x + (playerCol->GetSize().x / 2.0f) + (objectCol->GetSize().x / 2.0f);
+					playerTr->SetPos(playerPos);
+				}
+			}
+			*/
+
+			// to up
+			if (0.0f > dir.y && dir.y >= -1.0f)
+			{
+				if (fYLen < fYSize)
+				{
+					playerPos.y = objectColPos.y + this->GetComponent<Collider>()->GetSize().y + playerCol->GetSize().y;
+					playerTr->SetPos(playerPos);
+				}
+			}
+
+			// to down
+			if (0.0f < dir.y && dir.y <= 1.0f)
+			{
+				if (fYLen < fYSize)
+				{
+					playerPos.y = objectColPos.y;
+					playerTr->SetPos(playerPos);
+				}
+
+				rb->SetGround(true);
+				mplayer->SetPlayerState(Player::ePlayerState::Idle);
+			}			
 		}
 	}
+
 	void LongFlatform::OnCollisionStay(Collider* other)
 	{
 		
 	}
+
 	void LongFlatform::OnCollisionExit(Collider* other)
 	{
 		eLayerType otherType = other->GetOwner()->GetType();

@@ -61,6 +61,7 @@ namespace ya
 		Vector2 GetPos() { return tr->GetPos(); }
 		void SetPos(Vector2 pos) { tr->SetPos(pos); }
 		ePlayerState GetPlayerState() { return mState; }
+		void SetPlayerState(ePlayerState state) { mState = state; }
 		eDirection GetPlayerDirection() { return mDirection; }
 
 	private:

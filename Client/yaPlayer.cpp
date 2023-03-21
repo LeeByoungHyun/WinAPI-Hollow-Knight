@@ -166,7 +166,7 @@ namespace ya
 		// 중립 상태로 돌아오면 모든 상태변수 초기화
 		if (mState == ePlayerState::Idle)
 		{
-			idleFlag = false;
+			//idleFlag = false;
 			walkFlag = false;
 			slashFlag = false;
 			slashAltFlag = false;
@@ -196,8 +196,21 @@ namespace ya
 				&& (mState != ePlayerState::DownSlash))
 			{
 				mState = ePlayerState::Fall;
+				idleFlag = false;
 			}
 		}
+
+		if (mRigidBody->GetGround() == true && idleFlag == false)
+		{
+			//mState = ePlayerState::Idle;
+		}
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKeyUp(eKeyCode::LEFT))
+			velocity.x = 0.0f;
+		if (Input::GetKeyUp(eKeyCode::RIGHT))
+			velocity.x = 0.0f;
+		mRigidBody->SetVelocity(velocity);
 
 		switch (mState)
 		{
@@ -311,6 +324,7 @@ namespace ya
 				}
 				break;
 
+			/*
 			// 충돌한 객체가 땅일 경우 idle
 			case eLayerType::Ground:
 				mState = ePlayerState::Idle;
@@ -319,6 +333,7 @@ namespace ya
 				else if (mDirection == eDirection::Right)
 					mAnimator->Play(L"Knight_Idleright", true);
 				break;
+			*/
 			}
 
 			// 몬스터와 접촉시 recoil state
@@ -363,13 +378,14 @@ namespace ya
 		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
-		if (idleFlag = false)
+		if (idleFlag == false)
 		{
 			if (mDirection == eDirection::Left)
 				mAnimator->Play(L"Knight_Idleleft", true);
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Idleright", true);
 
+			mRigidBody->SetVelocity(Vector2::Zero);
 			idleFlag = true;
 		}
 		
@@ -497,12 +513,20 @@ namespace ya
 			return;
 		}
 
+		/*
 		Vector2 pos = tr->GetPos();
 		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 300.0f * Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 300.0f * Time::DeltaTime();
 		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::slash()
@@ -556,12 +580,20 @@ namespace ya
 			}
 		}
 
+		/*
 		Vector2 pos = tr->GetPos();
 		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 300.0f * Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 300.0f * Time::DeltaTime();
 		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::slashAlt()
@@ -615,12 +647,20 @@ namespace ya
 			}
 		}
 
+		/*
 		Vector2 pos = tr->GetPos();
 		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 300.0f * Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 300.0f * Time::DeltaTime();
 		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::upSlash()
@@ -659,12 +699,20 @@ namespace ya
 			downSlashFlag = true;
 		}
 
+		/*
 		Vector2 pos = tr->GetPos();
 		if (Input::GetKey(eKeyCode::LEFT))
 			pos.x -= 300.0f * Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::RIGHT))
 			pos.x += 300.0f * Time::DeltaTime();
 		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::dash()
@@ -691,17 +739,21 @@ namespace ya
 		}
 
 		// 대쉬 중에는 중력 영향 x
-		mRigidBody->SetVelocity((Vector2::Zero));
-
+		/*
 		Vector2 pos = tr->GetPos();
-
 		if (mDirection == eDirection::Left)
 			pos.x -= 800.0f * Time::DeltaTime();
-
 		else if (mDirection == eDirection::Right)
 			pos.x += 800.0f * Time::DeltaTime();
-
 		tr->SetPos(pos);
+		*/
+		mRigidBody->SetVelocity((Vector2::Zero));
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (mDirection == eDirection::Left)
+			velocity.x = -800.0f;
+		if (mDirection == eDirection::Right)
+			velocity.x = 800.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::jump()
@@ -784,23 +836,20 @@ namespace ya
 			return;
 		}
 
-		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
-		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
-		{
-			Vector2 pos = tr->GetPos();
-			switch (mDirection)
-			{
-			case eDirection::Left:
-				pos.x -= 300.0f * Time::DeltaTime();
-				break;
-
-			case eDirection::Right:
-				pos.x += 300.0f * Time::DeltaTime();
-				break;
-			}
-
-			tr->SetPos(pos);
-		}
+		/*
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::doubleJump()
@@ -837,9 +886,6 @@ namespace ya
 			velocity.y = -800.0f;
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
-
-			mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
-
 		}
 
 		// 대시키 입력시 dash 상태로 변경
@@ -877,23 +923,20 @@ namespace ya
 			return;
 		}
 
-		// 점프중 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
-		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
-		{
-			Vector2 pos = tr->GetPos();
-			switch (mDirection)
-			{
-			case eDirection::Left:
-				pos.x -= 300.0f * Time::DeltaTime();
-				break;
-
-			case eDirection::Right:
-				pos.x += 300.0f * Time::DeltaTime();
-				break;
-			}
-
-			tr->SetPos(pos);
-		}
+		/*
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::fall()
@@ -905,7 +948,7 @@ namespace ya
 
 		if (fallFlag == false)
 		{
-			mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
+			mRigidBody->SetVelocity(Vector2::Zero);
 
 			switch (mDirection)
 			{
@@ -980,23 +1023,20 @@ namespace ya
 			return;
 		}
 
-		// 좌우 입력시 플레이어 방향 유지한 채 위치만 이동
-		if (Input::GetKey(eKeyCode::LEFT) || Input::GetKey(eKeyCode::RIGHT))
-		{
-			Vector2 pos = tr->GetPos();
-			switch (mDirection)
-			{
-			case eDirection::Left:
-				pos.x -= 300.0f * Time::DeltaTime();
-				break;
-
-			case eDirection::Right:
-				pos.x += 300.0f * Time::DeltaTime();
-				break;
-			}
-
-			tr->SetPos(pos);
-		}
+		/*
+		Vector2 pos = tr->GetPos();
+		if (Input::GetKey(eKeyCode::LEFT))
+			pos.x -= 300.0f * Time::DeltaTime();
+		if (Input::GetKey(eKeyCode::RIGHT))
+			pos.x += 300.0f * Time::DeltaTime();
+		tr->SetPos(pos);
+		*/
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::castFireball()
@@ -1026,30 +1066,41 @@ namespace ya
 		}
 
 		// 주문시전 중에는 중력 영향 x
+		/*
 		mRigidBody->SetVelocity((Vector2::Zero));
-
 		Vector2 pos = tr->GetPos();
-
 		if (mDirection == eDirection::Left)
 			pos.x += 30.0f * Time::DeltaTime();
-
 		else if (mDirection == eDirection::Right)
 			pos.x -= 30.0f * Time::DeltaTime();
-
 		tr->SetPos(pos);
+		*/
+		mRigidBody->SetVelocity((Vector2::Zero));
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (mDirection == eDirection::Left)
+			velocity.x = 30.0f;
+		if (mDirection == eDirection::Right)
+			velocity.x = -30.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::recoil()
 	{
+		/*
 		Vector2 pos = tr->GetPos();
-
 		if (mDirection == eDirection::Left)
 			pos.x += 100.0f * Time::DeltaTime();
-
 		else if (mDirection == eDirection::Right)
 			pos.x -= 100.0f * Time::DeltaTime();
-
 		tr->SetPos(pos);
+		*/
+		mRigidBody->SetVelocity((Vector2::Zero));
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (mDirection == eDirection::Left)
+			velocity.x = -50.0f;
+		if (mDirection == eDirection::Right)
+			velocity.x = 50.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::death()

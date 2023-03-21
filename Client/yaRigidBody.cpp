@@ -12,8 +12,8 @@ namespace ya
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 200.0f;
-		mLimitedVelocity.y = 3000.0f;
+		mLimitedVelocity.x = 1000.0f;
+		mLimitedVelocity.y = 800.0f;
 		mbGround = false;
 		mGravity = Vector2(0.0f, 800.0f);
 		mFriction = 100.0f;
