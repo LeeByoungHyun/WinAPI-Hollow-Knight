@@ -89,30 +89,7 @@ namespace ya
 			float fYLen = fabs(playerColPos.y - objectColPos.y);
 			float fYSize = (playerCol->GetSize().y / 2.0f) + (objectCol->GetSize().y / 2.0f);
 
-			/*
-			// 픽셀 충돌 이후로 수정
-			// to right
-			if (0.0f <= dir.x && dir.x <= 1.0f)
-			{
-				if (fXLen < fXSize)	// 여기가 문제
-				{
-					playerPos.x = objectColPos.x - (playerCol->GetSize().x / 2.0f) - (objectCol->GetSize().x / 2.0f);
-					playerTr->SetPos(playerPos);
-				}
-			}
-
-			// to left
-			// dir >= -1
-			if (0.0f >= dir.x && dir.x >= -1.0f)
-			{
-				if (fXLen < fXSize)
-				{
-					playerPos.x = objectColPos.x + (playerCol->GetSize().x / 2.0f) + (objectCol->GetSize().x / 2.0f);
-					playerTr->SetPos(playerPos);
-				}
-			}
-			*/
-
+			// 뚫고 넘어가는 문제는 픽셀 충돌 이후로 수정
 			// to up
 			if (0.0f > dir.y && dir.y >= -1.0f)
 			{
@@ -124,7 +101,7 @@ namespace ya
 			}
 
 			// to down
-			if (0.0f < dir.y && dir.y <= 1.0f)
+			else if (0.0f < dir.y && dir.y <= 1.0f)
 			{
 				if (fYLen < fYSize)
 				{
@@ -134,7 +111,29 @@ namespace ya
 
 				rb->SetGround(true);
 				mplayer->SetPlayerState(Player::ePlayerState::Idle);
-			}			
+			}
+			// to right
+			else if (0.0f < dir.x && dir.x <= 1.0f)
+			{
+				if (fXLen < fXSize)
+				{
+					playerPos.x = objectColPos.x - playerCol->GetSize().x / 2.0f;
+					playerTr->SetPos(playerPos);
+				}
+			}
+
+			// to left
+			// dir >= -1
+			else if (0.0f > dir.x && dir.x >= -1.0f)
+			{
+				if (fXLen > fXSize)
+				{
+					playerPos.x = objectColPos.x + objectCol->GetSize().x + (playerCol->GetSize().x / 2.0f);
+					playerTr->SetPos(playerPos);
+				}
+			}
+
+			
 		}
 	}
 

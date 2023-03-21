@@ -182,6 +182,7 @@ namespace ya
 			jumpFlag = false;
 			doubleJumpFlag = false;
 			fallFlag = false;
+			//invincibilityFlag = false;
 
 			mTime = 0.0f;
 		}
