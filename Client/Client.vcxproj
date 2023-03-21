@@ -133,8 +133,6 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
-    <ClInclude Include="FadeIn.h" />
-    <ClInclude Include="FadeOut.h" />
     <ClInclude Include="FireballCastEffect.h" />
     <ClInclude Include="FireballCastEffectLeft.h" />
     <ClInclude Include="FireballCastEffectRight.h" />
@@ -142,7 +140,6 @@
     <ClInclude Include="FireballEffectRight.h" />
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GroundCollider.h" />
     <ClInclude Include="LongFlatform.h" />
     <ClInclude Include="MantisLord1.h" />
     <ClInclude Include="MantisLord2.h" />
@@ -163,8 +160,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="yaAnimation.h" />
     <ClInclude Include="yaAnimator.h" />
-    <ClInclude Include="yaAscent_Wall_02.h" />
-    <ClInclude Include="yaBackboard.h" />
     <ClInclude Include="yaCollider.h" />
     <ClInclude Include="yaCollisionManager.h" />
     <ClInclude Include="yaCrawlid.h" />
@@ -196,15 +191,12 @@
   <ItemGroup>
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
-    <ClCompile Include="FadeIn.cpp" />
-    <ClCompile Include="FadeOut.cpp" />
     <ClCompile Include="FireballCastEffect.cpp" />
     <ClCompile Include="FireballCastEffectLeft.cpp" />
     <ClCompile Include="FireballCastEffectRight.cpp" />
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
-    <ClCompile Include="GroundCollider.cpp" />
     <ClCompile Include="LongFlatform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisLord1.cpp" />
@@ -223,8 +215,6 @@
     <ClCompile Include="yaRigidBody.cpp" />
     <ClCompile Include="yaAnimation.cpp" />
     <ClCompile Include="yaAnimator.cpp" />
-    <ClCompile Include="yaAscent_Wall_02.cpp" />
-    <ClCompile Include="yaBackboard.cpp" />
     <ClCompile Include="yaCollider.cpp" />
     <ClCompile Include="yaCollisionManager.cpp" />
     <ClCompile Include="yaCrawlid.cpp" />
