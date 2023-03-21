@@ -29,12 +29,12 @@ namespace ya
 		mCollider = AddComponent<Collider>();
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimations(L"..\\Resources\\GodHome\\Platform", Vector2::Zero, 1.0f);
+		mAnimator->CreateAnimations(L"..\\Resources\\GodHome\\Platform(Long)", Vector2::Zero, 1.0f);
 
-		mAnimator->Play(L"GodHomePlatform", false);
+		mAnimator->Play(L"GodHomePlatform(Long)", false);
 
-		mCollider->SetSize(Vector2(1183.0f, 103.0f));
-		mCollider->SetCenter(Vector2(-591.5f, -103.0f));
+		mCollider->SetSize(Vector2(1544.0f, 103.0f));
+		mCollider->SetCenter(Vector2(-772.0f, -103.0f));
 
 		GameObject::Initialize();
 	}
@@ -54,7 +54,6 @@ namespace ya
 	void LongFlatform::Release()
 	{
 		GameObject::Release();
-
 	}
 
 	void LongFlatform::OnCollisionEnter(Collider* other)
@@ -90,6 +89,7 @@ namespace ya
 			float fYSize = (playerCol->GetSize().y / 2.0f) + (objectCol->GetSize().y / 2.0f);
 
 			// 뚫고 넘어가는 문제는 픽셀 충돌 이후로 수정
+			// 플레이어 현재 좌표 파악해서 다르게 적용해야 함
 			// to up
 			if (0.0f > dir.y && dir.y >= -1.0f)
 			{
