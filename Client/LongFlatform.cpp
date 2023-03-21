@@ -91,6 +91,39 @@ namespace ya
 			// 뚫고 넘어가는 문제는 픽셀 충돌 이후로 수정
 			// 플레이어 현재 좌표 파악해서 다르게 적용해야 함
 			// to up
+			/*
+			if ((0.0f > dir.y && dir.y >= -1.0f) //충돌시 플레이어 y좌표가 오브젝트 콜라이더보다 아래에 있고,
+													//플레이어 x좌표가 오브젝트콜라이더 사이에 위치한 경우에만 적용
+			&& ((playerColPos.y + playerCol->GetSize().y) > objectColPos.y)
+				&& ((playerColPos.x - playerCol->GetSize().x / 2) > (objectColPos.x - (objectCol->GetSize().x / 2)))
+				&& ((playerColPos.x + playerCol->GetSize().x / 2) < (objectColPos.x + (objectCol->GetSize().x / 2))))
+				{
+					if (fYLen < fYSize)
+					{
+						playerPos.y = objectColPos.y + this->GetComponent<Collider>()->GetSize().y + playerCol->GetSize().y;
+						playerTr->SetPos(playerPos);
+					}
+			}
+
+			// to down
+			else if (0.0f < dir.y && dir.y <= 1.0f //충돌시 플레이어 y좌표가 오브젝트 콜라이더보다 위에 있고,
+													//플레이어 x좌표가 오브젝트콜라이더 사이에 위치한 경우에만 적용
+				&& (playerColPos.y <= objectColPos.y - objectCol->GetSize().y)
+				&& ((playerColPos.x - playerCol->GetSize().x / 2) > (objectColPos.x - (objectCol->GetSize().x / 2)))
+				&& ((playerColPos.x + playerCol->GetSize().x / 2) < (objectColPos.x + (objectCol->GetSize().x / 2))))
+			{
+				if (fYLen < fYSize)
+				{
+					playerPos.y = objectColPos.y;
+					playerTr->SetPos(playerPos);
+				}
+
+				rb->SetGround(true);
+				mplayer->SetPlayerState(Player::ePlayerState::Idle);
+			}
+			*/
+
+			// to up
 			if (0.0f > dir.y && dir.y >= -1.0f)
 			{
 				if (fYLen < fYSize)
@@ -123,7 +156,6 @@ namespace ya
 			}
 
 			// to left
-			// dir >= -1
 			else if (0.0f > dir.x && dir.x >= -1.0f)
 			{
 				if (fXLen > fXSize)

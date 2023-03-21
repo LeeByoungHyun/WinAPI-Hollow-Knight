@@ -86,7 +86,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1100.0f));
 	}
 
 	void MantisLordsBossScene::Exit()
