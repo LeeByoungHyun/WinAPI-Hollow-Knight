@@ -33,7 +33,6 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-
 		TransparentBlt(hdc, 300, 50, mImage->GetWidth(), mImage->GetHeight()
 			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 	}
@@ -41,6 +40,5 @@ namespace ya
 	void MenuTitle::Release()
 	{
 		GameObject::Release();
-
 	}
 }

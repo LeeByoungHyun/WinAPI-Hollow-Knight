@@ -18,10 +18,12 @@ namespace ya
 		SceneManager::SetActiveScene(this);
 
 		// 강사님 코드에는 존재X 지우면 GameObject Initialize 호출 안됨 에러
+		/*
 		for (Layer& layer : mLayers)
 		{
 			layer.Initialize();
 		}
+		*/
 	}
 
 	void Scene::Update()

@@ -77,9 +77,6 @@
     <Filter Include="Contents\Objects\Struct">
       <UniqueIdentifier>{bc4acd11-6a16-4b8e-ac4d-3d88d89da49d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC">
-      <UniqueIdentifier>{838adeed-54d3-40e3-95d5-1f65f3a64d0e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects\Struct\menu_title">
       <UniqueIdentifier>{7fb95708-5933-4f22-9bb4-f93e9f672f76}</UniqueIdentifier>
     </Filter>
@@ -101,53 +98,56 @@
     <Filter Include="Contents\Objects\Struct\Cursor">
       <UniqueIdentifier>{2caf598b-e7bc-444e-ad13-fc283498f741}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Mantis_Lords">
-      <UniqueIdentifier>{0d3c9e98-9c87-484c-a0d3-b845e1fb5541}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord1">
-      <UniqueIdentifier>{669393db-5017-4eee-8025-edcca8079da9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord2">
-      <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord3">
-      <UniqueIdentifier>{ff38d3fb-344b-42c1-9b21-127d3477408b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Crawlid">
-      <UniqueIdentifier>{921e3477-ec64-484a-a6a7-ce1be6c6c37e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player">
-      <UniqueIdentifier>{33bd0678-aa21-4031-ab0c-30f3d8bea85d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\SlashEffect">
-      <UniqueIdentifier>{e7f81400-5a77-4b4c-8eea-df41d5fa1743}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\UpSlashEffect">
-      <UniqueIdentifier>{8e9b62d6-b367-4536-92f9-0bcfce778248}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\SlashAltEffect">
-      <UniqueIdentifier>{3b78b24d-a251-4a90-8f71-1a22fd2b0f35}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\DashEffect">
-      <UniqueIdentifier>{e919e1c4-0c40-40c8-9d15-bd6e7f5a153b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\FireballEffect">
-      <UniqueIdentifier>{1ed775da-a6af-4bff-b5f7-d8585684e7b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\DownSlashEffect">
-      <UniqueIdentifier>{c19873f0-5b7a-4e3e-88f9-d589cd983244}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\FocusEffect">
-      <UniqueIdentifier>{55fc5714-cc63-4fa9-bd80-dac65c820601}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\DoubleJumpEffect">
-      <UniqueIdentifier>{26e0690f-ffa0-44ba-985a-cb4d31ff6024}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Objects\Playable, NPC\Player\FireballCastEffect">
-      <UniqueIdentifier>{53c2bb92-10dd-480a-9160-703982d1d72b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects\Struct\PlayerSkull">
       <UniqueIdentifier>{7371db15-b776-4b5d-93fb-d55a1458010d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor">
+      <UniqueIdentifier>{838adeed-54d3-40e3-95d5-1f65f3a64d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Mantis_Lords">
+      <UniqueIdentifier>{0d3c9e98-9c87-484c-a0d3-b845e1fb5541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord1">
+      <UniqueIdentifier>{669393db-5017-4eee-8025-edcca8079da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord2">
+      <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord3">
+      <UniqueIdentifier>{ff38d3fb-344b-42c1-9b21-127d3477408b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Crawlid">
+      <UniqueIdentifier>{921e3477-ec64-484a-a6a7-ce1be6c6c37e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player">
+      <UniqueIdentifier>{33bd0678-aa21-4031-ab0c-30f3d8bea85d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\SlashEffect">
+      <UniqueIdentifier>{e7f81400-5a77-4b4c-8eea-df41d5fa1743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\UpSlashEffect">
+      <UniqueIdentifier>{8e9b62d6-b367-4536-92f9-0bcfce778248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\SlashAltEffect">
+      <UniqueIdentifier>{3b78b24d-a251-4a90-8f71-1a22fd2b0f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\DashEffect">
+      <UniqueIdentifier>{e919e1c4-0c40-40c8-9d15-bd6e7f5a153b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\FireballEffect">
+      <UniqueIdentifier>{1ed775da-a6af-4bff-b5f7-d8585684e7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\DownSlashEffect">
+      <UniqueIdentifier>{c19873f0-5b7a-4e3e-88f9-d589cd983244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\FocusEffect">
+      <UniqueIdentifier>{55fc5714-cc63-4fa9-bd80-dac65c820601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\DoubleJumpEffect">
+      <UniqueIdentifier>{26e0690f-ffa0-44ba-985a-cb4d31ff6024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\FireballCastEffect">
+      <UniqueIdentifier>{53c2bb92-10dd-480a-9160-703982d1d72b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -218,7 +218,7 @@
       <Filter>Engine\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="yaPlayer.h">
-      <Filter>Contents\Objects\Playable, NPC\Player</Filter>
+      <Filter>Contents\Objects\Charactor\Player</Filter>
     </ClInclude>
     <ClInclude Include="yaCursor.h">
       <Filter>Contents\Objects\Struct\Cursor</Filter>
@@ -248,10 +248,10 @@
       <Filter>Engine\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="yaCrawlid.h">
-      <Filter>Contents\Objects\Playable, NPC\Crawlid</Filter>
+      <Filter>Contents\Objects\Charactor\Crawlid</Filter>
     </ClInclude>
     <ClInclude Include="yaUpSlashEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\UpSlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\UpSlashEffect</Filter>
     </ClInclude>
     <ClInclude Include="yaCamera.h">
       <Filter>Engine\Camera</Filter>
@@ -260,22 +260,22 @@
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaDashEffectLeft.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\DashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DashEffect</Filter>
     </ClInclude>
     <ClInclude Include="yaDashEffectRight.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\DashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DashEffect</Filter>
     </ClInclude>
     <ClInclude Include="MantisLords.h">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords</Filter>
     </ClInclude>
     <ClInclude Include="MantisLordsBossScene.h">
       <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
     </ClInclude>
     <ClInclude Include="FireballEffectLeft.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballEffect</Filter>
     </ClInclude>
     <ClInclude Include="FireballEffectRight.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballEffect</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSkull.h">
       <Filter>Contents\Objects\Struct\PlayerSkull</Filter>
@@ -284,30 +284,30 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="DownSlashEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\DownSlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DownSlashEffect</Filter>
     </ClInclude>
     <ClInclude Include="FocusEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FocusEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FocusEffect</Filter>
     </ClInclude>
     <ClInclude Include="DoubleJumpEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\DoubleJumpEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DoubleJumpEffect</Filter>
     </ClInclude>
     <ClInclude Include="FireballCastEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClInclude>
     <ClInclude Include="FireballCastEffectLeft.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClInclude>
     <ClInclude Include="FireballCastEffectRight.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClInclude>
     <ClInclude Include="SlashEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\SlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\SlashEffect</Filter>
     </ClInclude>
     <ClInclude Include="SlashAltEffect.h">
-      <Filter>Contents\Objects\Playable, NPC\Player\SlashAltEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\SlashAltEffect</Filter>
     </ClInclude>
-    <ClInclude Include="LongFlatform.h">
+    <ClInclude Include="LongPlatform.h">
       <Filter>Contents\Objects\Struct\LongPlatform</Filter>
     </ClInclude>
     <ClInclude Include="MantisThrone.h">
@@ -317,13 +317,13 @@
       <Filter>Contents\Objects\Struct\MantisThroneBack</Filter>
     </ClInclude>
     <ClInclude Include="MantisLord1.h">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord1</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord1</Filter>
     </ClInclude>
     <ClInclude Include="MantisLord2.h">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord2</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord2</Filter>
     </ClInclude>
     <ClInclude Include="MantisLord3.h">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord3</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -376,7 +376,7 @@
       <Filter>Engine\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="yaPlayer.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player</Filter>
+      <Filter>Contents\Objects\Charactor\Player</Filter>
     </ClCompile>
     <ClCompile Include="yaCursor.cpp">
       <Filter>Contents\Objects\Struct\Cursor</Filter>
@@ -406,31 +406,31 @@
       <Filter>Engine\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="yaCrawlid.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Crawlid</Filter>
+      <Filter>Contents\Objects\Charactor\Crawlid</Filter>
     </ClCompile>
     <ClCompile Include="yaUpSlashEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\UpSlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\UpSlashEffect</Filter>
     </ClCompile>
     <ClCompile Include="yaCamera.cpp">
       <Filter>Engine\Camera</Filter>
     </ClCompile>
     <ClCompile Include="yaDashEffectLeft.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\DashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DashEffect</Filter>
     </ClCompile>
     <ClCompile Include="yaDashEffectRight.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\DashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DashEffect</Filter>
     </ClCompile>
     <ClCompile Include="MantisLords.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords</Filter>
     </ClCompile>
     <ClCompile Include="MantisLordsBossScene.cpp">
       <Filter>Contents\Scenes\Mantis_Lords_Boss_Scene</Filter>
     </ClCompile>
     <ClCompile Include="FireballEffectLeft.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballEffect</Filter>
     </ClCompile>
     <ClCompile Include="FireballEffectRight.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballEffect</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSkull.cpp">
       <Filter>Contents\Objects\Struct\PlayerSkull</Filter>
@@ -439,30 +439,30 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="DownSlashEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\DownSlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DownSlashEffect</Filter>
     </ClCompile>
     <ClCompile Include="FocusEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FocusEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FocusEffect</Filter>
     </ClCompile>
     <ClCompile Include="DoubleJumpEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\DoubleJumpEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\DoubleJumpEffect</Filter>
     </ClCompile>
     <ClCompile Include="FireballCastEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClCompile>
     <ClCompile Include="FireballCastEffectLeft.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClCompile>
     <ClCompile Include="FireballCastEffectRight.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\FireballCastEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\FireballCastEffect</Filter>
     </ClCompile>
     <ClCompile Include="SlashEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\SlashEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\SlashEffect</Filter>
     </ClCompile>
     <ClCompile Include="SlashAltEffect.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Player\SlashAltEffect</Filter>
+      <Filter>Contents\Objects\Charactor\Player\SlashAltEffect</Filter>
     </ClCompile>
-    <ClCompile Include="LongFlatform.cpp">
+    <ClCompile Include="LongPlatform.cpp">
       <Filter>Contents\Objects\Struct\LongPlatform</Filter>
     </ClCompile>
     <ClCompile Include="MantisThrone.cpp">
@@ -472,13 +472,13 @@
       <Filter>Contents\Objects\Struct\MantisThroneBack</Filter>
     </ClCompile>
     <ClCompile Include="MantisLord1.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord1</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord1</Filter>
     </ClCompile>
     <ClCompile Include="MantisLord2.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord2</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord2</Filter>
     </ClCompile>
     <ClCompile Include="MantisLord3.cpp">
-      <Filter>Contents\Objects\Playable, NPC\Mantis_Lords\MantisLord3</Filter>
+      <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

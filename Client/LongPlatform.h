@@ -1,15 +1,14 @@
 #pragma once
 #include "yaGameObject.h"
-#include "yaImage.h"
 
 namespace ya
 {
-	class LongFlatform : public GameObject
+	class LongPlatform : public GameObject
 	{
 	public:
 
-		LongFlatform();
-		~LongFlatform();
+		LongPlatform();
+		~LongPlatform();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -21,7 +20,7 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other);
 
 	private:
-		Image* mImage;
+		class Image* mImage;
 		class Transform* tr;
 		class Animator* mAnimator;
 		class Collider* mCollider;

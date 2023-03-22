@@ -20,6 +20,8 @@ namespace ya
 
 	private:
 		class Player* mPlayer;
+		class LongPlatform* platform1;
+		class LongPlatform* platform2;
 	};
 }
 

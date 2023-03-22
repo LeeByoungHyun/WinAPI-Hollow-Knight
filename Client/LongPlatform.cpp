@@ -1,4 +1,4 @@
-#include "LongFlatform.h"
+#include "LongPlatform.h"
 #include "yaTime.h"
 #include "yaInput.h"
 #include "yaResourceManager.h"
@@ -7,56 +7,69 @@
 #include "yaAnimator.h"
 #include "yaCollider.h"
 #include "yaRigidBody.h"
+#include "yaImage.h"
+#include "yaCamera.h"
 
 #include "yaPlayer.h"
 
+
 namespace ya
 {
-	LongFlatform::LongFlatform()
+	LongPlatform::LongPlatform()
 	{
 
 	}
 
-	LongFlatform::~LongFlatform()
+	LongPlatform::~LongPlatform()
 	{
 
 	}
 
-	void LongFlatform::Initialize()
+	void LongPlatform::Initialize()
 	{
-		//mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\room1.bmp");
 		tr = AddComponent<Transform>();
+		mImage = ResourceManager::Load<Image>(L"Platform(Long)", L"..\\Resources\\GodHome\\Platform(Long).bmp");
+
 		mCollider = AddComponent<Collider>();
-		mAnimator = AddComponent<Animator>();
+		mCollider->SetSize(Vector2(1544.0f, 99.0f));
+		mCollider->SetCenter(Vector2(-772.0f, -99.0f));
 
-		mAnimator->CreateAnimations(L"..\\Resources\\GodHome\\Platform(Long)", Vector2::Zero, 1.0f);
-
-		mAnimator->Play(L"GodHomePlatform(Long)", false);
-
-		mCollider->SetSize(Vector2(1544.0f, 103.0f));
-		mCollider->SetCenter(Vector2(-772.0f, -103.0f));
+		tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
 
 		GameObject::Initialize();
 	}
 
-	void LongFlatform::Update()
+	void LongPlatform::Update()
 	{
 		GameObject::Update();
 	}
 
-	void LongFlatform::Render(HDC hdc)
+	void LongPlatform::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
-		//BitBlt(hdc, tr->GetPos().x, tr->GetPos().y - 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		// 카메라 위치에 맞추어 좌표 계산
+		tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
+		pos.x -= mImage->GetWidth() / 2;
+		pos.y -= mImage->GetHeight();
+
+		TransparentBlt(hdc, pos.x, pos.y
+			, mImage->GetWidth(), mImage->GetHeight()
+			, mImage->GetHdc()
+			, 0, 0
+			, mImage->GetWidth(), mImage->GetHeight()
+			, RGB(255, 0, 255));
 	}
 
-	void LongFlatform::Release()
+	void LongPlatform::Release()
 	{
 		GameObject::Release();
 	}
 
-	void LongFlatform::OnCollisionEnter(Collider* other)
+	void LongPlatform::OnCollisionEnter(Collider* other)
 	{
 		eLayerType otherType = other->GetOwner()->GetType();
 		if (otherType == eLayerType::Player)
@@ -169,12 +182,12 @@ namespace ya
 		}
 	}
 
-	void LongFlatform::OnCollisionStay(Collider* other)
+	void LongPlatform::OnCollisionStay(Collider* other)
 	{
 		
 	}
 
-	void LongFlatform::OnCollisionExit(Collider* other)
+	void LongPlatform::OnCollisionExit(Collider* other)
 	{
 		eLayerType otherType = other->GetOwner()->GetType();
 		if (otherType == eLayerType::Player)

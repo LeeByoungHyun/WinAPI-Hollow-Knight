@@ -6,6 +6,7 @@
 #include "yaTransform.h"
 #include "yaAnimator.h"
 #include "yaRigidBody.h"
+#include "yaCamera.h"
 
 #include "yaPlayer.h"
 
@@ -23,13 +24,8 @@ namespace ya
 
 	void MantisThrone::Initialize()
 	{
-		//mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\room1.bmp");
+		mImage = ResourceManager::Load<Image>(L"mantis_throne", L"..\\Resources\\GodHome\\gg_mantis_throne.bmp");
 		tr = AddComponent<Transform>();
-		mAnimator = AddComponent<Animator>();
-
-		mAnimator->CreateAnimations(L"..\\Resources\\GodHome\\Mantis Throne\\Throne", Vector2::Zero, 1.0f);
-
-		mAnimator->Play(L"Mantis ThroneThrone", false);
 
 		GameObject::Initialize();
 	}
@@ -43,24 +39,20 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		//BitBlt(hdc, tr->GetPos().x, tr->GetPos().y - 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		// 카메라 위치에 맞추어 좌표 계산
+		tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
+		pos.x -= mImage->GetWidth() / 2;
+		pos.y -= mImage->GetHeight();
+
+		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight()
+			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
 	}
 
 	void MantisThrone::Release()
 	{
 		GameObject::Release();
 
-	}
-	void MantisThrone::OnCollisionEnter(Collider* other)
-	{
-		
-	}
-	void MantisThrone::OnCollisionStay(Collider* other)
-	{
-
-	}
-	void MantisThrone::OnCollisionExit(Collider* other)
-	{
-		
 	}
 }

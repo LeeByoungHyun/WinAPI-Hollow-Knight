@@ -5,6 +5,7 @@
 #include "yaSceneManager.h"
 #include "yaTransform.h"
 #include "yaAnimator.h"
+#include "yaCamera.h"
 
 namespace ya
 {
@@ -20,13 +21,8 @@ namespace ya
 
 	void GodBG::Initialize()
 	{
-		//mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\room1.bmp");
+		mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\GodHome\\GodBG.bmp");
 		tr = AddComponent<Transform>();
-
-		mAnimator = AddComponent<Animator>();
-		mAnimator->CreateAnimations(L"..\\Resources\\GodHome\\BG", Vector2::Zero, 1.0f);
-
-		mAnimator->Play(L"GodHomeBG", false);
 
 		GameObject::Initialize();
 	}
@@ -40,7 +36,14 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		//BitBlt(hdc, tr->GetPos().x, tr->GetPos().y - 100, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+		// 카메라 위치에 맞추어 좌표 계산
+		tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
+		pos.x -= mImage->GetWidth() / 2;
+		pos.y -= mImage->GetHeight();
+
+		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void GodBG::Release()

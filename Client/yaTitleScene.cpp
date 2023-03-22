@@ -18,6 +18,7 @@ namespace ya
 	void TitleScene::Initialize()
 	{
 		Scene::Initialize();
+		Scene* scene = SceneManager::GetActiveScene();
 
 		/*
 		mMenuBG = new MenuBG();

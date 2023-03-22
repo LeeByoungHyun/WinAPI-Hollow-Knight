@@ -140,7 +140,7 @@
     <ClInclude Include="FireballEffectRight.h" />
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="LongFlatform.h" />
+    <ClInclude Include="LongPlatform.h" />
     <ClInclude Include="MantisLord1.h" />
     <ClInclude Include="MantisLord2.h" />
     <ClInclude Include="MantisLord3.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
-    <ClCompile Include="LongFlatform.cpp" />
+    <ClCompile Include="LongPlatform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisLord1.cpp" />
     <ClCompile Include="MantisLord2.cpp" />

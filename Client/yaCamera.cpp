@@ -7,7 +7,7 @@
 
 extern ya::Application application;
 
-const float CameraSpeed = 200.0f;
+const float CameraSpeed = 500.0f;
 
 namespace ya
 {
