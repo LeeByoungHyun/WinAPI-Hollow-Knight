@@ -44,7 +44,7 @@ namespace ya
 		//object::Instantiate<LongPlatformBackPixel>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
 
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
-		object::Instantiate<LongPlatform>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
+		//object::Instantiate<LongPlatform>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();

@@ -87,7 +87,6 @@ namespace ya
 		tr = GetComponent<Transform>();
 
 		// Å×½ºÆ®
-		/*
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
 			throneStandFlag = false;
@@ -109,10 +108,9 @@ namespace ya
 			wallLeave1Flag = false;
 			wallLeave2Flag = false;
 
-			mState = eMantisLordsState::DstabArrive;
+			mState = eMantisLordsState::DashArrive;
 			return;
 		}
-		*/
 
 		// ÇÃ·¹ÀÌ¾î »ç¸Á½Ã ¿ÁÁÂ·Î ±ÍÈ¯
 		if (mState == eMantisLordsState::Idle && player->GetPlayerState() == Player::ePlayerState::Death)

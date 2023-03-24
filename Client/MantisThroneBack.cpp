@@ -24,7 +24,7 @@ namespace ya
 
 	void MantisThroneBack::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"grimroom", L"..\\Resources\\GodHome\\gg_mantis_throne_back.bmp");
+		mImage = ResourceManager::Load<Image>(L"gg_mantis_throne_back", L"..\\Resources\\GodHome\\gg_mantis_throne_back.bmp");
 		tr = AddComponent<Transform>();
 
 		GameObject::Initialize();
