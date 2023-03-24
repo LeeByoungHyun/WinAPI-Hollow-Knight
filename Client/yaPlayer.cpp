@@ -1423,6 +1423,7 @@ namespace ya
 	{
 		// 대쉬 끝나면 대쉬 재사용 가능하도록
 		dashFlag = false;
+		mRigidBody->SetVelocity(Vector2::Zero);
 
 		// 대쉬 끝났을 때 공중, 지상일 경우 구분
 		switch (mRigidBody->GetGround())
