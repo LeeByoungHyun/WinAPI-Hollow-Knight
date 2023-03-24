@@ -152,6 +152,18 @@
     <Filter Include="Contents\Objects\Struct\LongPlatformBackPixel">
       <UniqueIdentifier>{c0b09d67-985c-461a-9d10-f9efdd52643b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\MantisBossPlatform">
+      <UniqueIdentifier>{5774c91b-7ce1-4041-8bed-7ef6771143e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\MantisBossWall">
+      <UniqueIdentifier>{606fc5e7-0e67-45ba-b140-192c1da4a41b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\MantisBossWall\left">
+      <UniqueIdentifier>{847faac5-49ef-4e7a-87f0-e5ac5e74f74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\MantisBossWall\right">
+      <UniqueIdentifier>{e40b9846-45e8-43e1-8ee5-d399c664e220}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -331,6 +343,15 @@
     <ClInclude Include="LongPlatformBackPixel.h">
       <Filter>Contents\Objects\Struct\LongPlatformBackPixel</Filter>
     </ClInclude>
+    <ClInclude Include="MantisBossPlatform.h">
+      <Filter>Contents\Objects\Struct\MantisBossPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisBossWallLeft.h">
+      <Filter>Contents\Objects\Struct\MantisBossWall\left</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisBossWallRight.h">
+      <Filter>Contents\Objects\Struct\MantisBossWall\right</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -488,6 +509,15 @@
     </ClCompile>
     <ClCompile Include="LongPlatformBackPixel.cpp">
       <Filter>Contents\Objects\Struct\LongPlatformBackPixel</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisBossPlatform.cpp">
+      <Filter>Contents\Objects\Struct\MantisBossPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisBossWallLeft.cpp">
+      <Filter>Contents\Objects\Struct\MantisBossWall\left</Filter>
+    </ClCompile>
+    <ClCompile Include="MantisBossWallRight.cpp">
+      <Filter>Contents\Objects\Struct\MantisBossWall\right</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

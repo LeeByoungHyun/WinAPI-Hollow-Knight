@@ -8,10 +8,15 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
+
 #include "yaPlayer.h"
+#include "LongPlatform.h"
 
 namespace ya
 {
+	Vector2 DashArriveLeftPos = Vector2(2434.0f, 1300.0f - 103.0f);
+	Vector2 DashArriveRightPos = Vector2(2434.0f - 1544.0f, 1300.0f - 103.0f);
+
 	MantisLords::MantisLords()
 	{
 
@@ -366,7 +371,7 @@ namespace ya
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
 				mDirection = eDirection::Left;
-				tr->SetPos(Vector2(2200.0f, 1300.0f - 103.0f));
+				tr->SetPos(Vector2(1200.0f + 1182.0f - 150.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveleft", false);
 				dashArriveFlag = true;
 
@@ -377,7 +382,7 @@ namespace ya
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
 				mDirection = eDirection::Right;
-				tr->SetPos(Vector2(2200.0f - 1183.0f, 1300.0f - 103.0f));
+				tr->SetPos(Vector2(1200.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveright", false);
 				dashArriveFlag = true;
 
@@ -467,10 +472,10 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 
 		if (mDirection == eDirection::Left)
-			pos.x -= 6000.0f * Time::DeltaTime();
+			pos.x -= 5500.0f * Time::DeltaTime();
 
 		else if (mDirection == eDirection::Right)
-			pos.x += 6000.0f * Time::DeltaTime();
+			pos.x += 5500.0f * Time::DeltaTime();
 
 		tr->SetPos(pos);
 

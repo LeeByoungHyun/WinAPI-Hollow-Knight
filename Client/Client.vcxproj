@@ -142,6 +142,9 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="LongPlatform.h" />
     <ClInclude Include="LongPlatformBackPixel.h" />
+    <ClInclude Include="MantisBossPlatform.h" />
+    <ClInclude Include="MantisBossWallLeft.h" />
+    <ClInclude Include="MantisBossWallRight.h" />
     <ClInclude Include="MantisLord1.h" />
     <ClInclude Include="MantisLord2.h" />
     <ClInclude Include="MantisLord3.h" />
@@ -201,6 +204,9 @@
     <ClCompile Include="LongPlatform.cpp" />
     <ClCompile Include="LongPlatformBackPixel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MantisBossPlatform.cpp" />
+    <ClCompile Include="MantisBossWallLeft.cpp" />
+    <ClCompile Include="MantisBossWallRight.cpp" />
     <ClCompile Include="MantisLord1.cpp" />
     <ClCompile Include="MantisLord2.cpp" />
     <ClCompile Include="MantisLord3.cpp" />
