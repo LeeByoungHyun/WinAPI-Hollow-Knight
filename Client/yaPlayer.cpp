@@ -951,7 +951,7 @@ namespace ya
 
 		if (fallFlag == false)
 		{
-			mRigidBody->SetVelocity(Vector2::Zero);
+			//mRigidBody->SetVelocity(Vector2::Zero);
 
 			switch (mDirection)
 			{
