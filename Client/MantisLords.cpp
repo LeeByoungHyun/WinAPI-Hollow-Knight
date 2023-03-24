@@ -93,8 +93,8 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
 
-		// 테스트
-		if (Input::GetKeyDown(eKeyCode::L))
+		// 패턴 테스트용 코드
+		if (Input::GetKeyDown(eKeyCode::I))
 		{
 			throneStandFlag = false;
 			throneBowFlag = false;

@@ -79,6 +79,8 @@ namespace ya
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\left", Vector2::Zero, 1.0f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\right", Vector2::Zero, 1.0f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Death\\neutral", Vector2::Zero, 0.066f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Focus\\left", Vector2::Zero, 0.1f);
@@ -134,7 +136,7 @@ namespace ya
 		mCollider->SetCenter(Vector2(-30.0f, -120.0f));
 		mCollider->SetSize(Vector2(60.0f, 120.0f));
 
-		mRigidBody->SetMass(0.01f);
+		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 		mState = ePlayerState::Idle;
 
@@ -184,6 +186,10 @@ namespace ya
 			fallFlag = false;
 			//invincibilityFlag = false;
 
+			// 속도 0으로
+			Vector2 velocity = mRigidBody->GetVelocity();
+			velocity.x = 0.0f;
+			mRigidBody->SetVelocity(velocity);
 			mTime = 0.0f;
 		}
 
@@ -199,11 +205,6 @@ namespace ya
 				mState = ePlayerState::Fall;
 				idleFlag = false;
 			}
-		}
-
-		if (mRigidBody->GetGround() == true && idleFlag == false)
-		{
-			//mState = ePlayerState::Idle;
 		}
 
 		// 좌우이동 멈추면 rigidbody 속도 0으로
@@ -309,20 +310,9 @@ namespace ya
 			case eLayerType::Monster:
 				if (!invincibilityFlag)
 				{
-					invincibilityFlag = true;
-
 					mState = ePlayerState::Recoil;
-					hp -= 1;
-
-					if (mDirection == eDirection::Left)
-					{
-						mAnimator->Play(L"Knight_Recoilleft", true);
-					}
-
-					else if (mDirection == eDirection::Right)
-					{
-						mAnimator->Play(L"Knight_Recoilright", true);
-					}
+					recoilFlag = false;
+					stunFlag = false;
 				}
 				break;
 
@@ -337,27 +327,6 @@ namespace ya
 				mRigidBody->SetGround(true);
 
 				break;
-			}
-
-			// 몬스터와 접촉시 recoil state
-			if (otherType == eLayerType::Monster && invincibilityFlag == false)
-			{
-				invincibilityFlag = true;
-
-				mState = ePlayerState::Recoil;
-				hp -= 1;
-
-				if (mDirection == eDirection::Left)
-				{
-					mAnimator->Play(L"Knight_Recoilleft", true);
-				}
-
-				else if (mDirection == eDirection::Right)
-				{
-					mAnimator->Play(L"Knight_Recoilright", true);
-				}
-
-				return;
 			}
 		}
 
@@ -1097,13 +1066,45 @@ namespace ya
 			pos.x -= 100.0f * Time::DeltaTime();
 		tr->SetPos(pos);
 		*/
-		mRigidBody->SetVelocity((Vector2::Zero));
-		Vector2 velocity = mRigidBody->GetVelocity();
-		if (mDirection == eDirection::Left)
-			velocity.x = -50.0f;
-		if (mDirection == eDirection::Right)
-			velocity.x = 50.0f;
-		mRigidBody->SetVelocity(velocity);
+
+		if (stunFlag == false)
+		{
+			invincibilityFlag = true;
+			hp -= 1;	// 피격당한 오브젝트의 공격력 값을 가져와야함
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Stunleft", false);
+
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Stunright", false);
+
+			stunFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime < 0.2f)
+		{
+			mRigidBody->SetVelocity((Vector2::Zero));
+		}
+
+		if (mTime >= 0.2f)
+		{
+			if (recoilFlag == false)
+			{
+				if (mDirection == eDirection::Left)
+					mAnimator->Play(L"Knight_Recoilleft", false);
+				else if (mDirection == eDirection::Right)
+					mAnimator->Play(L"Knight_Recoilright", false);
+			}
+			mRigidBody->SetGround(false);
+			Vector2 velocity;
+			if (mDirection == eDirection::Left)
+				velocity = Vector2(200.0f, -200.0f);
+			else if (mDirection == eDirection::Right)
+				velocity = Vector2(-200.0f, -200.0f);
+
+			mRigidBody->SetVelocity(velocity);
+			recoilFlag = true;
+		}
 	}
 
 	void Player::death()
@@ -1113,6 +1114,9 @@ namespace ya
 			mAnimator->Play(L"Knight_Deathneutral", false);
 			deathFlag = true;
 		}
+
+		mRigidBody->SetVelocity((Vector2::Zero));
+
 	}
 
 	void Player::focus()
@@ -1199,6 +1203,7 @@ namespace ya
 				break;
 			}
 			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
+			hp += 1;
 		}
 
 		// 회복키에서 손 때면 회복종료
@@ -1381,7 +1386,9 @@ namespace ya
 
 	void Player::recoilEndEvent()
 	{
-		mState = ePlayerState::Idle;
+		recoilFlag = false;
+		stunFlag = false;
+		mTime = 0.0f;
 
 		// 공중, 지상일 경우 구분
 		switch (mRigidBody->GetGround())

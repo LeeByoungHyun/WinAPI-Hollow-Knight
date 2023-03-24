@@ -132,6 +132,8 @@ namespace ya
 		bool jumpFlag			= false;
 		bool doubleJumpFlag		= false;
 		bool fallFlag			= false;
+		bool stunFlag			= false;
+		bool recoilFlag			= false;
 		
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
