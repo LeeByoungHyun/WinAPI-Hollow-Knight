@@ -349,9 +349,16 @@ namespace ya
 	{
 		if (Gesture1Flag == false)
 		{
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.x += 13.0f;
+			tr->SetPos(pos);
+
 			mAnimator->Play(L"Mantis Lords_Gesture(Part 1)neutral", false);
 			Gesture1Flag = true;
 		}
+
+		
 
 		mTime += Time::DeltaTime();
 
@@ -369,6 +376,11 @@ namespace ya
 	{
 		if (Gesture2Flag == false)
 		{
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.x += 4.0f;
+			tr->SetPos(pos);
+
 			mAnimator->Play(L"Mantis Lords_Gesture(Part 2)neutral", false);
 			Gesture2Flag = true;
 		}
