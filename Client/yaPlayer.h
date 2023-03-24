@@ -64,6 +64,9 @@ namespace ya
 		void SetPlayerState(ePlayerState state) { mState = state; }
 		eDirection GetPlayerDirection() { return mDirection; }
 
+		bool GetIdleFlag() { return idleFlag; }
+		void SetIdleFlag(bool flag) { idleFlag = flag; }
+
 	private:
 		void idle();
 		void walk();

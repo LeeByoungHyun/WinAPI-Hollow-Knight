@@ -326,7 +326,6 @@ namespace ya
 				}
 				break;
 
-			/*
 			// 충돌한 객체가 땅일 경우 idle
 			case eLayerType::Ground:
 				mState = ePlayerState::Idle;
@@ -334,8 +333,10 @@ namespace ya
 					mAnimator->Play(L"Knight_Idleleft", true);
 				else if (mDirection == eDirection::Right)
 					mAnimator->Play(L"Knight_Idleright", true);
+
+				mRigidBody->SetGround(true);
+
 				break;
-			*/
 			}
 
 			// 몬스터와 접촉시 recoil state

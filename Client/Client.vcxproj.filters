@@ -149,6 +149,9 @@
     <Filter Include="Contents\Objects\Charactor\Player\FireballCastEffect">
       <UniqueIdentifier>{53c2bb92-10dd-480a-9160-703982d1d72b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\LongPlatformBackPixel">
+      <UniqueIdentifier>{c0b09d67-985c-461a-9d10-f9efdd52643b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -325,6 +328,9 @@
     <ClInclude Include="MantisLord3.h">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord3</Filter>
     </ClInclude>
+    <ClInclude Include="LongPlatformBackPixel.h">
+      <Filter>Contents\Objects\Struct\LongPlatformBackPixel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -479,6 +485,9 @@
     </ClCompile>
     <ClCompile Include="MantisLord3.cpp">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLord3</Filter>
+    </ClCompile>
+    <ClCompile Include="LongPlatformBackPixel.cpp">
+      <Filter>Contents\Objects\Struct\LongPlatformBackPixel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

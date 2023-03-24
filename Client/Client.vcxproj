@@ -141,6 +141,7 @@
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LongPlatform.h" />
+    <ClInclude Include="LongPlatformBackPixel.h" />
     <ClInclude Include="MantisLord1.h" />
     <ClInclude Include="MantisLord2.h" />
     <ClInclude Include="MantisLord3.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
     <ClCompile Include="LongPlatform.cpp" />
+    <ClCompile Include="LongPlatformBackPixel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisLord1.cpp" />
     <ClCompile Include="MantisLord2.cpp" />

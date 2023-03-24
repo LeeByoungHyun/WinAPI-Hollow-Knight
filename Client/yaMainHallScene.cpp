@@ -13,6 +13,7 @@
 #include "GodBG.h"
 #include "GroundCollider.h"
 #include "LongPlatform.h"
+#include "LongPlatformBackPixel.h"
 
 namespace ya
 {
@@ -38,9 +39,12 @@ namespace ya
 		object::Instantiate<Crawlid>(Vector2(2100.0f, 1300.0f - 103.0f), eLayerType::Monster);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		platform1 = object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
-		platform2 = object::Instantiate<LongPlatform>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
 
+		//object::Instantiate<LongPlatformBackPixel>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		//object::Instantiate<LongPlatformBackPixel>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
+
+		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		object::Instantiate<LongPlatform>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
