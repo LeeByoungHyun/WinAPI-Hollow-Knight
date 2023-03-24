@@ -858,6 +858,7 @@ namespace ya
 			// 세부위치조정
 			Vector2 pos = tr->GetPos();
 			pos.x -= 50.0f;
+			pos.y = 1300.0f;
 			tr->SetPos(pos);
 
 			mCollider->SetCenter(Vector2(0.0f, -250.0f));
