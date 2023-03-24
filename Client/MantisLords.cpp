@@ -57,9 +57,12 @@ namespace ya
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Bow\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Idle\\neutral", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Leave\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Leave\\neutral", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Stand\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Wounded\\neutral", Vector2::Zero, 0.1f);
+
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Gesture(Part 1)\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Gesture(Part 2)\\neutral", Vector2::Zero, 0.1f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throw\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throw\\right", Vector2::Zero, 0.1f);
@@ -72,12 +75,11 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
 
-		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", true);
+		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", false);
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetName(L"MantisLordCollider");
-		mCollider->SetCenter(Vector2(-50.0f, -300.0f));
-		mCollider->SetSize(Vector2(100.0f, 300.0f));
+		mCollider->SetCenter(Vector2(0.0f, 0.0f));
+		mCollider->SetSize(Vector2(0.0f, 0.0f));
 
 		mState = eMantisLordsState::ThroneIdle;
 
@@ -92,8 +94,7 @@ namespace ya
 		tr = GetComponent<Transform>();
 
 		// 테스트
-		
-		if (Input::GetKeyDown(eKeyCode::O))
+		if (Input::GetKeyDown(eKeyCode::L))
 		{
 			throneStandFlag = false;
 			throneBowFlag = false;
@@ -149,6 +150,14 @@ namespace ya
 
 		case ya::MantisLords::eMantisLordsState::ThroneWounded:
 			throneWounded();
+			break;
+
+		case ya::MantisLords::eMantisLordsState::Gesture1:
+			gesture1();
+			break;
+
+		case ya::MantisLords::eMantisLordsState::Gesture2:
+			gesture2();
 			break;
 
 		case ya::MantisLords::eMantisLordsState::DashArrive:
@@ -293,9 +302,9 @@ namespace ya
 		mTime += Time::DeltaTime();
 
 		// 일어선지 3초 경과 후
-		if (mTime >= 2.0f)
+		if (mTime >= 1.0f)
 		{
-			mState = eMantisLordsState::ThroneLeave;
+			mState = eMantisLordsState::Gesture1;
 			throneStandFlag = false;
 			mTime = 0.0f;
 			return;
@@ -320,7 +329,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 1.0f)
+		if (mTime >= 0.1f)
 		{
 			mState = eMantisLordsState::Idle;
 			throneLeaveFlag = false;
@@ -333,6 +342,46 @@ namespace ya
 		{
 			mAnimator->Play(L"Mantis Lords_Throne Woundedneutral", false);
 			throneBowFlag = true;
+		}
+	}
+
+	void MantisLords::gesture1()
+	{
+		if (Gesture1Flag == false)
+		{
+			mAnimator->Play(L"Mantis Lords_Gesture(Part 1)neutral", false);
+			Gesture1Flag = true;
+		}
+
+		mTime += Time::DeltaTime();
+
+		// 
+		if (mTime >= 1.0f)
+		{
+			mState = eMantisLordsState::Gesture2;
+			Gesture1Flag = false;
+			mTime = 0.0f;
+			return;
+		}
+	}
+
+	void MantisLords::gesture2()
+	{
+		if (Gesture2Flag == false)
+		{
+			mAnimator->Play(L"Mantis Lords_Gesture(Part 2)neutral", false);
+			Gesture2Flag = true;
+		}
+
+		mTime += Time::DeltaTime();
+
+		// 
+		if (mTime >= 1.0f)
+		{
+			mState = eMantisLordsState::ThroneLeave;
+			Gesture2Flag = false;
+			mTime = 0.0f;
+			return;
 		}
 	}
 

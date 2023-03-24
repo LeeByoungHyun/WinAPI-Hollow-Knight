@@ -29,7 +29,9 @@ namespace ya
 			WallLeave1,
 			WallLeave2,
 			Death,
-			DeathLeave
+			DeathLeave,
+			Gesture1,
+			Gesture2,
 		};
 
 		enum class eDirection
@@ -57,6 +59,8 @@ namespace ya
 		void throneStand();
 		void throneLeave();
 		void throneWounded();
+		void gesture1();
+		void gesture2();
 		void dashArrive();
 		void dashAnticipate();
 		void dash();
@@ -73,6 +77,7 @@ namespace ya
 		void dStab();
 		void dStabLand();
 		void dStabLeave();
+		
 
 		void dashArriveComplateEvent();
 		void dashAnticipateComplateEvent();
@@ -119,6 +124,8 @@ namespace ya
 		bool throwFlag			= false;
 		bool wallLeave1Flag		= false;
 		bool wallLeave2Flag		= false;
+		bool Gesture1Flag		= false;
+		bool Gesture2Flag		= false;
 	};
 }
 
