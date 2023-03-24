@@ -240,7 +240,6 @@ namespace ya
 	void MantisLords::idle()
 	{
 		tr->SetPos(Vector2::Zero);
-		//mAnimator->Play(L"", false);
 
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.5f)
@@ -372,7 +371,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.75f)
 		{
 			mState = eMantisLordsState::DashAnticipate;
 			dashArriveFlag = false;
@@ -411,7 +410,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.5f)
 		{
 			mState = eMantisLordsState::Dash;
 			dashAnticipateFlag = false;
@@ -561,7 +560,7 @@ namespace ya
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.1)
+		if (mTime >= 0.1f)
 		{
 			mState = eMantisLordsState::Idle;
 			dashLeaveFlag = false;
@@ -606,7 +605,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.5f)
 		{
 			mState = eMantisLordsState::WallReady;
 			wallArriveFlag = false;
@@ -650,7 +649,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.5f)
 		{
 			mState = eMantisLordsState::Throw;
 			wallReadyFlag = false;
@@ -779,7 +778,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.1)
+		if (mTime >= 0.1f)
 		{
 			mState = eMantisLordsState::Idle;
 			wallLeave2Flag = false;
@@ -842,7 +841,7 @@ namespace ya
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.1)
+		if (mTime >= 0.1f)
 		{
 			mState = eMantisLordsState::DstabLand;
 			dStabFlag = false;
@@ -869,7 +868,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 1.0)
+		if (mTime >= 1.0f)
 		{
 			mState = eMantisLordsState::DstabLeave;
 			dStabLandFlag = false;
@@ -896,7 +895,7 @@ namespace ya
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.1)
+		if (mTime >= 0.1f)
 		{
 			mState = eMantisLordsState::Idle;
 			dStabLeaveFlag = false;
