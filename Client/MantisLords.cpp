@@ -40,8 +40,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Arrive\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Arrive\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\left", Vector2::Zero, 0.02f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\right", Vector2::Zero, 0.02f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\left", Vector2::Zero, 0.01f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash Leave\\right", Vector2::Zero, 0.01f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Anticipate)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Anticipate)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Recover)\\left", Vector2::Zero, 0.1f);
@@ -92,6 +92,7 @@ namespace ya
 		tr = GetComponent<Transform>();
 
 		// 테스트
+		
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
 			throneStandFlag = false;
@@ -113,10 +114,11 @@ namespace ya
 			wallLeave1Flag = false;
 			wallLeave2Flag = false;
 
-			mState = eMantisLordsState::WallArrive;
+			mState = eMantisLordsState::DstabArrive;
 			return;
 		}
-
+		
+		
 		// 플레이어 사망시 옥좌로 귀환
 		if (mState == eMantisLordsState::Idle && player->GetPlayerState() == Player::ePlayerState::Death)
 		{
@@ -241,7 +243,7 @@ namespace ya
 		//mAnimator->Play(L"", false);
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 1.0f)
+		if (mTime >= 1.5f)
 		{
 			// 각 패턴이 종료되면 돌아오는 준비상태
 			// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
@@ -321,32 +323,8 @@ namespace ya
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.0f)
 		{
-			mTime += Time::DeltaTime();
-			if (mTime >= 1.0f)
-			{
-				// 각 패턴이 종료되면 돌아오는 준비상태
-				// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
-				// 랜덤 함수 이용해 패턴 랜덤하게 호출
-				int pattern = rand() % 3;
-				switch (pattern)
-				{
-				case 0:	// Dash
-					mState = eMantisLordsState::DashArrive;
-					break;
-
-				case 1:	// Dstab
-					mState = eMantisLordsState::DstabArrive;
-					break;
-
-				case 2:	// WallThrow
-					mState = eMantisLordsState::WallArrive;
-					break;
-
-				default:
-					mState = eMantisLordsState::Idle;
-					break;
-				}
-			}
+			mState = eMantisLordsState::Idle;
+			throneLeaveFlag = false;
 		}
 	}
 
@@ -520,7 +498,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 1.0f)
 		{
 			mState = eMantisLordsState::DashLeave;
 			dashRecoverFlag = false;
@@ -540,7 +518,7 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				// 세부위치조정
-				pos.x -= 30.0f;
+				pos.x -= 20.0f;
 				tr->SetPos(pos);
 				mCollider->SetCenter(Vector2(0.0f, 0.0f));
 				mCollider->SetSize(Vector2(0.0f, 0.0f));
@@ -552,7 +530,7 @@ namespace ya
 
 			case eDirection::Right:	// right
 				// 세부위치조정
-				pos.x += 30.0f;
+				pos.x += 20.0f;
 				tr->SetPos(pos);
 				mCollider->SetCenter(Vector2(0.0f, 0.0f));
 				mCollider->SetSize(Vector2(0.0f, 0.0f));
@@ -716,7 +694,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 1.5f)
 		{
 			mState = eMantisLordsState::WallLeave1;
 			throwFlag = false;
@@ -760,7 +738,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 0.25f)
 		{
 			mState = eMantisLordsState::WallLeave2;
 			wallLeave1Flag = false;
@@ -827,13 +805,13 @@ namespace ya
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
 
 			// 플레이어 x좌표 위에 생성되야 함 지금은 임시
-			tr->SetPos(Vector2(pos.x, 650.0f));
+			tr->SetPos(Vector2(pos.x, 800.0f));
 			mAnimator->Play(L"Mantis Lords_Dstab Arriveneutral", false);
 			dStabArriveFlag = true;
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 1.0)
+		if (mTime >= 1.0f)
 		{
 			mState = eMantisLordsState::Dstab;
 			dStabArriveFlag = false;
@@ -860,7 +838,7 @@ namespace ya
 		}
 
 		Vector2 pos = tr->GetPos();
-		pos.y += 6000.0f * Time::DeltaTime();
+		pos.y += 4300.0f * Time::DeltaTime();
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
@@ -891,7 +869,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 0.5)
+		if (mTime >= 1.0)
 		{
 			mState = eMantisLordsState::DstabLeave;
 			dStabLandFlag = false;
@@ -926,5 +904,61 @@ namespace ya
 
 			return;
 		}
+	}
+
+	void MantisLords::dashArriveComplateEvent()
+	{
+	}
+
+	void MantisLords::dashAnticipateComplateEvent()
+	{
+	}
+
+	void MantisLords::dashComplateEvent()
+	{
+	}
+
+	void MantisLords::dashRecoverComplateEvent()
+	{
+	}
+
+	void MantisLords::dashLeaveComplateEvent()
+	{
+	}
+
+	void MantisLords::wallArriveComplateEvent()
+	{
+	}
+
+	void MantisLords::wallReadyComplateEvent()
+	{
+	}
+
+	void MantisLords::wallThrowComplateEvent()
+	{
+	}
+
+	void MantisLords::wallLeave1ComplateEvent()
+	{
+	}
+
+	void MantisLords::wallLeave2ComplateEvent()
+	{
+	}
+
+	void MantisLords::dStabArriveComplateEvent()
+	{
+	}
+
+	void MantisLords::dStabComplateEvent()
+	{
+	}
+
+	void MantisLords::dStabLandComplateEvent()
+	{
+	}
+
+	void MantisLords::dStabLeaveComplateEvent()
+	{
 	}
 }

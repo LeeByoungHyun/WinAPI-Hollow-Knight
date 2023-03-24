@@ -74,6 +74,21 @@ namespace ya
 		void dStabLand();
 		void dStabLeave();
 
+		void dashArriveComplateEvent();
+		void dashAnticipateComplateEvent();
+		void dashComplateEvent();
+		void dashRecoverComplateEvent();
+		void dashLeaveComplateEvent();
+		void wallArriveComplateEvent();
+		void wallReadyComplateEvent();
+		void wallThrowComplateEvent();
+		void wallLeave1ComplateEvent();
+		void wallLeave2ComplateEvent();
+		void dStabArriveComplateEvent();
+		void dStabComplateEvent();
+		void dStabLandComplateEvent();
+		void dStabLeaveComplateEvent();
+
 	private:
 		eMantisLordsState mState;
 		class Transform* tr;
