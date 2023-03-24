@@ -3,6 +3,7 @@
 #include "yaInput.h"
 #include "yaObject.h"
 #include "yaCollisionManager.h"
+#include "yaCamera.h"
 
 #include "yaPlayer.h"
 #include "GodBG.h"
@@ -48,8 +49,8 @@ namespace ya
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		//object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
-		object::Instantiate<MantisBossWallLeft>(Vector2(1724.0f - 591.0f, 1300.0f), eLayerType::Wall);
-		object::Instantiate<MantisBossWallRight>(Vector2(1724.0f + 591.0f, 1300.0f), eLayerType::Wall);
+		object::Instantiate<MantisBossWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
+		object::Instantiate<MantisBossWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
@@ -92,6 +93,12 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+
+		Camera::SetTarget(mPlayer);
+		Camera::SetMinX(1725.0f);
+		Camera::SetMaxX(1725.0f);
+		Camera::SetMinY(850.0f);
+		Camera::SetMaxY(850.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
 	}

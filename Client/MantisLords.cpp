@@ -113,7 +113,7 @@ namespace ya
 			wallLeave1Flag = false;
 			wallLeave2Flag = false;
 
-			mState = eMantisLordsState::DashArrive;
+			mState = eMantisLordsState::WallArrive;
 			return;
 		}
 
@@ -603,7 +603,7 @@ namespace ya
 			case 0:	// left
 				mCollider->SetCenter(Vector2(-300.0f, -550.0f));
 				mCollider->SetSize(Vector2(200.0f, 400.0f));
-				tr->SetPos(Vector2(2200.0f - 1183.0f, 1100.0f));
+				tr->SetPos(Vector2(2200.0f - 1183.0f + 230.0f, 1100.0f));
 
 				mDirection = eDirection::Left;
 				mAnimator->Play(L"Mantis Lords_Wall Arriveleft", false);

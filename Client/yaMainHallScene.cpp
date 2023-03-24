@@ -52,11 +52,7 @@ namespace ya
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
 
-		Camera::SetTarget(mPlayer);
-		Camera::SetMinX(800.0f);
-		Camera::SetMaxX(2648.0f);
-		Camera::SetMinY(1300.0f);
-		Camera::SetMaxY(0.0f);
+		
 
 	}
 
@@ -97,6 +93,12 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+
+		Camera::SetTarget(mPlayer);
+		Camera::SetMinX(800.0f);
+		Camera::SetMaxX(2648.0f);
+		Camera::SetMinY(1300.0f);
+		Camera::SetMaxY(0.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1100.0f));
 	}
