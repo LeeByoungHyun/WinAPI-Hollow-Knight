@@ -246,7 +246,9 @@ namespace ya
 	void MantisLord2::idle()
 	{
 		tr->SetPos(Vector2::Zero);
-
+		
+		// 보스 관리 매니저에서 패턴 정해야 함
+		/*
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.5f)
 		{
@@ -273,6 +275,7 @@ namespace ya
 				break;
 			}
 		}
+		*/
 	}
 
 	void MantisLord2::throneIdle()
