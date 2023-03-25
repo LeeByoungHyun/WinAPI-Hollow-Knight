@@ -649,12 +649,12 @@ namespace ya
 			upSlashFlag = true;
 		}
 
-		Vector2 pos = tr->GetPos();
+		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
+			velocity.x = -400.0f;
 		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::downSlash()
@@ -1388,6 +1388,7 @@ namespace ya
 	{
 		recoilFlag = false;
 		stunFlag = false;
+		fallFlag = false;
 		mTime = 0.0f;
 
 		// 공중, 지상일 경우 구분
