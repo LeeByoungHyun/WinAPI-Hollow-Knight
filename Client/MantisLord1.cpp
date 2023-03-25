@@ -29,7 +29,7 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 100;
+		hp = 1;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -114,6 +114,12 @@ namespace ya
 
 			mState = eMantisLordsState::DstabArrive;
 			return;
+		}
+
+		// 사망시 옥좌로 귀환
+		if (hp <= 0 && deathFlag == false)
+		{
+			mState = eMantisLordsState::Death;
 		}
 
 
@@ -213,6 +219,14 @@ namespace ya
 			wallThrow();
 			break;
 
+		case ya::MantisLord1::eMantisLordsState::Death:
+			death();
+			break;
+
+		case ya::MantisLord1::eMantisLordsState::DeathLeave:
+			deathLeave();
+			break;
+
 		default:
 			break;
 		}
@@ -231,6 +245,18 @@ namespace ya
 	void MantisLord1::OnCollisionEnter(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
+
+		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
+		if (mState != eMantisLordsState::Death)
+		{
+			switch (otherType)
+			{
+			case eLayerType::Effect:
+				hp--;	// 플레이어 공격력만큼 감소해야 함
+
+				break;
+			}
+		}
 	}
 
 	void MantisLord1::OnCollisionStay(Collider* other)
@@ -335,16 +361,18 @@ namespace ya
 
 	void MantisLord1::throneWounded()
 	{
-		if (throneBowFlag == false)
+		if (throneWoundedFlag == false)
 		{
+			tr->SetPos(Vector2(1724.0f, 670.0f + 80.0f));
+
 			mAnimator->Play(L"Mantis Lords_Throne Woundedneutral", false);
-			throneBowFlag = true;
+			throneWoundedFlag = true;
 		}
 	}
 
 	void MantisLord1::gesture1()
 	{
-		if (Gesture1Flag == false)
+		if (gesture1Flag == false)
 		{
 			// 세부위치조정
 			Vector2 pos = tr->GetPos();
@@ -352,7 +380,7 @@ namespace ya
 			tr->SetPos(pos);
 
 			mAnimator->Play(L"Mantis Lords_Gesture(Part 1)neutral", false);
-			Gesture1Flag = true;
+			gesture1Flag = true;
 		}
 
 
@@ -363,7 +391,7 @@ namespace ya
 		if (mTime >= 1.0f)
 		{
 			mState = eMantisLordsState::Gesture2;
-			Gesture1Flag = false;
+			gesture1Flag = false;
 			mTime = 0.0f;
 			return;
 		}
@@ -371,7 +399,7 @@ namespace ya
 
 	void MantisLord1::gesture2()
 	{
-		if (Gesture2Flag == false)
+		if (gesture2Flag == false)
 		{
 			// 세부위치조정
 			Vector2 pos = tr->GetPos();
@@ -379,7 +407,7 @@ namespace ya
 			tr->SetPos(pos);
 
 			mAnimator->Play(L"Mantis Lords_Gesture(Part 2)neutral", false);
-			Gesture2Flag = true;
+			gesture2Flag = true;
 		}
 
 		mTime += Time::DeltaTime();
@@ -388,7 +416,7 @@ namespace ya
 		if (mTime >= 1.0f)
 		{
 			mState = eMantisLordsState::ThroneLeave;
-			Gesture2Flag = false;
+			gesture2Flag = false;
 			mTime = 0.0f;
 			return;
 		}
@@ -847,10 +875,47 @@ namespace ya
 
 	void MantisLord1::death()
 	{
+		if (deathFlag == false)
+		{
+			// 세부위치조정
+			//Vector2 pos = tr->GetPos();
+			//pos.y -= 35.0f;
+			//tr->SetPos(pos);
+
+			mCollider->SetCenter(Vector2(0.0f, 0.0f));
+			mCollider->SetSize(Vector2(0.0f, 0.0f));
+
+			mAnimator->Play(L"Mantis Lords_Deathneutral", false);
+			deathFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 3.0f)
+		{
+			mState = eMantisLordsState::DeathLeave;
+			mTime = 0.0f;
+		}
 	}
 
 	void MantisLord1::deathLeave()
 	{
+		if (deathLeaveFlag == false)
+		{
+			// 세부위치조정
+			//Vector2 pos = tr->GetPos();
+			//pos.y -= 35.0f;
+			//tr->SetPos(pos);
+
+			mAnimator->Play(L"Mantis Lords_Death Leaveneutral", false);
+			deathLeaveFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 3.0f)
+		{
+			mState = eMantisLordsState::ThroneWounded;
+			mTime = 0.0f;
+		}
 	}
 
 	void MantisLord1::dStabArrive()

@@ -90,26 +90,29 @@ namespace ya
 		eDirection mDirection;
 		double mTime = 0.0f;
 
-		bool throneStandFlag = false;
-		bool throneBowFlag = false;
-		bool throneLeaveFlag = false;
-		bool throneWoundedFlag = false;
-		bool dashArriveFlag = false;
-		bool dashAnticipateFlag = false;
-		bool dashFlag = false;
-		bool dashRecoverFlag = false;
-		bool dashLeaveFlag = false;
-		bool dStabArriveFlag = false;
-		bool dStabFlag = false;
-		bool dStabLandFlag = false;
-		bool dStabLeaveFlag = false;
-		bool wallArriveFlag = false;
-		bool wallReadyFlag = false;
-		bool throwFlag = false;
-		bool wallLeave1Flag = false;
-		bool wallLeave2Flag = false;
-		bool Gesture1Flag = false;
-		bool Gesture2Flag = false;
+		bool throneStandFlag	= false;
+		bool throneBowFlag		= false;
+		bool throneLeaveFlag	= false;
+		bool throneWoundedFlag	= false;
+		bool dashArriveFlag		= false;
+		bool dashAnticipateFlag	= false;
+		bool dashFlag			= false;
+		bool dashRecoverFlag	= false;
+		bool dashLeaveFlag		= false;
+		bool dStabArriveFlag	= false;
+		bool dStabFlag			= false;
+		bool dStabLandFlag		= false;
+		bool dStabLeaveFlag		= false;
+		bool wallArriveFlag		= false;
+		bool wallReadyFlag		= false;
+		bool throwFlag			= false;
+		bool wallLeave1Flag		= false;
+		bool wallLeave2Flag		= false;
+		bool gesture1Flag		= false;
+		bool gesture2Flag		= false;
+		bool deathFlag			= false;
+		bool deathLeaveFlag		= false;
+
 	};
 }
 
