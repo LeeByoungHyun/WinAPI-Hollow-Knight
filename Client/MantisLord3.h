@@ -108,8 +108,10 @@ namespace ya
 		bool throwFlag = false;
 		bool wallLeave1Flag = false;
 		bool wallLeave2Flag = false;
-		bool Gesture1Flag = false;
-		bool Gesture2Flag = false;
+		bool gesture1Flag = false;
+		bool gesture2Flag = false;
+		bool deathFlag = false;
+		bool deathLeaveFlag = false;
 	};
 }
 

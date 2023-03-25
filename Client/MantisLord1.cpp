@@ -45,7 +45,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Recover)\\right", Vector2::Zero, 0.1f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Death\\neutral", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Death Leave\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Death Leave\\neutral", Vector2::Zero, 0.02f);
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Arrive\\neutral", Vector2::Zero, 0.1f);
@@ -246,7 +246,7 @@ namespace ya
 	{
 		GameObject::OnCollisionEnter(other);
 
-		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
+		eLayerType otherType = other->GetOwner()->GetType();	// 오브젝트와 충돌한 객체의 타입
 		if (mState != eMantisLordsState::Death)
 		{
 			switch (otherType)
@@ -911,7 +911,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 3.0f)
+		if (mTime >= 0.2f)
 		{
 			mState = eMantisLordsState::ThroneWounded;
 			mTime = 0.0f;
