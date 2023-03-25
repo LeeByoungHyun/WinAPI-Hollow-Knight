@@ -14,9 +14,6 @@
 
 namespace ya
 {
-	Vector2 DashArriveLeftPos = Vector2(2434.0f, 1300.0f - 103.0f);
-	Vector2 DashArriveRightPos = Vector2(2434.0f - 1544.0f, 1300.0f - 103.0f);
-
 	MantisLords::MantisLords()
 	{
 

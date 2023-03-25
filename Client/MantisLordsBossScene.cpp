@@ -7,7 +7,9 @@
 
 #include "yaPlayer.h"
 #include "GodBG.h"
-#include "MantisLords.h"
+#include "MantisLord1.h"
+#include "MantisLord2.h"
+#include "MantisLord3.h"
 #include "yaCrawlid.h"
 #include "GroundCollider.h"
 #include "LongPlatform.h"
@@ -35,9 +37,9 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에
-		object::Instantiate<MantisLords>(Vector2(1724.0f, 670.0f + 80.0f), eLayerType::Monster);
-		//object::Instantiate<MantisLords>(Vector2(1724.0f, 800.0f), eLayerType::Monster);
-		//object::Instantiate<MantisLords>(Vector2(1924.0f, 800.0f), eLayerType::Monster);
+		object::Instantiate<MantisLord1>(Vector2(1724.0f, 670.0f + 80.0f), eLayerType::Monster);
+		object::Instantiate<MantisLord2>(Vector2(1474.0f, 800.0f + 80.0f), eLayerType::Monster);
+		object::Instantiate<MantisLord3>(Vector2(1974.0f, 800.0f + 80.0f), eLayerType::Monster);
 
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
@@ -47,7 +49,6 @@ namespace ya
 		object::Instantiate<MantisThrone>(Vector2(1974.0f, 1430.0f), eLayerType::BGObject);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		//object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 		object::Instantiate<MantisBossWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<MantisBossWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
