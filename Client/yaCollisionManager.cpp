@@ -98,6 +98,10 @@ namespace ya
 
 	bool CollisionManager::Intersect(Collider* left, Collider* right)
 	{
+		// 둘중 하나라도 비활성화 상태라면 return
+		if (left->GetActive() == false || right->GetActive() == false)
+			return false;
+
 		Vector2 leftPos = left->GetPos();
 		Vector2 rightPos = right->GetPos();
 

@@ -77,6 +77,7 @@ namespace ya
 		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", false);
 
 		mCollider = AddComponent<Collider>();
+		mCollider->SetActive(false);
 		mCollider->SetCenter(Vector2(0.0f, 0.0f));
 		mCollider->SetSize(Vector2(0.0f, 0.0f));
 
@@ -430,6 +431,7 @@ namespace ya
 	{
 		if (dashArriveFlag == false)
 		{
+			mCollider->SetActive(true);
 			//int direction = rand() % 2;	// 패턴매니저에서 방향 관리
 			switch (mDirection)
 			{
@@ -601,6 +603,7 @@ namespace ya
 	{
 		if (dashLeaveFlag == false)
 		{
+			mCollider->SetActive(false);
 			Vector2 pos = tr->GetPos();
 
 			switch (mDirection)
@@ -664,6 +667,7 @@ namespace ya
 		if (wallArriveFlag == false)
 		{
 			//int direction = rand() % 2;
+			mCollider->SetActive(true);
 
 			switch (mDirection)
 			{
@@ -845,6 +849,7 @@ namespace ya
 			pos.y -= 100.0f;
 			tr->SetPos(pos);
 
+			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 
@@ -881,11 +886,7 @@ namespace ya
 	{
 		if (deathFlag == false)
 		{
-			// 세부위치조정
-			//Vector2 pos = tr->GetPos();
-			//pos.y -= 35.0f;
-			//tr->SetPos(pos);
-
+			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 
@@ -905,11 +906,6 @@ namespace ya
 	{
 		if (deathLeaveFlag == false)
 		{
-			// 세부위치조정
-			//Vector2 pos = tr->GetPos();
-			//pos.y -= 35.0f;
-			//tr->SetPos(pos);
-
 			mAnimator->Play(L"Mantis Lords_Death Leaveneutral", false);
 			deathLeaveFlag = true;
 		}
@@ -926,6 +922,7 @@ namespace ya
 	{
 		if (dStabArriveFlag == false)
 		{
+			mCollider->SetActive(true);
 			Vector2 pos = player->GetInstance()->GetPos();
 			mCollider->SetCenter(Vector2(0.0f, -250.0f));
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
@@ -1010,6 +1007,7 @@ namespace ya
 	{
 		if (dStabLeaveFlag == false)
 		{
+			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 

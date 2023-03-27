@@ -63,18 +63,28 @@ namespace ya
 
 	void Collider::OnCollisionEnter(Collider* other)
 	{
-		GetOwner()->OnCollisionEnter(other);
+		if (mActive == true)
+		{
+			GetOwner()->OnCollisionEnter(other);
+		}
+		
 	}
 
 	void Collider::OnCollisionStay(Collider* other)
 	{
-		mCollisionCount = true;
-
-		GetOwner()->OnCollisionStay(other);
+		if (mActive == true)
+		{
+			mCollisionCount = true;
+			GetOwner()->OnCollisionStay(other);
+		}
+		
 	}
 
 	void Collider::OnCollisionExit(Collider* other)
 	{
-		GetOwner()->OnCollisionExit(other);
+		if (mActive == true)
+		{
+			GetOwner()->OnCollisionExit(other);
+		}
 	}
 }

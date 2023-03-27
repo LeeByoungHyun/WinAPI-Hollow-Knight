@@ -23,6 +23,8 @@ namespace ya
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }
+		bool GetActive() { return mActive; }
+		void SetActive(bool active) { mActive = active; }
 
 	private:
 		static UINT ColliderNumber;
@@ -31,5 +33,7 @@ namespace ya
 		Vector2 mCenter;
 		Vector2 mSize;
 		Vector2 mPos;
+
+		bool mActive = true;
 	};
 }
