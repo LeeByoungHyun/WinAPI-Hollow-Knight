@@ -186,6 +186,7 @@ namespace ya
 			mTime += Time::DeltaTime();
 			if (mTime >= 2.0f)
 			{
+				mTime = 0.0f;
 				int pattern = rand() % 3;
 				switch (pattern)
 				{
@@ -213,6 +214,10 @@ namespace ya
 		}
 
 		// 둘 중 하나라도 죽을 시 3페이즈 진입
+		if (true)
+		{
+
+		}
 	}
 
 	void MantisLordsManager::phase3()
