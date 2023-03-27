@@ -292,7 +292,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		if (mantis3AttackFlag == false && mTime >= 1.2f)
 		{
 			mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
 			mantis3AttackFlag = true;
@@ -324,7 +324,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		if (mantis3AttackFlag == false && mTime >= 1.2f)
 		{
 			mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
 			mantis3AttackFlag = true;
@@ -356,7 +356,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		if (mantis3AttackFlag == false && mTime >= 1.2f)
 		{
 			mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
 			mantis3AttackFlag = true;
@@ -375,7 +375,7 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		if (mantis3AttackFlag == false && mTime >= 1.2f)
 		{
 			mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
 			mantis3AttackFlag = true;
@@ -405,7 +405,7 @@ namespace ya
 		{
 			// 동시에 벽에 붙어 투사체 공격
 			mantisLord2->SetDirection(MantisLord2::eDirection::Left);
-			mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+			mantisLord3->SetDirection(MantisLord3::eDirection::Right);
 
 			mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
 			mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
