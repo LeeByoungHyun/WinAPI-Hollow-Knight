@@ -112,6 +112,14 @@ namespace ya
 			phase2Combo4();
 			break;
 
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo5:
+			phase2Combo5();
+			break;
+
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo6:
+			phase2Combo6();
+			break;
+
 		case ya::MantisLordsManager::ePhaseState::Phase3:
 			phase3();
 			break;
@@ -146,6 +154,7 @@ namespace ya
 			mTime += Time::DeltaTime();
 			if (mTime >= 2.0f)
 			{
+				srand((unsigned int)time(NULL));
 				int pattern = rand() % 3;
 				mTime = 0.0f;
 				switch (pattern)
@@ -197,8 +206,6 @@ namespace ya
 
 	void MantisLordsManager::phase2()
 	{
-		// 2번 보스가 먼저 행동 후 3번 보스가 따라해야 함
-		
 		// 두 보스가 모두 대기상태일 경우 패턴 실행
 		if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Idle
 			&& mantisLord3->GetState() == MantisLord3::eMantisLordsState::Idle)
@@ -209,7 +216,9 @@ namespace ya
 				mantis2AttackFlag = false;
 				mantis3AttackFlag = false;
 				mTime = 0.0f;
-				int pattern = rand() % 4;
+
+				srand((unsigned int)time(NULL));
+				int pattern = rand() % 6;
 				switch (pattern)
 				{
 				case 0:	// Dash, Dstab
@@ -226,6 +235,14 @@ namespace ya
 
 				case 3:	// Wall
 					mPhase = ePhaseState::Phase2Combo4;
+					break;
+
+				case 4:	// Wall
+					mPhase = ePhaseState::Phase2Combo5;
+					break;
+
+				case 5:	// Wall
+					mPhase = ePhaseState::Phase2Combo6;
 					break;
 
 				default:
@@ -254,6 +271,7 @@ namespace ya
 		// 2번보스 돌진 후 3번보스 돌진
 		if (mantis2AttackFlag == false)
 		{
+			srand((unsigned int)time(NULL));
 			int direct = rand() % 2;
 			switch (direct)
 			{
@@ -287,6 +305,7 @@ namespace ya
 		// 2번보스 돌진 후 3번보스 내려찍기
 		if (mantis2AttackFlag == false)
 		{
+			srand((unsigned int)time(NULL));
 			int direct = rand() % 2;
 			switch (direct)
 			{
@@ -318,6 +337,7 @@ namespace ya
 		// 2번보스 내려찍기 후 3번보스 돌진
 		if (mantis2AttackFlag == false)
 		{
+			srand((unsigned int)time(NULL));
 			int direct = rand() % 2;
 			switch (direct)
 			{
@@ -363,19 +383,36 @@ namespace ya
 		}
 	}
 
-	void MantisLordsManager::phase2Dstab()
+	void MantisLordsManager::phase2Combo5()
 	{
-		mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
-		mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+		// 동시에 반대편에서 돌진
+		if (mantis2AttackFlag == false)
+		{
+			mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+			mantisLord3->SetDirection(MantisLord3::eDirection::Right);
+
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+			mantis3AttackFlag = true;
+			mantis2AttackFlag = true;
+			mTime = 0.0f;
+		}
 	}
 
-	void MantisLordsManager::phase2Wall()
+	void MantisLordsManager::phase2Combo6()
 	{
-		mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
-		mantisLord2->SetDirection(MantisLord2::eDirection::Left);
-		mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
-		mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+		if (mantis2AttackFlag == false)
+		{
+			// 동시에 벽에 붙어 투사체 공격
+			mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+			mantisLord2->SetDirection(MantisLord2::eDirection::Right);
 
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
+
+			mantis3AttackFlag = true;
+			mantis2AttackFlag = true;
+		}
 	}
 }
 

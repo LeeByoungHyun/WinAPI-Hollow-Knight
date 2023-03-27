@@ -16,6 +16,8 @@ namespace ya
 			Phase2Combo2,
 			Phase2Combo3,
 			Phase2Combo4,
+			Phase2Combo5,
+			Phase2Combo6,
 			Phase3,
 			End
 		};
@@ -35,16 +37,12 @@ namespace ya
 		void phase2();
 		void phase3();
 
-		void phase2Dash1();
-		void phase2Dash2();
-
 		void phase2Combo1();
 		void phase2Combo2();
 		void phase2Combo3();
 		void phase2Combo4();
-
-		void phase2Dstab();
-		void phase2Wall();
+		void phase2Combo5();
+		void phase2Combo6();
 
 	private:
 		class MantisLord1* mantisLord1;
