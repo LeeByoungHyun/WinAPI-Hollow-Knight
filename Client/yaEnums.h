@@ -13,6 +13,7 @@ enum class eSceneType
 
 enum class eLayerType	
 {
+	Manager,
 	BG,
 	BGObject,
 	Ground,

@@ -62,6 +62,9 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		eMantisLordsState GetState() { return mState; }
+		void SetState(eMantisLordsState state) { mState = state; }
+
 	private:
 		void idle();
 		void throneIdle();

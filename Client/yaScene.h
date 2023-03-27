@@ -19,11 +19,16 @@ namespace ya
 		void AddGameObject(GameObject* obj, eLayerType layer);
 		std::vector<GameObject*>& GetGameObjects(eLayerType layer);
 
+		eSceneType GetType() { return mType; }
+		void SetType(eSceneType type) { mType = type; }
+
 		virtual void Enter();
 		virtual void Exit();
 
 	private:
 		std::vector<Layer> mLayers;
+
+		eSceneType mType;
 	};
 }
 

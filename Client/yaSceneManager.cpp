@@ -16,8 +16,11 @@ namespace ya
 
         // ¾À ¸Å´ÏÀú¿¡ ¾À Ãß°¡
         mScenes[(UINT)eSceneType::Title] = new TitleScene();
+        mScenes[(UINT)eSceneType::Title]->SetType(eSceneType::Title);
         mScenes[(UINT)eSceneType::MantisLordsBoss] = new MantisLordsBossScene();
+        mScenes[(UINT)eSceneType::MantisLordsBoss]->SetType(eSceneType::MantisLordsBoss);
         mScenes[(UINT)eSceneType::MainHall] = new MainHallScene();
+        mScenes[(UINT)eSceneType::MainHall]->SetType(eSceneType::MainHall);
 
         for (Scene* scene : mScenes)
         {

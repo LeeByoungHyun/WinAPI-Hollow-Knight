@@ -275,7 +275,6 @@ namespace ya
 		tr->SetPos(Vector2::Zero);
 
 		// 보스 관리 매니저에서 패턴 정해야 함
-		/*
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.5f)
 		{
@@ -302,7 +301,6 @@ namespace ya
 				break;
 			}
 		}
-		*/
 	}
 
 	void MantisLord3::throneIdle()
@@ -365,10 +363,12 @@ namespace ya
 
 	void MantisLord3::throneWounded()
 	{
-		if (throneBowFlag == false)
+		if (throneWoundedFlag == false)
 		{
+			tr->SetPos(Vector2(1974.0f, 800.0f + 80.0f));
+
 			mAnimator->Play(L"Mantis Lords_Throne Woundedneutral", false);
-			throneBowFlag = true;
+			throneWoundedFlag = true;
 		}
 	}
 
