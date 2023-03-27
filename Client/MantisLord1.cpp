@@ -275,6 +275,7 @@ namespace ya
 	{
 		tr->SetPos(Vector2::Zero);
 
+		/* 패턴은 패턴매니저에서 관리
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.5f)
 		{
@@ -301,6 +302,7 @@ namespace ya
 				break;
 			}
 		}
+		*/
 	}
 
 	void MantisLord1::throneIdle()

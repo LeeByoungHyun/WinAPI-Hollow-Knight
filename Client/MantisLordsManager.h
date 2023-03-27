@@ -6,6 +6,16 @@ namespace ya
 	class MantisLordsManager : public GameObject
 	{
 	public:
+		enum class ePhaseState
+		{
+			Phase1Start,
+			Phase1,
+			Phase2Start,
+			Phase2,
+			Phase3,
+			End
+		};
+
 		MantisLordsManager();
 		~MantisLordsManager();
 
@@ -14,10 +24,18 @@ namespace ya
 		virtual void Release() override;
 
 	private:
+		void phase1Start();
+		void phase1();
+		void phase2Start();
+		void phase2();
+		void phase3();
+
+	private:
 		class MantisLord1* mantisLord1;
 		class MantisLord2* mantisLord2;
 		class MantisLord3* mantisLord3;
 
+		ePhaseState mPhase;
 		class Scene* activeScene;
 		float mTime = 0.0f;
 
