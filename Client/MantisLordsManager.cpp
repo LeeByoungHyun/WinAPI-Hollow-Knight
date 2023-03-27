@@ -25,6 +25,7 @@ namespace ya
 	{
 		GameObject::Update();
 
+
 	}
 
 	void MantisLordsManager::Render(HDC hdc)

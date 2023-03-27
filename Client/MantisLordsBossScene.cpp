@@ -37,9 +37,27 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에
-		object::Instantiate<MantisLord1>(Vector2(1724.0f, 670.0f + 80.0f), eLayerType::Monster);
-		object::Instantiate<MantisLord2>(Vector2(1474.0f, 800.0f + 80.0f), eLayerType::Monster);
-		object::Instantiate<MantisLord3>(Vector2(1974.0f, 800.0f + 80.0f), eLayerType::Monster);
+		//object::Instantiate<MantisLord1>(Vector2(1724.0f, 670.0f + 80.0f), eLayerType::Monster);
+		//object::Instantiate<MantisLord2>(Vector2(1474.0f, 800.0f + 80.0f), eLayerType::Monster);
+		//object::Instantiate<MantisLord3>(Vector2(1974.0f, 800.0f + 80.0f), eLayerType::Monster);
+
+		mantisLord1 = ya::MantisLord1::GetInstance();
+		scene->AddGameObject(mantisLord1, eLayerType::Monster);
+		mantisLord1->Initialize();
+		mantisLord1->GetComponent<Transform>()->SetPos(Vector2(1724.0f, 670.0f + 80.0f));
+		mantisLord1->SetType(eLayerType::Monster);
+
+		mantisLord2 = ya::MantisLord2::GetInstance();
+		scene->AddGameObject(mantisLord2, eLayerType::Monster);
+		mantisLord2->Initialize();
+		mantisLord2->GetComponent<Transform>()->SetPos(Vector2(1474.0f, 800.0f + 80.0f));
+		mantisLord2->SetType(eLayerType::Monster);
+
+		mantisLord3 = ya::MantisLord3::GetInstance();
+		scene->AddGameObject(mantisLord3, eLayerType::Monster);
+		mantisLord3->Initialize();
+		mantisLord3->GetComponent<Transform>()->SetPos(Vector2(1974.0f, 800.0f + 80.0f));
+		mantisLord3->SetType(eLayerType::Monster);
 
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);

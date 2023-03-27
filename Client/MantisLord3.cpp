@@ -14,6 +14,8 @@
 
 namespace ya
 {
+	MantisLord3* MantisLord3::instance = nullptr;
+
 	MantisLord3::MantisLord3()
 	{
 

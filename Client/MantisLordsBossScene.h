@@ -19,7 +19,9 @@ namespace ya
 
 	private:
 		class Player* mPlayer;
-
+		class MantisLord1* mantisLord1;
+		class MantisLord2* mantisLord2;
+		class MantisLord3* mantisLord3;
 
 		bool mantis1DefeatFlag = false;
 	};

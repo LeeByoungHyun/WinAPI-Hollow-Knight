@@ -43,6 +43,16 @@ namespace ya
 		MantisLord1();
 		~MantisLord1();
 
+		// 싱글톤
+		// 이미 인스턴스가 존재하면 인스턴스를 반환, 없다면 인스턴스 생성
+		static MantisLord1* GetInstance()
+		{
+			if (instance == nullptr)
+				instance = new MantisLord1();
+
+			return instance;
+		}
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -113,6 +123,8 @@ namespace ya
 		bool deathFlag			= false;
 		bool deathLeaveFlag		= false;
 
+		// 싱글톤 객체 인스턴스
+		static MantisLord1* instance;
 	};
 }
 

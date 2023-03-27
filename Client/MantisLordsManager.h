@@ -15,9 +15,9 @@ namespace ya
 		virtual void Release() override;
 
 	private:
-		class MantisLord1* mantis1;
-		class MantisLord2* mantis2;
-		class MantisLord3* mantis3;
+		class MantisLord1* mantisLord1;
+		class MantisLord2* mantisLord2;
+		class MantisLord3* mantisLord3;
 	};
 }
 
