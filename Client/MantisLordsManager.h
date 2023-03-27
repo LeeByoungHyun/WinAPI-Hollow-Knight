@@ -60,7 +60,9 @@ namespace ya
 
 		bool mantis2AttackFlag = false;
 		bool mantis3AttackFlag = false;
-		bool phase2Dash2Flag = false;
+
+		bool mantis2DeathFlag = false;
+		bool mantis3DeathFlag = false;
 	};
 }
 

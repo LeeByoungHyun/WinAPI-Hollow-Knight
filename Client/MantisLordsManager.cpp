@@ -67,6 +67,19 @@ namespace ya
 			mantis3AttackFlag = false;
 		}
 
+		// 2페이즈 진행중 둘 중 하나라도 죽을 시 3페이즈 진입
+		if ((mantisLord2->GetState() == MantisLord2::eMantisLordsState::ThroneWounded
+			|| mantisLord3->GetState() == MantisLord3::eMantisLordsState::ThroneWounded)
+			&& (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Idle
+				|| mantisLord3->GetState() == MantisLord3::eMantisLordsState::Idle))
+		{
+			mPhase = ePhaseState::Phase3;
+			if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::ThroneWounded)
+				mantis2DeathFlag = true;
+			else if (mantisLord3->GetState() == MantisLord3::eMantisLordsState::ThroneWounded)
+				mantis3DeathFlag = true;
+		}
+
 		// 모든 보스가 죽으면 메인 홀 씬으로 변경
 		if (flag4 == true)
 		{
@@ -253,17 +266,90 @@ namespace ya
 
 			}
 		}
-
-		// 둘 중 하나라도 죽을 시 3페이즈 진입
-		if (true)
-		{
-
-		}
 	}
 
 	void MantisLordsManager::phase3()
 	{
+		if (mantis2DeathFlag == true)
+		{
+			// 패턴 3가지 랜덤하게 실행
+			if (mantisLord3->GetState() == MantisLord3::eMantisLordsState::Idle)
+			{
+				mTime += Time::DeltaTime();
+				if (mTime >= 0.5f)
+				{
+					srand((unsigned int)time(NULL));
 
+					int direct = rand() % 2;
+					if (direct == 0)
+						mantisLord3->SetDirection(MantisLord3::eDirection::Left);
+					else
+						mantisLord3->SetDirection(MantisLord3::eDirection::Right);
+
+					int pattern = rand() % 3;
+					mTime = 0.0f;
+					switch (pattern)
+					{
+					case 0:	// Dash
+						mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+						break;
+
+					case 1:	// Dstab
+						mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+						break;
+
+					case 2:	// WallThrow
+						mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
+						break;
+
+					default:
+						mantisLord3->SetState(MantisLord3::eMantisLordsState::Idle);
+						break;
+					}
+				}
+			}
+		}
+
+		else if (mantis3DeathFlag == true)
+		{
+			// 패턴 3가지 랜덤하게 실행
+			if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Idle)
+			{
+				mTime += Time::DeltaTime();
+				if (mTime >= 1.0f)
+				{
+					srand((unsigned int)time(NULL));
+
+					int direct = rand() % 2;
+					if (direct == 0)
+						mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+					else
+						mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+
+					int pattern = rand() % 3;
+					mTime = 0.0f;
+					switch (pattern)
+					{
+					case 0:	// Dash
+						mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
+						break;
+
+					case 1:	// Dstab
+						mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
+						break;
+
+					case 2:	// WallThrow
+						mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
+						break;
+
+					default:
+						mantisLord2->SetState(MantisLord2::eMantisLordsState::Idle);
+						break;
+					}
+				}
+			}
+		}
+		
 	}
 
 	void MantisLordsManager::phase2Combo1()
