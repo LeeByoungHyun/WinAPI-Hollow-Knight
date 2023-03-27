@@ -430,25 +430,25 @@ namespace ya
 	{
 		if (dashArriveFlag == false)
 		{
-			int direction = rand() % 2;	// 패턴매니저에서 방향 관리
-			switch (direction)
+			//int direction = rand() % 2;	// 패턴매니저에서 방향 관리
+			switch (mDirection)
 			{
-			case 0:	// left
+			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-170.0f, -150.0f));
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
-				mDirection = eDirection::Left;
+				//mDirection = eDirection::Left;
 				tr->SetPos(Vector2(1200.0f + 1182.0f - 150.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveleft", false);
 				dashArriveFlag = true;
 
 				break;
 
-			case 1:	// right
+			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(-130.0f, -150.0f));
 				mCollider->SetSize(Vector2(300.0f, 150.0f));
 
-				mDirection = eDirection::Right;
+				//mDirection = eDirection::Right;
 				tr->SetPos(Vector2(1200.0f, 1300.0f - 103.0f));
 				mAnimator->Play(L"Mantis Lords_Dash Arriveright", false);
 				dashArriveFlag = true;
@@ -663,11 +663,11 @@ namespace ya
 	{
 		if (wallArriveFlag == false)
 		{
-			int direction = rand() % 2;
+			//int direction = rand() % 2;
 
-			switch (direction)
+			switch (mDirection)
 			{
-			case 0:	// left
+			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-300.0f, -550.0f));
 				mCollider->SetSize(Vector2(200.0f, 400.0f));
 				tr->SetPos(Vector2(2200.0f - 1183.0f + 230.0f, 1100.0f));
@@ -678,7 +678,7 @@ namespace ya
 
 				break;
 
-			case 1:	// right
+			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(100.0f, -550.0f));
 				mCollider->SetSize(Vector2(200.0f, 400.0f));
 				tr->SetPos(Vector2(2200.0f, 1100.0f));

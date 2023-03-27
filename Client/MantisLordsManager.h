@@ -12,6 +12,10 @@ namespace ya
 			Phase1,
 			Phase2Start,
 			Phase2,
+			Phase2Combo1,
+			Phase2Combo2,
+			Phase2Combo3,
+			Phase2Combo4,
 			Phase3,
 			End
 		};
@@ -23,12 +27,24 @@ namespace ya
 		virtual void Update() override;
 		virtual void Release() override;
 
+
 	private:
 		void phase1Start();
 		void phase1();
 		void phase2Start();
 		void phase2();
 		void phase3();
+
+		void phase2Dash1();
+		void phase2Dash2();
+
+		void phase2Combo1();
+		void phase2Combo2();
+		void phase2Combo3();
+		void phase2Combo4();
+
+		void phase2Dstab();
+		void phase2Wall();
 
 	private:
 		class MantisLord1* mantisLord1;
@@ -43,6 +59,10 @@ namespace ya
 		bool StartFlag2 = false;
 		bool startFlag3 = false;
 		bool flag4 = false;
+
+		bool mantis2AttackFlag = false;
+		bool mantis3AttackFlag = false;
+		bool phase2Dash2Flag = false;
 	};
 }
 

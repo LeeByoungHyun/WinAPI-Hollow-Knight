@@ -64,6 +64,7 @@ namespace ya
 
 		eMantisLordsState GetState() { return mState; }
 		void SetState(eMantisLordsState state) { mState = state; }
+		void SetDirection(eDirection direction) { mDirection = direction; }
 
 	private:
 		void idle();

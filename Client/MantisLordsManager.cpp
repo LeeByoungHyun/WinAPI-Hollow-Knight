@@ -38,14 +38,6 @@ namespace ya
 			mPhase = ePhaseState::Phase1Start;
 		}
 
-		// 2, 3번 보스중 한마리라도 죽으면 3페이즈 진입
-		if ((mantisLord2->GetState() == MantisLord2::eMantisLordsState::ThroneWounded 
-			|| mantisLord3->GetState() == MantisLord3::eMantisLordsState::ThroneWounded)
-			&& StartFlag2 == false)
-		{
-			mPhase = ePhaseState::Phase3;
-		}
-
 		// 모든 보스가 죽으면 보스 인사 애니메이션 출력 후 씬 종료
 		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::ThroneWounded 
 			&& mantisLord2->GetState() == MantisLord2::eMantisLordsState::ThroneWounded
@@ -64,6 +56,17 @@ namespace ya
 			}
 		}
 
+		// 2페이즈에서 보스가 모두 대기상태일 경우 
+		if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Idle
+			&& mantisLord3->GetState() == MantisLord3::eMantisLordsState::Idle
+			&& mantis2AttackFlag == true
+			&& mantis3AttackFlag == true)
+		{
+			mPhase = ePhaseState::Phase2;
+			mantis2AttackFlag = false;
+			mantis3AttackFlag = false;
+		}
+
 		// 모든 보스가 죽으면 메인 홀 씬으로 변경
 		if (flag4 == true)
 		{
@@ -71,6 +74,7 @@ namespace ya
 			if (mTime >= 3.0f)
 			{
 				SceneManager::LoadScene(eSceneType::MainHall);
+				mTime = 0.0f;
 			}
 		}
 
@@ -90,6 +94,22 @@ namespace ya
 		
 		case ya::MantisLordsManager::ePhaseState::Phase2:
 			phase2();
+			break;
+
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo1:
+			phase2Combo1();
+			break;
+
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo2:
+			phase2Combo2();
+			break;
+
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo3:
+			phase2Combo3();
+			break;
+
+		case ya::MantisLordsManager::ePhaseState::Phase2Combo4:
+			phase2Combo4();
 			break;
 
 		case ya::MantisLordsManager::ePhaseState::Phase3:
@@ -186,23 +206,26 @@ namespace ya
 			mTime += Time::DeltaTime();
 			if (mTime >= 2.0f)
 			{
+				mantis2AttackFlag = false;
+				mantis3AttackFlag = false;
 				mTime = 0.0f;
-				int pattern = rand() % 3;
+				int pattern = rand() % 4;
 				switch (pattern)
 				{
-				case 0:	// Dash
-					mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
-					mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+				case 0:	// Dash, Dstab
+					mPhase = ePhaseState::Phase2Combo1;
 					break;
 
-				case 1:	// Dstab
-					mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
-					mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+				case 1:	// Wall
+					mPhase = ePhaseState::Phase2Combo2;
 					break;
 
-				case 2:	// WallThrow
-					mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
-					mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
+				case 2:	// Wall
+					mPhase = ePhaseState::Phase2Combo3;
+					break;
+
+				case 3:	// Wall
+					mPhase = ePhaseState::Phase2Combo4;
 					break;
 
 				default:
@@ -210,6 +233,7 @@ namespace ya
 					mantisLord3->SetState(MantisLord3::eMantisLordsState::Idle);
 					break;
 				}
+
 			}
 		}
 
@@ -224,4 +248,134 @@ namespace ya
 	{
 
 	}
+
+	void MantisLordsManager::phase2Combo1()
+	{
+		// 2번보스 돌진 후 3번보스 돌진
+		if (mantis2AttackFlag == false)
+		{
+			int direct = rand() % 2;
+			switch (direct)
+			{
+			case 0:
+				mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+				mantisLord3->SetDirection(MantisLord3::eDirection::Left);
+				break;
+
+			case 1:
+				mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+				mantisLord3->SetDirection(MantisLord3::eDirection::Right);
+				break;
+			}
+
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
+			mantis2AttackFlag = true;
+			mTime = 0.0f;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		{
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+			mantis3AttackFlag = true;
+			mTime = 0.0f;
+		}
+	}
+
+	void MantisLordsManager::phase2Combo2()
+	{
+		// 2번보스 돌진 후 3번보스 내려찍기
+		if (mantis2AttackFlag == false)
+		{
+			int direct = rand() % 2;
+			switch (direct)
+			{
+			case 0:
+				mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+				break;
+
+			case 1:
+				mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+				break;
+			}
+
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
+			mantis2AttackFlag = true;
+			mTime = 0.0f;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		{
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+			mantis3AttackFlag = true;
+			mTime = 0.0f;
+		}
+	}
+
+	void MantisLordsManager::phase2Combo3()
+	{
+		// 2번보스 내려찍기 후 3번보스 돌진
+		if (mantis2AttackFlag == false)
+		{
+			int direct = rand() % 2;
+			switch (direct)
+			{
+			case 0:
+				mantisLord3->SetDirection(MantisLord3::eDirection::Left);
+				break;
+
+			case 1:
+				mantisLord3->SetDirection(MantisLord3::eDirection::Right);
+				break;
+			}
+
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
+			mantis2AttackFlag = true;
+			mTime = 0.0f;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		{
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+			mantis3AttackFlag = true;
+			mTime = 0.0f;
+		}
+	}
+
+	void MantisLordsManager::phase2Combo4()
+	{
+		// 2번보스 내려찍기 후 3번보스 내려찍기
+		if (mantis2AttackFlag == false)
+		{
+			mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
+			mantis2AttackFlag = true;
+			mTime = 0.0f;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mantis3AttackFlag == false && mTime >= 1.0f)
+		{
+			mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+			mantis3AttackFlag = true;
+			mTime = 0.0f;
+		}
+	}
+
+	void MantisLordsManager::phase2Dstab()
+	{
+		mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
+		mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+	}
+
+	void MantisLordsManager::phase2Wall()
+	{
+		mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
+		mantisLord2->SetDirection(MantisLord2::eDirection::Left);
+		mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
+		mantisLord2->SetDirection(MantisLord2::eDirection::Right);
+
+	}
 }
+
