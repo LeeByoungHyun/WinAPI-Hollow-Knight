@@ -64,15 +64,25 @@ namespace ya
 			&& flag4 == false)
 		{
 			mTime += Time::DeltaTime();
-			if (mTime >= 3.0f)
+			if (mTime >= 5.0f)
 			{
 				mantisLord1->SetState(MantisLord1::eMantisLordsState::ThroneBow);
 				mantisLord2->SetState(MantisLord2::eMantisLordsState::ThroneBow);
 				mantisLord3->SetState(MantisLord3::eMantisLordsState::ThroneBow);
 
-				// 액티브 씬 메인 홀 씬으로 변경하는 코드 추가
+				mTime = 0.0f;
+				flag4 = true;
 			}
-			
+		}
+
+		// 모든 보스가 죽으면 메인 홀 씬으로 변경
+		if (flag4 == true)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 3.0f)
+			{
+				SceneManager::LoadScene(eSceneType::MainHall);
+			}
 		}
 
 		// 2, 3번 보스가 동시에 움직이고 있으면 여기에서 패턴 관리
