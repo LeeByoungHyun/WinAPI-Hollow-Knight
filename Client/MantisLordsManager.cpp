@@ -123,24 +123,29 @@ namespace ya
 		// 패턴 3가지 랜덤하게 실행
 		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::Idle)
 		{
-			int pattern = rand() % 3;
-			switch (pattern)
+			mTime += Time::DeltaTime();
+			if (mTime >= 2.0f)
 			{
-			case 0:	// Dash
-				mantisLord1->SetState(MantisLord1::eMantisLordsState::DashArrive);
-				break;
+				int pattern = rand() % 3;
+				mTime = 0.0f;
+				switch (pattern)
+				{
+				case 0:	// Dash
+					mantisLord1->SetState(MantisLord1::eMantisLordsState::DashArrive);
+					break;
 
-			case 1:	// Dstab
-				mantisLord1->SetState(MantisLord1::eMantisLordsState::DstabArrive);
-				break;
+				case 1:	// Dstab
+					mantisLord1->SetState(MantisLord1::eMantisLordsState::DstabArrive);
+					break;
 
-			case 2:	// WallThrow
-				mantisLord1->SetState(MantisLord1::eMantisLordsState::WallArrive);
-				break;
+				case 2:	// WallThrow
+					mantisLord1->SetState(MantisLord1::eMantisLordsState::WallArrive);
+					break;
 
-			default:
-				mantisLord1->SetState(MantisLord1::eMantisLordsState::Idle);
-				break;
+				default:
+					mantisLord1->SetState(MantisLord1::eMantisLordsState::Idle);
+					break;
+				}
 			}
 		}
 
@@ -178,28 +183,32 @@ namespace ya
 		if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Idle
 			&& mantisLord3->GetState() == MantisLord3::eMantisLordsState::Idle)
 		{
-			int pattern = rand() % 3;
-			switch (pattern)
+			mTime += Time::DeltaTime();
+			if (mTime >= 2.0f)
 			{
-			case 0:	// Dash
-				mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
-				mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
-				break;
+				int pattern = rand() % 3;
+				switch (pattern)
+				{
+				case 0:	// Dash
+					mantisLord2->SetState(MantisLord2::eMantisLordsState::DashArrive);
+					mantisLord3->SetState(MantisLord3::eMantisLordsState::DashArrive);
+					break;
 
-			case 1:	// Dstab
-				mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
-				mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
-				break;
+				case 1:	// Dstab
+					mantisLord2->SetState(MantisLord2::eMantisLordsState::DstabArrive);
+					mantisLord3->SetState(MantisLord3::eMantisLordsState::DstabArrive);
+					break;
 
-			case 2:	// WallThrow
-				mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
-				mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
-				break;
+				case 2:	// WallThrow
+					mantisLord2->SetState(MantisLord2::eMantisLordsState::WallArrive);
+					mantisLord3->SetState(MantisLord3::eMantisLordsState::WallArrive);
+					break;
 
-			default:
-				mantisLord2->SetState(MantisLord2::eMantisLordsState::Idle);
-				mantisLord3->SetState(MantisLord3::eMantisLordsState::Idle);
-				break;
+				default:
+					mantisLord2->SetState(MantisLord2::eMantisLordsState::Idle);
+					mantisLord3->SetState(MantisLord3::eMantisLordsState::Idle);
+					break;
+				}
 			}
 		}
 
