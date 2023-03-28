@@ -173,6 +173,9 @@
     <Filter Include="Contents\Objects\Charactor\Mantis_Lords\Air Projectile">
       <UniqueIdentifier>{961111b6-48f7-46a5-b3d2-677fda147c47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\False_Knight">
+      <UniqueIdentifier>{7a00e69f-0de4-4d80-ae19-ad218c16d665}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -370,6 +373,9 @@
     <ClInclude Include="MantisLordsProjectile.h">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\Air Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="FalseKnight.h">
+      <Filter>Contents\Objects\Charactor\False_Knight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -545,6 +551,9 @@
     </ClCompile>
     <ClCompile Include="MantisLordsProjectile.cpp">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\Air Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseKnight.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
