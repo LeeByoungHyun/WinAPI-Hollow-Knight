@@ -41,7 +41,7 @@ namespace ya
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 
-		BossDoor* mantisDoor = object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
+		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
@@ -55,11 +55,6 @@ namespace ya
 	void MainHallScene::Update()
 	{
 		Scene::Update();
-
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::MantisLordsBoss);
-		}
 
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
 		{

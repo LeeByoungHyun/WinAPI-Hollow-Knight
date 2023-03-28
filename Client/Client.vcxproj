@@ -152,6 +152,7 @@
     <ClInclude Include="MantisLords.h" />
     <ClInclude Include="MantisLordsBossScene.h" />
     <ClInclude Include="MantisLordsManager.h" />
+    <ClInclude Include="MantisLordsProjectile.h" />
     <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="MantisThroneBack.h" />
     <ClInclude Include="PlayerSkull.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="MantisLords.cpp" />
     <ClCompile Include="MantisLordsBossScene.cpp" />
     <ClCompile Include="MantisLordsManager.cpp" />
+    <ClCompile Include="MantisLordsProjectile.cpp" />
     <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="MantisThroneBack.cpp" />
     <ClCompile Include="PlayerSkull.cpp" />
