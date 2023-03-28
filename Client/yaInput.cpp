@@ -1,4 +1,7 @@
 #include "yaInput.h"
+#include "yaApplication.h"
+
+extern ya::Application application;
 
 namespace ya
 {
@@ -14,7 +17,8 @@ namespace ya
 		VK_NUMPAD0,
 	};
 
-	std::vector <Input::Key> Input::mKeys;
+	std::vector<Input::Key> Input::mKeys;
+	Vector2 Input::mMousePos = Vector2::Zero;
 
 	void Input::Initialize()
 	{
@@ -32,37 +36,50 @@ namespace ya
 
 	void Input::Update()
 	{
-		for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
+		if (GetFocus())
 		{
-			// 키 눌림
-			if (GetAsyncKeyState(ASCII[i]) & 0x8000)
+
+			for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 			{
-				// 이전 프레임에서 눌려 있었을 경우
-				if (mKeys[i].bePressed == true)
+				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
 				{
-					mKeys[i].state = eKeyState::Pressed;
-				}
+					// 이전 프레임에도 눌려 있었다
+					if (mKeys[i].bePressed)
+						mKeys[i].state = eKeyState::Pressed;
+					else
+						mKeys[i].state = eKeyState::Down;
 
-				// 이전 프레임에서 눌려 있지 않았을 경우
-				else
+					mKeys[i].bePressed = true;
+				}
+				else // 현재 프레임에 키가 눌려있지 않다.
 				{
-					mKeys[i].state = eKeyState::Down;
+					// 이전 프레임에 내키가 눌려있엇다.
+					if (mKeys[i].bePressed)
+						mKeys[i].state = eKeyState::Up;
+					else
+						mKeys[i].state = eKeyState::None;
+
+					mKeys[i].bePressed = false;
 				}
-
-				mKeys[i].bePressed = true;
-
 			}
 
-			else // 현재 프레임에 키가 눌려있지 않다
+			POINT mousePos = {};
+			GetCursorPos(&mousePos);
+
+			ScreenToClient(application.GetHwnd(), &mousePos);
+			mMousePos.x = mousePos.x;
+			mMousePos.y = mousePos.y;
+		}
+		else
+		{
+			for (UINT i = 0; i < (UINT)eKeyCode::END; i++)
 			{
-				// 이전 프레임에서 눌려 있었을 경우
-				if (mKeys[i].bePressed == true)
+				if (eKeyState::Down == mKeys[i].state
+					|| eKeyState::Pressed == mKeys[i].state)
 				{
 					mKeys[i].state = eKeyState::Up;
 				}
-
-				// 이전 프레임에서 눌려 있지 않았을 경우
-				else
+				else if (eKeyState::Up == mKeys[i].state)
 				{
 					mKeys[i].state = eKeyState::None;
 				}

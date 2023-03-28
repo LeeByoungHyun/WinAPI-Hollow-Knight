@@ -13,8 +13,7 @@ namespace ya
 		NUM4, NUM5, NUM6,
 		NUM1, NUM2, NUM3,
 		NUM0,
-
-		//LBUTTON, RBUTTON
+		LBUTTON, RBUTTON,
 		END,
 	};
 
@@ -67,5 +66,6 @@ namespace ya
 
 	private:
 		static std::vector<Key> mKeys;
+		static Vector2 mMousePos;
 	};
 }
