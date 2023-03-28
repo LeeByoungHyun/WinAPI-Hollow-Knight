@@ -25,7 +25,8 @@ namespace ya
 			FocusGet,
 			FocusGetOnce,
 			Death,
-			CastFireball
+			CastFireball,
+			Enter
 		};
 
 		enum class eDirection
@@ -35,7 +36,6 @@ namespace ya
 		};
 
 		Player();
-		Player(const Player& other);
 		~Player();
 
 		// ΩÃ±€≈Ê
@@ -85,6 +85,7 @@ namespace ya
 		void focusEnd();
 		void focusGet();
 		void focusGetOnce();
+		void enter();
 
 		void slashEndEvent();
 		void slashAltEndEvent();
@@ -99,7 +100,6 @@ namespace ya
 		void focusGetOnceEndEvent();
 		void castFireballEndEvent();
 		void doubleJumpEndEvent();
-
 
 	private:
 		class Transform* tr;

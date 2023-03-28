@@ -167,6 +167,9 @@
     <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLordsManager">
       <UniqueIdentifier>{1774a97c-b2ff-4c61-a1f3-8bbaf29418b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\BossDoor">
+      <UniqueIdentifier>{deb3d4f8-f34d-4c0a-99b5-94bf6807c863}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -358,6 +361,9 @@
     <ClInclude Include="MantisLordsManager.h">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLordsManager</Filter>
     </ClInclude>
+    <ClInclude Include="BossDoor.h">
+      <Filter>Contents\Objects\Struct\BossDoor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -527,6 +533,9 @@
     </ClCompile>
     <ClCompile Include="MantisLordsManager.cpp">
       <Filter>Contents\Objects\Charactor\Mantis_Lords\MantisLordsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BossDoor.cpp">
+      <Filter>Contents\Objects\Struct\BossDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ enum class eLayerType
 	Manager,
 	BG,
 	BGObject,
+	Object,
 	Ground,
 	Wall,
 	BackEffect,

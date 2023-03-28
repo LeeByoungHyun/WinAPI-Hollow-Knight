@@ -14,6 +14,7 @@
 #include "GroundCollider.h"
 #include "LongPlatform.h"
 #include "LongPlatformBackPixel.h"
+#include "BossDoor.h"
 
 namespace ya
 {
@@ -40,20 +41,15 @@ namespace ya
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 
-		//object::Instantiate<LongPlatformBackPixel>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
-		//object::Instantiate<LongPlatformBackPixel>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
+		BossDoor* mantisDoor = object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
-		//object::Instantiate<LongPlatform>(Vector2(1724.0f, 900.0f), eLayerType::Ground);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
 		scene->AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
-
-		
-
 	}
 
 	void MainHallScene::Update()
@@ -93,6 +89,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Object, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(800.0f);
