@@ -67,6 +67,8 @@ namespace ya
 		bool GetIdleFlag() { return idleFlag; }
 		void SetIdleFlag(bool flag) { idleFlag = flag; }
 
+		bool GetEnterComplateFlag() { return enterComplateFlag; }
+
 	private:
 		void idle();
 		void walk();
@@ -100,6 +102,7 @@ namespace ya
 		void focusGetOnceEndEvent();
 		void castFireballEndEvent();
 		void doubleJumpEndEvent();
+		void enterComplateEvent();
 
 	private:
 		class Transform* tr;
@@ -134,7 +137,8 @@ namespace ya
 		bool fallFlag			= false;
 		bool stunFlag			= false;
 		bool recoilFlag			= false;
-		
+		bool enterFlag			= false;
+		bool enterComplateFlag	= false;
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
 	};

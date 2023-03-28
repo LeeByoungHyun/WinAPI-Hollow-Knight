@@ -57,32 +57,25 @@ namespace ya
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Run\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Run\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\left", Vector2::Zero, 0.025f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Dash\\right", Vector2::Zero, 0.025f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\left", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Slash\\right", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\left", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAlt\\right", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlash\\neutral", Vector2::Zero, 0.033f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DownSlash\\neutral", Vector2::Zero, 0.033f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\left", Vector2::Zero, 1.0f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\right", Vector2::Zero, 1.0f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Death\\neutral", Vector2::Zero, 0.066f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Focus\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Focus\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusEnd\\left", Vector2::Zero, 0.1f);
@@ -91,16 +84,12 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGet\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FocusGetOnce\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Airborne\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Fall\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Enter\\neutral", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
@@ -109,14 +98,11 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_SlashAltright") = std::bind(&Player::slashAltEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_UpSlashneutral") = std::bind(&Player::upSlashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_DownSlashneutral") = std::bind(&Player::downSlashEndEvent, this);
-
 		mAnimator->GetCompleteEvent(L"Knight_Dashleft") = std::bind(&Player::dashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Dashright") = std::bind(&Player::dashEndEvent, this);
-
 		mAnimator->GetCompleteEvent(L"Knight_Recoilleft") = std::bind(&Player::recoilEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Recoilright") = std::bind(&Player::recoilEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Deathneutral") = std::bind(&Player::deathEndEvent, this);
-
 		mAnimator->GetCompleteEvent(L"Knight_Focusleft") = std::bind(&Player::focusEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Focusright") = std::bind(&Player::focusEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FocusEndleft") = std::bind(&Player::focusEndEndEvent, this);
@@ -125,12 +111,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_FocusGetright") = std::bind(&Player::focusGetEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceleft") = std::bind(&Player::focusGetOnceEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FocusGetOnceright") = std::bind(&Player::focusGetOnceEndEvent, this);
-
 		mAnimator->GetCompleteEvent(L"Knight_FireballCastleft") = std::bind(&Player::castFireballEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_FireballCastright") = std::bind(&Player::castFireballEndEvent, this);
-
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpleft") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Enterneutral") = std::bind(&Player::enterComplateEvent, this);
+
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -186,6 +172,7 @@ namespace ya
 			jumpFlag = false;
 			doubleJumpFlag = false;
 			fallFlag = false;
+			enterFlag = false;
 			//invincibilityFlag = false;
 
 			// 속도 0으로
@@ -285,6 +272,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::CastFireball:
 			castFireball();
+			break;
+
+		case ya::Player::ePlayerState::Enter:
+			enter();
 			break;
 
 		default:
@@ -1284,6 +1275,11 @@ namespace ya
 
 	void Player::enter()
 	{
+		if (enterFlag == false)
+		{
+			mAnimator->Play(L"Knight_Enterneutral", false);
+			enterFlag = true;
+		}
 	}
 
 	void Player::slashEndEvent()
@@ -1555,5 +1551,10 @@ namespace ya
 			mAnimator->Play(L"Knight_Fallleft", true);
 		else if (mDirection == eDirection::Right)
 			mAnimator->Play(L"Knight_Fallright", true);
+	}
+
+	void Player::enterComplateEvent()
+	{
+		enterComplateFlag = true;
 	}
 }

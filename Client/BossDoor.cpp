@@ -74,9 +74,15 @@ namespace ya
 			if (mplayer == nullptr)
 				return;
 
-			if (Input::GetKeyState(eKeyCode::UP) == eKeyState::Down)
+			if (Input::GetKeyState(eKeyCode::UP) == eKeyState::Down 
+				&& mplayer->GetComponent<RigidBody>()->GetGround() == true)
 			{
-				
+				mplayer->SetPlayerState(Player::ePlayerState::Enter);
+			}
+
+			if (mplayer->GetEnterComplateFlag() == true)
+			{
+				SceneManager::LoadScene(eSceneType::MantisLordsBoss);
 			}
 		}
 	}
