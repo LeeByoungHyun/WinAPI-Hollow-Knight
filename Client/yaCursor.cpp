@@ -31,15 +31,7 @@ namespace ya
 		GameObject::Update();
 
 		tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
-		POINT mouse;
-		::GetCursorPos(&mouse);
-
-		pos.x = mouse.x;
-		pos.y = mouse.y;
-
-		tr->SetPos(pos);
+		tr->SetPos(Input::GetMousePos());
 	}
 
 	void Cursor::Render(HDC hdc)
