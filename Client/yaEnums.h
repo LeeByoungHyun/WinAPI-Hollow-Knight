@@ -7,6 +7,7 @@ enum class eSceneType
 	Romm1,
 	Boss,
 	MantisLordsBoss,
+	FalseKnightBoss,
 	Ending,
 	End
 };

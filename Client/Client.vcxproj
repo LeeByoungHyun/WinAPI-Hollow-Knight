@@ -135,6 +135,8 @@
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
     <ClInclude Include="FalseKnight.h" />
+    <ClInclude Include="FalseKnightBossScene.h" />
+    <ClInclude Include="FalseKnightPlatform.h" />
     <ClInclude Include="FireballCastEffect.h" />
     <ClInclude Include="FireballCastEffectLeft.h" />
     <ClInclude Include="FireballCastEffectRight.h" />
@@ -201,6 +203,8 @@
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
     <ClCompile Include="FalseKnight.cpp" />
+    <ClCompile Include="FalseKnightBossScene.cpp" />
+    <ClCompile Include="FalseKnightPlatform.cpp" />
     <ClCompile Include="FireballCastEffect.cpp" />
     <ClCompile Include="FireballCastEffectLeft.cpp" />
     <ClCompile Include="FireballCastEffectRight.cpp" />

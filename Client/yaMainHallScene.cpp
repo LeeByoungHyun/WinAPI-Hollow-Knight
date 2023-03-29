@@ -60,6 +60,11 @@ namespace ya
 		{
 			SceneManager::LoadScene(eSceneType::Title);
 		}
+
+		if (Input::GetKeyState(eKeyCode::M) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::FalseKnightBoss);
+		}
 	}
 
 	void MainHallScene::Render(HDC hdc)
