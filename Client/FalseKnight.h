@@ -38,6 +38,16 @@ namespace ya
 		FalseKnight();
 		~FalseKnight();
 
+		// 싱글톤
+		// 이미 인스턴스가 존재하면 인스턴스를 반환, 없다면 인스턴스 생성
+		static FalseKnight* GetInstance()
+		{
+			if (instance == nullptr)
+				instance = new FalseKnight();
+
+			return instance;
+		}
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -75,6 +85,7 @@ namespace ya
 		class RigidBody* mRigidbody;
 		eFalseKnightState mState;
 		eDirection mDirection;
+		float mTime = 0.0f;
 
 		bool idleFlag = false;
 		bool runAnticipateFlag = false;
@@ -95,5 +106,8 @@ namespace ya
 		bool stunOpenedFlag = false;
 		bool stunHitFlag = false;
 		bool deathFlag = false;
+
+		// 싱글톤 객체 인스턴스
+		static FalseKnight* instance;
 	};
 }

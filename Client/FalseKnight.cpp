@@ -9,9 +9,12 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 
+#include "yaPlayer.h"
 
 namespace ya
 {
+	FalseKnight* FalseKnight::instance = nullptr;
+
 	FalseKnight::FalseKnight()
 	{
 
@@ -24,7 +27,11 @@ namespace ya
 
 	void FalseKnight::Initialize()
 	{
+		//mRigidbody = AddComponent<RigidBody>();
+		mCollider = AddComponent<Collider>();
 		mAnimator = AddComponent<Animator>();
+		tr = AddComponent<Transform>();
+
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Idle\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Idle\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Run(Anticipate)\\left", Vector2::Zero, 0.1f);
@@ -74,18 +81,27 @@ namespace ya
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
-		mRigidbody = AddComponent<RigidBody>();
-
-		mCollider = AddComponent<Collider>();
-		mCollider->SetCenter(Vector2(0.0f, 0.0f));
-		mCollider->SetSize(Vector2(300.0f, 300.0f));
-
 		GameObject::Initialize();
 	}
 
 	void FalseKnight::Update()
 	{
 		GameObject::Update();
+
+		// 플레이어 위치에 따라 방향 전환
+		Vector2 playerPos = Player::GetInstance()->GetPos();
+		if (playerPos.x > tr->GetPos().x)
+			mDirection = eDirection::Right;
+		else
+			mDirection = eDirection::Left;
+
+		// 테스트용 코드
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.0f)
+		{
+			idleFlag = false;
+			mTime = 0.0f;
+		}
 
 		switch (mState)
 		{
@@ -199,17 +215,20 @@ namespace ya
 	{
 		if (idleFlag == false)
 		{
-			int direction = rand() % 2;
-			switch (direction)
+			switch (mDirection)
 			{
-			case 0:	// left
-				mDirection = eDirection::Left;
+			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+				mCollider->SetSize(Vector2(275.0f, 300.0f));
+
 				mAnimator->Play(L"False Knight_Idleleft", true);
 				idleFlag = true;
 				break;
 
-			case 1:	// right
-				mDirection = eDirection::Right;
+			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(75.0f, -300.0f));
+				mCollider->SetSize(Vector2(275.0f, 300.0f));
+
 				mAnimator->Play(L"False Knight_Idleright", true);
 				idleFlag = true;
 				break;
