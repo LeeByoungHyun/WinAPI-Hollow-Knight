@@ -72,8 +72,28 @@ namespace ya
 		class Animator* mAnimator;
 		class Collider* mCollider;
 		class Transform* tr;
-
+		class RigidBody* mRigidbody;
 		eFalseKnightState mState;
+		eDirection mDirection;
 
+		bool idleFlag = false;
+		bool runAnticipateFlag = false;
+		bool runFlag = false;
+		bool jumpAnticipateFlag = false;
+		bool jumpFlag = false;
+		bool landFlag = false;
+		bool attackAnticipateFlag = false;
+		bool attackFlag = false;
+		bool attackRecoverFlag = false;
+		bool jumpAttackUpFlag = false;
+		bool jumpAttackPart1Flag = false;
+		bool jumpAttackPart2Flag = false;
+		bool jumpAttackPart3Flag = false;
+		bool stunRollFlag = false;
+		bool stunRollEndFlag = false;
+		bool stunOpenFlag = false;
+		bool stunOpenedFlag = false;
+		bool stunHitFlag = false;
+		bool deathFlag = false;
 	};
 }
