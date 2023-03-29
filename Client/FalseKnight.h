@@ -48,9 +48,32 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 	private:
+		void idle();
+		void runAnticipate();
+		void run();
+		void jumpAnticipate();
+		void jump();
+		void land();
+		void attackAnticipate();
+		void attack();
+		void attackRecover();
+		void jumpAttackUp();
+		void jumpAttackPart1();
+		void jumpAttackPart2();
+		void jumpAttackPart3();
+		void stunRoll();
+		void stunRollEnd();
+		void stunOpen();
+		void stunOpened();
+		void stunHit();
+		void death();
+
+	private:
 		class Animator* mAnimator;
 		class Collider* mCollider;
 		class Transform* tr;
+
+		eFalseKnightState mState;
 
 	};
 }

@@ -71,12 +71,118 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->Play(L"False Knight_Idleleft", true);
+		mState = eFalseKnightState::Idle;
+
 		GameObject::Initialize();
 	}
 
 	void FalseKnight::Update()
 	{
 		GameObject::Update();
+
+		/*
+			Idle,
+			RunAnticipate,
+			Run,
+			JumpAnticipate,
+			Jump,
+			Land,
+			AttackAnticipate,
+			Attack,
+			AttackRecover,
+			JumpAttackUp,
+			JumpAttackPart1,
+			JumpAttackPart2,
+			JumpAttackPart3,
+			StunRoll,
+			StunRollEnd,
+			StunOpen,
+			StunOpened,
+			StunHit,
+			Death,
+		*/
+		switch (mState)
+		{
+		case ya::FalseKnight::eFalseKnightState::Idle:
+			idle();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::RunAnticipate:
+			runAnticipate();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Run:
+			run();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::JumpAnticipate:
+			jumpAnticipate();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Jump:
+			jump();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Land:
+			land();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::AttackAnticipate:
+			attackAnticipate();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Attack:
+			attack();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::AttackRecover:
+			attackRecover();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::JumpAttackUp:
+			jumpAttackUp();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::JumpAttackPart1:
+			jumpAttackPart1();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::JumpAttackPart2:
+			jumpAttackPart2();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::JumpAttackPart3:
+			jumpAttackPart3();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::StunRoll:
+			stunRoll();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::StunRollEnd:
+			stunRollEnd();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::StunOpen:
+			stunOpen();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::StunOpened:
+			stunOpened();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::StunHit:
+			stunHit();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Death:
+			death();
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	void FalseKnight::Render(HDC hdc)
@@ -102,5 +208,62 @@ namespace ya
 	void FalseKnight::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionExit(other);
+	}
+	void FalseKnight::idle()
+	{
+	}
+	void FalseKnight::runAnticipate()
+	{
+	}
+	void FalseKnight::run()
+	{
+	}
+	void FalseKnight::jumpAnticipate()
+	{
+	}
+	void FalseKnight::jump()
+	{
+	}
+	void FalseKnight::land()
+	{
+	}
+	void FalseKnight::attackAnticipate()
+	{
+	}
+	void FalseKnight::attack()
+	{
+	}
+	void FalseKnight::attackRecover()
+	{
+	}
+	void FalseKnight::jumpAttackUp()
+	{
+	}
+	void FalseKnight::jumpAttackPart1()
+	{
+	}
+	void FalseKnight::jumpAttackPart2()
+	{
+	}
+	void FalseKnight::jumpAttackPart3()
+	{
+	}
+	void FalseKnight::stunRoll()
+	{
+	}
+	void FalseKnight::stunRollEnd()
+	{
+	}
+	void FalseKnight::stunOpen()
+	{
+	}
+	void FalseKnight::stunOpened()
+	{
+	}
+	void FalseKnight::stunHit()
+	{
+	}
+	void FalseKnight::death()
+	{
 	}
 }
