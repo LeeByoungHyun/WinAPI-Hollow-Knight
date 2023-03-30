@@ -218,7 +218,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-200.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Idleleft", true);
@@ -226,7 +226,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(75.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Idleright", true);
