@@ -33,7 +33,6 @@ namespace ya
 		mFalseKnight = ya::FalseKnight::GetInstance();
 		scene->AddGameObject(mFalseKnight, eLayerType::Monster);
 		mFalseKnight->Initialize();
-		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1000.0f));
 		mFalseKnight->SetType(eLayerType::Monster);
 
 		mPlayer = ya::Player::GetInstance();
@@ -75,6 +74,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 
 		Camera::SetTarget(mPlayer);
@@ -84,6 +84,7 @@ namespace ya
 		Camera::SetMaxY(850.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
 	}
 
 	void FalseKnightBossScene::Exit()

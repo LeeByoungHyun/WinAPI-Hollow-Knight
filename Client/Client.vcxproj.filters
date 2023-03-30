@@ -56,9 +56,6 @@
     <Filter Include="Contents\Scenes\MainHallScene">
       <UniqueIdentifier>{e8d86363-73f2-428d-a40a-d0b8ec2b2ed1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scenes\Room1Scene">
-      <UniqueIdentifier>{d868db69-3b8b-4a6f-866d-c2a49c1a3ee8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\Animation">
       <UniqueIdentifier>{ceff0711-6a30-4e9b-a2c9-5d153de03624}</UniqueIdentifier>
     </Filter>
@@ -175,6 +172,15 @@
     </Filter>
     <Filter Include="Contents\Objects\Charactor\False_Knight">
       <UniqueIdentifier>{7a00e69f-0de4-4d80-ae19-ad218c16d665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\False_Knight\NewFilter1">
+      <UniqueIdentifier>{066189f7-93da-4983-acd8-f7c3ac6cd7c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\FalseKnightPlatform">
+      <UniqueIdentifier>{6153e236-b48c-4787-8357-a8500bc9d835}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\FalseKnightBossScene">
+      <UniqueIdentifier>{17e35d86-d3ab-487f-bcc2-b5bb3329dba5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +382,12 @@
     <ClInclude Include="FalseKnight.h">
       <Filter>Contents\Objects\Charactor\False_Knight</Filter>
     </ClInclude>
+    <ClInclude Include="FalseKnightPlatform.h">
+      <Filter>Contents\Objects\Struct\FalseKnightPlatform</Filter>
+    </ClInclude>
+    <ClInclude Include="FalseKnightBossScene.h">
+      <Filter>Contents\Scenes\FalseKnightBossScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -554,6 +566,12 @@
     </ClCompile>
     <ClCompile Include="FalseKnight.cpp">
       <Filter>Contents\Objects\Charactor\False_Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseKnightPlatform.cpp">
+      <Filter>Contents\Objects\Struct\FalseKnightPlatform</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseKnightBossScene.cpp">
+      <Filter>Contents\Scenes\FalseKnightBossScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

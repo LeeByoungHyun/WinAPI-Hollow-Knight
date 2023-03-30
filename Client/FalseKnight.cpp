@@ -8,6 +8,7 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
+#include "yaRigidBody.h"
 
 #include "yaPlayer.h"
 
@@ -27,7 +28,7 @@ namespace ya
 
 	void FalseKnight::Initialize()
 	{
-		//mRigidbody = AddComponent<RigidBody>();
+		mRigidbody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
 		mAnimator = AddComponent<Animator>();
 		tr = AddComponent<Transform>();
@@ -77,8 +78,11 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
 
-		mState = eFalseKnightState::StunOpen;
+		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
+
+		mRigidbody->SetMass(1.0f);
+		mRigidbody->SetGravity(Vector2(0.0f, 2000.0f));
 
 		GameObject::Initialize();
 	}
@@ -251,6 +255,33 @@ namespace ya
 				break;
 
 			default:
+				break;
+			}
+		}
+
+		// Idle 상태에서 일정 시간이 지나면 패턴중 하나를 랜덤하게 실행
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.5f)
+		{
+			srand((unsigned int)time(NULL));
+			int pattern = rand() % 3;
+			mTime = 0.0f;
+			switch (pattern)
+			{
+			case 0:	// Jump to Player
+				break;
+
+			case 1:	// Jump Attack to Player
+				break;
+
+			case 2:	// Attack
+				break;
+
+			case 3:	// Attack after jump away from player
+				break;
+
+			default:
+				mState = eFalseKnightState::Idle;
 				break;
 			}
 		}

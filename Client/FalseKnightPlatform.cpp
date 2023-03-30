@@ -11,7 +11,7 @@
 #include "yaCamera.h"
 
 #include "yaPlayer.h"
-
+#include "FalseKnight.h"
 
 namespace ya
 {
@@ -92,6 +92,28 @@ namespace ya
 
 			playerPos.y = objectColPos.y + 1.0f;
 			playerTr->SetPos(playerPos);
+		}
+
+		else if (otherType == eLayerType::Monster)
+		{
+			FalseKnight* mFalseKnight = FalseKnight::GetInstance();
+			if (mFalseKnight == nullptr)
+				return;
+
+			RigidBody* rb = mFalseKnight->GetComponent<RigidBody>();
+
+			Collider* objectCol = this->GetComponent<Collider>();
+			Vector2 objectColPos = objectCol->GetPos();
+
+			Transform* falseTr = mFalseKnight->GetComponent<Transform>();
+			Transform* objectTr = this->GetComponent<Transform>();
+			Vector2 falsePos = falseTr->GetPos();
+			Vector2 objectPos = objectTr->GetPos();
+
+			falsePos.y = objectColPos.y + 1.0f;
+			falseTr->SetPos(falsePos);
+
+			mFalseKnight->GetComponent<RigidBody>()->SetGround(true);
 		}
 	}
 
