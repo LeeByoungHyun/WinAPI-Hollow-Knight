@@ -173,14 +173,14 @@
     <Filter Include="Contents\Objects\Charactor\False_Knight">
       <UniqueIdentifier>{7a00e69f-0de4-4d80-ae19-ad218c16d665}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Charactor\False_Knight\NewFilter1">
-      <UniqueIdentifier>{066189f7-93da-4983-acd8-f7c3ac6cd7c8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects\Struct\FalseKnightPlatform">
       <UniqueIdentifier>{6153e236-b48c-4787-8357-a8500bc9d835}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Scenes\FalseKnightBossScene">
       <UniqueIdentifier>{17e35d86-d3ab-487f-bcc2-b5bb3329dba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\False_Knight\FalseKnightManager">
+      <UniqueIdentifier>{066189f7-93da-4983-acd8-f7c3ac6cd7c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +388,9 @@
     <ClInclude Include="FalseKnightBossScene.h">
       <Filter>Contents\Scenes\FalseKnightBossScene</Filter>
     </ClInclude>
+    <ClInclude Include="FalseKnightManager.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\FalseKnightManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -572,6 +575,9 @@
     </ClCompile>
     <ClCompile Include="FalseKnightBossScene.cpp">
       <Filter>Contents\Scenes\FalseKnightBossScene</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseKnightManager.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\FalseKnightManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

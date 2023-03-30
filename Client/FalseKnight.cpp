@@ -264,20 +264,25 @@ namespace ya
 		if (mTime >= 1.5f)
 		{
 			srand((unsigned int)time(NULL));
-			int pattern = rand() % 3;
+			//pattern = rand() % 4;	
+			pattern = 0;
 			mTime = 0.0f;
+			idleFlag = false;
 			switch (pattern)
 			{
 			case 0:	// Jump to Player
+				mState = eFalseKnightState::JumpAnticipate;
 				break;
 
 			case 1:	// Jump Attack to Player
+				mState = eFalseKnightState::JumpAnticipate;
 				break;
 
 			case 2:	// Attack
 				break;
 
 			case 3:	// Attack after jump away from player
+				mState = eFalseKnightState::JumpAnticipate;
 				break;
 
 			default:
@@ -369,6 +374,27 @@ namespace ya
 				break;
 			}
 		}
+
+		// pattern 변수에 따라 다른 방향으로 점프해야 함
+		switch(pattern)
+		{
+		case 0:	// Jump to Player
+			break;
+
+		case 1:	// Jump Attack to Player
+			break;
+
+		case 2:	// Attack
+			break;
+
+		case 3:	// Attack after jump away from player
+			break;
+
+		default:
+			break;
+		}
+
+
 	}
 
 	void FalseKnight::jump()

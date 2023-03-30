@@ -86,6 +86,7 @@ namespace ya
 		eFalseKnightState mState;
 		eDirection mDirection;
 		float mTime = 0.0f;
+		int pattern;
 
 		bool idleFlag = false;
 		bool runAnticipateFlag = false;
