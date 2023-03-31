@@ -86,15 +86,18 @@ namespace ya
 		void stunHit();
 		void death();
 
-		void jumpAnticipateComplateEvent();
-		void jumpComplateEvent();
-		void landComplateEvent();
-		void jumpAttackPart1ComplateEvent();
-		void jumpAttackPart2ComplateEvent();
-		void jumpAttackPart3ComplateEvent();
-		void attackAnticipateComplateEvent();
-		void attackComplateEvent();
-		void attackRecoverComplateEvent();
+		void jumpAnticipateCompleteEvent();
+		void jumpCompleteEvent();
+		void landCompleteEvent();
+		void jumpAttackPart1CompleteEvent();
+		void jumpAttackPart2CompleteEvent();
+		void jumpAttackPart3CompleteEvent();
+		void attackAnticipateCompleteEvent();
+		void attackCompleteEvent();
+		void attackRecoverCompleteEvent();
+		void stunRollCompleteEvent();
+		void stunRollEndCompleteEvent();
+		void stunOpenCompleteEvent();
 
 	private:
 		class Animator* mAnimator;

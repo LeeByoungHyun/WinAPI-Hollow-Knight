@@ -79,23 +79,27 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
 
-		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)left") = std::bind(&FalseKnight::jumpAnticipateComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)right") = std::bind(&FalseKnight::jumpAnticipateComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Landleft") = std::bind(&FalseKnight::landComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Landright") = std::bind(&FalseKnight::landComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)left") = std::bind(&FalseKnight::jumpAttackPart1ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)right") = std::bind(&FalseKnight::jumpAttackPart1ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)left") = std::bind(&FalseKnight::jumpAttackPart2ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)right") = std::bind(&FalseKnight::jumpAttackPart2ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)left") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)right") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)left") = std::bind(&FalseKnight::attackAnticipateComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)right") = std::bind(&FalseKnight::attackAnticipateComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attackleft") = std::bind(&FalseKnight::attackComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attackright") = std::bind(&FalseKnight::attackComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)left") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
-		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)right") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
-		
+		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)left") = std::bind(&FalseKnight::jumpAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)right") = std::bind(&FalseKnight::jumpAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Landleft") = std::bind(&FalseKnight::landCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Landright") = std::bind(&FalseKnight::landCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)left") = std::bind(&FalseKnight::jumpAttackPart1CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)right") = std::bind(&FalseKnight::jumpAttackPart1CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)left") = std::bind(&FalseKnight::jumpAttackPart2CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)right") = std::bind(&FalseKnight::jumpAttackPart2CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)left") = std::bind(&FalseKnight::jumpAttackPart3CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)right") = std::bind(&FalseKnight::jumpAttackPart3CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)left") = std::bind(&FalseKnight::attackAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)right") = std::bind(&FalseKnight::attackAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attackleft") = std::bind(&FalseKnight::attackCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attackright") = std::bind(&FalseKnight::attackCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)left") = std::bind(&FalseKnight::attackRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)right") = std::bind(&FalseKnight::attackRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll)left") = std::bind(&FalseKnight::stunRollCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll)right") = std::bind(&FalseKnight::stunRollCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll End)left") = std::bind(&FalseKnight::stunRollEndCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll End)right") = std::bind(&FalseKnight::stunRollEndCompleteEvent, this);
+
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
@@ -792,48 +796,63 @@ namespace ya
 
 	}
 
-	void FalseKnight::jumpAnticipateComplateEvent()
+	void FalseKnight::jumpAnticipateCompleteEvent()
 	{
 		jumpReadyFlag = true;
 	}
 
-	void FalseKnight::jumpComplateEvent()
+	void FalseKnight::jumpCompleteEvent()
 	{
 
 	}
 
-	void FalseKnight::landComplateEvent()
+	void FalseKnight::landCompleteEvent()
 	{
 		mState = eFalseKnightState::Idle;
 	}
 
-	void FalseKnight::jumpAttackPart1ComplateEvent()
+	void FalseKnight::jumpAttackPart1CompleteEvent()
 	{
 		mState = eFalseKnightState::JumpAttackPart2;
 	}
 
-	void FalseKnight::jumpAttackPart2ComplateEvent()
+	void FalseKnight::jumpAttackPart2CompleteEvent()
 	{
 		mState = eFalseKnightState::JumpAttackPart3;
 	}
 
-	void FalseKnight::jumpAttackPart3ComplateEvent()
+	void FalseKnight::jumpAttackPart3CompleteEvent()
 	{
 		mState = eFalseKnightState::Idle;
 	}
 
-	void FalseKnight::attackAnticipateComplateEvent()
+	void FalseKnight::attackAnticipateCompleteEvent()
 	{
 		mState = eFalseKnightState::Attack;
 	}
 
-	void FalseKnight::attackComplateEvent()
+	void FalseKnight::attackCompleteEvent()
 	{
 		mState = eFalseKnightState::AttackRecover;
 	}
 
-	void FalseKnight::attackRecoverComplateEvent()
+	void FalseKnight::attackRecoverCompleteEvent()
 	{
 		mState = eFalseKnightState::Idle;
+	}
+
+	void FalseKnight::stunRollCompleteEvent()
+	{
+		mState = eFalseKnightState::StunRollEnd;
+	}
+
+	void FalseKnight::stunRollEndCompleteEvent()
+	{
+		mState = eFalseKnightState::StunOpen;
+	}
+
+	void FalseKnight::stunOpenCompleteEvent()
+	{
+
 	}
 }
