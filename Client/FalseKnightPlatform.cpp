@@ -114,6 +114,11 @@ namespace ya
 			falseTr->SetPos(falsePos);
 
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(true);
+			// 점프애니메이션 도중 땅에 착지하면 Land animation 재생
+			if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Jump)
+			{
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Land);
+			}
 		}
 	}
 

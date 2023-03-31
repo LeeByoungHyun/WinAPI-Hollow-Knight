@@ -8,17 +8,12 @@ namespace ya
 	public:
 		enum class ePhaseState
 		{
-			Phase1Start,
 			Phase1,
-			Phase2Start,
 			Phase2,
-			Phase2Combo1,
-			Phase2Combo2,
-			Phase2Combo3,
-			Phase2Combo4,
-			Phase2Combo5,
-			Phase2Combo6,
-			Phase3,
+			Pattern1,
+			Pattern2,
+			Pattern3,
+			Pattern4,
 			End
 		};
 
@@ -30,11 +25,12 @@ namespace ya
 		virtual void Release() override;
 
 	private:
-		void phase1Start();
 		void phase1();
-		void phase2Start();
 		void phase2();
-		void phase3();
+		void pattern1();
+		void pattern2();
+		void pattern3();
+		void pattern4();
 
 	private:
 		class FalseKnight* mFalseKnight;
@@ -42,6 +38,15 @@ namespace ya
 		ePhaseState mPhase;
 		class Scene* activeScene;
 		float mTime = 0.0f;
+		int pattern;
+
+		bool count1 = false;
+		bool pattern1Flag = false;
+		bool pattern2Flag = false;
+		bool pattern3Flag = false;
+		bool pattern4Flag = false;
+
+		bool flag2 = false;
 	};
 }
 

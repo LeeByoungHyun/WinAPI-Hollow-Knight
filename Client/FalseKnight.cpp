@@ -78,6 +78,10 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)left") = std::bind(&FalseKnight::jumpAnticipateComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)right") = std::bind(&FalseKnight::jumpAnticipateComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Landleft") = std::bind(&FalseKnight::landComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Landright") = std::bind(&FalseKnight::landComplateEvent, this);
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
@@ -99,6 +103,7 @@ namespace ya
 			mDirection = eDirection::Left;
 
 		// 테스트용 코드
+		/*
 		mTime += Time::DeltaTime();
 		if (mTime >= 1.0f)
 		{
@@ -123,7 +128,7 @@ namespace ya
 			deathFlag = false;
 			mTime = 0.0f;
 		}
-
+		*/
 		switch (mState)
 		{
 		case ya::FalseKnight::eFalseKnightState::Idle:
@@ -257,38 +262,11 @@ namespace ya
 			default:
 				break;
 			}
-		}
 
-		// Idle 상태에서 일정 시간이 지나면 패턴중 하나를 랜덤하게 실행
-		mTime += Time::DeltaTime();
-		if (mTime >= 1.5f)
-		{
-			srand((unsigned int)time(NULL));
-			//pattern = rand() % 4;	
-			pattern = 0;
-			mTime = 0.0f;
-			idleFlag = false;
-			switch (pattern)
-			{
-			case 0:	// Jump to Player
-				mState = eFalseKnightState::JumpAnticipate;
-				break;
-
-			case 1:	// Jump Attack to Player
-				mState = eFalseKnightState::JumpAnticipate;
-				break;
-
-			case 2:	// Attack
-				break;
-
-			case 3:	// Attack after jump away from player
-				mState = eFalseKnightState::JumpAnticipate;
-				break;
-
-			default:
-				mState = eFalseKnightState::Idle;
-				break;
-			}
+			runFlag = false;
+			landFlag = false;
+			attackRecoverFlag = false;
+			jumpAttackPart3Flag = false;
 		}
 	}
 
@@ -317,6 +295,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			idleFlag = false;
 		}
 	}
 
@@ -345,6 +325,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			runAnticipateFlag = false;
 		}
 	}
 
@@ -373,28 +355,9 @@ namespace ya
 			default:
 				break;
 			}
+
+			idleFlag = false;
 		}
-
-		// pattern 변수에 따라 다른 방향으로 점프해야 함
-		switch(pattern)
-		{
-		case 0:	// Jump to Player
-			break;
-
-		case 1:	// Jump Attack to Player
-			break;
-
-		case 2:	// Attack
-			break;
-
-		case 3:	// Attack after jump away from player
-			break;
-
-		default:
-			break;
-		}
-
-
 	}
 
 	void FalseKnight::jump()
@@ -422,6 +385,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			jumpAnticipateFlag = false;
 		}
 	}
 
@@ -450,6 +415,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			jumpFlag = false;
 		}
 	}
 
@@ -478,6 +445,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			idleFlag = false;
 		}
 	}
 
@@ -506,6 +475,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			attackAnticipateFlag = false;
 		}
 	}
 
@@ -534,6 +505,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			attackFlag = false;
 		}
 	}
 
@@ -562,6 +535,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			idleFlag = false;
 		}
 	}
 
@@ -590,6 +565,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			jumpAttackUpFlag = false;
 		}
 	}
 
@@ -618,6 +595,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			jumpAttackPart1Flag = false;
 		}
 	}
 
@@ -646,6 +625,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			jumpAttackPart2Flag = false;
 		}
 	}
 
@@ -672,6 +653,8 @@ namespace ya
 			default:
 				break;
 			}
+
+
 		}
 	}
 
@@ -732,5 +715,20 @@ namespace ya
 	void FalseKnight::death()
 	{
 
+	}
+
+	void FalseKnight::jumpAnticipateComplateEvent()
+	{
+		mState = eFalseKnightState::Jump;
+	}
+
+	void FalseKnight::jumpComplateEvent()
+	{
+
+	}
+
+	void FalseKnight::landComplateEvent()
+	{
+		mState = eFalseKnightState::Idle;
 	}
 }

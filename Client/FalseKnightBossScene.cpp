@@ -7,6 +7,7 @@
 
 #include "yaPlayer.h"
 #include "FalseKnight.h"
+#include "FalseKnightManager.h"
 #include "GodBG.h"
 #include "FalseKnightPlatform.h"
 
@@ -30,6 +31,7 @@ namespace ya
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
+		object::Instantiate<FalseKnightManager>(eLayerType::Manager);
 		mFalseKnight = ya::FalseKnight::GetInstance();
 		scene->AddGameObject(mFalseKnight, eLayerType::Monster);
 		mFalseKnight->Initialize();

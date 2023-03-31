@@ -57,6 +57,9 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetFalseKnightState(eFalseKnightState state) { mState = state; }
+		eFalseKnightState GetFalseKnightState() { return mState; }
+
 	private:
 		void idle();
 		void runAnticipate();
@@ -77,6 +80,10 @@ namespace ya
 		void stunOpened();
 		void stunHit();
 		void death();
+
+		void jumpAnticipateComplateEvent();
+		void jumpComplateEvent();
+		void landComplateEvent();
 
 	private:
 		class Animator* mAnimator;
