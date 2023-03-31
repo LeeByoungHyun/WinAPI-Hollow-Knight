@@ -74,8 +74,7 @@ namespace ya
 		if (mTime >= 1.5f && mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle)
 		{
 			srand((unsigned int)time(NULL));
-			//pattern = rand() % 4;	
-			pattern = 3;
+			pattern = rand() % 5;	
 			mTime = 0.0f;
 			switch (pattern)
 			{
@@ -92,6 +91,10 @@ namespace ya
 				break;
 
 			case 3:	// Attack after jump away from player
+				mPhase = ePhaseState::Pattern4;
+				break;
+
+			case 4:	// Attack after jump away from player
 				mPhase = ePhaseState::Pattern4;
 				break;
 

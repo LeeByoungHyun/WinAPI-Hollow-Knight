@@ -94,6 +94,7 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Attackright") = std::bind(&FalseKnight::attackComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)left") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)right") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
+		
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
@@ -116,7 +117,44 @@ namespace ya
 			else
 				mDirection = eDirection::Left;
 		}
-		
+
+		/*
+		// Å×½ºÆ®
+		Vector2 playerPos = Player::GetInstance()->GetPos();
+		if (playerPos.x > tr->GetPos().x)
+			mDirection = eDirection::Right;
+		else
+			mDirection = eDirection::Left;
+		mTime += Time::DeltaTime();
+		if (mTime >= 2.0f)
+		{
+			mState = eFalseKnightState::JumpAnticipate;
+
+			idleFlag = false;
+			runAnticipateFlag = false;
+			runFlag = false;
+			jumpAnticipateFlag = false;
+			jumpFlag = false;
+			landFlag = false;
+			attackAnticipateFlag = false;
+			attackFlag = false;
+			attackRecoverFlag = false;
+			jumpAttackUpFlag = false;
+			jumpAttackPart1Flag = false;
+			jumpAttackPart2Flag = false;
+			jumpAttackPart3Flag = false;
+			stunRollFlag = false;
+			stunRollEndFlag = false;
+			stunOpenFlag = false;
+			stunOpenedFlag = false;
+			stunHitFlag = false;
+			deathFlag = false;
+			jumpReadyFlag = false;
+
+			mTime = 0.0f;
+		}
+		*/
+
 		switch (mState)
 		{
 		case ya::FalseKnight::eFalseKnightState::Idle:
@@ -251,7 +289,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-200.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-135.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Idleleft", true);
@@ -259,7 +297,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-140.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Idleright", true);
@@ -344,7 +382,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-200.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-140.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump(Anticipate)left", false);
@@ -352,7 +390,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-135.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump(Anticipate)right", false);
@@ -371,24 +409,24 @@ namespace ya
 	{
 		if (jumpFlag == false)
 		{
-			Vector2 pos = tr->GetPos();
+			//Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-260.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-140.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				pos.x += 60.0f;
-				tr->SetPos(pos);
+				//pos.x += 60.0f;
+				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpleft", false);
 				jumpFlag = true;
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-15.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-135.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				pos.x -= 60.0f;
-				tr->SetPos(pos);
+				//pos.x -= 60.0f;
+				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpright", false);
 				jumpFlag = true;
@@ -407,24 +445,24 @@ namespace ya
 	{
 		if (landFlag == false)
 		{
-			Vector2 pos = tr->GetPos();
+			//Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-200.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-145.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				pos.x -= 60.0f;
-				tr->SetPos(pos);
+				//pos.x -= 60.0f;
+				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landleft", false);
 				landFlag = true;
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-130.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				pos.x += 60.0f;
-				tr->SetPos(pos);
+				//pos.x += 60.0f;
+				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landright", false);
 				landFlag = true;
@@ -445,7 +483,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-260.0f, -320.0f));
+				mCollider->SetCenter(Vector2(-100.0f, -320.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Attack(Anticipate)left", false);
@@ -453,7 +491,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-15.0f, -320.0f));
+				mCollider->SetCenter(Vector2(-175.0f, -320.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Attack(Anticipate)right", false);
@@ -475,7 +513,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-60.0f, -320.0f));
+				mCollider->SetCenter(Vector2(-125.0f, -320.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Attackleft", false);
@@ -483,7 +521,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-215.0f, -320.0f));
+				mCollider->SetCenter(Vector2(-150.0f, -320.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Attackright", false);

@@ -14,6 +14,7 @@ namespace ya
 			Pattern2,
 			Pattern3,
 			Pattern4,
+			Pattern5,
 			End
 		};
 
@@ -31,6 +32,7 @@ namespace ya
 		void pattern2();
 		void pattern3();
 		void pattern4();
+		void pattern5();
 
 	private:
 		class FalseKnight* mFalseKnight;
