@@ -4,6 +4,7 @@
 #include "yaRigidBody.h"
 
 #include "FalseKnight.h"
+#include "yaPlayer.h"
 
 namespace ya
 {
@@ -120,9 +121,19 @@ namespace ya
 			flag2 = true;
 
 			// 플레이어와의 거리에 비례해서 더 멀리 점프해야 함
-			// 지금은 테스트용으로 수직점프
-			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -1200.0f));
+			Vector2 distance = Vector2::Zero;
+			distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x
+				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
+
+			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 2, -1500.0f));
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
+		{
+			mPhase = ePhaseState::Phase1; 
+			pattern1Flag = false;
+			flag2 = false;
 		}
 	}
 

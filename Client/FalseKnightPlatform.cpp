@@ -118,6 +118,7 @@ namespace ya
 			if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Jump)
 			{
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Land);
+				rb->SetVelocity(Vector2::Zero);
 			}
 		}
 	}
