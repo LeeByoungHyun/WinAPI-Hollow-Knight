@@ -42,14 +42,13 @@ namespace ya
 		float mTime = 0.0f;
 		int pattern;
 
-		bool count1 = false;
+		bool enterFlag = false;
 		bool pattern1Flag = false;
 		bool pattern2Flag = false;
 		bool pattern3Flag = false;
 		bool pattern4Flag = false;
-
-		bool flag2 = false;
-		bool flag3 = false;
+		bool check1Flag = false;
+		bool check2Flag = false;
 	};
 }
 

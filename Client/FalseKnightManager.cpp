@@ -28,10 +28,10 @@ namespace ya
 	void FalseKnightManager::Update()
 	{
 		activeScene = SceneManager::GetActiveScene();
-		if (activeScene->GetType() == eSceneType::FalseKnightBoss && count1 == false)
+		if (activeScene->GetType() == eSceneType::FalseKnightBoss && enterFlag == false)
 		{
 			mPhase = ePhaseState::Phase1;
-			count1 = true;
+			enterFlag = true;
 		}
 
 		switch (mPhase)
@@ -120,9 +120,9 @@ namespace ya
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
 		}
 
-		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
+		if (mFalseKnight->GetJumpReadyFlag() == true && check1Flag == false)
 		{
-			flag2 = true;
+			check1Flag = true;
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
 
 			// 플레이어와의 거리에 비례해서 더 멀리 점프해야 함
@@ -137,7 +137,7 @@ namespace ya
 		{
 			mPhase = ePhaseState::Phase1;
 			pattern1Flag = false;
-			flag2 = false;
+			check1Flag = false;
 		}
 	}
 
@@ -151,9 +151,9 @@ namespace ya
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
 		}
 
-		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
+		if (mFalseKnight->GetJumpReadyFlag() == true && check1Flag == false)
 		{
-			flag2 = true;
+			check1Flag = true;
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAttackUp);
 
 			// 플레이어와의 거리에 비례해서 더 멀리 점프해야 함
@@ -168,7 +168,7 @@ namespace ya
 		{
 			mPhase = ePhaseState::Phase1;
 			pattern1Flag = false;
-			flag2 = false;
+			check1Flag = false;
 		}
 	}
 
@@ -199,9 +199,9 @@ namespace ya
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
 		}
 
-		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
+		if (mFalseKnight->GetJumpReadyFlag() == true && check1Flag == false)
 		{
-			flag2 = true;
+			check1Flag = true;
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
 
 			// 플레이어의 반대편으로 일정 거리만큼 점프해야 함
@@ -215,18 +215,18 @@ namespace ya
 		}
 
 		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle 
-			&& flag2 == true && flag3 == false)
+			&& check1Flag == true && check2Flag == false)
 		{
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::AttackAnticipate);
-			flag3 = true;
+			check2Flag = true;
 		}
 
 		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
 		{
 			mPhase = ePhaseState::Phase1;
 			pattern1Flag = false;
-			flag2 = false;
-			flag3 = false;
+			check1Flag = false;
+			check2Flag = false;
 		}
 	}
 }
