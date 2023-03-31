@@ -75,7 +75,7 @@ namespace ya
 		{
 			srand((unsigned int)time(NULL));
 			//pattern = rand() % 4;	
-			pattern = 1;
+			pattern = 2;
 			mTime = 0.0f;
 			switch (pattern)
 			{
@@ -171,7 +171,19 @@ namespace ya
 
 	void FalseKnightManager::pattern3()
 	{
+		/* 제자리에서 공격 */
+		if (pattern1Flag == false)
+		{
+			pattern1Flag = true;
 
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::AttackAnticipate);
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
+		{
+			mPhase = ePhaseState::Phase1;
+			pattern1Flag = false;
+		}
 	}
 
 	void FalseKnightManager::pattern4()

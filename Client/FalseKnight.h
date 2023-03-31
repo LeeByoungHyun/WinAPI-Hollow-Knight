@@ -89,6 +89,9 @@ namespace ya
 		void jumpAttackPart1ComplateEvent();
 		void jumpAttackPart2ComplateEvent();
 		void jumpAttackPart3ComplateEvent();
+		void attackAnticipateComplateEvent();
+		void attackComplateEvent();
+		void attackRecoverComplateEvent();
 
 	private:
 		class Animator* mAnimator;

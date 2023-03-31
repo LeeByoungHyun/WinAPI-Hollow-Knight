@@ -88,6 +88,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)right") = std::bind(&FalseKnight::jumpAttackPart2ComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)left") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)right") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)left") = std::bind(&FalseKnight::attackAnticipateComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Anticipate)right") = std::bind(&FalseKnight::attackAnticipateComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attackleft") = std::bind(&FalseKnight::attackComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attackright") = std::bind(&FalseKnight::attackComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)left") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Attack(Recover)right") = std::bind(&FalseKnight::attackRecoverComplateEvent, this);
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
@@ -757,6 +763,21 @@ namespace ya
 	}
 
 	void FalseKnight::jumpAttackPart3ComplateEvent()
+	{
+		mState = eFalseKnightState::Idle;
+	}
+
+	void FalseKnight::attackAnticipateComplateEvent()
+	{
+		mState = eFalseKnightState::Attack;
+	}
+
+	void FalseKnight::attackComplateEvent()
+	{
+		mState = eFalseKnightState::AttackRecover;
+	}
+
+	void FalseKnight::attackRecoverComplateEvent()
 	{
 		mState = eFalseKnightState::Idle;
 	}
