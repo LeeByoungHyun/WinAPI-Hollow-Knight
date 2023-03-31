@@ -75,7 +75,7 @@ namespace ya
 		{
 			srand((unsigned int)time(NULL));
 			//pattern = rand() % 4;	
-			pattern = 2;
+			pattern = 3;
 			mTime = 0.0f;
 			switch (pattern)
 			{
@@ -188,6 +188,42 @@ namespace ya
 
 	void FalseKnightManager::pattern4()
 	{
+		/* 플레이어의 반대방향으로 점프 후 공격 */
+		if (pattern1Flag == false)
+		{
+			pattern1Flag = true;
 
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
+		}
+
+		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
+		{
+			flag2 = true;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
+
+			// 플레이어의 반대편으로 일정 거리만큼 점프해야 함
+			if ((Player::GetInstance()->GetComponent<Transform>()->GetPos().x
+				- mFalseKnight->GetComponent<Transform>()->GetPos().x) < 0)
+				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(300.0f, -1500.0f));
+			else
+				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(-300.0f, -1500.0f));
+
+			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle 
+			&& flag2 == true && flag3 == false)
+		{
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::AttackAnticipate);
+			flag3 = true;
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
+		{
+			mPhase = ePhaseState::Phase1;
+			pattern1Flag = false;
+			flag2 = false;
+			flag3 = false;
+		}
 	}
 }

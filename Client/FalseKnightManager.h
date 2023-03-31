@@ -47,6 +47,7 @@ namespace ya
 		bool pattern4Flag = false;
 
 		bool flag2 = false;
+		bool flag3 = false;
 	};
 }
 
