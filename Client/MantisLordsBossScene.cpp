@@ -106,7 +106,8 @@ namespace ya
 	{
 		Scene::Enter();
 
-		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);

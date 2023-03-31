@@ -31,7 +31,7 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 1;
+		hp = 160;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -253,9 +253,12 @@ namespace ya
 		{
 			switch (otherType)
 			{
-			case eLayerType::Effect:
-				hp--;	// 플레이어 공격력만큼 감소해야 함
+			case eLayerType::NeilEffect:
+				hp -= Player::GetInstance()->GetNeilAtk();
+				break;
 
+			case eLayerType::SpellEffect:
+				hp -= Player::GetInstance()->GetSpellAtk();
 				break;
 			}
 		}
@@ -274,36 +277,6 @@ namespace ya
 	void MantisLord3::idle()
 	{
 		tr->SetPos(Vector2::Zero);
-
-		/*	패턴매니저에서 패턴 관리
-		// 보스 관리 매니저에서 패턴 정해야 함
-		mTime += Time::DeltaTime();
-		if (mTime >= 1.5f)
-		{
-			// 각 패턴이 종료되면 돌아오는 준비상태
-			// 패턴 끝나고 약 1초 뒤 다음 패턴 시작
-			// 랜덤 함수 이용해 패턴 랜덤하게 호출
-			int pattern = rand() % 3;
-			switch (pattern)
-			{
-			case 0:	// Dash
-				mState = eMantisLordsState::DashArrive;
-				break;
-
-			case 1:	// Dstab
-				mState = eMantisLordsState::DstabArrive;
-				break;
-
-			case 2:	// WallThrow
-				mState = eMantisLordsState::WallArrive;
-				break;
-
-			default:
-				mState = eMantisLordsState::Idle;
-				break;
-			}
-		}
-		*/
 	}
 
 	void MantisLord3::throneIdle()

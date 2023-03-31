@@ -18,7 +18,13 @@ namespace ya
 
 	FalseKnight::FalseKnight()
 	{
+		mRigidbody = AddComponent<RigidBody>();
+		mCollider = AddComponent<Collider>();
+		mAnimator = AddComponent<Animator>();
+		tr = AddComponent<Transform>();
 
+		trueHP = 160;
+		armorHP = 75;
 	}
 
 	FalseKnight::~FalseKnight()
@@ -28,11 +34,6 @@ namespace ya
 
 	void FalseKnight::Initialize()
 	{
-		mRigidbody = AddComponent<RigidBody>();
-		mCollider = AddComponent<Collider>();
-		mAnimator = AddComponent<Animator>();
-		tr = AddComponent<Transform>();
-
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Idle\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Idle\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Run(Anticipate)\\left", Vector2::Zero, 0.1f);
@@ -267,6 +268,23 @@ namespace ya
 			else if (mState == FalseKnight::eFalseKnightState::JumpAttackUp)
 			{
 				mState = FalseKnight::eFalseKnightState::JumpAttackPart1;
+			}
+			break;
+
+		// 플레이어의 공격일 경우
+		case eLayerType::NeilEffect:
+			armorHP -= Player::GetInstance()->GetNeilAtk();
+			if (armorHP <= 0)
+			{
+				mState = eFalseKnightState::StunRoll;
+			}
+			break;
+
+		case eLayerType::SpellEffect:
+			armorHP -= Player::GetInstance()->GetSpellAtk();
+			if (armorHP <= 0)
+			{
+				mState = eFalseKnightState::StunRoll;
 			}
 			break;
 		}
@@ -776,7 +794,6 @@ namespace ya
 
 	void FalseKnight::jumpAnticipateComplateEvent()
 	{
-		//mState = eFalseKnightState::Jump;
 		jumpReadyFlag = true;
 	}
 

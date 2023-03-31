@@ -59,7 +59,10 @@ namespace ya
 
 		void SetFalseKnightState(eFalseKnightState state) { mState = state; }
 		eFalseKnightState GetFalseKnightState() { return mState; }
-
+		void SetArmorHP(int hp) { armorHP = hp; }
+		int GetArmorHP() { return armorHP; }
+		void SetTrueHP(int hp) { trueHP = hp; }
+		int GetTrueHP() { return trueHP; }
 		bool GetJumpReadyFlag() { return jumpReadyFlag; }
 
 	private:
@@ -102,6 +105,8 @@ namespace ya
 		eDirection mDirection;
 		float mTime = 0.0f;
 		int pattern;
+		int armorHP;
+		int trueHP;
 
 		bool idleFlag = false;
 		bool runAnticipateFlag = false;
@@ -122,7 +127,6 @@ namespace ya
 		bool stunOpenedFlag = false;
 		bool stunHitFlag = false;
 		bool deathFlag = false;
-
 		bool jumpReadyFlag = false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫

@@ -31,7 +31,7 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 1;
+		hp = 210;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -92,32 +92,6 @@ namespace ya
 
 		curScene = SceneManager::GetActiveScene();
 		tr = GetComponent<Transform>();
-
-		// 패턴 테스트용 코드
-		if (Input::GetKeyDown(eKeyCode::I))
-		{
-			throneStandFlag = false;
-			throneBowFlag = false;
-			throneLeaveFlag = false;
-			throneWoundedFlag = false;
-			dashArriveFlag = false;
-			dashAnticipateFlag = false;
-			dashFlag = false;
-			dashRecoverFlag = false;
-			dashLeaveFlag = false;
-			dStabArriveFlag = false;
-			dStabFlag = false;
-			dStabLandFlag = false;
-			dStabLeaveFlag = false;
-			wallArriveFlag = false;
-			wallReadyFlag = false;
-			throwFlag = false;
-			wallLeave1Flag = false;
-			wallLeave2Flag = false;
-
-			mState = eMantisLordsState::DstabArrive;
-			return;
-		}
 
 		// 사망시 옥좌로 귀환
 		if (hp <= 0 && deathFlag == false)
@@ -254,9 +228,12 @@ namespace ya
 		{
 			switch (otherType)
 			{
-			case eLayerType::Effect:
-				hp--;	// 플레이어 공격력만큼 감소해야 함
+			case eLayerType::NeilEffect:
+				hp -= Player::GetInstance()->GetNeilAtk();	
+				break;
 
+			case eLayerType::SpellEffect:
+				hp -= Player::GetInstance()->GetSpellAtk();
 				break;
 			}
 		}

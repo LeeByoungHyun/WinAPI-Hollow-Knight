@@ -31,7 +31,7 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 1;
+		hp = 160;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -253,9 +253,12 @@ namespace ya
 		{
 			switch (otherType)
 			{
-			case eLayerType::Effect:
-				hp--;	// 플레이어 공격력만큼 감소해야 함
+			case eLayerType::NeilEffect:
+				hp -= Player::GetInstance()->GetNeilAtk();
+				break;
 
+			case eLayerType::SpellEffect:
+				hp -= Player::GetInstance()->GetSpellAtk();
 				break;
 			}
 		}

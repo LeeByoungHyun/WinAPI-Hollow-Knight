@@ -27,11 +27,18 @@ namespace ya
 
 	void FalseKnightManager::Update()
 	{
+		// 플레이어가 보스룸 진입하면 시작
 		activeScene = SceneManager::GetActiveScene();
 		if (activeScene->GetType() == eSceneType::FalseKnightBoss && enterFlag == false)
 		{
 			mPhase = ePhaseState::Phase1;
 			enterFlag = true;
+		}
+
+		// 갑옷 체력이 0이 되면 스턴
+		if (mFalseKnight->GetArmorHP() <= 0)
+		{
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::StunRoll);
 		}
 
 		switch (mPhase)
@@ -59,6 +66,7 @@ namespace ya
 		default:
 			break;
 		}
+
 		GameObject::Update();
 	}
 

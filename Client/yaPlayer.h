@@ -57,7 +57,8 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
-		int GetAtk() { return atk; }
+		int GetNeilAtk() { return neilAtk; }
+		int GetSpellAtk() { return spellAtk; }
 		Vector2 GetPos() { return tr->GetPos(); }
 		void SetPos(Vector2 pos) { tr->SetPos(pos); }
 		ePlayerState GetPlayerState() { return mState; }
@@ -115,7 +116,8 @@ namespace ya
 		eDirection mDirection = eDirection::Right;
 
 		int hp;
-		int atk = 1;
+		int neilAtk;
+		int spellAtk;
 		double mTime = 0.0f;
 
 		bool idleFlag			= false;

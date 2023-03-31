@@ -23,6 +23,8 @@ enum class eLayerType
 	BackEffect,
 	Monster,
 	Player,
+	NeilEffect,
+	SpellEffect,
 	Effect,
 	UI, 
 	Fade,

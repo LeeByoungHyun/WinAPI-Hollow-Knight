@@ -33,7 +33,17 @@ namespace ya
 
 	Player::Player()
 	{
+		tr = AddComponent<Transform>();
+		mAnimator = AddComponent<Animator>();
+		mCollider = AddComponent<Collider>();
+		mRigidBody = AddComponent<RigidBody>();
+		curScene = SceneManager::GetActiveScene();
 
+		hp = 5;
+		neilAtk = 9;
+		spellAtk = 15;
+		deathFlag = false;
+		invincibilityFlag = false;
 	}
 
 	Player::~Player()
@@ -43,18 +53,6 @@ namespace ya
 
 	void Player::Initialize()
 	{
-		tr = AddComponent<Transform>();
-		mAnimator = AddComponent<Animator>();
-		mCollider = AddComponent<Collider>();
-		mRigidBody = AddComponent<RigidBody>();
-		curScene = SceneManager::GetActiveScene();
-
-		hp = 5;
-		atk = 1;
-
-		deathFlag = false;
-		invincibilityFlag = false;
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Idle\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Walk\\left", Vector2::Zero, 0.1f);
@@ -507,20 +505,18 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_Slashleft", true);
-				//object::Instantiate<SlashEffectLeft>(tr->GetPos() + Vector2(-60.0f, 0.0f), eLayerType::Effect);
 				slashFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_Slashright", true);
-				//object::Instantiate<SlashEffectRight>(tr->GetPos() + Vector2(60.0f, 0.0f), eLayerType::Effect);
 				slashFlag = true;
 				break;
 
 			default:
 				break;
 			}
-			object::Instantiate<SlashEffect>(eLayerType::Effect);
+			object::Instantiate<SlashEffect>(eLayerType::NeilEffect);
 		}
 
 		mTime += Time::DeltaTime();
@@ -545,14 +541,6 @@ namespace ya
 			}
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -574,20 +562,18 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_SlashAltleft", true);
-				//object::Instantiate<SlashAltEffectLeft>(tr->GetPos() + Vector2(-40.0f, -10.0f), eLayerType::Effect);
 				slashAltFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_SlashAltright", true);
-				//object::Instantiate<SlashAltEffectRight>(tr->GetPos() + Vector2(40.0f, -10.0f), eLayerType::Effect);
 				slashAltFlag = true;
 				break;
 
 			default:
 				break;
 			}
-			object::Instantiate<SlashAltEffect>(eLayerType::Effect);
+			object::Instantiate<SlashAltEffect>(eLayerType::NeilEffect);
 		}
 
 		mTime += Time::DeltaTime();
@@ -612,14 +598,6 @@ namespace ya
 			}
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -638,7 +616,7 @@ namespace ya
 		if (upSlashFlag == false)
 		{
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
-			object::Instantiate<UpSlashEffect>(eLayerType::Effect);
+			object::Instantiate<UpSlashEffect>(eLayerType::NeilEffect);
 			upSlashFlag = true;
 		}
 
@@ -660,18 +638,10 @@ namespace ya
 		if (downSlashFlag == false)
 		{
 			mAnimator->Play(L"Knight_DownSlashneutral", true);
-			object::Instantiate<DownSlashEffect>(eLayerType::Effect);
+			object::Instantiate<DownSlashEffect>(eLayerType::NeilEffect);
 			downSlashFlag = true;
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -703,15 +673,6 @@ namespace ya
 			}
 		}
 
-		// 대쉬 중에는 중력 영향 x
-		/*
-		Vector2 pos = tr->GetPos();
-		if (mDirection == eDirection::Left)
-			pos.x -= 800.0f * Time::DeltaTime();
-		else if (mDirection == eDirection::Right)
-			pos.x += 800.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		mRigidBody->SetVelocity((Vector2::Zero));
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (mDirection == eDirection::Left)
@@ -807,14 +768,6 @@ namespace ya
 			return;
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -894,14 +847,6 @@ namespace ya
 			return;
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -919,8 +864,6 @@ namespace ya
 
 		if (fallFlag == false)
 		{
-			//mRigidBody->SetVelocity(Vector2::Zero);
-
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -994,14 +937,6 @@ namespace ya
 			return;
 		}
 
-		/*
-		Vector2 pos = tr->GetPos();
-		if (Input::GetKey(eKeyCode::LEFT))
-			pos.x -= 300.0f * Time::DeltaTime();
-		if (Input::GetKey(eKeyCode::RIGHT))
-			pos.x += 300.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
@@ -1019,15 +954,13 @@ namespace ya
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"Knight_FireballCastleft", false);
-				object::Instantiate<FireballEffectLeft>(tr->GetPos(), eLayerType::Effect);
-				//object::Instantiate<FireballCastEffectLeft>(tr->GetPos(), eLayerType::BackEffect);
+				object::Instantiate<FireballEffectLeft>(tr->GetPos(), eLayerType::SpellEffect);
 				castFireballFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"Knight_FireballCastright", false);
-				object::Instantiate<FireballEffectRight>(tr->GetPos(), eLayerType::Effect);
-				//object::Instantiate<FireballCastEffectRight>(tr->GetPos(), eLayerType::BackEffect);
+				object::Instantiate<FireballEffectRight>(tr->GetPos(), eLayerType::SpellEffect);
 				castFireballFlag = true;
 				break;
 
@@ -1036,16 +969,6 @@ namespace ya
 			}
 		}
 
-		// 주문시전 중에는 중력 영향 x
-		/*
-		mRigidBody->SetVelocity((Vector2::Zero));
-		Vector2 pos = tr->GetPos();
-		if (mDirection == eDirection::Left)
-			pos.x += 30.0f * Time::DeltaTime();
-		else if (mDirection == eDirection::Right)
-			pos.x -= 30.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
 		mRigidBody->SetVelocity((Vector2::Zero));
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (mDirection == eDirection::Left)
@@ -1063,15 +986,6 @@ namespace ya
 
 	void Player::recoil()
 	{
-		/*
-		Vector2 pos = tr->GetPos();
-		if (mDirection == eDirection::Left)
-			pos.x += 100.0f * Time::DeltaTime();
-		else if (mDirection == eDirection::Right)
-			pos.x -= 100.0f * Time::DeltaTime();
-		tr->SetPos(pos);
-		*/
-
 		if (stunFlag == false)
 		{
 			invincibilityFlag = true;
