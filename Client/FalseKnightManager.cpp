@@ -129,7 +129,7 @@ namespace ya
 			Vector2 distance = Vector2::Zero;
 			distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x
 				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
-			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 2, -1500.0f));
+			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 1.5f, -1500.0f));
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
 		}
 
@@ -160,7 +160,7 @@ namespace ya
 			Vector2 distance = Vector2::Zero;
 			distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x
 				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
-			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 2, -1500.0f));
+			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 1.5f, -1500.0f));
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
 		}
 
@@ -207,9 +207,9 @@ namespace ya
 			// 플레이어의 반대편으로 일정 거리만큼 점프해야 함
 			if ((Player::GetInstance()->GetComponent<Transform>()->GetPos().x
 				- mFalseKnight->GetComponent<Transform>()->GetPos().x) < 0)
-				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(300.0f, -1500.0f));
+				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(400.0f, -1500.0f));
 			else
-				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(-300.0f, -1500.0f));
+				mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(-400.0f, -1500.0f));
 
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
 		}

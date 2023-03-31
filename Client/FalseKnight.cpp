@@ -573,7 +573,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-260.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-97.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Up)left", false);
@@ -581,7 +581,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-15.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-178.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Up)right", false);
@@ -604,7 +604,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-210.0f, -350.0f));
+				mCollider->SetCenter(Vector2(-190.0f, -350.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 1)left", false);
@@ -612,7 +612,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-65.0f, -350.0f));
+				mCollider->SetCenter(Vector2(-85.0f, -350.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 1)right", false);
@@ -634,7 +634,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-210.0f, -350.0f));
+				mCollider->SetCenter(Vector2(-190.0f, -350.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 2)left", false);
@@ -642,7 +642,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-65.0f, -350.0f));
+				mCollider->SetCenter(Vector2(-85.0f, -350.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 2)right", false);
@@ -664,7 +664,7 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mCollider->SetCenter(Vector2(-170.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-132.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 3)left", false);
@@ -672,7 +672,7 @@ namespace ya
 				break;
 
 			case eDirection::Right:	// right
-				mCollider->SetCenter(Vector2(-105.0f, -300.0f));
+				mCollider->SetCenter(Vector2(-143.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
 
 				mAnimator->Play(L"False Knight_Jump Attack(Part 3)right", false);
