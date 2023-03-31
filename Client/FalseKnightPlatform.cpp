@@ -112,14 +112,6 @@ namespace ya
 
 			falsePos.y = objectColPos.y + 1.0f;
 			falseTr->SetPos(falsePos);
-
-			mFalseKnight->GetComponent<RigidBody>()->SetGround(true);
-			// 점프애니메이션 도중 땅에 착지하면 Land animation 재생
-			if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Jump)
-			{
-				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Land);
-				rb->SetVelocity(Vector2::Zero);
-			}
 		}
 	}
 

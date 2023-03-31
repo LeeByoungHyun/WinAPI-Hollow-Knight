@@ -82,6 +82,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)right") = std::bind(&FalseKnight::jumpAnticipateComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Landleft") = std::bind(&FalseKnight::landComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Landright") = std::bind(&FalseKnight::landComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)left") = std::bind(&FalseKnight::jumpAttackPart1ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 1)right") = std::bind(&FalseKnight::jumpAttackPart1ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)left") = std::bind(&FalseKnight::jumpAttackPart2ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 2)right") = std::bind(&FalseKnight::jumpAttackPart2ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)left") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Jump Attack(Part 3)right") = std::bind(&FalseKnight::jumpAttackPart3ComplateEvent, this);
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 
@@ -96,39 +102,15 @@ namespace ya
 		GameObject::Update();
 
 		// 플레이어 위치에 따라 방향 전환
-		Vector2 playerPos = Player::GetInstance()->GetPos();
-		if (playerPos.x > tr->GetPos().x)
-			mDirection = eDirection::Right;
-		else
-			mDirection = eDirection::Left;
-
-		// 테스트용 코드
-		/*
-		mTime += Time::DeltaTime();
-		if (mTime >= 1.0f)
+		if (mState == eFalseKnightState::Idle)
 		{
-			idleFlag = false;
-			runAnticipateFlag = false;
-			runFlag = false;
-			jumpAnticipateFlag = false;
-			jumpFlag = false;
-			landFlag = false;
-			attackAnticipateFlag = false;
-			attackFlag = false;
-			attackRecoverFlag = false;
-			jumpAttackUpFlag = false;
-			jumpAttackPart1Flag = false;
-			jumpAttackPart2Flag = false;
-			jumpAttackPart3Flag = false;
-			stunRollFlag = false;
-			stunRollEndFlag = false;
-			stunOpenFlag = false;
-			stunOpenedFlag = false;
-			stunHitFlag = false;
-			deathFlag = false;
-			mTime = 0.0f;
+			Vector2 playerPos = Player::GetInstance()->GetPos();
+			if (playerPos.x > tr->GetPos().x)
+				mDirection = eDirection::Right;
+			else
+				mDirection = eDirection::Left;
 		}
-		*/
+		
 		switch (mState)
 		{
 		case ya::FalseKnight::eFalseKnightState::Idle:
@@ -225,6 +207,25 @@ namespace ya
 	void FalseKnight::OnCollisionEnter(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
+
+		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
+		switch (otherType)
+		{
+		// 땅과 충돌할 경우
+		case eLayerType::Ground:
+			mRigidbody->SetGround(true);
+			mRigidbody->SetVelocity(Vector2::Zero);
+			// 점프애니메이션 도중 땅에 착지하면 Land animation 재생
+			if (mState == FalseKnight::eFalseKnightState::Jump)
+			{
+				mState = FalseKnight::eFalseKnightState::Land;
+			}
+			else if (mState == FalseKnight::eFalseKnightState::JumpAttackUp)
+			{
+				mState = FalseKnight::eFalseKnightState::JumpAttackPart1;
+			}
+			break;
+		}
 	}
 
 	void FalseKnight::OnCollisionStay(Collider* other)
@@ -364,11 +365,14 @@ namespace ya
 	{
 		if (jumpFlag == false)
 		{
+			Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-260.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
+				pos.x += 60.0f;
+				tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpleft", false);
 				jumpFlag = true;
@@ -377,6 +381,8 @@ namespace ya
 			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(-15.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
+				pos.x -= 60.0f;
+				tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpright", false);
 				jumpFlag = true;
@@ -387,6 +393,7 @@ namespace ya
 			}
 
 			jumpAnticipateFlag = false;
+			jumpReadyFlag = false;
 		}
 	}
 
@@ -394,11 +401,14 @@ namespace ya
 	{
 		if (landFlag == false)
 		{
+			Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-200.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
+				pos.x -= 60.0f;
+				tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landleft", false);
 				landFlag = true;
@@ -407,6 +417,8 @@ namespace ya
 			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(-75.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
+				pos.x += 60.0f;
+				tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landright", false);
 				landFlag = true;
@@ -536,7 +548,8 @@ namespace ya
 				break;
 			}
 
-			idleFlag = false;
+			jumpAnticipateFlag = false;
+			jumpReadyFlag = false;
 		}
 	}
 
@@ -719,7 +732,8 @@ namespace ya
 
 	void FalseKnight::jumpAnticipateComplateEvent()
 	{
-		mState = eFalseKnightState::Jump;
+		//mState = eFalseKnightState::Jump;
+		jumpReadyFlag = true;
 	}
 
 	void FalseKnight::jumpComplateEvent()
@@ -728,6 +742,21 @@ namespace ya
 	}
 
 	void FalseKnight::landComplateEvent()
+	{
+		mState = eFalseKnightState::Idle;
+	}
+
+	void FalseKnight::jumpAttackPart1ComplateEvent()
+	{
+		mState = eFalseKnightState::JumpAttackPart2;
+	}
+
+	void FalseKnight::jumpAttackPart2ComplateEvent()
+	{
+		mState = eFalseKnightState::JumpAttackPart3;
+	}
+
+	void FalseKnight::jumpAttackPart3ComplateEvent()
 	{
 		mState = eFalseKnightState::Idle;
 	}

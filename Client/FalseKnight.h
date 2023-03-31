@@ -60,6 +60,8 @@ namespace ya
 		void SetFalseKnightState(eFalseKnightState state) { mState = state; }
 		eFalseKnightState GetFalseKnightState() { return mState; }
 
+		bool GetJumpReadyFlag() { return jumpReadyFlag; }
+
 	private:
 		void idle();
 		void runAnticipate();
@@ -84,6 +86,9 @@ namespace ya
 		void jumpAnticipateComplateEvent();
 		void jumpComplateEvent();
 		void landComplateEvent();
+		void jumpAttackPart1ComplateEvent();
+		void jumpAttackPart2ComplateEvent();
+		void jumpAttackPart3ComplateEvent();
 
 	private:
 		class Animator* mAnimator;
@@ -114,6 +119,8 @@ namespace ya
 		bool stunOpenedFlag = false;
 		bool stunHitFlag = false;
 		bool deathFlag = false;
+
+		bool jumpReadyFlag = false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static FalseKnight* instance;

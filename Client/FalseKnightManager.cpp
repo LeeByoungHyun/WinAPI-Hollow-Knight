@@ -75,7 +75,7 @@ namespace ya
 		{
 			srand((unsigned int)time(NULL));
 			//pattern = rand() % 4;	
-			pattern = 0;
+			pattern = 1;
 			mTime = 0.0f;
 			switch (pattern)
 			{
@@ -109,6 +109,7 @@ namespace ya
 
 	void FalseKnightManager::pattern1()
 	{
+		/* 플레이어 위치로 점프 */ 
 		if (pattern1Flag == false)
 		{
 			pattern1Flag = true;
@@ -116,22 +117,22 @@ namespace ya
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
 		}
 
-		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Jump && flag2 == false)
+		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
 		{
 			flag2 = true;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
 
 			// 플레이어와의 거리에 비례해서 더 멀리 점프해야 함
 			Vector2 distance = Vector2::Zero;
 			distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x
 				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
-
 			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 2, -1500.0f));
 			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
 		}
 
 		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
 		{
-			mPhase = ePhaseState::Phase1; 
+			mPhase = ePhaseState::Phase1;
 			pattern1Flag = false;
 			flag2 = false;
 		}
@@ -139,7 +140,33 @@ namespace ya
 
 	void FalseKnightManager::pattern2()
 	{
+		/* 플레이어 위치로 점프하면서 공격 */
+		if (pattern1Flag == false)
+		{
+			pattern1Flag = true;
 
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
+		}
+
+		if (mFalseKnight->GetJumpReadyFlag() == true && flag2 == false)
+		{
+			flag2 = true;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAttackUp);
+
+			// 플레이어와의 거리에 비례해서 더 멀리 점프해야 함
+			Vector2 distance = Vector2::Zero;
+			distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x
+				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
+			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 2, -1500.0f));
+			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && pattern1Flag == true)
+		{
+			mPhase = ePhaseState::Phase1;
+			pattern1Flag = false;
+			flag2 = false;
+		}
 	}
 
 	void FalseKnightManager::pattern3()
