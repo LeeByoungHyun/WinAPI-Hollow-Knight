@@ -55,5 +55,6 @@ namespace ya
 		bool hitFlag = false;
 		bool deathFlag1 = false;
 		bool deathFlag2 = false;
+		bool deathFlag3 = false;
 	};
 }

@@ -219,17 +219,17 @@ namespace ya
 			}
 		}
 
-		if (mTime >= 3.0f)
+		if (mTime >= 3.0f && deathFlag3 == false)
 		{
 			Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				//pos.x -= 200.0f;
+				pos.x -= 200.0f * Time::DeltaTime();
 				break;
 
 			case eDirection::Right:	// right
-				//pos.x += 200.0f;
+				pos.x += 200.0f * Time::DeltaTime();
 				break;
 
 			default:
@@ -259,6 +259,8 @@ namespace ya
 		default:
 			break;
 		}
+
+		deathFlag3 = true;
 	}
 
 
