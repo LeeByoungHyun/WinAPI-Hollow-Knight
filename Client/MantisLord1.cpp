@@ -11,6 +11,7 @@
 
 #include "yaPlayer.h"
 #include "LongPlatform.h"
+#include "MantisLordsProjectile.h"
 
 namespace ya
 {
@@ -739,6 +740,8 @@ namespace ya
 			pos.y -= 35.0f;
 			tr->SetPos(pos);
 
+			// ¹ö±×
+			//object::Instantiate<MantisLordsProjectile>(tr->GetPos(), eLayerType::Monster);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

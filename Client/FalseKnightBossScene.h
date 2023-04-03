@@ -20,6 +20,9 @@ namespace ya
 	private:
 		class Player* mPlayer;
 		class FalseKnight* mFalseKnight;
+		class FalseKnightManager* mFalseManager;
+
+		float mTime = 0.0f;
 	};
 }
 

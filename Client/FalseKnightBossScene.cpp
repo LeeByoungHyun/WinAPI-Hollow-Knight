@@ -4,12 +4,14 @@
 #include "yaObject.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
+#include "yaTime.h"
 
 #include "yaPlayer.h"
 #include "FalseKnight.h"
 #include "FalseKnightManager.h"
 #include "GodBG.h"
 #include "FalseKnightPlatform.h"
+#include "FalseBarrel.h"
 
 namespace ya
 {
@@ -27,11 +29,12 @@ namespace ya
 	{
 		Scene::Initialize();
 		Scene* scene = SceneManager::GetActiveScene();
+		srand((unsigned int)time(NULL));
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
-		object::Instantiate<FalseKnightManager>(eLayerType::Manager);
+		mFalseManager = object::Instantiate<FalseKnightManager>(eLayerType::Manager);
 		mFalseKnight = ya::FalseKnight::GetInstance();
 		scene->AddGameObject(mFalseKnight, eLayerType::Monster);
 		mFalseKnight->Initialize();
@@ -55,6 +58,17 @@ namespace ya
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Title);
+		}
+
+		if (mFalseManager->GetPhaseState() == FalseKnightManager::ePhaseState::RageAttack)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 0.3)
+			{
+				int posX = rand() % 1600;
+				object::Instantiate<FalseBarrel>(Vector2(1724.0f - 1000.0f + posX, 200.0f), eLayerType::Monster);
+				mTime = 0.0f;
+			}
 		}
 	}
 

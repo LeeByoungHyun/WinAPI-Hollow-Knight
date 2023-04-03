@@ -185,6 +185,9 @@
     <Filter Include="Contents\Objects\Charactor\False_Knight\StunHead">
       <UniqueIdentifier>{6ff86b55-1278-4927-9e9d-afb3b06c5e42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\False_Knight\Barrel">
+      <UniqueIdentifier>{fc43dcd0-16ea-4d0c-9539-577d4dd2860d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -397,6 +400,9 @@
     <ClInclude Include="StunHead.h">
       <Filter>Contents\Objects\Charactor\False_Knight\StunHead</Filter>
     </ClInclude>
+    <ClInclude Include="FalseBarrel.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\Barrel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -587,6 +593,9 @@
     </ClCompile>
     <ClCompile Include="StunHead.cpp">
       <Filter>Contents\Objects\Charactor\False_Knight\StunHead</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseBarrel.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\Barrel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

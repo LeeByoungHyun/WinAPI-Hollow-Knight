@@ -134,6 +134,7 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
+    <ClInclude Include="FalseBarrel.h" />
     <ClInclude Include="FalseKnight.h" />
     <ClInclude Include="FalseKnightBossScene.h" />
     <ClInclude Include="FalseKnightManager.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="BossDoor.cpp" />
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
+    <ClCompile Include="FalseBarrel.cpp" />
     <ClCompile Include="FalseKnight.cpp" />
     <ClCompile Include="FalseKnightBossScene.cpp" />
     <ClCompile Include="FalseKnightManager.cpp" />

@@ -28,6 +28,8 @@ namespace ya
 		virtual void Update() override;
 		virtual void Release() override;
 
+		ePhaseState GetPhaseState() { return mPhase; }
+
 	private:
 		void phase1();
 		void phase2();
