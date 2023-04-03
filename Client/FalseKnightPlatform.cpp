@@ -112,6 +112,9 @@ namespace ya
 
 			falsePos.y = objectColPos.y + 1.0f;
 			falseTr->SetPos(falsePos);
+
+			// Å×½ºÆ®
+			mFalseKnight->GetComponent<RigidBody>()->SetGround(true);
 		}
 	}
 

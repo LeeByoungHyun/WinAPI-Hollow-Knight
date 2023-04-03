@@ -11,6 +11,7 @@
 #include "yaRigidBody.h"
 
 #include "yaPlayer.h"
+#include "StunHead.h"
 
 namespace ya
 {
@@ -101,6 +102,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll)right") = std::bind(&FalseKnight::stunRollCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll End)left") = std::bind(&FalseKnight::stunRollEndCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Stun(Roll End)right") = std::bind(&FalseKnight::stunRollEndCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Open)left") = std::bind(&FalseKnight::stunOpenCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Stun(Open)right") = std::bind(&FalseKnight::stunOpenCompleteEvent, this);
 
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
@@ -296,6 +299,30 @@ namespace ya
 	void FalseKnight::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionExit(other);
+	}
+
+	void FalseKnight::InitializeFlag()
+	{
+		idleFlag = false;
+		runAnticipateFlag = false;
+		runFlag = false;
+		jumpAnticipateFlag = false;
+		jumpFlag = false;
+		landFlag = false;
+		attackAnticipateFlag = false;
+		attackFlag = false;
+		attackRecoverFlag = false;
+		jumpAttackUpFlag = false;
+		jumpAttackPart1Flag = false;
+		jumpAttackPart2Flag = false;
+		jumpAttackPart3Flag = false;
+		stunRollFlag = false;
+		stunRollEndFlag = false;
+		stunOpenFlag = false;
+		stunOpenedFlag = false;
+		stunHitFlag = false;
+		deathFlag = false;
+		jumpReadyFlag = false;
 	}
 
 	void FalseKnight::idle()
@@ -707,7 +734,6 @@ namespace ya
 	{
 		if (stunRollFlag == false)
 		{
-			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 
@@ -728,13 +754,29 @@ namespace ya
 			}
 		}
 
-		if (mDirection == FalseKnight::eDirection::Left)
+		mTime += Time::DeltaTime();
+		if (mTime <= 0.2f)
 		{
-			mRigidbody->SetVelocity(Vector2(200.0f, 0.0f));
+			if (mDirection == FalseKnight::eDirection::Left)
+			{
+				mRigidbody->SetVelocity(Vector2(200.0f, -100.0f));
+			}
+			else if (mDirection == FalseKnight::eDirection::Right)
+			{
+				mRigidbody->SetVelocity(Vector2(-200.0f, -100.0f));
+			}
 		}
-		else if (mDirection == FalseKnight::eDirection::Right)
+		else
 		{
-			mRigidbody->SetVelocity(Vector2(-200.0f, 0.0f));
+			Vector2 mVelocity = mRigidbody->GetVelocity();
+			if (mDirection == FalseKnight::eDirection::Left)
+			{
+				mRigidbody->SetVelocity(Vector2(200.0f, mVelocity.y));
+			}
+			else if (mDirection == FalseKnight::eDirection::Right)
+			{
+				mRigidbody->SetVelocity(Vector2(-200.0f, mVelocity.y));
+			}
 		}
 	}
 
@@ -794,15 +836,21 @@ namespace ya
 		// False Knight_StunBodyleft
 		if (stunOpenedFlag == false)
 		{
+			StunHead* head = object::Instantiate<StunHead>(tr->GetPos(), eLayerType::Monster);
+			Vector2 headPos = head->GetComponent<Transform>()->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
 				mAnimator->Play(L"False Knight_StunBodyleft", false);
+				head->SetHeadDirection(StunHead::eDirection::Left);
+				head->GetComponent<Transform>()->SetPos(headPos - Vector2(150.0f, 0.0f));
 				stunOpenedFlag = true;
 				break;
 
 			case eDirection::Right:	// right
 				mAnimator->Play(L"False Knight_StunBodyright", false);
+				head->SetHeadDirection(StunHead::eDirection::Right);
+				head->GetComponent<Transform>()->SetPos(headPos + Vector2(150.0f, 0.0f));
 				stunOpenedFlag = true;
 				break;
 

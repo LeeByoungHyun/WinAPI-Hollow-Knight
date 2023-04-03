@@ -66,6 +66,7 @@ namespace ya
 		bool GetJumpReadyFlag() { return jumpReadyFlag; }
 		int GetStunCount() { return stunCount; }
 		void IncreaseStunCount() { stunCount++; }
+		void InitializeFlag();
 
 	private:
 		void idle();

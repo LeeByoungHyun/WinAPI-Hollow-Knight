@@ -17,7 +17,7 @@ namespace ya
 {
 	StunHead::StunHead()
 	{
-		mRigidbody = AddComponent<RigidBody>();
+		//mRigidbody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
 		mAnimator = AddComponent<Animator>();
 		tr = AddComponent<Transform>();
@@ -34,14 +34,25 @@ namespace ya
 	{
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Idle)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Idle)\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\left", Vector2::Zero, 0.033f);
-		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\right", Vector2::Zero, 0.033f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\left", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\right", Vector2::Zero, 0.066f);
+
+		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)left") = std::bind(&StunHead::hitCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)right") = std::bind(&StunHead::hitCompleteEvent, this);
 
 		mState = eStunHeadState::Idle;
+
+		GameObject::Initialize();
 	}
 
 	void StunHead::Update()
 	{
+		// 40 이상의 피해를 받으면 사라짐
+		if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
+		{
+			object::Destroy(this);
+		}
+
 		switch (mState)
 		{
 		case ya::StunHead::eStunHeadState::Idle:
@@ -55,16 +66,18 @@ namespace ya
 		default:
 			break;
 		}
+
+		GameObject::Update();
 	}
 
 	void StunHead::Render(HDC hdc)
 	{
-		
+		GameObject::Render(hdc);
 	}
 
 	void StunHead::Release()
 	{
-
+		GameObject::Release();
 	}
 
 	void StunHead::OnCollisionEnter(Collider* other)
@@ -105,11 +118,15 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
+				mCollider->SetSize(Vector2(120.0f, 120.0f));
+				mCollider->SetCenter(Vector2(-60.0f, -120.0f));
 				mAnimator->Play(L"False Knight_Head(Idle)left", true);
 				idleFlag = true;
 				break;
 
 			case eDirection::Right:	// right
+				mCollider->SetSize(Vector2(120.0f, 120.0f));
+				mCollider->SetCenter(Vector2(-60.0f, -120.0f));
 				mAnimator->Play(L"False Knight_Head(Idle)right", true);
 				idleFlag = true;
 				break;
@@ -129,12 +146,12 @@ namespace ya
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
-				mAnimator->Play(L"False Knight_Head(Hit)left", true);
+				mAnimator->Play(L"False Knight_Head(Hit)left", false);
 				hitFlag = true;
 				break;
 
 			case eDirection::Right:	// right
-				mAnimator->Play(L"False Knight_Head(Hit)right", true);
+				mAnimator->Play(L"False Knight_Head(Hit)right", false);
 				hitFlag = true;
 				break;
 
@@ -144,5 +161,10 @@ namespace ya
 
 			idleFlag = false;
 		}
+	}
+
+	void StunHead::hitCompleteEvent()
+	{
+		mState = eStunHeadState::Idle;
 	}
 }

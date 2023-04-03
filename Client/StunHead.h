@@ -30,15 +30,19 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetHeadDirection(eDirection direct) { mDirection = direct; }
+
 	private:
 		void idle();
 		void hit();
+
+		void hitCompleteEvent();
 
 	private:
 		class Animator* mAnimator;
 		class Collider* mCollider;
 		class Transform* tr;
-		class RigidBody* mRigidbody;
+		//class RigidBody* mRigidbody;
 		eStunHeadState mState;
 		eDirection mDirection;
 		class FalseKnight* mFalseKnight;
