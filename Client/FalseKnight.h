@@ -65,6 +65,8 @@ namespace ya
 		int GetTrueHP() { return trueHP; }
 		bool GetJumpReadyFlag() { return jumpReadyFlag; }
 		int GetStunCount() { return stunCount; }
+		void SetDirection(eDirection direct) { mDirection = direct; }
+		eDirection GetDirection() { return mDirection; }
 		void IncreaseStunCount() { stunCount++; }
 		void InitializeFlag();
 

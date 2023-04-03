@@ -43,12 +43,14 @@ namespace ya
 			{
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::StunRoll);
 				mFalseKnight->IncreaseStunCount();
+				mFalseKnight->InitializeFlag();
 				stunFlag = true;
 				stuned = true;
 			}
 		}
 		else if (stuned == true)
 		{
+			// º»Ã¼ Ã¼·ÂÀÌ 0ÀÌ µÇ¸é Death
 			if (mFalseKnight->GetTrueHP() <= 0)
 			{
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Death);
@@ -62,6 +64,7 @@ namespace ya
 				mFalseKnight->SetArmorHP(75);
 				stunFlag = false;
 				stuned = false;
+				mPhase = ePhaseState::Rage;
 			}
 		}
 		
@@ -85,6 +88,18 @@ namespace ya
 
 		case ya::FalseKnightManager::ePhaseState::Pattern4:
 			pattern4();
+			break;
+
+		case ya::FalseKnightManager::ePhaseState::Rage:
+			rage();
+			break;
+
+		case ya::FalseKnightManager::ePhaseState::RageAttack:
+			rageAttack();
+			break;
+
+		case ya::FalseKnightManager::ePhaseState::Stun:
+			stun();
 			break;
 
 		default:
@@ -255,6 +270,76 @@ namespace ya
 			pattern1Flag = false;
 			check1Flag = false;
 			check2Flag = false;
+		}
+	}
+
+	void FalseKnightManager::rage()
+	{
+		/* ¸Ê Áß¾ÓÀ¸·Î Á¡ÇÁ ÈÄ ÁÂ¿ì ³»·ÁÂï±â ¹Ýº¹ */
+		if (rageFlag == false)
+		{
+			rageFlag = true;
+
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
+		}
+
+		if (mFalseKnight->GetJumpReadyFlag() == true && check1Flag == false)
+		{
+			check1Flag = true;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
+
+			Vector2 distance = Vector2::Zero;
+			distance.x = 1724.0f // ¸Ê Áß¾Ó xÁÂÇ¥
+				- mFalseKnight->GetComponent<Transform>()->GetPos().x;
+			mFalseKnight->GetComponent<RigidBody>()->SetVelocity(Vector2(distance.x / 1.5f, -1500.0f));
+			mFalseKnight->GetComponent<RigidBody>()->SetGround(false);
+		}
+
+		// Áß¾ÓÀ¸·Î Á¡ÇÁ ÈÄ 5¿¬¼Ó ÁÂ¿ì³»·ÁÂï±â
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle && rageFlag == true)
+		{
+			mPhase = ePhaseState::RageAttack;
+			rageFlag = false;
+			check1Flag = false;
+		}
+	}
+
+	void FalseKnightManager::stun()
+	{
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle)
+		{
+			mPhase = ePhaseState::Phase1;
+		}
+	}
+
+	void FalseKnightManager::rageAttack()
+	{
+		// ÁÂ¿ì ³»·ÁÂï±â 5¹ø ¹Ýº¹
+		if (rageAttackFlag == false)
+		{
+			rageAttackFlag = true;
+
+			if (mFalseKnight->GetDirection() == FalseKnight::eDirection::Left)
+				mFalseKnight->SetDirection(FalseKnight::eDirection::Right);
+			else
+				mFalseKnight->SetDirection(FalseKnight::eDirection::Left);
+
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Attack);
+			rageCount++;
+		}
+
+		if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::AttackRecover && rageAttackFlag == true)
+		{
+			rageAttackFlag = false;
+			mFalseKnight->InitializeFlag();
+		}
+
+		if (rageCount > 10)
+		{
+			mPhase = ePhaseState::Phase1;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+			rageAttackFlag = false;
+			rageCount = 0;
 		}
 	}
 }

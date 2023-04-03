@@ -15,6 +15,9 @@ namespace ya
 			Pattern3,
 			Pattern4,
 			Pattern5,
+			Rage,
+			Stun,
+			RageAttack,
 			End
 		};
 
@@ -33,6 +36,9 @@ namespace ya
 		void pattern3();
 		void pattern4();
 		void pattern5();
+		void rage();
+		void stun();
+		void rageAttack();
 
 	private:
 		class FalseKnight* mFalseKnight;
@@ -51,7 +57,9 @@ namespace ya
 		bool check1Flag = false;
 		bool check2Flag = false;
 		bool stunFlag = false;
-
+		bool rageFlag = false;
+		bool rageAttackFlag = false;
+		int rageCount = 0;
 		bool stuned = false;
 	};
 }
