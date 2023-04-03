@@ -283,9 +283,8 @@ namespace ya
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAnticipate);
 		}
 
-		if (mFalseKnight->GetJumpReadyFlag() == true && check1Flag == false)
+		if (mFalseKnight->GetJumpReadyFlag() == true)
 		{
-			check1Flag = true;
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Jump);
 
 			Vector2 distance = Vector2::Zero;
