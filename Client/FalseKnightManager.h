@@ -36,6 +36,7 @@ namespace ya
 
 	private:
 		class FalseKnight* mFalseKnight;
+		class StunHead* mHead;
 
 		ePhaseState mPhase;
 		class Scene* activeScene;
@@ -49,6 +50,9 @@ namespace ya
 		bool pattern4Flag = false;
 		bool check1Flag = false;
 		bool check2Flag = false;
+		bool stunFlag = false;
+
+		bool stuned = false;
 	};
 }
 

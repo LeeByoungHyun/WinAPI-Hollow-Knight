@@ -4,6 +4,7 @@
 #include "yaRigidBody.h"
 
 #include "FalseKnight.h"
+#include "StunHead.h"
 #include "yaPlayer.h"
 
 namespace ya
@@ -35,12 +36,28 @@ namespace ya
 			enterFlag = true;
 		}
 
-		// 갑옷 체력이 0이 되면 스턴
-		if (mFalseKnight->GetArmorHP() <= 0)
+		if (stuned == false)
 		{
-			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::StunRoll);
+			// 갑옷 체력이 0이 되면 스턴
+			if (mFalseKnight->GetArmorHP() <= 0 && stunFlag == false)
+			{
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::StunRoll);
+				mFalseKnight->IncreaseStunCount();
+				stunFlag = true;
+				stuned = true;
+			}
 		}
 
+		else if (stuned == true)
+		{
+			// 본체 체력이 40*스턴배수가 되면 Idle
+			if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
+			{
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+				stuned = false;
+			}
+		}
+		
 		switch (mPhase)
 		{
 		case ya::FalseKnightManager::ePhaseState::Phase1:
@@ -82,7 +99,7 @@ namespace ya
 		if (mTime >= 1.5f && mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle)
 		{
 			srand((unsigned int)time(NULL));
-			pattern = rand() % 5;	
+			pattern = rand() % 4;	
 			mTime = 0.0f;
 			switch (pattern)
 			{
@@ -99,10 +116,6 @@ namespace ya
 				break;
 
 			case 3:	// Attack after jump away from player
-				mPhase = ePhaseState::Pattern4;
-				break;
-
-			case 4:	// Attack after jump away from player
 				mPhase = ePhaseState::Pattern4;
 				break;
 

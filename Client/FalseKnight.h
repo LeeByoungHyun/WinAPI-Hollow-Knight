@@ -64,6 +64,8 @@ namespace ya
 		void SetTrueHP(int hp) { trueHP = hp; }
 		int GetTrueHP() { return trueHP; }
 		bool GetJumpReadyFlag() { return jumpReadyFlag; }
+		int GetStunCount() { return stunCount; }
+		void IncreaseStunCount() { stunCount++; }
 
 	private:
 		void idle();
@@ -110,6 +112,7 @@ namespace ya
 		int pattern;
 		int armorHP;
 		int trueHP;
+		int stunCount = 0;
 
 		bool idleFlag = false;
 		bool runAnticipateFlag = false;

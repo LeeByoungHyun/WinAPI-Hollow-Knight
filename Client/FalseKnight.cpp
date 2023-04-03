@@ -78,6 +78,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 1)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_StunBody\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_StunBody\\right", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)left") = std::bind(&FalseKnight::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Jump(Anticipate)right") = std::bind(&FalseKnight::jumpAnticipateCompleteEvent, this);
@@ -278,18 +280,10 @@ namespace ya
 		// 플레이어의 공격일 경우
 		case eLayerType::NeilEffect:
 			armorHP -= Player::GetInstance()->GetNeilAtk();
-			if (armorHP <= 0)
-			{
-				mState = eFalseKnightState::StunRoll;
-			}
 			break;
 
 		case eLayerType::SpellEffect:
 			armorHP -= Player::GetInstance()->GetSpellAtk();
-			if (armorHP <= 0)
-			{
-				mState = eFalseKnightState::StunRoll;
-			}
 			break;
 		}
 	}
@@ -732,8 +726,15 @@ namespace ya
 			default:
 				break;
 			}
+		}
 
-
+		if (mDirection == FalseKnight::eDirection::Left)
+		{
+			mRigidbody->SetVelocity(Vector2(200.0f, 0.0f));
+		}
+		else if (mDirection == FalseKnight::eDirection::Right)
+		{
+			mRigidbody->SetVelocity(Vector2(-200.0f, 0.0f));
 		}
 	}
 
@@ -756,6 +757,13 @@ namespace ya
 			default:
 				break;
 			}
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.5f)
+		{
+			mTime = 0.0f;
+			mState = eFalseKnightState::StunOpen;
 		}
 	}
 
@@ -783,7 +791,25 @@ namespace ya
 
 	void FalseKnight::stunOpened()
 	{
+		// False Knight_StunBodyleft
+		if (stunOpenedFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"False Knight_StunBodyleft", false);
+				stunOpenedFlag = true;
+				break;
 
+			case eDirection::Right:	// right
+				mAnimator->Play(L"False Knight_StunBodyright", false);
+				stunOpenedFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 
 	void FalseKnight::stunHit()
@@ -848,11 +874,12 @@ namespace ya
 
 	void FalseKnight::stunRollEndCompleteEvent()
 	{
-		mState = eFalseKnightState::StunOpen;
+		//mState = eFalseKnightState::StunOpen;
+		mRigidbody->SetVelocity(Vector2(0.0f, 0.0f));
 	}
 
 	void FalseKnight::stunOpenCompleteEvent()
 	{
-
+		mState = eFalseKnightState::StunOpened;
 	}
 }

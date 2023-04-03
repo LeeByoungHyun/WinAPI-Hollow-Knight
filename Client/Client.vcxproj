@@ -163,6 +163,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SlashAltEffect.h" />
     <ClInclude Include="SlashEffect.h" />
+    <ClInclude Include="StunHead.h" />
     <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaDashEffectLeft.h" />
     <ClInclude Include="yaDashEffectRight.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="PlayerSkull.cpp" />
     <ClCompile Include="SlashAltEffect.cpp" />
     <ClCompile Include="SlashEffect.cpp" />
+    <ClCompile Include="StunHead.cpp" />
     <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaDashEffectLeft.cpp" />
     <ClCompile Include="yaDashEffectRight.cpp" />
