@@ -36,9 +36,14 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Idle)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Head(Hit)\\right", Vector2::Zero, 0.066f);
-
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 1)\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 1)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Death(Head 2)\\right", Vector2::Zero, 0.1f);
 		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)left") = std::bind(&StunHead::hitCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)right") = std::bind(&StunHead::hitCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)left") = std::bind(&StunHead::deathHead1CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)right") = std::bind(&StunHead::deathHead1CompleteEvent, this);
 
 		mState = eStunHeadState::Idle;
 
@@ -48,7 +53,12 @@ namespace ya
 	void StunHead::Update()
 	{
 		// 40 이상의 피해를 받으면 사라짐
-		if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
+
+		if (mFalseKnight->GetTrueHP() <= 0)
+		{
+			mState = eStunHeadState::Death;
+		}
+		else if(mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
 		{
 			object::Destroy(this);
 		}
@@ -61,6 +71,10 @@ namespace ya
 
 		case ya::StunHead::eStunHeadState::Hit:
 			hit();
+			break;
+
+		case ya::StunHead::eStunHeadState::Death:
+			death();
 			break;
 
 		default:
@@ -163,8 +177,94 @@ namespace ya
 		}
 	}
 
+	void StunHead::death()
+	{
+		mCollider->SetActive(false);
+		mCollider->SetSize(Vector2(0.0f, 0.0f));
+		if (deathFlag1 == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"False Knight_Head(Hit)left", true);
+				deathFlag1 = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"False Knight_Head(Hit)right", true);
+				deathFlag1 = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 3.0f && deathFlag2 == false)
+		{
+			deathFlag2 = true;
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"False Knight_Death(Head 1)left", false);
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"False Knight_Death(Head 1)right", false);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		if (mTime >= 3.0f)
+		{
+			Vector2 pos = tr->GetPos();
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				//pos.x -= 200.0f;
+				break;
+
+			case eDirection::Right:	// right
+				//pos.x += 200.0f;
+				break;
+
+			default:
+				break;
+			}
+			tr->SetPos(pos);
+		}
+	}
+
 	void StunHead::hitCompleteEvent()
 	{
 		mState = eStunHeadState::Idle;
 	}
+
+	void StunHead::deathHead1CompleteEvent()
+	{
+		switch (mDirection)
+		{
+		case eDirection::Left:	// left
+			mAnimator->Play(L"False Knight_Death(Head 2)left", false);
+			break;
+
+		case eDirection::Right:	// right
+			mAnimator->Play(L"False Knight_Death(Head 2)right", false);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+
+
+
+
+
+
 }

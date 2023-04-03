@@ -833,7 +833,6 @@ namespace ya
 
 	void FalseKnight::stunOpened()
 	{
-		// False Knight_StunBodyleft
 		if (stunOpenedFlag == false)
 		{
 			StunHead* head = object::Instantiate<StunHead>(tr->GetPos(), eLayerType::Monster);

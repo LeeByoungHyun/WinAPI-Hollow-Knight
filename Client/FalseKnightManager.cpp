@@ -49,8 +49,12 @@ namespace ya
 		}
 		else if (stuned == true)
 		{
+			if (mFalseKnight->GetTrueHP() <= 0)
+			{
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Death);
+			}
 			// 본체 체력이 40*스턴배수가 되면 Idle
-			if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
+			else if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
 			{
 				mFalseKnight->SetTrueHP(160 - (mFalseKnight->GetStunCount() * 40));
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);

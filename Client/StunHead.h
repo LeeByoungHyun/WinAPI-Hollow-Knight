@@ -9,7 +9,8 @@ namespace ya
 		enum class eStunHeadState
 		{
 			Idle,
-			Hit
+			Hit,
+			Death
 		};
 
 		enum class eDirection
@@ -35,8 +36,10 @@ namespace ya
 	private:
 		void idle();
 		void hit();
+		void death();
 
 		void hitCompleteEvent();
+		void deathHead1CompleteEvent();
 
 	private:
 		class Animator* mAnimator;
@@ -45,9 +48,12 @@ namespace ya
 		//class RigidBody* mRigidbody;
 		eStunHeadState mState;
 		eDirection mDirection;
+		float mTime = 0.0f;
 		class FalseKnight* mFalseKnight;
 		class Player* mPlayer;
 		bool idleFlag = false;
 		bool hitFlag = false;
+		bool deathFlag1 = false;
+		bool deathFlag2 = false;
 	};
 }
