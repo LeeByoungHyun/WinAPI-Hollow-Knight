@@ -16,5 +16,10 @@
 #include <functional>
 #include <filesystem>
 #include <iostream>
+#include <mmsystem.h>
+#include <dsound.h>
+#include <dinput.h>
 
 #pragma comment(lib, "Msimg32.lib")
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "dsound.lib")

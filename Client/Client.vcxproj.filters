@@ -403,6 +403,12 @@
     <ClInclude Include="FalseBarrel.h">
       <Filter>Contents\Objects\Charactor\False_Knight\Barrel</Filter>
     </ClInclude>
+    <ClInclude Include="yaSound.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSoundManager.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -596,6 +602,12 @@
     </ClCompile>
     <ClCompile Include="FalseBarrel.cpp">
       <Filter>Contents\Objects\Charactor\False_Knight\Barrel</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSound.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSoundManager.cpp">
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

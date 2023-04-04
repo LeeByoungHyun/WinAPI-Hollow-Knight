@@ -182,6 +182,8 @@
     <ClInclude Include="yaMenuBG.h" />
     <ClInclude Include="yaMenuTitle.h" />
     <ClInclude Include="yaPlayer.h" />
+    <ClInclude Include="yaSound.h" />
+    <ClInclude Include="yaSoundManager.h" />
     <ClInclude Include="yaTitleScene.h" />
     <ClInclude Include="yaApplication.h" />
     <ClInclude Include="yaComponent.h" />
@@ -250,6 +252,8 @@
     <ClCompile Include="yaMenuBG.cpp" />
     <ClCompile Include="yaMenuTitle.cpp" />
     <ClCompile Include="yaPlayer.cpp" />
+    <ClCompile Include="yaSound.cpp" />
+    <ClCompile Include="yaSoundManager.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
     <ClCompile Include="yaApplication.cpp" />
     <ClCompile Include="yaComponent.cpp" />
