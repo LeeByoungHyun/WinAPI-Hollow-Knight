@@ -71,17 +71,17 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
 
-		landGroundSound = ResourceManager::Load<Sound>(L"MantisLords_LandonGround01", L"..\\Resources\\Sound\\Mantis Lords_Land on Ground.wav");
-		jumpOfGroundSound = ResourceManager::Load<Sound>(L"MantisLordsJumpoffGround01", L"..\\Resources\\Sound\\Mantis Lords_jump off Ground.wav");
-		dashSound = ResourceManager::Load<Sound>(L"MantisLordshorizontaldash01", L"..\\Resources\\Sound\\Mantis Lords_horizontal_dash.wav");
-		landWallSound = ResourceManager::Load<Sound>(L"MantisLordslandcage01", L"..\\Resources\\Sound\\Mantis Lords_land_cage.wav");
-		jumpOfWallSound = ResourceManager::Load<Sound>(L"MantisLordsjumpoffcage01", L"..\\Resources\\Sound\\Mantis Lords_jump_off_cage.wav");
-		downSlashSound = ResourceManager::Load<Sound>(L"MantisLordsdownslash01", L"..\\Resources\\Sound\\Mantis Lords_down_slash.wav");
-		downSlashImpactSound = ResourceManager::Load<Sound>(L"MantisLordsdownslashimpact01", L"..\\Resources\\Sound\\Mantis Lords_down_slash_impact.wav");
-		downSlashArriveSound = ResourceManager::Load<Sound>(L"MantisLordsdstabarrive01", L"..\\Resources\\Sound\\Mantis Lords_dstab arrive.wav");
-		wallSlashSound = ResourceManager::Load<Sound>(L"MantisLordswallattack01", L"..\\Resources\\Sound\\Mantis Lords_wall_attack.wav");
-		deathSound = ResourceManager::Load<Sound>(L"MantisLorddeath01", L"..\\Resources\\Sound\\Mantis_Lord_death_01.wav");
-		victorySound = ResourceManager::Load<Sound>(L"MantisLordsStandVictory", L"..\\Resources\\Sound\\Mantis Lords_Stand Victory.wav");
+		landGroundSound = ResourceManager::Load<Sound>(L"MantisLords_LandonGround01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_Land on Ground.wav");
+		jumpOfGroundSound = ResourceManager::Load<Sound>(L"MantisLordsJumpoffGround01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_jump off Ground.wav");
+		dashSound = ResourceManager::Load<Sound>(L"MantisLordshorizontaldash01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_horizontal_dash.wav");
+		landWallSound = ResourceManager::Load<Sound>(L"MantisLordslandcage01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_land_cage.wav");
+		jumpOfWallSound = ResourceManager::Load<Sound>(L"MantisLordsjumpoffcage01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_jump_off_cage.wav");
+		downSlashSound = ResourceManager::Load<Sound>(L"MantisLordsdownslash01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_down_slash.wav");
+		downSlashImpactSound = ResourceManager::Load<Sound>(L"MantisLordsdownslashimpact01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_down_slash_impact.wav");
+		downSlashArriveSound = ResourceManager::Load<Sound>(L"MantisLordsdstabarrive01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_dstab arrive.wav");
+		wallSlashSound = ResourceManager::Load<Sound>(L"MantisLordswallattack01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_wall_attack.wav");
+		deathSound = ResourceManager::Load<Sound>(L"MantisLorddeath01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis_Lord_death_01.wav");
+		victorySound = ResourceManager::Load<Sound>(L"MantisLordsStandVictory", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_Stand Victory.wav");
 		damagedSound = ResourceManager::Load<Sound>(L"enemy_damaged", L"..\\Resources\\Sound\\enemy_damage.wav");
 
 		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", false);

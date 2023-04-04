@@ -77,7 +77,7 @@ namespace ya
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
 
-		mantisLordsTheme = ResourceManager::Load<Sound>(L"MantisLordstheme", L"..\\Resources\\Sound\\Mantis Lords_theme2.wav");
+		mantisLordsTheme = ResourceManager::Load<Sound>(L"MantisLordstheme", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_theme2.wav");
 	}
 
 	void MantisLordsBossScene::Update()
