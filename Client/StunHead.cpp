@@ -9,6 +9,7 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
+#include "yaSound.h"
 
 #include "yaPlayer.h"
 #include "FalseKnight.h"
@@ -44,6 +45,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)right") = std::bind(&StunHead::hitCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)left") = std::bind(&StunHead::deathHead1CompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)right") = std::bind(&StunHead::deathHead1CompleteEvent, this);
+
+		damaged1Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged1Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_01.wav");
+		damaged2Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged2Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_02.wav");
+		damaged3Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged3Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_03.wav");
+		damaged4Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged4Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_05.wav");
+		damaged5Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged5Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_06.wav");
 
 		mState = eStunHeadState::Idle;
 
@@ -157,6 +164,35 @@ namespace ya
 	{
 		if (hitFlag == false)
 		{
+			// 보이스 랜덤하게 재생
+			srand((unsigned int)time(NULL));
+			int voice = rand() % 5;
+			switch (voice)
+			{
+			case 0:
+				damaged1Sound->Play(false);
+				break;
+
+			case 1:
+				damaged2Sound->Play(false);
+				break;
+
+			case 2:
+				damaged3Sound->Play(false);
+				break;
+
+			case 3:
+				damaged4Sound->Play(false);
+				break;
+
+			case 4:
+				damaged5Sound->Play(false);
+				break;
+
+			default:
+				break;
+			}
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

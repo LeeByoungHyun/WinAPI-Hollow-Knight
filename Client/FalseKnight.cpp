@@ -9,6 +9,7 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
+#include "yaSound.h"
 
 #include "yaPlayer.h"
 #include "StunHead.h"
@@ -295,15 +296,18 @@ namespace ya
 			{
 				mState = FalseKnight::eFalseKnightState::JumpAttackPart1;
 			}
+			landSound->Play(false);
 			break;
 
 		// 플레이어의 공격일 경우
 		case eLayerType::NeilEffect:
 			armorHP -= Player::GetInstance()->GetNeilAtk();
+			armorDamagedSound->Play(false);
 			break;
 
 		case eLayerType::SpellEffect:
 			armorHP -= Player::GetInstance()->GetSpellAtk();
+			armorDamagedSound->Play(false);
 			break;
 		}
 	}
@@ -469,7 +473,7 @@ namespace ya
 	{
 		if (jumpFlag == false)
 		{
-			//Vector2 pos = tr->GetPos();
+			jumpSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -540,6 +544,35 @@ namespace ya
 	{
 		if (attackAnticipateFlag == false)
 		{
+			// 공격마다 보이스 랜덤하게 재생
+			srand((unsigned int)time(NULL));
+			int voice = rand() % 5;
+			switch (voice)
+			{
+			case 0:
+				attack1Sound->Play(false);
+				break;
+
+			case 1:
+				attack2Sound->Play(false);
+				break;
+
+			case 2:
+				attack3Sound->Play(false);
+				break;
+
+			case 3:
+				attack4Sound->Play(false);
+				break;
+
+			case 4:
+				attack5Sound->Play(false);
+				break;
+
+			default:
+				break;
+			}
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -570,6 +603,7 @@ namespace ya
 	{
 		if (attackFlag == false)
 		{
+			swingSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -630,6 +664,36 @@ namespace ya
 	{
 		if (jumpAttackUpFlag == false)
 		{
+			// 공격마다 보이스 랜덤하게 재생
+			srand((unsigned int)time(NULL));
+			int voice = rand() % 5;
+			switch (voice)
+			{
+			case 0:
+				attack1Sound->Play(false);
+				break;
+
+			case 1:
+				attack2Sound->Play(false);
+				break;
+
+			case 2:
+				attack3Sound->Play(false);
+				break;
+
+			case 3:
+				attack4Sound->Play(false);
+				break;
+
+			case 4:
+				attack5Sound->Play(false);
+				break;
+
+			default:
+				break;
+			}
+			jumpSound->Play(false);
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -661,6 +725,7 @@ namespace ya
 	{
 		if (jumpAttackPart1Flag == false)
 		{
+			swingSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -753,7 +818,7 @@ namespace ya
 		{
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
-
+			rollSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -830,6 +895,35 @@ namespace ya
 	{
 		if (stunOpenFlag == false)
 		{
+			// 보이스 랜덤하게 재생
+			srand((unsigned int)time(NULL));
+			int voice = rand() % 5;
+			switch (voice)
+			{
+			case 0:
+				damaged1Sound->Play(false);
+				break;
+
+			case 1:
+				damaged2Sound->Play(false);
+				break;
+
+			case 2:
+				damaged3Sound->Play(false);
+				break;
+
+			case 3:
+				damaged4Sound->Play(false);
+				break;
+
+			case 4:
+				damaged5Sound->Play(false);
+				break;
+
+			default:
+				break;
+			}
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -909,6 +1003,7 @@ namespace ya
 	void FalseKnight::jumpAttackPart2CompleteEvent()
 	{
 		mState = eFalseKnightState::JumpAttackPart3;
+		strikeGroundSound->Play(false);
 	}
 
 	void FalseKnight::jumpAttackPart3CompleteEvent()
@@ -924,6 +1019,7 @@ namespace ya
 	void FalseKnight::attackCompleteEvent()
 	{
 		mState = eFalseKnightState::AttackRecover;
+		strikeGroundSound->Play(false);
 	}
 
 	void FalseKnight::attackRecoverCompleteEvent()

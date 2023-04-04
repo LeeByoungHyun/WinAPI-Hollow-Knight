@@ -56,5 +56,11 @@ namespace ya
 		bool deathFlag1 = false;
 		bool deathFlag2 = false;
 		bool deathFlag3 = false;
+
+		class Sound* damaged1Sound;
+		class Sound* damaged2Sound;
+		class Sound* damaged3Sound;
+		class Sound* damaged4Sound;
+		class Sound* damaged5Sound;
 	};
 }
