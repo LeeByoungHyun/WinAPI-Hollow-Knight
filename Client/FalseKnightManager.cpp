@@ -59,7 +59,7 @@ namespace ya
 			else if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
 			{
 				mFalseKnight->SetTrueHP(160 - (mFalseKnight->GetStunCount() * 40));
-				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);	// 일어나는 애니메이션으로 추후 변경
 				mFalseKnight->InitializeFlag();
 				mFalseKnight->SetArmorHP(75);
 				stunFlag = false;
