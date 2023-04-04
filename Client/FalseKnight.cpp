@@ -105,6 +105,23 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Stun(Open)left") = std::bind(&FalseKnight::stunOpenCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Stun(Open)right") = std::bind(&FalseKnight::stunOpenCompleteEvent, this);
 
+		attack1Sound = ResourceManager::Load<Sound>(L"falseKnightAttack1Sound", L"..\\Resources\\Sound\\False Knight\\False_Knight_Attack_New_01.wav");
+		attack2Sound = ResourceManager::Load<Sound>(L"falseKnightAttack2Sound", L"..\\Resources\\Sound\\False Knight\\False_Knight_Attack_New_02.wav");
+		attack3Sound = ResourceManager::Load<Sound>(L"falseKnightAttack3Sound", L"..\\Resources\\Sound\\False Knight\\False_Knight_Attack_New_03.wav");
+		attack4Sound = ResourceManager::Load<Sound>(L"falseKnightAttack4Sound", L"..\\Resources\\Sound\\False Knight\\False_Knight_Attack_New_04.wav");
+		attack5Sound = ResourceManager::Load<Sound>(L"falseKnightAttack5Sound", L"..\\Resources\\Sound\\False Knight\\False_Knight_Attack_New_05.wav");
+		strikeGroundSound = ResourceManager::Load<Sound>(L"falseKnightStrikeGroundSound", L"..\\Resources\\Sound\\False Knight\\false_knight_strike_ground.wav");
+		swingSound = ResourceManager::Load<Sound>(L"falseKnightSwingSound", L"..\\Resources\\Sound\\False Knight\\false_knight_swing.wav");
+		armorDamagedSound = ResourceManager::Load<Sound>(L"falseKnightDamagedArmorSound", L"..\\Resources\\Sound\\False Knight\\false_knight_damage_armour.wav");
+		damaged1Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged1Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_01.wav");
+		damaged2Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged2Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_02.wav");
+		damaged3Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged3Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_03.wav");
+		damaged4Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged4Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_05.wav");
+		damaged5Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged5Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_06.wav");
+		jumpSound = ResourceManager::Load<Sound>(L"falseKnightJumpSound", L"..\\Resources\\Sound\\False Knight\\false_knight_jump.wav");
+		landSound = ResourceManager::Load<Sound>(L"falseKnightLandSound", L"..\\Resources\\Sound\\False Knight\\false_knight_land.wav");
+		rollSound = ResourceManager::Load<Sound>(L"falseKnightRollSound", L"..\\Resources\\Sound\\False Knight\\false_knight_roll.wav");
+
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
 

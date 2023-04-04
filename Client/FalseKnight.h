@@ -138,6 +138,23 @@ namespace ya
 		bool deathFlag = false;
 		bool jumpReadyFlag = false;
 
+		class Sound* attack1Sound;
+		class Sound* attack2Sound;
+		class Sound* attack3Sound;
+		class Sound* attack4Sound;
+		class Sound* attack5Sound;
+		class Sound* strikeGroundSound;
+		class Sound* swingSound;
+		class Sound* armorDamagedSound;
+		class Sound* damaged1Sound;
+		class Sound* damaged2Sound;
+		class Sound* damaged3Sound;
+		class Sound* damaged4Sound;
+		class Sound* damaged5Sound;
+		class Sound* jumpSound;
+		class Sound* landSound;
+		class Sound* rollSound;
+
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static FalseKnight* instance;
 	};
