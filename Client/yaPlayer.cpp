@@ -116,15 +116,20 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Enterneutral") = std::bind(&Player::enterComplateEvent, this);
 
-		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight Walk.wav");
-		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight_damage.wav");
-		dashSound = ResourceManager::Load<Sound>(L"Knight_dash", L"..\\Resources\\Sound\\Knight_dash.wav");
-		doubleJumpSound = ResourceManager::Load<Sound>(L"Knight_doubleJump", L"..\\Resources\\Sound\\Knight_doubleJump.wav");
-		fireballSound = ResourceManager::Load<Sound>(L"Knight_fireball", L"..\\Resources\\Sound\\Knight_fireball.wav");
-		jumpSound = ResourceManager::Load<Sound>(L"Knight_jump", L"..\\Resources\\Sound\\Knight_jump.wav");
-		landSound = ResourceManager::Load<Sound>(L"Knight_land_soft", L"..\\Resources\\Sound\\Knight_land_soft.wav");
-		focusChargeSound = ResourceManager::Load<Sound>(L"Knight_focus_charging", L"..\\Resources\\Sound\\Knight_focus_charging.wav");
-		focusSuccessSound = ResourceManager::Load<Sound>(L"Knight_focus_Success", L"..\\Resources\\Sound\\Knight_focus_Success.wav");
+		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight\\Knight Walk.wav");
+		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight\\Knight_damage.wav");
+		dashSound = ResourceManager::Load<Sound>(L"Knight_dash", L"..\\Resources\\Sound\\Knight\\Knight_dash.wav");
+		doubleJumpSound = ResourceManager::Load<Sound>(L"Knight_doubleJump", L"..\\Resources\\Sound\\Knight\\Knight_doubleJump.wav");
+		fireballSound = ResourceManager::Load<Sound>(L"Knight_fireball", L"..\\Resources\\Sound\\Knight\\Knight_fireball.wav");
+		jumpSound = ResourceManager::Load<Sound>(L"Knight_jump", L"..\\Resources\\Sound\\Knight\\Knight_jump.wav");
+		landSound = ResourceManager::Load<Sound>(L"Knight_land_soft", L"..\\Resources\\Sound\\Knight\\Knight_land_soft.wav");
+		focusChargeSound = ResourceManager::Load<Sound>(L"Knight_focus_charging", L"..\\Resources\\Sound\\Knight\\Knight_focus_charging.wav");
+		focusSuccessSound = ResourceManager::Load<Sound>(L"Knight_focus_Success", L"..\\Resources\\Sound\\Knight\\Knight_focus_Success.wav");
+		slash1Sound = ResourceManager::Load<Sound>(L"sword_1", L"..\\Resources\\Sound\\Knight\\sword_1.wav");
+		slash2Sound = ResourceManager::Load<Sound>(L"sword_2", L"..\\Resources\\Sound\\Knight\\sword_2.wav");
+		slash3Sound = ResourceManager::Load<Sound>(L"sword_3", L"..\\Resources\\Sound\\Knight\\sword_3.wav");
+		slash4Sound = ResourceManager::Load<Sound>(L"sword_4", L"..\\Resources\\Sound\\Knight\\sword_4.wav");
+		slash5Sound = ResourceManager::Load<Sound>(L"sword_5", L"..\\Resources\\Sound\\Knight\\sword_5.wav");
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -540,6 +545,7 @@ namespace ya
 				break;
 			}
 			object::Instantiate<SlashEffect>(eLayerType::NeilEffect);
+			slash1Sound->Play(false);
 		}
 
 		mTime += Time::DeltaTime();
@@ -597,6 +603,7 @@ namespace ya
 				break;
 			}
 			object::Instantiate<SlashAltEffect>(eLayerType::NeilEffect);
+			slash2Sound->Play(false);
 		}
 
 		mTime += Time::DeltaTime();
@@ -640,6 +647,7 @@ namespace ya
 		{
 			mAnimator->Play(L"Knight_UpSlashneutral", true);
 			object::Instantiate<UpSlashEffect>(eLayerType::NeilEffect);
+			slash3Sound->Play(false);
 			upSlashFlag = true;
 		}
 
@@ -662,6 +670,7 @@ namespace ya
 		{
 			mAnimator->Play(L"Knight_DownSlashneutral", true);
 			object::Instantiate<DownSlashEffect>(eLayerType::NeilEffect);
+			slash4Sound->Play(false);
 			downSlashFlag = true;
 		}
 

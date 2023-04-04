@@ -152,7 +152,11 @@ namespace ya
 		class Sound* landSound;
 		class Sound* focusChargeSound;
 		class Sound* focusSuccessSound;
-
+		class Sound* slash1Sound;
+		class Sound* slash2Sound;
+		class Sound* slash3Sound;
+		class Sound* slash4Sound;
+		class Sound* slash5Sound;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
