@@ -80,6 +80,7 @@ namespace ya
 		downSlashArriveSound = ResourceManager::Load<Sound>(L"MantisLordsdstabarrive02", L"..\\Resources\\Sound\\Mantis Lords_dstab arrive.wav");
 		wallSlashSound = ResourceManager::Load<Sound>(L"MantisLordswallattack02", L"..\\Resources\\Sound\\Mantis Lords_wall_attack.wav");
 		deathSound = ResourceManager::Load<Sound>(L"MantisLorddeath02", L"..\\Resources\\Sound\\Mantis_Lord_death_02.wav");
+		damagedSound = ResourceManager::Load<Sound>(L"enemy_damaged", L"..\\Resources\\Sound\\enemy_damage.wav");
 
 		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", false);
 
@@ -262,10 +263,12 @@ namespace ya
 			{
 			case eLayerType::NeilEffect:
 				hp -= Player::GetInstance()->GetNeilAtk();
+				damagedSound->Play(false);
 				break;
 
 			case eLayerType::SpellEffect:
 				hp -= Player::GetInstance()->GetSpellAtk();
+				damagedSound->Play(false);
 				break;
 			}
 		}

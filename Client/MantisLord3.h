@@ -137,6 +137,7 @@ namespace ya
 		class Sound* downSlashArriveSound;
 		class Sound* wallSlashSound;
 		class Sound* deathSound;
+		class Sound* damagedSound;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static MantisLord3* instance;
