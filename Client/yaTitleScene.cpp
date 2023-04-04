@@ -2,6 +2,8 @@
 #include "yaInput.h"
 #include "yaSceneManager.h"
 #include "yaObject.h"
+#include "yaSound.h"
+#include "yaResourceManager.h"
 
 namespace ya
 {
@@ -37,6 +39,9 @@ namespace ya
 		object::Instantiate<MenuBG>(eLayerType::BG);
 		object::Instantiate<MenuTitle>(eLayerType::BG);
 		object::Instantiate<Cursor>(eLayerType::UI);
+
+		titletheme = ResourceManager::Load<Sound>(L"titletheme", L"..\\Resources\\Sound\\Title.wav");
+		titletheme->Play(true);
 	}
 
 	void TitleScene::Update()
@@ -61,11 +66,11 @@ namespace ya
 
 	void TitleScene::Enter()
 	{
-
+		titletheme->Play(true);
 	}
 
 	void TitleScene::Exit()
 	{
-
+		titletheme->Stop(true);
 	}
 }

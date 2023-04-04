@@ -25,6 +25,7 @@ namespace ya
 		MenuBG* mMenuBG;
 		Cursor* mCursor;
 		MenuTitle* mMenuTitle;
+		class Sound* titletheme;
 	};
 }
 

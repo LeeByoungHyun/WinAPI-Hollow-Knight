@@ -46,6 +46,7 @@ namespace ya
 
 		Input::Initialize();
 		Time::Initialize();
+		SoundManager::Initialize();
 		SceneManager::Initialize();
 		Camera::Initialize();
 	}
