@@ -35,9 +35,6 @@ namespace ya
 
 		// 게임오브젝트 추가는 이곳에	
 		object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
-		object::Instantiate<Crawlid>(Vector2(1800.0f, 1300.0f - 103.0f), eLayerType::Monster);
-		object::Instantiate<Crawlid>(Vector2(1950.0f, 1300.0f - 103.0f), eLayerType::Monster);
-		object::Instantiate<Crawlid>(Vector2(2100.0f, 1300.0f - 103.0f), eLayerType::Monster);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 
@@ -50,6 +47,9 @@ namespace ya
 		scene->AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
+
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
+
 	}
 
 	void MainHallScene::Update()
@@ -96,8 +96,6 @@ namespace ya
 		Camera::SetMaxX(2648.0f);
 		Camera::SetMinY(1300.0f);
 		Camera::SetMaxY(0.0f);
-
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1100.0f));
 	}
 
 	void MainHallScene::Exit()

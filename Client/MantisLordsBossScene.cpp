@@ -124,5 +124,7 @@ namespace ya
 	void MantisLordsBossScene::Exit()
 	{
 		Scene::Exit();
+
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
 	}
 }

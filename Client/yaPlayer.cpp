@@ -171,6 +171,7 @@ namespace ya
 			doubleJumpFlag = false;
 			fallFlag = false;
 			enterFlag = false;
+			enterComplateFlag = false;
 			//invincibilityFlag = false;
 
 			// 속도 0으로
