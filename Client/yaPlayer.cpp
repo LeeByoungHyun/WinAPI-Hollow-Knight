@@ -10,6 +10,7 @@
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
 #include "yaCamera.h"
+#include "yaSound.h"
 
 #include "DownSlashEffect.h"
 #include "yaUpSlashEffect.h"
@@ -115,6 +116,15 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Enterneutral") = std::bind(&Player::enterComplateEvent, this);
 
+		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight Walk.wav");
+		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight_damage.wav");
+		dashSound = ResourceManager::Load<Sound>(L"Knight_dash", L"..\\Resources\\Sound\\Knight_dash.wav");
+		doubleJumpSound = ResourceManager::Load<Sound>(L"Knight_doubleJump", L"..\\Resources\\Sound\\Knight_doubleJump.wav");
+		fireballSound = ResourceManager::Load<Sound>(L"Knight_fireball", L"..\\Resources\\Sound\\Knight_fireball.wav");
+		jumpSound = ResourceManager::Load<Sound>(L"Knight_jump", L"..\\Resources\\Sound\\Knight_jump.wav");
+		landSound = ResourceManager::Load<Sound>(L"Knight_land_soft", L"..\\Resources\\Sound\\Knight_land_soft.wav");
+		focusChargeSound = ResourceManager::Load<Sound>(L"Knight_focus_charging", L"..\\Resources\\Sound\\Knight_focus_charging.wav");
+		focusSuccessSound = ResourceManager::Load<Sound>(L"Knight_focus_Success", L"..\\Resources\\Sound\\Knight_focus_Success.wav");
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -317,7 +327,7 @@ namespace ya
 					mAnimator->Play(L"Knight_Idleright", true);
 
 				mRigidBody->SetGround(true);
-
+				landSound->Play(false);
 				break;
 			}
 		}
@@ -362,6 +372,9 @@ namespace ya
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Walkright", true);
 			idleFlag = false;
+
+			// sound
+			walkSound->Play(true);
 
 			return;
 		}
@@ -422,6 +435,8 @@ namespace ya
 		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
 
+		
+
 		// 이동키에서 손을 땔 경우 Idle상태로 변경
 		if (Input::GetKeyUp(eKeyCode::LEFT) || Input::GetKeyUp(eKeyCode::RIGHT))
 		{
@@ -432,6 +447,7 @@ namespace ya
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Idleright", true);
 
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -439,6 +455,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::C))
 		{
 			mState = ePlayerState::Dash;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -446,6 +463,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
 			mState = ePlayerState::Jump;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -453,6 +471,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X) && Input::GetKey(eKeyCode::UP))
 		{
 			mState = ePlayerState::UpSlash;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -460,6 +479,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
 			mState = ePlayerState::Slash;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -467,6 +487,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
 			mState = ePlayerState::CastFireball;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -474,6 +495,7 @@ namespace ya
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			mState = ePlayerState::Focus;
+			walkSound->Stop(true);
 			return;
 		}
 
@@ -672,6 +694,8 @@ namespace ya
 			default:
 				break;
 			}
+
+			dashSound->Play(false);
 		}
 
 		mRigidBody->SetVelocity((Vector2::Zero));
@@ -698,6 +722,7 @@ namespace ya
 
 		if (jumpFlag == false)
 		{
+			jumpSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -788,6 +813,7 @@ namespace ya
 		{
 			DoubleJumpEffect* effect = object::Instantiate<DoubleJumpEffect>(tr->GetPos() + Vector2(0.0f, 0.0f), eLayerType::BackEffect);
 			effect->GetComponent<Transform>()->SetSize(Vector2(0.5f, 0.5f));
+			doubleJumpSound->Play(false);
 
 			switch (mDirection)
 			{
@@ -968,6 +994,7 @@ namespace ya
 			default:
 				break;
 			}
+			fireballSound->Play(false);
 		}
 
 		mRigidBody->SetVelocity((Vector2::Zero));
@@ -997,6 +1024,7 @@ namespace ya
 			else if (mDirection == eDirection::Right)
 				mAnimator->Play(L"Knight_Stunright", false);
 
+			damageSound->Play(false);
 			stunFlag = true;
 		}
 
@@ -1059,6 +1087,7 @@ namespace ya
 				break;
 			}
 			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
+			focusChargeSound->Play(false);
 		}
 
 		// 회복키에서 손 때면 회복종료
@@ -1077,6 +1106,7 @@ namespace ya
 			mState = ePlayerState::FocusGet;
 			focusFlag = false;
 			mTime = 0.0f;
+			focusChargeSound->Stop(true);
 			return;
 		}
 	}
@@ -1100,6 +1130,8 @@ namespace ya
 			default:
 				break;
 			}
+			focusChargeSound->Stop(true);
+			focusSuccessSound->Stop(true);
 		}
 	}
 
@@ -1124,6 +1156,8 @@ namespace ya
 			}
 			object::Instantiate<FocusEffect>(tr->GetPos(), eLayerType::BackEffect);
 			hp += 1;
+			focusSuccessSound->Play(false);
+			focusChargeSound->Play(false);
 		}
 
 		// 회복키에서 손 때면 회복종료
@@ -1142,6 +1176,7 @@ namespace ya
 			mState = ePlayerState::FocusGet;
 			focusGetFlag = false;
 			mTime = 0.0f;
+			focusSuccessSound->Stop(true);
 			return;
 		}
 	}

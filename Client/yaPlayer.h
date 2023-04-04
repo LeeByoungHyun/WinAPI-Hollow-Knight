@@ -141,6 +141,19 @@ namespace ya
 		bool recoilFlag			= false;
 		bool enterFlag			= false;
 		bool enterComplateFlag	= false;
+
+		// sound
+		class Sound* walkSound;
+		class Sound* damageSound;
+		class Sound* dashSound;
+		class Sound* doubleJumpSound;
+		class Sound* fireballSound;
+		class Sound* jumpSound;
+		class Sound* landSound;
+		class Sound* focusChargeSound;
+		class Sound* focusSuccessSound;
+
+
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
 	};
