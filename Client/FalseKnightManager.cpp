@@ -337,6 +337,7 @@ namespace ya
 		{
 			mPhase = ePhaseState::Phase1;
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+			mFalseKnight->InitializeFlag();
 			rageAttackFlag = false;
 			rageCount = 0;
 		}
