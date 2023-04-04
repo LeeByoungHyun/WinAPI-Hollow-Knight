@@ -4,6 +4,9 @@
 #include "yaObject.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
+#include "yaResourceManager.h"
+#include "yaSound.h"
+#include "yaTime.h"
 
 #include "yaPlayer.h"
 #include "GodBG.h"
@@ -56,7 +59,6 @@ namespace ya
 		mantisLord3->SetType(eLayerType::Monster);
 
 		object::Instantiate<MantisLordsManager>(eLayerType::Manager);	// 패턴관리매니저
-
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1974.0f, 800.0f), eLayerType::BGObject);
@@ -74,6 +76,8 @@ namespace ya
 		scene->AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
+
+		mantisLordsTheme = ResourceManager::Load<Sound>(L"MantisLordstheme", L"..\\Resources\\Sound\\Mantis Lords_theme2.wav");
 	}
 
 	void MantisLordsBossScene::Update()
@@ -88,6 +92,15 @@ namespace ya
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Title);
+		}
+
+		if (enterFlag == true)
+			mTime += Time::DeltaTime();
+		if (mTime >= 2.0f && enterFlag == true)
+		{
+			mantisLordsTheme->Play(true);
+			enterFlag = false;
+			mTime = 0.0f;
 		}
 	}
 
@@ -119,6 +132,7 @@ namespace ya
 		Camera::SetMaxY(850.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		enterFlag = true;
 	}
 
 	void MantisLordsBossScene::Exit()
@@ -126,5 +140,6 @@ namespace ya
 		Scene::Exit();
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
+		mantisLordsTheme->Stop(true);
 	}
 }

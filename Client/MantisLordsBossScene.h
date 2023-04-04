@@ -22,8 +22,10 @@ namespace ya
 		class MantisLord1* mantisLord1;
 		class MantisLord2* mantisLord2;
 		class MantisLord3* mantisLord3;
+		class Sound* mantisLordsTheme;
 
-		bool mantis1DefeatFlag = false;
+		bool enterFlag = false;
+		float mTime = 0.0f;
 	};
 }
 

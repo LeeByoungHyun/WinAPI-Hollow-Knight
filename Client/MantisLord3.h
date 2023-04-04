@@ -127,6 +127,17 @@ namespace ya
 		bool deathFlag = false;
 		bool deathLeaveFlag = false;
 
+		class Sound* landGroundSound;
+		class Sound* jumpOfGroundSound;
+		class Sound* dashSound;
+		class Sound* landWallSound;
+		class Sound* jumpOfWallSound;
+		class Sound* downSlashSound;
+		class Sound* downSlashImpactSound;
+		class Sound* downSlashArriveSound;
+		class Sound* wallSlashSound;
+		class Sound* deathSound;
+
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static MantisLord3* instance;
 	};

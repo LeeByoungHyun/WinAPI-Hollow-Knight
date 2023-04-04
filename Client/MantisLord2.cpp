@@ -8,6 +8,7 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
+#include "yaSound.h"
 
 #include "yaPlayer.h"
 #include "LongPlatform.h"
@@ -45,24 +46,19 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Anticipate)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Recover)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash(Recover)\\right", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Death\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Death Leave\\neutral", Vector2::Zero, 0.02f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Arrive\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Land\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dstab Leave\\neutral", Vector2::Zero, 0.02f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Bow\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Idle\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Leave\\neutral", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Stand\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throne Wounded\\neutral", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Gesture(Part 1)\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Gesture(Part 2)\\neutral", Vector2::Zero, 0.1f);
-
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throw\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Throw\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Arrive\\left", Vector2::Zero, 0.1f);
@@ -73,6 +69,17 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\right", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
+
+		landGroundSound = ResourceManager::Load<Sound>(L"MantisLords_LandonGround02", L"..\\Resources\\Sound\\Mantis Lords_Land on Ground.wav");
+		jumpOfGroundSound = ResourceManager::Load<Sound>(L"MantisLordsJumpoffGround02", L"..\\Resources\\Sound\\Mantis Lords_jump off Ground.wav");
+		dashSound = ResourceManager::Load<Sound>(L"MantisLordshorizontaldash02", L"..\\Resources\\Sound\\Mantis Lords_horizontal_dash.wav");
+		landWallSound = ResourceManager::Load<Sound>(L"MantisLordslandcage02", L"..\\Resources\\Sound\\Mantis Lords_land_cage.wav");
+		jumpOfWallSound = ResourceManager::Load<Sound>(L"MantisLordsjumpoffcage02", L"..\\Resources\\Sound\\Mantis Lords_jump_off_cage.wav");
+		downSlashSound = ResourceManager::Load<Sound>(L"MantisLordsdownslash02", L"..\\Resources\\Sound\\Mantis Lords_down_slash.wav");
+		downSlashImpactSound = ResourceManager::Load<Sound>(L"MantisLordsdownslashimpact02", L"..\\Resources\\Sound\\Mantis Lords_down_slash_impact.wav");
+		downSlashArriveSound = ResourceManager::Load<Sound>(L"MantisLordsdstabarrive02", L"..\\Resources\\Sound\\Mantis Lords_dstab arrive.wav");
+		wallSlashSound = ResourceManager::Load<Sound>(L"MantisLordswallattack02", L"..\\Resources\\Sound\\Mantis Lords_wall_attack.wav");
+		deathSound = ResourceManager::Load<Sound>(L"MantisLorddeath02", L"..\\Resources\\Sound\\Mantis_Lord_death_02.wav");
 
 		mAnimator->Play(L"Mantis Lords_Throne Idleneutral", false);
 
@@ -435,7 +442,7 @@ namespace ya
 		if (dashArriveFlag == false)
 		{
 			mCollider->SetActive(true);
-			//int direction = rand() % 2;	// 패턴매니저에서 방향 관리
+			landGroundSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -521,7 +528,7 @@ namespace ya
 		{
 			mCollider->SetCenter(Vector2(-200.0f, -150.0f));
 			mCollider->SetSize(Vector2(400.0f, 150.0f));
-
+			dashSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -608,7 +615,7 @@ namespace ya
 		{
 			mCollider->SetActive(false);
 			Vector2 pos = tr->GetPos();
-
+			jumpOfGroundSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -671,7 +678,7 @@ namespace ya
 		{
 			//int direction = rand() % 2;
 			mCollider->SetActive(true);
-
+			landWallSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -763,7 +770,7 @@ namespace ya
 			Vector2 pos = tr->GetPos();
 			pos.y -= 35.0f;
 			tr->SetPos(pos);
-
+			wallSlashSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -855,6 +862,7 @@ namespace ya
 			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
+			jumpOfWallSound->Play(false);
 
 			switch (mDirection)
 			{
@@ -892,7 +900,7 @@ namespace ya
 			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
-
+			deathSound->Play(false);
 			mAnimator->Play(L"Mantis Lords_Deathneutral", false);
 			deathFlag = true;
 		}
@@ -929,8 +937,7 @@ namespace ya
 			Vector2 pos = player->GetInstance()->GetPos();
 			mCollider->SetCenter(Vector2(0.0f, -250.0f));
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
-
-			// 플레이어 x좌표 위에 생성되야 함 지금은 임시
+			downSlashArriveSound->Play(false);
 			tr->SetPos(Vector2(pos.x, 800.0f));
 			mAnimator->Play(L"Mantis Lords_Dstab Arriveneutral", false);
 			dStabArriveFlag = true;
@@ -958,7 +965,7 @@ namespace ya
 
 			mCollider->SetCenter(Vector2(-75.0f, -300.0f));
 			mCollider->SetSize(Vector2(150.0f, 300.0f));
-
+			downSlashSound->Play(false);
 			mAnimator->Play(L"Mantis Lords_Dstabneutral", false);
 			dStabFlag = true;
 		}
@@ -990,7 +997,7 @@ namespace ya
 
 			mCollider->SetCenter(Vector2(0.0f, -250.0f));
 			mCollider->SetSize(Vector2(150.0f, 200.0f));
-
+			downSlashImpactSound->Play(false);
 			mAnimator->Play(L"Mantis Lords_Dstab Landneutral", false);
 			dStabLandFlag = true;
 		}
@@ -1013,7 +1020,7 @@ namespace ya
 			mCollider->SetActive(false);
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
-
+			jumpOfGroundSound->Play(false);
 			mAnimator->Play(L"Mantis Lords_Dstab Leaveneutral", false);
 			dStabLeaveFlag = true;
 		}
