@@ -4,6 +4,7 @@
 #include "yaCollider.h"
 #include "yaObject.h"
 #include "yaTime.h"
+#include "yaRigidBody.h"
 
 #include "MantisLord1.h"
 
@@ -12,6 +13,7 @@ namespace ya
 	MantisLordsProjectile::MantisLordsProjectile()
 	{
 		tr = AddComponent<Transform>();
+		//mRigidbody = AddComponent<RigidBody>();
 	}
 
 	MantisLordsProjectile::~MantisLordsProjectile()
@@ -26,6 +28,9 @@ namespace ya
 		mAnimator->Play(L"Mantis Lords_Air Projectileneutral", true);
 
 		mCollider = AddComponent<Collider>();
+		mCollider->SetCenter(Vector2(-150.0f, -100.0f));
+		mCollider->SetSize(Vector2(300.0f, 100.0f));
+		//mRigidbody->SetGravity(Vector2(0.0f, 100.0f));
 
 		GameObject::Initialize();
 	}
@@ -93,20 +98,35 @@ namespace ya
 			disableFlag = false;
 			activeFlag = true;
 			this->SetState(eState::Active);
+			speed = 800.0f;
+
+			Vector2 pos = tr->GetPos();
+			pos.y -= 300.0f;
+			tr->SetPos(pos);
 		}
 
 		// 여기에서 포물선으로 움직이도록 구현해야 함
 		// 테스트용으로 일직선으로 날아가도록 구현
 		if (mDirection == eDirection::Left)
 		{
+
+			//mRigidbody->SetVelocity(Vector2(speed, 0.0f));
+
 			Vector2 pos = tr->GetPos();
-			pos.x += 100.0f * Time::DeltaTime();
+			pos.x += speed * Time::DeltaTime();
+			speed -= 5.0f;
+			pos.y += 1.2f;
+
 			tr->SetPos(pos);
 		}
 		else
 		{
+			//mRigidbody->SetVelocity(Vector2(-speed, 0.0f));
 			Vector2 pos = tr->GetPos();
-			pos.x -= 100.0f * Time::DeltaTime();
+			pos.x -= speed * Time::DeltaTime();
+			speed -= 5.0f;
+			pos.y += 1.2f;
+
 			tr->SetPos(pos);
 		}
 		
