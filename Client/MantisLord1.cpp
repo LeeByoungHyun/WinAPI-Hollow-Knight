@@ -759,7 +759,7 @@ namespace ya
 			wallSlashSound->Play(false);
 
 			// ¹ö±×
-			object::Instantiate<MantisLordsProjectile>(tr->GetPos(), eLayerType::Monster);
+			//object::Instantiate<MantisLordsProjectile>(tr->GetPos(), eLayerType::Monster);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

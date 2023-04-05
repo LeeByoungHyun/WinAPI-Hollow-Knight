@@ -1,9 +1,12 @@
 #include "MantisLordsManager.h"
+#include "yaSceneManager.h"
+#include "yaTime.h"
+#include "yaObject.h"
+
 #include "MantisLord1.h"
 #include "MantisLord2.h"
 #include "MantisLord3.h"
-#include "yaSceneManager.h"
-#include "yaTime.h"
+#include "MantisLordsProjectile.h"
 
 namespace ya
 {
@@ -24,6 +27,14 @@ namespace ya
 		mantisLord1 = MantisLord1::GetInstance();
 		mantisLord2 = MantisLord2::GetInstance();
 		mantisLord3 = MantisLord3::GetInstance();
+		
+		// 미리 투사체를 생성해두고 투사체 필요한 패턴에서만 활성화
+		projectile1 = object::Instantiate<MantisLordsProjectile>(mantisLord1->GetComponent<Transform>()->GetPos(), eLayerType::Monster);
+		projectile2 = object::Instantiate<MantisLordsProjectile>(mantisLord1->GetComponent<Transform>()->GetPos(), eLayerType::Monster);
+		projectile3 = object::Instantiate<MantisLordsProjectile>(mantisLord1->GetComponent<Transform>()->GetPos(), eLayerType::Monster);
+		projectile1->SetState(eState::Pause);
+		projectile2->SetState(eState::Pause);
+		projectile3->SetState(eState::Pause);
 	}
 
 	void MantisLordsManager::Update()
@@ -189,6 +200,19 @@ namespace ya
 					break;
 				}
 			}
+		}
+
+		// throw 패턴에서 투사체 활성화
+		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::Throw 
+			&& projectile1->GetActiveFlag() == false)
+		{
+			projectile1->SetState(eState::Active);
+			projectile1->SetProjectileState(MantisLordsProjectile::eProjectileState::Active);
+			projectile1->SetPos(mantisLord1->GetComponent<Transform>()->GetPos());
+			if (mantisLord1->GetDirection() == MantisLord1::eDirection::Left)
+				projectile1->SetDirection(MantisLordsProjectile::eDirection::Left);
+			else
+				projectile1->SetDirection(MantisLordsProjectile::eDirection::Right);
 		}
 
 		// 1번 보스가 죽으면 2페이즈 진입
@@ -498,6 +522,32 @@ namespace ya
 
 			mantis3AttackFlag = true;
 			mantis2AttackFlag = true;
+		}
+
+		// throw 패턴에서 투사체 활성화
+		if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Throw
+			&& projectile2->GetActiveFlag() == false)
+		{
+			projectile2->SetState(eState::Active);
+			projectile2->SetProjectileState(MantisLordsProjectile::eProjectileState::Active);
+			projectile2->SetPos(mantisLord2->GetComponent<Transform>()->GetPos());
+			if (mantisLord2->GetDirection() == MantisLord2::eDirection::Left)
+				projectile2->SetDirection(MantisLordsProjectile::eDirection::Left);
+			else
+				projectile2->SetDirection(MantisLordsProjectile::eDirection::Right);
+		}
+
+		// throw 패턴에서 투사체 활성화
+		if (mantisLord3->GetState() == MantisLord3::eMantisLordsState::Throw
+			&& projectile3->GetActiveFlag() == false)
+		{
+			projectile3->SetState(eState::Active);
+			projectile3->SetProjectileState(MantisLordsProjectile::eProjectileState::Active);
+			projectile3->SetPos(mantisLord3->GetComponent<Transform>()->GetPos());
+			if (mantisLord3->GetDirection() == MantisLord3::eDirection::Left)
+				projectile3->SetDirection(MantisLordsProjectile::eDirection::Left);
+			else
+				projectile3->SetDirection(MantisLordsProjectile::eDirection::Right);
 		}
 	}
 }

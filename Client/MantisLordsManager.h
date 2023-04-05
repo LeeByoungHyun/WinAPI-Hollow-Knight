@@ -48,6 +48,9 @@ namespace ya
 		class MantisLord1* mantisLord1;
 		class MantisLord2* mantisLord2;
 		class MantisLord3* mantisLord3;
+		class MantisLordsProjectile* projectile1;
+		class MantisLordsProjectile* projectile2;
+		class MantisLordsProjectile* projectile3;
 
 		ePhaseState mPhase;
 		class Scene* activeScene;

@@ -107,9 +107,6 @@
     <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord1">
       <UniqueIdentifier>{669393db-5017-4eee-8025-edcca8079da9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord2">
-      <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord3">
       <UniqueIdentifier>{ff38d3fb-344b-42c1-9b21-127d3477408b}</UniqueIdentifier>
     </Filter>
@@ -187,6 +184,9 @@
     </Filter>
     <Filter Include="Contents\Objects\Charactor\False_Knight\Barrel">
       <UniqueIdentifier>{fc43dcd0-16ea-4d0c-9539-577d4dd2860d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord2">
+      <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
