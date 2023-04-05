@@ -44,7 +44,6 @@ namespace ya
 		class Animator* mAnimator;
 		class Transform* tr;
 		class Collider* mCollider;
-		class RigidBody* mRigidbody;
 
 		eProjectileState mState;
 		eDirection mDirection;

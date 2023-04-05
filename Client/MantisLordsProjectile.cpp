@@ -13,7 +13,6 @@ namespace ya
 	MantisLordsProjectile::MantisLordsProjectile()
 	{
 		tr = AddComponent<Transform>();
-		//mRigidbody = AddComponent<RigidBody>();
 	}
 
 	MantisLordsProjectile::~MantisLordsProjectile()
@@ -30,7 +29,6 @@ namespace ya
 		mCollider = AddComponent<Collider>();
 		mCollider->SetCenter(Vector2(-150.0f, -100.0f));
 		mCollider->SetSize(Vector2(300.0f, 100.0f));
-		//mRigidbody->SetGravity(Vector2(0.0f, 100.0f));
 
 		GameObject::Initialize();
 	}
@@ -98,10 +96,10 @@ namespace ya
 			disableFlag = false;
 			activeFlag = true;
 			this->SetState(eState::Active);
-			speed = 800.0f;
+			speed = 800.0f;	// 초기 투사체 속도
 
 			Vector2 pos = tr->GetPos();
-			pos.y -= 300.0f;
+			pos.y -= 300.0f;	// 투사체 생성 위치 조정
 			tr->SetPos(pos);
 		}
 
@@ -109,23 +107,19 @@ namespace ya
 		// 테스트용으로 일직선으로 날아가도록 구현
 		if (mDirection == eDirection::Left)
 		{
-
-			//mRigidbody->SetVelocity(Vector2(speed, 0.0f));
-
 			Vector2 pos = tr->GetPos();
 			pos.x += speed * Time::DeltaTime();
-			speed -= 5.0f;
-			pos.y += 1.2f;
+			speed -= 5.0f;	// 투사체 감속 수치
+			pos.y += 1.2f;	// 투사체 하강 수치
 
 			tr->SetPos(pos);
 		}
 		else
 		{
-			//mRigidbody->SetVelocity(Vector2(-speed, 0.0f));
 			Vector2 pos = tr->GetPos();
 			pos.x -= speed * Time::DeltaTime();
-			speed -= 5.0f;
-			pos.y += 1.2f;
+			speed -= 5.0f;	// 투사체 감속 수치
+			pos.y += 1.2f;	// 투사체 하강 수치
 
 			tr->SetPos(pos);
 		}
