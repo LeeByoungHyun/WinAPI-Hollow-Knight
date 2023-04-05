@@ -53,6 +53,7 @@ namespace ya
 		damaged5Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged5Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_06.wav");
 		deathSound = ResourceManager::Load<Sound>(L"falseKnightDeathSound", L"..\\Resources\\Sound\\False Knight\\FKnight_death.wav");
 		damagedSound = ResourceManager::Load<Sound>(L"enemy_damaged", L"..\\Resources\\Sound\\enemy_damage.wav");
+		bossExplodeSound = ResourceManager::Load<Sound>(L"boss_Explode", L"..\\Resources\\Sound\\boss_explode.wav");
 		mState = eStunHeadState::Idle;
 
 		GameObject::Initialize();
@@ -240,9 +241,10 @@ namespace ya
 		}
 
 		mTime += Time::DeltaTime();
-		if (mTime >= 3.0f && deathFlag2 == false)
+		if (mTime >= 5.0f && deathFlag2 == false)
 		{
 			deathFlag2 = true;
+			bossExplodeSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -258,7 +260,7 @@ namespace ya
 			}
 		}
 
-		if (mTime >= 3.0f && deathFlag3 == false)
+		if (mTime >= 5.0f && deathFlag3 == false)
 		{
 			Vector2 pos = tr->GetPos();
 			switch (mDirection)
