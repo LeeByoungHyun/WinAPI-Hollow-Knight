@@ -52,7 +52,7 @@ namespace ya
 		damaged4Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged4Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_05.wav");
 		damaged5Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged5Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_06.wav");
 		deathSound = ResourceManager::Load<Sound>(L"falseKnightDeathSound", L"..\\Resources\\Sound\\False Knight\\FKnight_death.wav");
-		damagedSound = ResourceManager::Load<Sound>(L"falseKnightDeathSound", L"..\\Resources\\Sound\\enemy_damage.wav");
+		damagedSound = ResourceManager::Load<Sound>(L"enemy_damaged", L"..\\Resources\\Sound\\enemy_damage.wav");
 		mState = eStunHeadState::Idle;
 
 		GameObject::Initialize();
