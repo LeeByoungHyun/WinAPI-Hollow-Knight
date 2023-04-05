@@ -51,7 +51,8 @@ namespace ya
 		damaged3Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged3Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_03.wav");
 		damaged4Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged4Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_05.wav");
 		damaged5Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged5Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_06.wav");
-
+		deathSound = ResourceManager::Load<Sound>(L"falseKnightDeathSound", L"..\\Resources\\Sound\\False Knight\\FKnight_death.wav");
+		damagedSound = ResourceManager::Load<Sound>(L"falseKnightDeathSound", L"..\\Resources\\Sound\\enemy_damage.wav");
 		mState = eStunHeadState::Idle;
 
 		GameObject::Initialize();
@@ -192,6 +193,7 @@ namespace ya
 			default:
 				break;
 			}
+			damagedSound->Play(false);
 
 			switch (mDirection)
 			{
@@ -215,10 +217,11 @@ namespace ya
 
 	void StunHead::death()
 	{
-		mCollider->SetActive(false);
-		mCollider->SetSize(Vector2(0.0f, 0.0f));
 		if (deathFlag1 == false)
 		{
+			mCollider->SetActive(false);
+			mCollider->SetSize(Vector2(0.0f, 0.0f));
+			deathSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

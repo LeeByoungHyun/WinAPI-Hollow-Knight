@@ -154,6 +154,7 @@ namespace ya
 		class Sound* jumpSound;
 		class Sound* landSound;
 		class Sound* rollSound;
+		class Sound* stunSound;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static FalseKnight* instance;

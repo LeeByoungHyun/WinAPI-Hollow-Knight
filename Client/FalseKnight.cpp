@@ -122,6 +122,7 @@ namespace ya
 		jumpSound = ResourceManager::Load<Sound>(L"falseKnightJumpSound", L"..\\Resources\\Sound\\False Knight\\false_knight_jump.wav");
 		landSound = ResourceManager::Load<Sound>(L"falseKnightLandSound", L"..\\Resources\\Sound\\False Knight\\false_knight_land.wav");
 		rollSound = ResourceManager::Load<Sound>(L"falseKnightRollSound", L"..\\Resources\\Sound\\False Knight\\false_knight_roll.wav");
+		stunSound = ResourceManager::Load<Sound>(L"bossStunSound", L"..\\Resources\\Sound\\boss_stun.wav");
 
 		mState = eFalseKnightState::Idle;
 		mDirection = eDirection::Left;
@@ -819,6 +820,7 @@ namespace ya
 			mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			mCollider->SetSize(Vector2(0.0f, 0.0f));
 			rollSound->Play(false);
+			stunSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

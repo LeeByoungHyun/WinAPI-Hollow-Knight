@@ -5,6 +5,8 @@
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaTime.h"
+#include "yaResourceManager.h"
+#include "yaSound.h"
 
 #include "yaPlayer.h"
 #include "FalseKnight.h"
@@ -44,6 +46,8 @@ namespace ya
 		scene->AddGameObject(mPlayer, eLayerType::Player);
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
+
+		falseBossTheme = ResourceManager::Load<Sound>(L"falseKnightTheme", L"..\\Resources\\Sound\\False Knight\\Boss Battle 1.wav");
 	}
 
 	void FalseKnightBossScene::Update()
@@ -102,10 +106,13 @@ namespace ya
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
 		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
+
+		falseBossTheme->Play(true);
 	}
 
 	void FalseKnightBossScene::Exit()
 	{
 		Scene::Exit();
+		falseBossTheme->Stop(true);
 	}
 }

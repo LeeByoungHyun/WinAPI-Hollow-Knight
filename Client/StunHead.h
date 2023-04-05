@@ -62,5 +62,7 @@ namespace ya
 		class Sound* damaged3Sound;
 		class Sound* damaged4Sound;
 		class Sound* damaged5Sound;
+		class Sound* deathSound;
+		class Sound* damagedSound;
 	};
 }

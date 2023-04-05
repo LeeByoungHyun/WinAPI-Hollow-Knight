@@ -21,7 +21,7 @@ namespace ya
 		class Player* mPlayer;
 		class FalseKnight* mFalseKnight;
 		class FalseKnightManager* mFalseManager;
-
+		class Sound* falseBossTheme;
 		float mTime = 0.0f;
 	};
 }
