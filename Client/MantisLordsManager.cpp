@@ -332,6 +332,19 @@ namespace ya
 					}
 				}
 			}
+
+			// throw 패턴에서 투사체 활성화
+			if (mantisLord3->GetState() == MantisLord3::eMantisLordsState::Throw
+				&& projectile3->GetActiveFlag() == false)
+			{
+				projectile3->SetState(eState::Active);
+				projectile3->SetProjectileState(MantisLordsProjectile::eProjectileState::Active);
+				projectile3->SetPos(mantisLord3->GetComponent<Transform>()->GetPos());
+				if (mantisLord3->GetDirection() == MantisLord3::eDirection::Left)
+					projectile3->SetDirection(MantisLordsProjectile::eDirection::Left);
+				else
+					projectile3->SetDirection(MantisLordsProjectile::eDirection::Right);
+			}
 		}
 
 		else if (mantis3DeathFlag == true)
@@ -372,8 +385,20 @@ namespace ya
 					}
 				}
 			}
+
+			// throw 패턴에서 투사체 활성화
+			if (mantisLord2->GetState() == MantisLord2::eMantisLordsState::Throw
+				&& projectile2->GetActiveFlag() == false)
+			{
+				projectile2->SetState(eState::Active);
+				projectile2->SetProjectileState(MantisLordsProjectile::eProjectileState::Active);
+				projectile2->SetPos(mantisLord2->GetComponent<Transform>()->GetPos());
+				if (mantisLord2->GetDirection() == MantisLord2::eDirection::Left)
+					projectile2->SetDirection(MantisLordsProjectile::eDirection::Left);
+				else
+					projectile2->SetDirection(MantisLordsProjectile::eDirection::Right);
+			}
 		}
-		
 	}
 
 	void MantisLordsManager::phase2Combo1()
