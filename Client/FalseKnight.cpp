@@ -545,6 +545,11 @@ namespace ya
 	{
 		if (attackAnticipateFlag == false)
 		{
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y += 20.0f;
+			tr->SetPos(pos);
+
 			// 공격마다 보이스 랜덤하게 재생
 			srand((unsigned int)time(NULL));
 			int voice = rand() % 5;
@@ -605,6 +610,9 @@ namespace ya
 		if (attackFlag == false)
 		{
 			swingSound->Play(false);
+
+			
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -635,6 +643,10 @@ namespace ya
 	{
 		if (attackRecoverFlag == false)
 		{
+			// 세부위치조정
+			Vector2 pos = tr->GetPos();
+			pos.y -= 20.0f;
+			tr->SetPos(pos);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
