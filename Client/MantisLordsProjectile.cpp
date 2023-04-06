@@ -105,25 +105,19 @@ namespace ya
 
 		// 여기에서 포물선으로 움직이도록 구현해야 함
 		// 테스트용으로 일직선으로 날아가도록 구현
+		Vector2 pos = tr->GetPos();
 		if (mDirection == eDirection::Left)
 		{
-			Vector2 pos = tr->GetPos();
 			pos.x += speed * Time::DeltaTime();
-			speed -= 50.0f * Time::DeltaTime();	// 투사체 감속 수치
-			pos.y += 10.2f * Time::DeltaTime();	// 투사체 하강 수치
-
-			tr->SetPos(pos);
 		}
 		else
 		{
-			Vector2 pos = tr->GetPos();
 			pos.x -= speed * Time::DeltaTime();
-			speed -= 50.0f * Time::DeltaTime();	// 투사체 감속 수치
-			pos.y += 10.2f * Time::DeltaTime();	// 투사체 하강 수치
-
-			tr->SetPos(pos);
 		}
-		
+		speed -= 300.0f * Time::DeltaTime();	// 투사체 감속 수치
+		pos.y += 80.0f * Time::DeltaTime();		// 투사체 하강 수치
+		tr->SetPos(pos);
+
 		mTime += Time::DeltaTime();
 		if (mTime >= 6.0f)
 		{
