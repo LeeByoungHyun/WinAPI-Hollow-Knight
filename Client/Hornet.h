@@ -70,6 +70,9 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 	private:
+		void idle();
+
+	private:
 		class Transform*	tr;
 		class Animator*		mAnimator;
 		class Scene*		curScene;
@@ -78,6 +81,8 @@ namespace ya
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
+
+		bool idleFlag = false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;

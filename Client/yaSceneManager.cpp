@@ -5,6 +5,7 @@
 #include "yaTitleScene.h"
 #include "yaMainHallScene.h"
 #include "FalseKnightBossScene.h"
+#include "HornetBossScene.h"
 
 namespace ya
 {
@@ -24,6 +25,8 @@ namespace ya
         mScenes[(UINT)eSceneType::MainHall]->SetType(eSceneType::MainHall);
         mScenes[(UINT)eSceneType::FalseKnightBoss] = new FalseKnightBossScene();
         mScenes[(UINT)eSceneType::FalseKnightBoss]->SetType(eSceneType::FalseKnightBoss);
+        mScenes[(UINT)eSceneType::HornetBoss] = new HornetBossScene();
+        mScenes[(UINT)eSceneType::HornetBoss]->SetType(eSceneType::HornetBoss);
 
         for (Scene* scene : mScenes)
         {

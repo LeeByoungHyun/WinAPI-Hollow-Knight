@@ -8,6 +8,7 @@ enum class eSceneType
 	Boss,
 	MantisLordsBoss,
 	FalseKnightBoss,
+	HornetBoss,
 	Ending,
 	End
 };
