@@ -23,9 +23,9 @@ namespace ya
 			SphereAnticipateA,
 			Sphere,
 			SphereRecover,
-			ThrowAnticipate,
-			Throw,
-			ThrowRecover,
+			ThrowNeedleAnticipate,
+			ThrowNeedle,
+			ThrowNeedleRecover,
 			CounterAnticipate,
 			CounterStance,
 			CounterEnd,
@@ -72,6 +72,35 @@ namespace ya
 	private:
 		void idle();
 		void run();
+		void JumpAnticipate();
+		void jump();
+		void land();
+		void gDashAnticipate();
+		void gDash();
+		void gDashRecover();
+		void aDashAnticipate();
+		void aDash();
+		void aDashRecover();
+		void sphereAnticipateG();
+		void sphereAnticipateA();
+		void sphere();
+		void sphereRecover();
+		void throwNeedleAnticipate();
+		void throwNeedle();
+		void throwNeedleRecover();
+		void counterAnticipate();
+		void counterStance();
+		void counterEnd();
+		void counterAttackAnticipate();
+		void counterAttack();
+		void counterAttackRecover();
+		void barbThrowAnticipate();
+		void barbThrow();
+		void barbThrowRecover();
+		void stunAir();
+		void stun();
+		void wounded();
+		void flash();
 
 	private:
 		class Transform*	tr;

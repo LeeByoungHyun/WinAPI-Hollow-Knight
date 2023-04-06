@@ -108,6 +108,122 @@ namespace ya
 			run();
 			break;
 
+		case ya::Hornet::eHornetState::JumpAnticipate:
+			JumpAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::Jump:
+			jump();
+			break;
+
+		case ya::Hornet::eHornetState::Land:
+			land();
+			break;
+
+		case ya::Hornet::eHornetState::GDashAnticipate:
+			gDashAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::GDash:
+			gDash();
+			break;
+
+		case ya::Hornet::eHornetState::GDashRecover:
+			gDashRecover();
+			break;
+
+		case ya::Hornet::eHornetState::ADashAnticipate:
+			aDashAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::ADash:
+			aDash();
+			break;
+
+		case ya::Hornet::eHornetState::ADashRecover:
+			aDashRecover();
+			break;
+
+		case ya::Hornet::eHornetState::SphereAnticipateG:
+			sphereAnticipateG();
+			break;
+
+		case ya::Hornet::eHornetState::SphereAnticipateA:
+			sphereAnticipateA();
+			break;
+
+		case ya::Hornet::eHornetState::Sphere:
+			sphere();
+			break;
+
+		case ya::Hornet::eHornetState::SphereRecover:
+			sphereRecover();
+			break;
+
+		case ya::Hornet::eHornetState::ThrowNeedleAnticipate:
+			throwNeedleAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::ThrowNeedle:
+			throwNeedle();
+			break;
+
+		case ya::Hornet::eHornetState::ThrowNeedleRecover:
+			throwNeedleRecover();
+			break;
+
+		case ya::Hornet::eHornetState::CounterAnticipate:
+			counterAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::CounterStance:
+			counterStance();
+			break;
+
+		case ya::Hornet::eHornetState::CounterEnd:
+			counterEnd();
+			break;
+
+		case ya::Hornet::eHornetState::CounterAttackAnticipate:
+			counterAttackAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::CounterAttack:
+			counterAttack();
+			break;
+
+		case ya::Hornet::eHornetState::CounterAttackRecover:
+			counterAttackRecover();
+			break;
+
+		case ya::Hornet::eHornetState::BarbThrowAnticipate:
+			barbThrowAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::BarbThrow:
+			barbThrow();
+			break;
+
+		case ya::Hornet::eHornetState::BarbThrowRecover:
+			barbThrowRecover();
+			break;
+
+		case ya::Hornet::eHornetState::StunAir:
+			stunAir();
+			break;
+
+		case ya::Hornet::eHornetState::Stun:
+			stun();
+			break;
+
+		case ya::Hornet::eHornetState::Wounded:
+			wounded();
+			break;
+
+		case ya::Hornet::eHornetState::Flash:
+			flash();
+			break;
+
 		default:
 			break;
 		}
@@ -185,5 +301,92 @@ namespace ya
 			mRigidBody->SetVelocity(Vector2::Zero);
 			runFlag = true;
 		}
+	}
+	void Hornet::JumpAnticipate()
+	{
+	}
+	void Hornet::jump()
+	{
+	}
+	void Hornet::land()
+	{
+	}
+	void Hornet::gDashAnticipate()
+	{
+	}
+	void Hornet::gDash()
+	{
+	}
+	void Hornet::gDashRecover()
+	{
+	}
+	void Hornet::aDashAnticipate()
+	{
+	}
+	void Hornet::aDash()
+	{
+	}
+	void Hornet::aDashRecover()
+	{
+	}
+	void Hornet::sphereAnticipateG()
+	{
+	}
+	void Hornet::sphereAnticipateA()
+	{
+	}
+	void Hornet::sphere()
+	{
+	}
+	void Hornet::sphereRecover()
+	{
+	}
+	void Hornet::throwNeedleAnticipate()
+	{
+	}
+	void Hornet::throwNeedle()
+	{
+	}
+	void Hornet::throwNeedleRecover()
+	{
+	}
+	void Hornet::counterAnticipate()
+	{
+	}
+	void Hornet::counterStance()
+	{
+	}
+	void Hornet::counterEnd()
+	{
+	}
+	void Hornet::counterAttackAnticipate()
+	{
+	}
+	void Hornet::counterAttack()
+	{
+	}
+	void Hornet::counterAttackRecover()
+	{
+	}
+	void Hornet::barbThrowAnticipate()
+	{
+	}
+	void Hornet::barbThrow()
+	{
+	}
+	void Hornet::barbThrowRecover()
+	{
+	}
+	void Hornet::stunAir()
+	{
+	}
+	void Hornet::stun()
+	{
+	}
+	void Hornet::wounded()
+	{
+	}
+	void Hornet::flash()
+	{
 	}
 }
