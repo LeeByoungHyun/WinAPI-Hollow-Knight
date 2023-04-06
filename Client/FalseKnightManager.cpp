@@ -313,11 +313,28 @@ namespace ya
 
 	void FalseKnightManager::rageAttack()
 	{
+		if (rageAttackFlag == false)
+		{
+			rageAttackFlag = true;
+			mFalseKnight->SetRageFlag(true);
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::AttackAnticipate);
+		}
+
+		if (mFalseKnight->GetRageFlag() == false && mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::Idle)
+		{
+			rageAttackFlag = false;
+			mPhase = ePhaseState::Phase1;
+			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+			mFalseKnight->InitializeFlag();
+		}
+
+		/*
 		// 좌우 내려찍기 5번 반복
 		if (rageAttackFlag == false)
 		{
 			rageAttackFlag = true;
 
+			// 매 공격마다 방향 전환
 			if (mFalseKnight->GetDirection() == FalseKnight::eDirection::Left)
 				mFalseKnight->SetDirection(FalseKnight::eDirection::Right);
 			else
@@ -346,5 +363,6 @@ namespace ya
 			rageAttackFlag = false;
 			rageCount = 0;
 		}
+		*/
 	}
 }

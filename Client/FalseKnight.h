@@ -69,6 +69,8 @@ namespace ya
 		eDirection GetDirection() { return mDirection; }
 		void IncreaseStunCount() { stunCount++; }
 		void InitializeFlag();
+		void SetRageFlag(bool flag) { rageFlag = flag; }
+		bool GetRageFlag() { return rageFlag; }
 
 	private:
 		void idle();
@@ -137,6 +139,8 @@ namespace ya
 		bool stunHitFlag = false;
 		bool deathFlag = false;
 		bool jumpReadyFlag = false;
+		bool rageFlag = false;
+		int rageCount = 0;
 
 		class Sound* attack1Sound;
 		class Sound* attack2Sound;

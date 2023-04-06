@@ -52,8 +52,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack(Anticipate)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack(Recover)\\left", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack(Recover)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack(Recover)\\left", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Attack(Recover)\\right", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Jump Attack(Up)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Jump Attack(Up)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\False Knight\\False Knight_Jump Attack(Part 1)\\left", Vector2::Zero, 0.1f);
@@ -292,12 +292,13 @@ namespace ya
 			if (mState == FalseKnight::eFalseKnightState::Jump)
 			{
 				mState = FalseKnight::eFalseKnightState::Land;
+				landSound->Play(false);
 			}
 			else if (mState == FalseKnight::eFalseKnightState::JumpAttackUp)
 			{
 				mState = FalseKnight::eFalseKnightState::JumpAttackPart1;
+				landSound->Play(false);
 			}
-			landSound->Play(false);
 			break;
 
 		// 플레이어의 공격일 경우
@@ -480,8 +481,6 @@ namespace ya
 			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-140.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				//pos.x += 60.0f;
-				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpleft", false);
 				jumpFlag = true;
@@ -490,8 +489,6 @@ namespace ya
 			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(-135.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				//pos.x -= 60.0f;
-				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Jumpright", false);
 				jumpFlag = true;
@@ -510,14 +507,11 @@ namespace ya
 	{
 		if (landFlag == false)
 		{
-			//Vector2 pos = tr->GetPos();
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
 				mCollider->SetCenter(Vector2(-145.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				//pos.x -= 60.0f;
-				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landleft", false);
 				landFlag = true;
@@ -526,8 +520,6 @@ namespace ya
 			case eDirection::Right:	// right
 				mCollider->SetCenter(Vector2(-130.0f, -300.0f));
 				mCollider->SetSize(Vector2(275.0f, 300.0f));
-				//pos.x += 60.0f;
-				//tr->SetPos(pos);
 
 				mAnimator->Play(L"False Knight_Landright", false);
 				landFlag = true;
@@ -610,8 +602,14 @@ namespace ya
 		if (attackFlag == false)
 		{
 			swingSound->Play(false);
-
 			
+			if (rageFlag == true && rageCount >= 1)
+			{
+				// 세부위치조정
+				Vector2 pos = tr->GetPos();
+				pos.y += 20.0f;
+				tr->SetPos(pos);
+			}
 
 			switch (mDirection)
 			{
@@ -647,6 +645,9 @@ namespace ya
 			Vector2 pos = tr->GetPos();
 			pos.y -= 20.0f;
 			tr->SetPos(pos);
+
+			int a = 0;
+			
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -669,6 +670,16 @@ namespace ya
 				break;
 			}
 
+			if (rageFlag == true)
+			{
+				// 매 공격마다 방향 전환
+				if (mDirection == FalseKnight::eDirection::Left)
+					mDirection = (FalseKnight::eDirection::Right);
+				else
+					mDirection = (FalseKnight::eDirection::Left);
+
+				rageCount++;
+			}
 			attackFlag = false;
 		}
 	}
@@ -1038,7 +1049,23 @@ namespace ya
 
 	void FalseKnight::attackRecoverCompleteEvent()
 	{
-		mState = eFalseKnightState::Idle;
+		if (rageFlag == true)
+		{
+			mState = eFalseKnightState::Attack;
+			attackFlag = false;
+			attackAnticipateFlag = false;
+			attackRecoverFlag = false;
+			if (rageCount >= 10)
+			{
+				mState = eFalseKnightState::Idle;
+				rageFlag = false;
+				rageCount = 0;
+			}
+		}
+		else
+		{
+			mState = eFalseKnightState::Idle;
+		}
 	}
 
 	void FalseKnight::stunRollCompleteEvent()
@@ -1048,7 +1075,6 @@ namespace ya
 
 	void FalseKnight::stunRollEndCompleteEvent()
 	{
-		//mState = eFalseKnightState::StunOpen;
 		mRigidbody->SetVelocity(Vector2(0.0f, 0.0f));
 	}
 
