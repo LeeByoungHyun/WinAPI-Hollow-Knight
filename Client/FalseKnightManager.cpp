@@ -331,6 +331,11 @@ namespace ya
 		{
 			rageAttackFlag = false;
 			mFalseKnight->InitializeFlag();
+
+			// 세부위치조정
+			Vector2 pos = mFalseKnight->GetComponent<Transform>()->GetPos();
+			pos.y += 20.0f;
+			mFalseKnight->GetComponent<Transform>()->SetPos(pos);
 		}
 
 		if (rageCount > 10)
