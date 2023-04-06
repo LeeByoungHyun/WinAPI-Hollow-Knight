@@ -31,7 +31,7 @@ namespace ya
 			CounterEnd,
 			CounterAttackAnticipate,
 			CounterAttack,
-			CounterAttackRecover,	// 스프라이트 없음
+			CounterAttackRecover,	// 이하 스프라이트 없음
 			BarbThrowAnticipate,
 			BarbThrow,
 			BarbThrowRecover,
@@ -71,6 +71,7 @@ namespace ya
 
 	private:
 		void idle();
+		void run();
 
 	private:
 		class Transform*	tr;
@@ -83,6 +84,7 @@ namespace ya
 		eDirection mDirection = eDirection::Left;
 
 		bool idleFlag = false;
+		bool runFlag = false;
 
 		// 싱글톤 객체 인스턴스
 		static Hornet* instance;
