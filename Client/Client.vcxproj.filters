@@ -188,6 +188,9 @@
     <Filter Include="Contents\Objects\Charactor\Mantis_Lords\MantisLord2">
       <UniqueIdentifier>{4862b297-07d3-4e50-a982-f8d513b899f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet">
+      <UniqueIdentifier>{a57059e4-af52-49a9-a0a7-beab7e971da2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -409,6 +412,9 @@
     <ClInclude Include="yaSoundManager.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="Hornet.h">
+      <Filter>Contents\Objects\Charactor\Hornet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -608,6 +614,9 @@
     </ClCompile>
     <ClCompile Include="yaSoundManager.cpp">
       <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Hornet.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
