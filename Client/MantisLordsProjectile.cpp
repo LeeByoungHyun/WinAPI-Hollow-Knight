@@ -109,8 +109,8 @@ namespace ya
 		{
 			Vector2 pos = tr->GetPos();
 			pos.x += speed * Time::DeltaTime();
-			speed -= 5.0f;	// 투사체 감속 수치
-			pos.y += 1.2f;	// 투사체 하강 수치
+			speed -= 50.0f * Time::DeltaTime();	// 투사체 감속 수치
+			pos.y += 10.2f * Time::DeltaTime();	// 투사체 하강 수치
 
 			tr->SetPos(pos);
 		}
@@ -125,7 +125,7 @@ namespace ya
 		}
 		
 		mTime += Time::DeltaTime();
-		if (mTime >= 5.0f)
+		if (mTime >= 6.0f)
 		{
 			mTime = 0.0f;
 			mState = eProjectileState::Disable;
