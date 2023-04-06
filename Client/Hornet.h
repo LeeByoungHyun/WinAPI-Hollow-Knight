@@ -112,8 +112,37 @@ namespace ya
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
 
-		bool idleFlag = false;
-		bool runFlag = false;
+		bool idleFlag						= false;
+		bool runFlag						= false;
+		bool jumpAnticipateFlag				= false;
+		bool jumpFlag						= false;
+		bool landFlag						= false;
+		bool gDashAnticipateFlag			= false;
+		bool gDashFlag						= false;
+		bool gDashRecoverFlag				= false;
+		bool aDashAnticipateFlag			= false;
+		bool aDashFlag						= false;
+		bool aDashRecoverFlag				= false;
+		bool sphereAnticipateGFlag			= false;
+		bool sphereAnticipateAFlag			= false;
+		bool sphereFlag						= false;
+		bool sphereRecoverFlag				= false;
+		bool throwNeedleAnticipateFlag		= false;
+		bool throwNeedleFlag				= false;
+		bool throwNeedleRecoverFlag			= false;
+		bool counterAnticipateFlag			= false;
+		bool counterStanceFlag				= false;
+		bool counterEndFlag					= false;
+		bool counterAttackAnticipateFlag	= false;
+		bool counterAttackFlag				= false;
+		bool counterAttackRecoverFlag		= false;
+		bool barbThrowAnticipateFlag		= false;
+		bool barbThrowFlag					= false;
+		bool barbThrowRecoverFlag			= false;
+		bool stunAirFlag					= false;
+		bool stunFlag						= false;
+		bool woundedFlag					= false;
+		bool flashFlag						= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;
