@@ -21,6 +21,7 @@ namespace ya
 		void SetGravity(Vector2 gravity) { mGravity = gravity; }
 		Vector2 GetVelocity() { return mVelocity; }
 		bool GetGround() { return mbGround; }
+		void SetActive(bool state) { mActive = state; }
 
 	private:
 		float mMass;
@@ -32,6 +33,7 @@ namespace ya
 		Vector2 mGravity;
 		float mFriction;
 		bool mbGround;
+		bool mActive = true;
 
 		/*float mStaticFriction;
 		float mKineticFriction;*/
