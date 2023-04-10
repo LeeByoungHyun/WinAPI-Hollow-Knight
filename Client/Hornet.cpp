@@ -22,7 +22,8 @@ namespace ya
 	Vector2 playerDir;
 	const float WAITTIME = 0.5f;
 	const float DASHSPEED = 1000.0f;
-	const float EVADESPEED = 500.0f;
+	const float EVADESPEED = 700.0f;
+	const float RUNSPEED = 500.0f;
 
 	Hornet::Hornet()
 	{
@@ -140,6 +141,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Evade(Anticipate)right") = std::bind(&Hornet::evadeAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Evadeleft") = std::bind(&Hornet::evadeCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Evaderight") = std::bind(&Hornet::evadeCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Runleft") = std::bind(&Hornet::runCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Runright") = std::bind(&Hornet::runCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -157,50 +160,8 @@ namespace ya
 		{
 			mState = eHornetState::EvadeAnticipate;
 
-			idleFlag = false;
-			runFlag = false;
-			jumpAnticipateFlag = false;
-			jumpFlag = false;
-			landFlag = false;
-			gDashAnticipateFlag = false;
-			gDashFlag = false;
-			gDashRecoverFlag = false;
-			aDashAnticipateFlag = false;
-			aDashFlag = false;
-			aDashRecoverFlag = false;
-			sphereAnticipateGFlag = false;
-			sphereAnticipateAFlag = false;
-			sphereFlag = false;
-			sphereRecoverFlag = false;
-			throwNeedleAnticipateFlag = false;
-			throwNeedleFlag = false;
-			throwNeedleRecoverFlag = false;
-			counterAnticipateFlag = false;
-			counterStanceFlag = false;
-			counterEndFlag = false;
-			counterAttackAnticipateFlag = false;
-			counterAttackFlag = false;
-			counterAttackRecoverFlag = false;
-			barbThrowAnticipateFlag = false;
-			barbThrowFlag = false;
-			barbThrowRecoverFlag = false;
-			stunAirFlag = false;
-			stunFlag = false;
-			woundedFlag = false;
-			flashFlag = false;
+			initializeFlag();
 		}
-
-		/*
-		// 플레이어 위치에 따라 방향 전환
-		if (mState == eFalseKnightState::Idle)
-		{
-			Vector2 playerPos = Player::GetInstance()->GetPos();
-			if (playerPos.x > tr->GetPos().x)
-				mDirection = eDirection::Right;
-			else
-				mDirection = eDirection::Left;
-		}
-		*/
 
 		// FSM
 		switch (mState)
@@ -494,7 +455,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		idlePattern = 1;	// test
+		//idlePattern = 1;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -502,7 +463,7 @@ namespace ya
 			idleFlag = false;
 			if (idlePattern == 0)
 			{
-				//mState = eHornetState::Run;
+				mState = eHornetState::Run;
 			}
 			else if (idlePattern == 1)
 			{
@@ -552,7 +513,16 @@ namespace ya
 				mAnimator->Play(L"Hornet_Runright", true);
 			}
 			runFlag = true;
+			idleFlag = false;
 		}
+
+		// 플레이어 방향으로
+		Vector2 pos = tr->GetPos();
+		if (mDirection == eDirection::Left)
+			pos.x -= RUNSPEED * Time::DeltaTime();
+		else if (mDirection == eDirection::Right)
+			pos.x += RUNSPEED * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 	void Hornet::jumpAnticipate()
 	{
@@ -834,7 +804,6 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 		pos.x += DASHSPEED * playerDir.x * Time::DeltaTime();
 		pos.y += DASHSPEED * playerDir.y * Time::DeltaTime();
-
 		tr->SetPos(pos);
 		mRigidBody->SetVelocity(Vector2::Zero);
 
@@ -1550,6 +1519,12 @@ namespace ya
 	{
 		mState = eHornetState::Idle;
 		evadeFlag = false;
+	}
+
+	void Hornet::runCompleteEvent()
+	{
+		mState = eHornetState::Idle;
+		runFlag = false;
 	}
 
 	void Hornet::initializeFlag()

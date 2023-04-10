@@ -130,6 +130,7 @@ namespace ya
 		void counterAttackRecoverCompleteEvent();
 		void evadeAnticipateCompleteEvent();
 		void evadeCompleteEvent();
+		void runCompleteEvent();
 
 		void initializeFlag();
 
