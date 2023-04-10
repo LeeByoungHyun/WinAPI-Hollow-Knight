@@ -112,6 +112,7 @@ namespace ya
 		void aDashCompleteEvent();
 		void gDashAnticipateCompleteEvent();
 		void gDashRecoverCompleteEvent();
+		void gDashCompleteEvent();
 		void throwNeedleAnticipateCompleteEvent();
 		void throwNeedleCompleteEvent();
 		void throwNeedleRecoverCompleteEvent();

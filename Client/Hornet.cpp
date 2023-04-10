@@ -21,6 +21,7 @@ namespace ya
 	Vector2 playerPos;
 	Vector2 playerDir;
 	const float WAITTIME = 0.5f;
+	const float DASHSPEED = 1000.0f;
 
 	Hornet::Hornet()
 	{
@@ -108,6 +109,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Anticipate)right") = std::bind(&Hornet::aDashAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)left") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)right") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Anticipate)left") = std::bind(&Hornet::gDashAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Anticipate)right") = std::bind(&Hornet::gDashAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)left") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)right") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Throw(Anticipate)left") = std::bind(&Hornet::throwNeedleAnticipateCompleteEvent, this);
@@ -432,7 +435,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		idlePattern = 3;	// test
+		idlePattern = 4;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -578,12 +581,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-30.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
 				mAnimator->Play(L"Hornet_G Dash(Anticipate)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 50.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
 				mAnimator->Play(L"Hornet_G Dash(Anticipate)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 50.0f;
+				tr->SetPos(pos);
 			}
 
 			gDashAnticipateFlag = true;
@@ -598,17 +609,33 @@ namespace ya
 			{
 				mCollider->SetCenter(Vector2(0.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
-				mAnimator->Play(L"Hornet_G Dashleft", false);
+				mAnimator->Play(L"Hornet_G Dashleft", true);
 			}
 				
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-60.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
-				mAnimator->Play(L"Hornet_G Dashright", false);
+				mAnimator->Play(L"Hornet_G Dashright", true);
 			}
 
 			gDashFlag = true;
+			playerPos = Player::GetInstance()->GetComponent<Transform>()->GetPos();	// 패턴 시작시점 플레이어 pos
+		}
+
+		// 플레이어 방향으로 돌진
+		Vector2 pos = tr->GetPos();
+		if (mDirection == eDirection::Left)
+			pos.x -= DASHSPEED * Time::DeltaTime();
+		else if (mDirection == eDirection::Right)
+			pos.x += DASHSPEED * Time::DeltaTime();
+		tr->SetPos(pos);
+
+		mTime += Time::DeltaTime();
+		if (playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f
+			|| mTime >= 0.5f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
+		{
+			mState = eHornetState::GDashRecover;
 		}
 	}
 
@@ -672,13 +699,13 @@ namespace ya
 			{
 				mCollider->SetCenter(Vector2(0.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
-				mAnimator->Play(L"Hornet_A Dashleft", false);
+				mAnimator->Play(L"Hornet_A Dashleft", true);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-60.0f, -100.0f));
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
-				mAnimator->Play(L"Hornet_A Dashright", false);
+				mAnimator->Play(L"Hornet_A Dashright", true);
 			}
 			aDashFlag = true;
 			aDashAnticipateFlag = false;
@@ -690,8 +717,8 @@ namespace ya
 
 		// 플레이어 방향으로 돌진
 		Vector2 pos = tr->GetPos();
-		pos.x += 1000.0f * playerDir.x * Time::DeltaTime();
-		pos.y += 1000.0f * playerDir.y * Time::DeltaTime();
+		pos.x += DASHSPEED * playerDir.x * Time::DeltaTime();
+		pos.y += DASHSPEED * playerDir.y * Time::DeltaTime();
 
 		tr->SetPos(pos);
 		mRigidBody->SetVelocity(Vector2::Zero);
@@ -1134,13 +1161,45 @@ namespace ya
 
 	void Hornet::gDashAnticipateCompleteEvent()
 	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 50.0f;
+			tr->SetPos(pos);
+		}
 
+		mState = eHornetState::GDash;
 	}
 
 	void Hornet::gDashRecoverCompleteEvent()
 	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 50.0f;
+			tr->SetPos(pos);
+		}
+
 		mState = eHornetState::Idle;
 	}
+
+	void Hornet::gDashCompleteEvent()
+	{
+		
+	}
+
 	void Hornet::throwNeedleAnticipateCompleteEvent()
 	{
 		if (mDirection == eDirection::Left)
