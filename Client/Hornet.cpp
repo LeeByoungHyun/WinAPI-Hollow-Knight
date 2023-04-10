@@ -20,6 +20,7 @@ namespace ya
 	Hornet* Hornet::instance = nullptr;
 	Vector2 playerPos;
 	Vector2 playerDir;
+	const float WAITTIME = 0.5f;
 
 	Hornet::Hornet()
 	{
@@ -109,6 +110,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)right") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)left") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)right") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throw(Anticipate)left") = std::bind(&Hornet::throwNeedleAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throw(Anticipate)right") = std::bind(&Hornet::throwNeedleAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throwleft") = std::bind(&Hornet::throwNeedleCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throwright") = std::bind(&Hornet::throwNeedleCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throw(Recover)left") = std::bind(&Hornet::throwNeedleRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Throw(Recover)right") = std::bind(&Hornet::throwNeedleRecoverCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -124,7 +131,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::JumpAnticipate;
+			mState = eHornetState::Idle;
 
 			idleFlag = false;
 			runFlag = false;
@@ -415,14 +422,55 @@ namespace ya
 		}
 
 		// 중립상태에서 일정시간이 지나면 랜덤하게 패턴 실행
-		// 1) jump
+		// 1) run
 		// 2) evade
-		// 3) run
-		// 4) counter
-		// 5) burb
+		// 3) jump 
+		// 4) throw
+		// 5) dash 
 		// 6) sphere
-		// 7) dash 
-		// 8) throw
+		// 7) burb 
+		// 8) counter
+		srand((unsigned int)time(NULL));
+		idlePattern = rand() % 8;
+		idlePattern = 3;	// test
+		mTime += Time::DeltaTime();
+		if (mTime >= WAITTIME)
+		{
+			mTime = 0.0f;
+			idleFlag = false;
+			if (idlePattern == 0)
+			{
+				mState = eHornetState::Run;
+			}
+			else if (idlePattern == 1)
+			{
+				//mState = eHornetState::;
+			}
+			else if (idlePattern == 2)
+			{
+				mState = eHornetState::JumpAnticipate;
+			}
+			else if (idlePattern == 3)
+			{
+				mState = eHornetState::ThrowNeedleAnticipate;
+			}
+			else if (idlePattern == 4)
+			{
+				mState = eHornetState::GDashAnticipate;
+			}
+			else if (idlePattern == 5)
+			{
+				mState = eHornetState::SphereAnticipateG;
+			}
+			else if (idlePattern == 6)
+			{
+				mState = eHornetState::BarbThrowAnticipate;
+			}
+			else if (idlePattern == 7)
+			{
+				mState = eHornetState::CounterAnticipate;
+			}
+		}
 	}
 
 	void Hornet::run()
@@ -785,16 +833,26 @@ namespace ya
 				mCollider->SetCenter(Vector2(-20.0f, -140.0f));
 				mCollider->SetSize(Vector2(80.0f, 140.0f));
 				mAnimator->Play(L"Hornet_Throw(Anticipate)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 50.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-60.0f, -140.0f));
 				mCollider->SetSize(Vector2(80.0f, 140.0f));
 				mAnimator->Play(L"Hornet_Throw(Anticipate)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 50.0f;
+				tr->SetPos(pos);
 			}
 
 			throwNeedleAnticipateFlag = true;
 		}
+
+
 	}
 
 	void Hornet::throwNeedle()
@@ -806,12 +864,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-65.0f, -100.0f));
 				mCollider->SetSize(Vector2(130.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Throwleft", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 50.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-65.0f, -100.0f));
 				mCollider->SetSize(Vector2(130.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Throwright", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 50.0f;
+				tr->SetPos(pos);
 			}
 
 			throwNeedleFlag = true;
@@ -827,12 +893,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-65.0f, -100.0f));
 				mCollider->SetSize(Vector2(130.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Throw(Recover)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 50.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-65.0f, -100.0f));
 				mCollider->SetSize(Vector2(130.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Throw(Recover)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 50.0f;
+				tr->SetPos(pos);
 			}
 
 			throwNeedleRecoverFlag = true;
@@ -1065,6 +1139,59 @@ namespace ya
 
 	void Hornet::gDashRecoverCompleteEvent()
 	{
+		mState = eHornetState::Idle;
+	}
+	void Hornet::throwNeedleAnticipateCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 50.0f;
+			tr->SetPos(pos);
+		}
+
+		mState = eHornetState::ThrowNeedle;
+	}
+
+	void Hornet::throwNeedleCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 50.0f;
+			tr->SetPos(pos);
+		}
+
+		mState = eHornetState::ThrowNeedleRecover;
+	}
+
+	void Hornet::throwNeedleRecoverCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 50.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 50.0f;
+			tr->SetPos(pos);
+		}
+
 		mState = eHornetState::Idle;
 	}
 }

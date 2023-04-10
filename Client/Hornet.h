@@ -112,6 +112,9 @@ namespace ya
 		void aDashCompleteEvent();
 		void gDashAnticipateCompleteEvent();
 		void gDashRecoverCompleteEvent();
+		void throwNeedleAnticipateCompleteEvent();
+		void throwNeedleCompleteEvent();
+		void throwNeedleRecoverCompleteEvent();
 
 	private:
 		class Transform*	tr;
@@ -123,6 +126,8 @@ namespace ya
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
 		int jumpPattern;
+		int idlePattern;
+		float mTime = 0.0f;
 
 		bool idleFlag						= false;
 		bool runFlag						= false;
@@ -155,6 +160,7 @@ namespace ya
 		bool stunFlag						= false;
 		bool woundedFlag					= false;
 		bool flashFlag						= false;
+		bool eventFlag						= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;
