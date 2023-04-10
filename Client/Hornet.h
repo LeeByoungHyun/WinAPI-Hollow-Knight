@@ -104,6 +104,8 @@ namespace ya
 
 		void jumpAnticipateCompleteEvent();
 		void jumpCompleteEvent();
+		void sphereAnticipateACompleteEvent();
+		void sphereCompleteEvent();
 
 	private:
 		class Transform*	tr;
