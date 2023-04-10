@@ -118,6 +118,9 @@ namespace ya
 		void throwNeedleAnticipateCompleteEvent();
 		void throwNeedleCompleteEvent();
 		void throwNeedleRecoverCompleteEvent();
+		void counterAnticipateCompleteEvent();
+		void counterStanceCompleteEvent();
+		void counterEndCompleteEvent();
 
 	private:
 		class Transform*	tr;

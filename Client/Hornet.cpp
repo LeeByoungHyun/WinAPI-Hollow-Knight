@@ -123,6 +123,10 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Throwright") = std::bind(&Hornet::throwNeedleCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Throw(Recover)left") = std::bind(&Hornet::throwNeedleRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Throw(Recover)right") = std::bind(&Hornet::throwNeedleRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter(Anticipate)left") = std::bind(&Hornet::counterAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter(Anticipate)right") = std::bind(&Hornet::counterAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter(End)left") = std::bind(&Hornet::counterEndCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter(End)right") = std::bind(&Hornet::counterEndCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -138,7 +142,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::Idle;
+			mState = eHornetState::CounterAnticipate;
 
 			idleFlag = false;
 			runFlag = false;
@@ -439,7 +443,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		idlePattern = 5;	// test
+		//idlePattern = 7;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -961,12 +965,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-92.5f, -120.0f));
 				mCollider->SetSize(Vector2(185.0f, 120.0f));
 				mAnimator->Play(L"Hornet_Counter(Anticipate)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 40.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-92.5f, -120.0f));
 				mCollider->SetSize(Vector2(185.0f, 120.0f));
 				mAnimator->Play(L"Hornet_Counter(Anticipate)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 40.0f;
+				tr->SetPos(pos);
 			}
 
 			counterAnticipateFlag = true;
@@ -981,16 +993,45 @@ namespace ya
 			{
 				mCollider->SetCenter(Vector2(-92.5f, -120.0f));
 				mCollider->SetSize(Vector2(185.0f, 120.0f));
-				mAnimator->Play(L"Hornet_Counter(Stance)left", false);
+				mAnimator->Play(L"Hornet_Counter(Stance)left", true);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 40.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-92.5f, -120.0f));
 				mCollider->SetSize(Vector2(185.0f, 120.0f));
-				mAnimator->Play(L"Hornet_Counter(Stance)right", false);
+				mAnimator->Play(L"Hornet_Counter(Stance)right", true);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 40.0f;
+				tr->SetPos(pos);
 			}
 
 			counterStanceFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 1.0f)
+		{
+			mTime = 0.0f;
+			if (mDirection == eDirection::Left)
+			{
+				Vector2 pos = tr->GetPos();
+				pos.x -= 40.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				Vector2 pos = tr->GetPos();
+				pos.x += 40.0f;
+				tr->SetPos(pos);
+			}
+
+			mState = eHornetState::CounterEnd;
+			counterStanceFlag = false;
 		}
 	}
 
@@ -1003,12 +1044,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
 				mCollider->SetSize(Vector2(60.0f, 170.0f));
 				mAnimator->Play(L"Hornet_Counter(End)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 40.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
 				mCollider->SetSize(Vector2(60.0f, 170.0f));
 				mAnimator->Play(L"Hornet_Counter(End)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 40.0f;
+				tr->SetPos(pos);
 			}
 
 			counterEndFlag = true;
@@ -1280,5 +1329,48 @@ namespace ya
 
 		mState = eHornetState::Idle;
 		throwNeedleRecoverFlag = false;
+	}
+
+	void Hornet::counterAnticipateCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 40.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 40.0f;
+			tr->SetPos(pos);
+		}
+
+		mState = eHornetState::CounterStance;
+		counterAnticipateFlag = false;
+	}
+
+	void Hornet::counterStanceCompleteEvent()
+	{
+
+	}
+
+	void Hornet::counterEndCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			//pos.x -= 40.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			//pos.x += 40.0f;
+			tr->SetPos(pos);
+		}
+
+		mState = eHornetState::Idle;
+		counterEndFlag = false;
 	}
 }
