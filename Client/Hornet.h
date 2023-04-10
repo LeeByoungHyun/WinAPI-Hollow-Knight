@@ -72,7 +72,7 @@ namespace ya
 	private:
 		void idle();
 		void run();
-		void JumpAnticipate();
+		void jumpAnticipate();
 		void jump();
 		void land();
 		void gDashAnticipate();
@@ -102,6 +102,9 @@ namespace ya
 		void wounded();
 		void flash();
 
+		void jumpAnticipateCompleteEvent();
+		void jumpCompleteEvent();
+
 	private:
 		class Transform*	tr;
 		class Animator*		mAnimator;
@@ -111,6 +114,7 @@ namespace ya
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
+		int jumpPattern;
 
 		bool idleFlag						= false;
 		bool runFlag						= false;

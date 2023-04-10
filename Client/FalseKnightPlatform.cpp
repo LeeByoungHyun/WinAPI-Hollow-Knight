@@ -120,7 +120,7 @@ namespace ya
 
 	void FalseKnightPlatform::OnCollisionStay(Collider* other)
 	{
-
+		
 	}
 
 	void FalseKnightPlatform::OnCollisionExit(Collider* other)

@@ -91,6 +91,9 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade(Anticipate)\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade(Anticipate)\\right", Vector2::Zero, 0.1f);
 
+		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)left") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
+
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 		mState = eHornetState::Idle;
@@ -103,7 +106,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::CounterAttackRecover;
+			mState = eHornetState::JumpAnticipate;
 
 			idleFlag = false;
 			runFlag = false;
@@ -169,7 +172,7 @@ namespace ya
 			break;
 
 		case ya::Hornet::eHornetState::JumpAnticipate:
-			JumpAnticipate();
+			jumpAnticipate();
 			break;
 
 		case ya::Hornet::eHornetState::Jump:
@@ -312,6 +315,12 @@ namespace ya
 		case eLayerType::Ground:
 			mRigidBody->SetGround(true);
 			mRigidBody->SetVelocity(Vector2::Zero);
+
+			if (jumpPattern == 0 && mState == eHornetState::Jump)	// jump pattern 1
+			{
+				mState = eHornetState::Idle;
+			}
+
 			break;
 		}
 	}
@@ -319,6 +328,18 @@ namespace ya
 	void Hornet::OnCollisionStay(Collider* other)
 	{
 		GameObject::OnCollisionStay(other);
+
+		eLayerType otherType = other->GetOwner()->GetType();	// 충돌한 객체의 타입
+		switch (otherType)
+		{
+			// 땅속에 있을 경우 땅위로 밀어냄
+		case eLayerType::Ground:
+			Vector2 pos = tr->GetPos();
+			pos.y = other->GetPos().y;
+			tr->SetPos(pos);
+
+			break;
+		}
 	}
 
 	void Hornet::OnCollisionExit(Collider* other)
@@ -372,7 +393,7 @@ namespace ya
 			runFlag = true;
 		}
 	}
-	void Hornet::JumpAnticipate()
+	void Hornet::jumpAnticipate()
 	{
 		if (jumpAnticipateFlag == false)
 		{
@@ -391,6 +412,7 @@ namespace ya
 
 			mRigidBody->SetVelocity(Vector2::Zero);
 			jumpAnticipateFlag = true;
+			idleFlag = false;
 		}
 	}
 
@@ -411,8 +433,22 @@ namespace ya
 				mAnimator->Play(L"Hornet_Jumpright", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
+			// 1) 그냥 점프
+			// 2) 플레이어 방향으로 점프 후 Sphere
+			// 3) 점프 후 플레이어 방향으로 대쉬(대각선)
+			// 
+			// 지금은 제자리 점프로 구현
+			srand((unsigned int)time(NULL));
+			jumpPattern = rand() % 3;
+			jumpPattern = 0;	// 테스트
+
+			// 앞뒤로 점프거리 랜덤하게 
+			// 지금은 테스트
+			mRigidBody->SetVelocity(Vector2(0.0f, -1200.0f));
+			mRigidBody->SetGround(false);
+
 			jumpFlag = true;
+			jumpAnticipateFlag = false;
 		}
 	}
 
@@ -890,5 +926,31 @@ namespace ya
 	void Hornet::flash()
 	{
 
+	}
+
+	void Hornet::jumpAnticipateCompleteEvent()
+	{
+		mState = eHornetState::Jump;
+	}
+
+	void Hornet::jumpCompleteEvent()
+	{
+		// Jump에서 선택한 변수값으로 이후 패턴 실행
+		// 1) 아무것도 하지 않고 착지
+		// 2) sphere
+		// 3) dash
+
+		if (jumpPattern == 0)	// 아무것도 하지 않고 착지
+		{
+
+		}
+		else if (jumpPattern == 1)	// sphere
+		{
+
+		}
+		else if (jumpPattern == 2)	// dash
+		{
+
+		}
 	}
 }
