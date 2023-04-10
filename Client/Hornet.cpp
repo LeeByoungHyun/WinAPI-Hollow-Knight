@@ -97,6 +97,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jumpleft") = std::bind(&Hornet::jumpCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jumpright") = std::bind(&Hornet::jumpCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Landleft") = std::bind(&Hornet::landCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Landright") = std::bind(&Hornet::landCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate A)left") = std::bind(&Hornet::sphereAnticipateACompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate A)right") = std::bind(&Hornet::sphereAnticipateACompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphereleft") = std::bind(&Hornet::sphereCompleteEvent, this);
@@ -320,21 +322,22 @@ namespace ya
 		switch (otherType)
 		{
 		case eLayerType::Ground:	// 땅과 충돌할 경우
-			if (jumpPattern == 0 && mState == eHornetState::Idle)	
+			if (mState == eHornetState::Idle)	
 			{
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 
 			}
-			else if (jumpPattern == 0 && mState == eHornetState::Jump)	
+			else if (mState == eHornetState::Jump 
+				&& mRigidBody->GetVelocity().Normalize().y >= 0.0f)	
 			{
-				mState = eHornetState::Idle;
+				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 			}
 			else if (mState == eHornetState::SphereRecover)	
 			{
-				mState = eHornetState::Idle;
+				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 			}
@@ -344,7 +347,9 @@ namespace ya
 			}
 			else if (mState == eHornetState::ADashRecover)
 			{
+				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
+				mRigidBody->SetVelocity(Vector2::Zero);
 			}
 			else if (mState == eHornetState::GDashRecover)
 			{
@@ -363,7 +368,7 @@ namespace ya
 		{
 			// 땅속에 있을 경우 땅위로 밀어냄
 		case eLayerType::Ground:
-			if (mState == eHornetState::Idle)
+			if (mState == eHornetState::Idle || mState == eHornetState::Land)
 			{
 				Vector2 pos = tr->GetPos();
 				pos.y = other->GetPos().y - 1;
@@ -484,7 +489,7 @@ namespace ya
 			// 지금은 제자리 점프로 구현
 			srand((unsigned int)time(NULL));
 			jumpPattern = rand() % 3;
-			jumpPattern = 2;	// 테스트
+			//jumpPattern = 0;	// 테스트
 
 			// 앞뒤로 점프거리 랜덤하게 
 			// 지금은 테스트
@@ -1020,7 +1025,12 @@ namespace ya
 			mState = eHornetState::ADashAnticipate;
 		}
 
-		jumpPattern = -1;
+		//jumpPattern = -1;
+	}
+
+	void Hornet::landCompleteEvent()
+	{
+		mState = eHornetState::Idle;
 	}
 
 	void Hornet::sphereAnticipateACompleteEvent()
@@ -1040,7 +1050,7 @@ namespace ya
 
 	void Hornet::aDashRecoverCompleteEvent()
 	{
-		mState = eHornetState::Idle;
+		//mState = eHornetState::Idle;
 	}
 
 	void Hornet::aDashCompleteEvent()

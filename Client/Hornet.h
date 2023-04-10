@@ -104,6 +104,7 @@ namespace ya
 
 		void jumpAnticipateCompleteEvent();
 		void jumpCompleteEvent();
+		void landCompleteEvent();
 		void sphereAnticipateACompleteEvent();
 		void sphereCompleteEvent();
 		void aDashAnticipateCompleteEvent();
