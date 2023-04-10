@@ -712,12 +712,12 @@ namespace ya
 		if (mDirection == eDirection::Left)
 		{
 			velocity.x = -800.0f;
-			velocity.y = 0.0f;
+			velocity.y = -10.0f;
 		}
 		if (mDirection == eDirection::Right)
 		{
 			velocity.x = 800.0f;
-			velocity.y = 0.0f;
+			velocity.y = -10.0f;
 		}
 		mRigidBody->SetVelocity(velocity);
 	}
@@ -1011,12 +1011,12 @@ namespace ya
 		if (mDirection == eDirection::Left)
 		{
 			velocity.x = 30.0f;
-			velocity.y = 0.0f;
+			velocity.y = -10.0f;
 		}
 		if (mDirection == eDirection::Right)
 		{
 			velocity.x = -30.0f;
-			velocity.y = 0.0f;
+			velocity.y = -10.0f;
 		}
 		mRigidBody->SetVelocity(velocity);
 	}

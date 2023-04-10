@@ -771,6 +771,7 @@ namespace ya
 
 			jumpFlag = false;
 			aDashAnticipateFlag = true;
+			mRigidBody->SetActive(false);
 		}
 
 		mRigidBody->SetVelocity(Vector2::Zero);
@@ -883,6 +884,7 @@ namespace ya
 
 			sphereAnticipateAFlag = true;
 			jumpFlag = false;
+			mRigidBody->SetActive(false);
 		}
 
 		mRigidBody->SetVelocity(Vector2::Zero);
@@ -1306,6 +1308,8 @@ namespace ya
 		{
 			mState = eHornetState::Idle;
 		}
+
+		mRigidBody->SetActive(true);
 	}
 
 	void Hornet::aDashAnticipateCompleteEvent()
@@ -1316,6 +1320,7 @@ namespace ya
 	void Hornet::aDashRecoverCompleteEvent()
 	{
 		//mState = eHornetState::Idle;
+		mRigidBody->SetActive(true);
 	}
 
 	void Hornet::aDashCompleteEvent()
