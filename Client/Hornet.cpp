@@ -103,8 +103,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Landright") = std::bind(&Hornet::landCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate A)left") = std::bind(&Hornet::sphereAnticipateACompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate A)right") = std::bind(&Hornet::sphereAnticipateACompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate G)left") = std::bind(&Hornet::sphereAnticipateGCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate G)right") = std::bind(&Hornet::sphereAnticipateGCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphereleft") = std::bind(&Hornet::sphereCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphereright") = std::bind(&Hornet::sphereCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Recover)left") = std::bind(&Hornet::sphereRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Recover)right") = std::bind(&Hornet::sphereRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Anticipate)left") = std::bind(&Hornet::aDashAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Anticipate)right") = std::bind(&Hornet::aDashAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)left") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
@@ -435,7 +439,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		idlePattern = 4;	// test
+		idlePattern = 5;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -569,6 +573,7 @@ namespace ya
 				mAnimator->Play(L"Hornet_Landright", false);
 			}
 			landFlag = true;
+			jumpAnticipateFlag = false;
 		}
 	}
 
@@ -598,6 +603,7 @@ namespace ya
 			}
 
 			gDashAnticipateFlag = true;
+			idleFlag = false;
 		}
 	}
 
@@ -620,6 +626,7 @@ namespace ya
 			}
 
 			gDashFlag = true;
+			gDashAnticipateFlag = false;
 			playerPos = Player::GetInstance()->GetComponent<Transform>()->GetPos();	// 패턴 시작시점 플레이어 pos
 		}
 
@@ -657,6 +664,8 @@ namespace ya
 			}
 
 			gDashRecoverFlag = true;
+			aDashFlag = false;
+			gDashFlag = false;
 		}
 	}
 
@@ -754,6 +763,7 @@ namespace ya
 			}
 
 			aDashRecoverFlag = true;
+			aDashFlag = false;
 		}
 	}
 
@@ -775,6 +785,7 @@ namespace ya
 			}
 
 			sphereAnticipateGFlag = true;
+			idleFlag = false;
 		}
 	}
 
@@ -877,9 +888,8 @@ namespace ya
 			}
 
 			throwNeedleAnticipateFlag = true;
+			idleFlag = false;
 		}
-
-
 	}
 
 	void Hornet::throwNeedle()
@@ -908,6 +918,7 @@ namespace ya
 			}
 
 			throwNeedleFlag = true;
+			throwNeedleAnticipateFlag = false;
 		}
 	}
 
@@ -937,6 +948,7 @@ namespace ya
 			}
 
 			throwNeedleRecoverFlag = true;
+			throwNeedleFlag = false;
 		}
 	}
 
@@ -1139,9 +1151,22 @@ namespace ya
 		mState = eHornetState::Sphere;
 	}
 
+	void Hornet::sphereAnticipateGCompleteEvent()
+	{
+		mState = eHornetState::Sphere;
+	}
+
 	void Hornet::sphereCompleteEvent()
 	{
 		mState = eHornetState::SphereRecover;
+	}
+
+	void Hornet::sphereRecoverCompleteEvent()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eHornetState::Idle;
+		}
 	}
 
 	void Hornet::aDashAnticipateCompleteEvent()
@@ -1197,7 +1222,7 @@ namespace ya
 
 	void Hornet::gDashCompleteEvent()
 	{
-		
+
 	}
 
 	void Hornet::throwNeedleAnticipateCompleteEvent()
@@ -1216,6 +1241,7 @@ namespace ya
 		}
 
 		mState = eHornetState::ThrowNeedle;
+		throwNeedleAnticipateFlag = false;
 	}
 
 	void Hornet::throwNeedleCompleteEvent()
@@ -1234,6 +1260,7 @@ namespace ya
 		}
 
 		mState = eHornetState::ThrowNeedleRecover;
+		throwNeedleFlag = false;
 	}
 
 	void Hornet::throwNeedleRecoverCompleteEvent()
@@ -1252,5 +1279,6 @@ namespace ya
 		}
 
 		mState = eHornetState::Idle;
+		throwNeedleRecoverFlag = false;
 	}
 }
