@@ -18,6 +18,8 @@ namespace ya
 {
 	// 싱글톤 객체 초기화
 	Hornet* Hornet::instance = nullptr;
+	Vector2 playerPos;
+	Vector2 playerDir;
 
 	Hornet::Hornet()
 	{
@@ -99,6 +101,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Sphere(Anticipate A)right") = std::bind(&Hornet::sphereAnticipateACompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphereleft") = std::bind(&Hornet::sphereCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Sphereright") = std::bind(&Hornet::sphereCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Anticipate)left") = std::bind(&Hornet::aDashAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Anticipate)right") = std::bind(&Hornet::aDashAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)left") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_A Dash(Recover)right") = std::bind(&Hornet::aDashRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)left") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_G Dash(Recover)right") = std::bind(&Hornet::gDashRecoverCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -148,13 +156,6 @@ namespace ya
 			woundedFlag = false;
 			flashFlag = false;
 		}
-
-		// 테스트용
-		Vector2 playerPos = Player::GetInstance()->GetPos();
-		if (playerPos.x > tr->GetPos().x)
-			mDirection = eDirection::Right;
-		else
-			mDirection = eDirection::Left;
 
 		/*
 		// 플레이어 위치에 따라 방향 전환
@@ -318,25 +319,36 @@ namespace ya
 		eLayerType otherType = other->GetOwner()->GetType();	// 충돌한 객체의 타입
 		switch (otherType)
 		{
-			// 땅과 충돌할 경우
-		case eLayerType::Ground:
-			if (jumpPattern == 0 && mState == eHornetState::Idle)	// jump pattern 1
+		case eLayerType::Ground:	// 땅과 충돌할 경우
+			if (jumpPattern == 0 && mState == eHornetState::Idle)	
 			{
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 
 			}
-			else if (jumpPattern == 0 && mState == eHornetState::Jump)	// jump pattern 1
+			else if (jumpPattern == 0 && mState == eHornetState::Jump)	
 			{
 				mState = eHornetState::Idle;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 			}
-			else if (mState == eHornetState::SphereRecover)	// sphere
+			else if (mState == eHornetState::SphereRecover)	
 			{
 				mState = eHornetState::Idle;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
+			}
+			else if (mState == eHornetState::ADash)	
+			{
+				mRigidBody->SetGround(true);
+			}
+			else if (mState == eHornetState::ADashRecover)
+			{
+				mRigidBody->SetGround(true);
+			}
+			else if (mState == eHornetState::GDashRecover)
+			{
+				mRigidBody->SetGround(true);
 			}
 			break;
 		}
@@ -356,6 +368,8 @@ namespace ya
 				Vector2 pos = tr->GetPos();
 				pos.y = other->GetPos().y - 1;
 				tr->SetPos(pos);
+				mRigidBody->SetVelocity(Vector2::Zero);
+				mRigidBody->SetGround(true);
 			}
 			break;
 		}
@@ -370,6 +384,13 @@ namespace ya
 	{
 		if (idleFlag == false)
 		{
+			// 플레이어 방향으로 방향 전환
+			Vector2 playerPos = Player::GetInstance()->GetPos();
+			if (playerPos.x > tr->GetPos().x)
+				mDirection = eDirection::Right;
+			else
+				mDirection = eDirection::Left;
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
@@ -382,7 +403,6 @@ namespace ya
 				mCollider->SetSize(Vector2(60.0f, 170.0f));
 				mAnimator->Play(L"Hornet_Idleright", true);
 			}
-
 			mRigidBody->SetVelocity(Vector2::Zero);
 			idleFlag = true;
 
@@ -416,8 +436,6 @@ namespace ya
 				mCollider->SetSize(Vector2(60.0f, 170.0f));
 				mAnimator->Play(L"Hornet_Runright", true);
 			}
-
-			mRigidBody->SetVelocity(Vector2::Zero);
 			runFlag = true;
 		}
 	}
@@ -437,8 +455,6 @@ namespace ya
 				mCollider->SetSize(Vector2(60.0f, 140.0f));
 				mAnimator->Play(L"Hornet_Jump(Anticipate)right", false);
 			}
-
-			mRigidBody->SetVelocity(Vector2::Zero);
 			jumpAnticipateFlag = true;
 			idleFlag = false;
 		}
@@ -468,7 +484,7 @@ namespace ya
 			// 지금은 제자리 점프로 구현
 			srand((unsigned int)time(NULL));
 			jumpPattern = rand() % 3;
-			jumpPattern = 1;	// 테스트
+			jumpPattern = 2;	// 테스트
 
 			// 앞뒤로 점프거리 랜덤하게 
 			// 지금은 테스트
@@ -496,8 +512,6 @@ namespace ya
 				mCollider->SetSize(Vector2(60.0f, 170.0f));
 				mAnimator->Play(L"Hornet_Landright", false);
 			}
-
-			mRigidBody->SetVelocity(Vector2::Zero);
 			landFlag = true;
 		}
 	}
@@ -519,7 +533,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_G Dash(Anticipate)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			gDashAnticipateFlag = true;
 		}
 	}
@@ -542,7 +555,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_G Dashright", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			gDashFlag = true;
 		}
 	}
@@ -564,7 +576,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_G Dash(Recover)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			gDashRecoverFlag = true;
 		}
 	}
@@ -573,6 +584,13 @@ namespace ya
 	{
 		if (aDashAnticipateFlag == false)
 		{
+			// 플레이어 방향으로 방향 전환
+			Vector2 playerPos = Player::GetInstance()->GetPos();
+			if (playerPos.x > tr->GetPos().x)
+				mDirection = eDirection::Right;
+			else
+				mDirection = eDirection::Left;
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -120.0f));
@@ -586,9 +604,11 @@ namespace ya
 				mAnimator->Play(L"Hornet_A Dash(Anticipate)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
+			jumpFlag = false;
 			aDashAnticipateFlag = true;
 		}
+
+		mRigidBody->SetVelocity(Vector2::Zero);
 	}
 
 	void Hornet::aDash()
@@ -607,9 +627,32 @@ namespace ya
 				mCollider->SetSize(Vector2(60.0f, 100.0f));
 				mAnimator->Play(L"Hornet_A Dashright", false);
 			}
-
-			mRigidBody->SetVelocity(Vector2::Zero);
 			aDashFlag = true;
+			aDashAnticipateFlag = false;
+
+			playerPos = Player::GetInstance()->GetComponent<Transform>()->GetPos();	// 패턴 시작시점 플레이어 pos
+			playerDir = playerPos - tr->GetPos();
+			playerDir = playerDir.Normalize();
+		}
+
+		// 플레이어 방향으로 돌진
+		Vector2 pos = tr->GetPos();
+		pos.x += 1000.0f * playerDir.x * Time::DeltaTime();
+		pos.y += 1000.0f * playerDir.y * Time::DeltaTime();
+
+		tr->SetPos(pos);
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		if (playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
+		{
+			if (mRigidBody->GetGround() == true)
+			{
+				mState = eHornetState::GDashRecover;
+			}
+			else
+			{
+				mState = eHornetState::ADashRecover;
+			}
 		}
 	}
 
@@ -630,7 +673,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_A Dash(Recover)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			aDashRecoverFlag = true;
 		}
 	}
@@ -652,7 +694,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Sphere(Anticipate G)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			sphereAnticipateGFlag = true;
 		}
 	}
@@ -674,7 +715,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Sphere(Anticipate A)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			sphereAnticipateAFlag = true;
 			jumpFlag = false;
 		}
@@ -700,7 +740,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Sphereright", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			sphereAnticipateAFlag = false;
 			sphereAnticipateGFlag = false;
 			sphereFlag = true;
@@ -749,7 +788,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Throw(Anticipate)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			throwNeedleAnticipateFlag = true;
 		}
 	}
@@ -771,7 +809,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Throwright", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			throwNeedleFlag = true;
 		}
 	}
@@ -793,7 +830,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Throw(Recover)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			throwNeedleRecoverFlag = true;
 		}
 	}
@@ -815,7 +851,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter(Anticipate)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterAnticipateFlag = true;
 		}
 	}
@@ -837,7 +872,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter(Stance)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterStanceFlag = true;
 		}
 	}
@@ -859,7 +893,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter(End)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterEndFlag = true;
 		}
 	}
@@ -881,7 +914,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter Attack(Anticipate)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterAttackAnticipateFlag = true;
 		}
 	}
@@ -903,7 +935,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter Attackright", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterAttackFlag = true;
 		}
 	}
@@ -925,7 +956,6 @@ namespace ya
 				mAnimator->Play(L"Hornet_Counter Attack(Recover)right", false);
 			}
 
-			mRigidBody->SetVelocity(Vector2::Zero);
 			counterAttackRecoverFlag = true;
 		}
 	}
@@ -1001,5 +1031,30 @@ namespace ya
 	void Hornet::sphereCompleteEvent()
 	{
 		mState = eHornetState::SphereRecover;
+	}
+
+	void Hornet::aDashAnticipateCompleteEvent()
+	{
+		mState = eHornetState::ADash;
+	}
+
+	void Hornet::aDashRecoverCompleteEvent()
+	{
+		mState = eHornetState::Idle;
+	}
+
+	void Hornet::aDashCompleteEvent()
+	{
+		
+	}
+
+	void Hornet::gDashAnticipateCompleteEvent()
+	{
+
+	}
+
+	void Hornet::gDashRecoverCompleteEvent()
+	{
+		mState = eHornetState::Idle;
 	}
 }

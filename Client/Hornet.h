@@ -106,6 +106,11 @@ namespace ya
 		void jumpCompleteEvent();
 		void sphereAnticipateACompleteEvent();
 		void sphereCompleteEvent();
+		void aDashAnticipateCompleteEvent();
+		void aDashRecoverCompleteEvent();
+		void aDashCompleteEvent();
+		void gDashAnticipateCompleteEvent();
+		void gDashRecoverCompleteEvent();
 
 	private:
 		class Transform*	tr;
