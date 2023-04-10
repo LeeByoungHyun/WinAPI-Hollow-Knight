@@ -13,6 +13,8 @@ namespace ya
 			JumpAnticipate,
 			Jump,
 			Land,
+			EvadeAnticipate,
+			Evade,
 			GDashAnticipate,
 			GDash,
 			GDashRecover,
@@ -75,6 +77,8 @@ namespace ya
 		void jumpAnticipate();
 		void jump();
 		void land();
+		void evadeAnticipate();
+		void evade();
 		void gDashAnticipate();
 		void gDash();
 		void gDashRecover();
@@ -124,6 +128,8 @@ namespace ya
 		void counterAttackAnticipateCompleteEvent();
 		void counterAttackCompleteEvent();
 		void counterAttackRecoverCompleteEvent();
+		void evadeAnticipateCompleteEvent();
+		void evadeCompleteEvent();
 
 		void initializeFlag();
 
@@ -147,6 +153,8 @@ namespace ya
 		bool jumpAnticipateFlag				= false;
 		bool jumpFlag						= false;
 		bool landFlag						= false;
+		bool evadeAnticipateFlag			= false;
+		bool evadeFlag						= false;
 		bool gDashAnticipateFlag			= false;
 		bool gDashFlag						= false;
 		bool gDashRecoverFlag				= false;

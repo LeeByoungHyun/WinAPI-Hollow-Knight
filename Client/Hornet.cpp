@@ -22,6 +22,7 @@ namespace ya
 	Vector2 playerDir;
 	const float WAITTIME = 0.5f;
 	const float DASHSPEED = 1000.0f;
+	const float EVADESPEED = 500.0f;
 
 	Hornet::Hornet()
 	{
@@ -135,6 +136,10 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Counter Attackright") = std::bind(&Hornet::counterAttackCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Recover)left") = std::bind(&Hornet::counterAttackRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Recover)right") = std::bind(&Hornet::counterAttackRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Evade(Anticipate)left") = std::bind(&Hornet::evadeAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Evade(Anticipate)right") = std::bind(&Hornet::evadeAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Evadeleft") = std::bind(&Hornet::evadeCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Evaderight") = std::bind(&Hornet::evadeCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -150,7 +155,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::CounterAnticipate;
+			mState = eHornetState::EvadeAnticipate;
 
 			idleFlag = false;
 			runFlag = false;
@@ -218,6 +223,14 @@ namespace ya
 
 		case ya::Hornet::eHornetState::Land:
 			land();
+			break;
+
+		case ya::Hornet::eHornetState::EvadeAnticipate:
+			evadeAnticipate();
+			break;
+
+		case ya::Hornet::eHornetState::Evade:
+			evade();
 			break;
 
 		case ya::Hornet::eHornetState::GDashAnticipate:
@@ -481,7 +494,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		idlePattern = 7;	// test
+		idlePattern = 1;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -489,11 +502,11 @@ namespace ya
 			idleFlag = false;
 			if (idlePattern == 0)
 			{
-				mState = eHornetState::Run;
+				//mState = eHornetState::Run;
 			}
 			else if (idlePattern == 1)
 			{
-				//mState = eHornetState::;
+				mState = eHornetState::EvadeAnticipate;
 			}
 			else if (idlePattern == 2)
 			{
@@ -513,7 +526,7 @@ namespace ya
 			}
 			else if (idlePattern == 6)
 			{
-				mState = eHornetState::BarbThrowAnticipate;
+				//mState = eHornetState::BarbThrowAnticipate;
 			}
 			else if (idlePattern == 7)
 			{
@@ -617,6 +630,56 @@ namespace ya
 			landFlag = true;
 			jumpAnticipateFlag = false;
 		}
+	}
+
+	void Hornet::evadeAnticipate()
+	{
+		if (evadeAnticipateFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Evade(Anticipate)left", false);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Evade(Anticipate)right", false);
+			}
+			evadeAnticipateFlag = true;
+			idleFlag = false;
+		}
+	}
+
+	void Hornet::evade()
+	{
+		if (evadeFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Evadeleft", false);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Evaderight", false);
+			}
+			evadeFlag = true;
+			evadeAnticipateFlag = false;
+		}
+
+		// 플레이어 반대방향으로 회피
+		Vector2 pos = tr->GetPos();
+		if (mDirection == eDirection::Left)
+			pos.x += EVADESPEED * Time::DeltaTime();
+		else if (mDirection == eDirection::Right)
+			pos.x -= EVADESPEED * Time::DeltaTime();
+		tr->SetPos(pos);
 	}
 
 	void Hornet::gDashAnticipate()
@@ -1477,6 +1540,18 @@ namespace ya
 		counterAttackRecoverFlag = false;
 	}
 
+	void Hornet::evadeAnticipateCompleteEvent()
+	{
+		mState = eHornetState::Evade;
+		evadeAnticipateFlag = false;
+	}
+
+	void Hornet::evadeCompleteEvent()
+	{
+		mState = eHornetState::Idle;
+		evadeFlag = false;
+	}
+
 	void Hornet::initializeFlag()
 	{
 		//idleFlag = false;
@@ -1484,6 +1559,8 @@ namespace ya
 		jumpAnticipateFlag = false;
 		jumpFlag = false;
 		landFlag = false;
+		evadeAnticipateFlag = false;
+		evadeFlag = false;
 		gDashAnticipateFlag = false;
 		gDashFlag = false;
 		gDashRecoverFlag = false;
