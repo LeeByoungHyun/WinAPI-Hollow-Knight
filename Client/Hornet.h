@@ -121,6 +121,11 @@ namespace ya
 		void counterAnticipateCompleteEvent();
 		void counterStanceCompleteEvent();
 		void counterEndCompleteEvent();
+		void counterAttackAnticipateCompleteEvent();
+		void counterAttackCompleteEvent();
+		void counterAttackRecoverCompleteEvent();
+
+		void initializeFlag();
 
 	private:
 		class Transform*	tr;
@@ -134,6 +139,8 @@ namespace ya
 		int jumpPattern;
 		int idlePattern;
 		float mTime = 0.0f;
+		int hp;
+		int stunHp;
 
 		bool idleFlag						= false;
 		bool runFlag						= false;

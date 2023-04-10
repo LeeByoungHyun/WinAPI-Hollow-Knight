@@ -30,6 +30,8 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		mRigidBody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
+		hp = 900;
+		stunHp = 300;
 	}
 
 	Hornet::~Hornet()
@@ -127,6 +129,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Counter(Anticipate)right") = std::bind(&Hornet::counterAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Counter(End)left") = std::bind(&Hornet::counterEndCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Counter(End)right") = std::bind(&Hornet::counterEndCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Anticipate)left") = std::bind(&Hornet::counterAttackAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Anticipate)right") = std::bind(&Hornet::counterAttackAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attackleft") = std::bind(&Hornet::counterAttackCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attackright") = std::bind(&Hornet::counterAttackCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Recover)left") = std::bind(&Hornet::counterAttackRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Counter Attack(Recover)right") = std::bind(&Hornet::counterAttackRecoverCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -374,6 +382,35 @@ namespace ya
 				mRigidBody->SetGround(true);
 			}
 			break;
+
+			// 플레이어의 공격일 경우
+		case eLayerType::NeilEffect:
+			if (mState == eHornetState::CounterStance)
+			{
+				mState = eHornetState::CounterAttackAnticipate;
+				// 팅소리
+			}
+			else
+			{
+				hp -= Player::GetInstance()->GetNeilAtk();
+				stunHp -= Player::GetInstance()->GetNeilAtk();
+				//armorDamagedSound->Play(false);
+			}
+			
+			break;
+		case eLayerType::SpellEffect:
+			if (mState == eHornetState::CounterStance)
+			{
+				mState = eHornetState::CounterAttackAnticipate;
+				// 팅소리
+			}
+			else
+			{
+				hp -= Player::GetInstance()->GetSpellAtk();
+				stunHp -= Player::GetInstance()->GetSpellAtk();
+				//armorDamagedSound->Play(false);
+			}
+			break;
 		}
 	}
 
@@ -430,6 +467,7 @@ namespace ya
 			idleFlag = true;
 
 			// 플레그 초기화
+			initializeFlag();
 		}
 
 		// 중립상태에서 일정시간이 지나면 랜덤하게 패턴 실행
@@ -443,7 +481,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		//idlePattern = 7;	// test
+		idlePattern = 7;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -646,6 +684,7 @@ namespace ya
 		if (playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f
 			|| mTime >= 0.5f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
 		{
+			mTime = 0.0f;
 			mState = eHornetState::GDashRecover;
 		}
 	}
@@ -1073,12 +1112,22 @@ namespace ya
 				mCollider->SetCenter(Vector2(-40.0f, -100.0f));
 				mCollider->SetSize(Vector2(140.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Counter Attack(Anticipate)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 14.0f;
+				//pos.y += 15.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(-100.0f, -100.0f));
 				mCollider->SetSize(Vector2(140.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Counter Attack(Anticipate)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 14.0f;
+				//pos.y += 15.0f;
+				tr->SetPos(pos);
 			}
 
 			counterAttackAnticipateFlag = true;
@@ -1104,6 +1153,7 @@ namespace ya
 
 			counterAttackFlag = true;
 		}
+		
 	}
 
 	void Hornet::counterAttackRecover()
@@ -1115,12 +1165,20 @@ namespace ya
 				mCollider->SetCenter(Vector2(-100.0f, -150.0f));
 				mCollider->SetSize(Vector2(80.0f, 150.0f));
 				mAnimator->Play(L"Hornet_Counter Attack(Recover)left", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x += 128.0f;
+				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
 			{
 				mCollider->SetCenter(Vector2(20.0f, -150.0f));
 				mCollider->SetSize(Vector2(80.0f, 150.0f));
 				mAnimator->Play(L"Hornet_Counter Attack(Recover)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 128.0f;
+				tr->SetPos(pos);
 			}
 
 			counterAttackRecoverFlag = true;
@@ -1372,5 +1430,86 @@ namespace ya
 
 		mState = eHornetState::Idle;
 		counterEndFlag = false;
+	}
+
+	void Hornet::counterAttackAnticipateCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 14.0f;
+			//pos.y -= 15.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 14.0f;
+			//pos.y -= 15.0f;
+			tr->SetPos(pos);
+		}
+
+		mState = eHornetState::CounterAttack;
+		counterAttackAnticipateFlag = false;
+	}
+
+	void Hornet::counterAttackCompleteEvent()
+	{
+		mState = eHornetState::CounterAttackRecover;
+		counterAttackFlag = false;
+	}
+
+	void Hornet::counterAttackRecoverCompleteEvent()
+	{
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 128.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 128.0f;
+			tr->SetPos(pos);
+		}
+		mState = eHornetState::Idle;
+		counterAttackRecoverFlag = false;
+	}
+
+	void Hornet::initializeFlag()
+	{
+		//idleFlag = false;
+		runFlag = false;
+		jumpAnticipateFlag = false;
+		jumpFlag = false;
+		landFlag = false;
+		gDashAnticipateFlag = false;
+		gDashFlag = false;
+		gDashRecoverFlag = false;
+		aDashAnticipateFlag = false;
+		aDashFlag = false;
+		aDashRecoverFlag = false;
+		sphereAnticipateGFlag = false;
+		sphereAnticipateAFlag = false;
+		sphereFlag = false;
+		sphereRecoverFlag = false;
+		throwNeedleAnticipateFlag = false;
+		throwNeedleFlag = false;
+		throwNeedleRecoverFlag = false;
+		counterAnticipateFlag = false;
+		counterStanceFlag = false;
+		counterEndFlag = false;
+		counterAttackAnticipateFlag = false;
+		counterAttackFlag = false;
+		counterAttackRecoverFlag = false;
+		barbThrowAnticipateFlag = false;
+		barbThrowFlag = false;
+		barbThrowRecoverFlag = false;
+		stunAirFlag = false;
+		stunFlag = false;
+		woundedFlag = false;
+		flashFlag = false;
+		eventFlag = false;
 	}
 }
