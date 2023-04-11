@@ -194,6 +194,9 @@
     <Filter Include="Contents\Scenes\HornetBossScene">
       <UniqueIdentifier>{415b06ba-ed34-46a0-8d66-b78921a4b3c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet\Barb">
+      <UniqueIdentifier>{51a4c448-61fa-4955-b8d4-be2b1c285b42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -421,6 +424,9 @@
     <ClInclude Include="HornetBossScene.h">
       <Filter>Contents\Scenes\HornetBossScene</Filter>
     </ClInclude>
+    <ClInclude Include="Barb.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -626,6 +632,9 @@
     </ClCompile>
     <ClCompile Include="HornetBossScene.cpp">
       <Filter>Contents\Scenes\HornetBossScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Barb.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
