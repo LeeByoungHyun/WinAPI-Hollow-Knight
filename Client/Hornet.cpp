@@ -17,6 +17,7 @@
 #include "Barb02.h"
 #include "Barb03.h"
 #include "Barb04.h"
+#include "SphereBall.h"
 
 namespace ya
 {
@@ -174,6 +175,9 @@ namespace ya
 		barb03->SetBarbState(Barb03::eBarbState::Disable);
 		barb04->SetBarbState(Barb04::eBarbState::Disable);
 
+		ball = object::Instantiate<SphereBall>(eLayerType::Monster);
+		ball->SetShereBallState(SphereBall::eSphereBallState::Disable);
+
 		GameObject::Initialize();
 	}
 
@@ -184,7 +188,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::BarbThrowAnticipate;
+			mState = eHornetState::SphereAnticipateG;
 
 			initializeFlag();
 		}
@@ -513,7 +517,14 @@ namespace ya
 			}
 			else if (idlePattern == 6)
 			{
-				mState = eHornetState::BarbThrowAnticipate;
+				// Barb가 scene에 남아있으면 continue
+				if (barb01->GetBarbState() == Barb01::eBarbState::Disable 
+					&& barb02->GetBarbState() == Barb02::eBarbState::Disable
+					&& barb03->GetBarbState() == Barb03::eBarbState::Disable
+					&& barb04->GetBarbState() == Barb04::eBarbState::Disable)
+				{
+					mState = eHornetState::BarbThrowAnticipate;
+				}
 			}
 			else if (idlePattern == 7)
 			{
@@ -933,6 +944,9 @@ namespace ya
 				mCollider->SetSize(Vector2(75.0f, 100.0f));
 				mAnimator->Play(L"Hornet_Sphereright", false);
 			}
+
+			ball->SetState(eState::Active);
+			ball->SetShereBallState(SphereBall::eSphereBallState::Active);
 
 			sphereAnticipateAFlag = false;
 			sphereAnticipateGFlag = false;

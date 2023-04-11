@@ -148,6 +148,7 @@ namespace ya
 		class Barb02* barb02;
 		class Barb03* barb03;
 		class Barb04* barb04;
+		class SphereBall* ball;
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;

@@ -197,6 +197,9 @@
     <Filter Include="Contents\Objects\Charactor\Hornet\Barb">
       <UniqueIdentifier>{51a4c448-61fa-4955-b8d4-be2b1c285b42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet\Sphere">
+      <UniqueIdentifier>{0726660e-02cc-4437-86fe-e6b74df7ca9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -436,6 +439,9 @@
     <ClInclude Include="Barb04.h">
       <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
     </ClInclude>
+    <ClInclude Include="SphereBall.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Sphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -653,6 +659,9 @@
     </ClCompile>
     <ClCompile Include="Barb04.cpp">
       <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereBall.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Sphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
