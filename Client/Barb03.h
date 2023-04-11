@@ -1,14 +1,9 @@
 #pragma once
-class Barb
-{
-};
-
-#pragma once
 #include "yaGameObject.h"
 
 namespace ya
 {
-	class Barb : public GameObject
+	class Barb03 : public GameObject
 	{
 	public:
 		enum class eBarbState
@@ -21,8 +16,8 @@ namespace ya
 			Break
 		};
 
-		Barb();
-		~Barb();
+		Barb03();
+		~Barb03();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -33,9 +28,9 @@ namespace ya
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
-		void SetProjectileState(eBarbState state) { mState = state; }
-		eBarbState GetProjectileState() { return mState; }
-		void SetPos(Vector2 pos) { tr->SetPos(pos); }
+		void SetBarbState(eBarbState state) { mState = state; }
+		eBarbState GetBarbState() { return mState; }
+		//void SetPos(Vector2 pos) { tr->SetPos(pos); }
 		bool GetActiveFlag() { return activeFlag; }
 
 	private:
@@ -48,6 +43,7 @@ namespace ya
 
 		void threadCompleteEvent();
 		void looseCompleteEvent();
+		void breakCompleteEvent();
 
 	private:
 		class Animator* mAnimator;

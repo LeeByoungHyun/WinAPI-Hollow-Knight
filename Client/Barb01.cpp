@@ -1,4 +1,4 @@
-#include "Barb.h"
+#include "Barb01.h"
 #include "yaTransform.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
@@ -11,22 +11,22 @@
 
 namespace ya
 {
-	Vector2 playerPos;
-	Vector2 playerDir;
+	Vector2 Barb01PlayerPos;
+	Vector2 Barb01PlayerDir;
 
-	const float SPEED = 800.0f;
+	const float SPEED = 2000.0f;
 
-	Barb::Barb()
+	Barb01::Barb01()
 	{
 		tr = AddComponent<Transform>();
 	}
 
-	Barb::~Barb()
+	Barb01::~Barb01()
 	{
 
 	}
 
-	void Barb::Initialize()
+	void Barb01::Initialize()
 	{
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Thread\\Barb01", Vector2::Zero, 0.1f);
@@ -34,39 +34,44 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Loose\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Break\\neutral", Vector2::Zero, 0.1f);
 
-		mAnimator->GetCompleteEvent(L"Hornet_Barb ThreadBarb01") = std::bind(&Barb::threadCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb ThreadBarb01") = std::bind(&Barb01::threadCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Looseneutral") = std::bind(&Barb01::looseCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Breakneutral") = std::bind(&Barb01::breakCompleteEvent, this);
+
+		mState = eBarbState::Active;
 
 		mCollider = AddComponent<Collider>();
 		mCollider->SetActive(false);
+		mCollider->SetSize(Vector2::Zero);
 
 		GameObject::Initialize();
 	}
 
-	void Barb::Update()
+	void Barb01::Update()
 	{
 		switch (mState)
 		{
-		case ya::Barb::eBarbState::Disable:
+		case ya::Barb01::eBarbState::Disable:
 			disable();
 			break;
 
-		case ya::Barb::eBarbState::Active:
+		case ya::Barb01::eBarbState::Active:
 			active();
 			break;
 
-		case ya::Barb::eBarbState::Thread:
+		case ya::Barb01::eBarbState::Thread:
 			thread();
 			break;
 
-		case ya::Barb::eBarbState::Spike:
+		case ya::Barb01::eBarbState::Spike:
 			spike();
 			break;
 
-		case ya::Barb::eBarbState::Loose:
+		case ya::Barb01::eBarbState::Loose:
 			loose();
 			break;
 
-		case ya::Barb::eBarbState::Break:
+		case ya::Barb01::eBarbState::Break:
 			barbBreak();
 			break;
 
@@ -77,21 +82,19 @@ namespace ya
 		GameObject::Update();
 	}
 
-	void Barb::Render(HDC hdc)
+	void Barb01::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 	}
 
-	void Barb::Release()
+	void Barb01::Release()
 	{
 		GameObject::Release();
 	}
 
-	void Barb::OnCollisionEnter(Collider* other)
+	void Barb01::OnCollisionEnter(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
-
-		
 
 		eLayerType otherType = other->GetOwner()->GetType();	// 충돌한 객체의 타입
 		switch (otherType)
@@ -102,24 +105,25 @@ namespace ya
 			hitFlag = true;
 
 			// 플레이어 공격과 충돌하면 반대방향으로 튕겨나감
-			playerPos = Player::GetInstance()->GetComponent<Transform>()->GetPos();	// 충돌시점 플레이어 pos
-			playerDir = playerPos - tr->GetPos();
-			playerDir = playerDir.Normalize();
+			Barb01PlayerPos = Player::GetInstance()->GetComponent<Collider>()->GetPos();	// 충돌시점 플레이어 pos
+			//Barb01PlayerPos.y += 60.0f;
+			Barb01PlayerDir = Barb01PlayerPos - mCollider->GetPos();
+			Barb01PlayerDir = Barb01PlayerDir.Normalize();
 			break;
 		}
 	}
 
-	void Barb::OnCollisionStay(Collider* other)
+	void Barb01::OnCollisionStay(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
 	}
 
-	void Barb::OnCollisionExit(Collider* other)
+	void Barb01::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
 	}
 
-	void Barb::disable()
+	void Barb01::disable()
 	{
 		if (disableFlag == false)
 		{
@@ -128,10 +132,12 @@ namespace ya
 
 			tr->SetPos(Vector2::Zero);
 			this->SetState(eState::Pause);
+			mCollider->SetSize(Vector2::Zero);
+
 		}
 	}
 
-	void Barb::active()
+	void Barb01::active()
 	{
 		if (activeFlag == false)
 		{
@@ -140,13 +146,13 @@ namespace ya
 			this->SetState(eState::Active);
 
 			// 초기 생성좌표
-			tr->SetPos(Vector2(0.0f, 0.0f));
+			tr->SetPos(Vector2(1300.0f, 1200.0f));
 
 			mState = eBarbState::Thread;
 		}
 	}
 
-	void Barb::thread()
+	void Barb01::thread()
 	{
 		if (threadFlag == false)
 		{
@@ -156,7 +162,7 @@ namespace ya
 		}
 	}
 
-	void Barb::spike()
+	void Barb01::spike()
 	{
 		if (spikeFlag == false)
 		{
@@ -164,7 +170,7 @@ namespace ya
 
 			mCollider->SetActive(true);
 			mCollider->SetSize(Vector2(60.0f, 60.0f));
-			mCollider->SetCenter(Vector2(0.0f, 0.0f));
+			mCollider->SetCenter(Vector2(-30.0f, -400.0f));
 
 			spikeFlag = true;
 		}
@@ -177,12 +183,18 @@ namespace ya
 		}
 	}
 
-	void Barb::loose()
+	void Barb01::loose()
 	{
 		if (looseFlag == false)
 		{
-			mAnimator->Play(L"Hornet_Barb LooseBarb01", false);
+			mAnimator->Play(L"Hornet_Barb Looseneutral", false);
+			
+			Vector2 pos = tr->GetPos();
+			pos.y -= 320.0f;
+			tr->SetPos(pos);
 
+			mCollider->SetSize(Vector2::Zero);
+			mCollider->SetActive(false);
 			looseFlag = true;
 		}
 
@@ -190,31 +202,37 @@ namespace ya
 		{
 			// 플레이어 방향으로 돌진
 			Vector2 pos = tr->GetPos();
-			pos.x -= SPEED * playerDir.x * Time::DeltaTime();
-			pos.y -= SPEED * playerDir.y * Time::DeltaTime();
+			pos.x -= SPEED * Barb01PlayerDir.x * Time::DeltaTime();
+			pos.y -= SPEED * Barb01PlayerDir.y * Time::DeltaTime();
 			tr->SetPos(pos);
 		}
 	}
 
-	void Barb::barbBreak()
+	void Barb01::barbBreak()
 	{
 		if (breakFlag == false)
 		{
-			mAnimator->Play(L"Hornet_Barb BreakBarb01", false);
+			mAnimator->Play(L"Hornet_Barb Breakneutral", false);
 
 			breakFlag = true;
 		}
 	}
 
-	void Barb::threadCompleteEvent()
+	void Barb01::threadCompleteEvent()
 	{
 		mState = eBarbState::Spike;
 		threadFlag = false;
 	}
 
-	void Barb::looseCompleteEvent()
+	void Barb01::looseCompleteEvent()
 	{
 		mState = eBarbState::Break;
 		looseFlag = false;
+	}
+
+	void Barb01::breakCompleteEvent()
+	{
+		mState = eBarbState::Disable;
+		breakFlag = false;
 	}
 }

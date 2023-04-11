@@ -424,7 +424,16 @@
     <ClInclude Include="HornetBossScene.h">
       <Filter>Contents\Scenes\HornetBossScene</Filter>
     </ClInclude>
-    <ClInclude Include="Barb.h">
+    <ClInclude Include="Barb01.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClInclude>
+    <ClInclude Include="Barb02.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClInclude>
+    <ClInclude Include="Barb03.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClInclude>
+    <ClInclude Include="Barb04.h">
       <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
     </ClInclude>
   </ItemGroup>
@@ -633,7 +642,16 @@
     <ClCompile Include="HornetBossScene.cpp">
       <Filter>Contents\Scenes\HornetBossScene</Filter>
     </ClCompile>
-    <ClCompile Include="Barb.cpp">
+    <ClCompile Include="Barb01.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClCompile>
+    <ClCompile Include="Barb02.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClCompile>
+    <ClCompile Include="Barb03.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
+    </ClCompile>
+    <ClCompile Include="Barb04.cpp">
       <Filter>Contents\Objects\Charactor\Hornet\Barb</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,6 +13,10 @@
 #include "yaSound.h"
 
 #include "yaPlayer.h"
+#include "Barb01.h"
+#include "Barb02.h"
+#include "Barb03.h"
+#include "Barb04.h"
 
 namespace ya
 {
@@ -147,6 +151,13 @@ namespace ya
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 		mState = eHornetState::Idle;
+
+		// barb 미리 생성
+		Barb01* barb01 = object::Instantiate<Barb01>(eLayerType::Monster);
+		Barb02* barb02 = object::Instantiate<Barb02>(eLayerType::Monster);
+		Barb03* barb03 = object::Instantiate<Barb03>(eLayerType::Monster);
+		Barb04* barb04 = object::Instantiate<Barb04>(eLayerType::Monster);
+		//barb->SetBarbState(Barb::eBarbState::Disable);
 
 		GameObject::Initialize();
 	}
