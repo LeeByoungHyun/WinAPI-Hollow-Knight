@@ -72,6 +72,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Monster, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(1725.0f);

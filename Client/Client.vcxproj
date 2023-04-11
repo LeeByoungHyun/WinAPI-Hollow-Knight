@@ -152,6 +152,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Hornet.h" />
     <ClInclude Include="HornetBossScene.h" />
+    <ClInclude Include="HornetNeedle.h" />
     <ClInclude Include="LongPlatform.h" />
     <ClInclude Include="LongPlatformBackPixel.h" />
     <ClInclude Include="MantisBossPlatform.h" />
@@ -231,6 +232,7 @@
     <ClCompile Include="FocusEffect.cpp" />
     <ClCompile Include="Hornet.cpp" />
     <ClCompile Include="HornetBossScene.cpp" />
+    <ClCompile Include="HornetNeedle.cpp" />
     <ClCompile Include="LongPlatform.cpp" />
     <ClCompile Include="LongPlatformBackPixel.cpp" />
     <ClCompile Include="main.cpp" />

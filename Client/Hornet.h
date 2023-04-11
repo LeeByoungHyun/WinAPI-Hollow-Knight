@@ -43,11 +43,13 @@ namespace ya
 			Flash
 		};
 
+		/*
 		enum class eDirection
 		{
 			Left,
 			Right
 		};
+		*/
 
 		Hornet();
 		~Hornet();
@@ -70,6 +72,8 @@ namespace ya
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
+
+		eHornetState GetHornetState() { return mState; }
 
 	private:
 		void idle();
@@ -149,12 +153,13 @@ namespace ya
 		class Barb03* barb03;
 		class Barb04* barb04;
 		class SphereBall* ball;
+		class HornetNeedle* needle;
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
 		int jumpPattern;
 		int idlePattern;
-		float mTime = 0.0f;
+		double mTime;
 		int hp;
 		int stunHp;
 
@@ -192,6 +197,7 @@ namespace ya
 		bool woundedFlag					= false;
 		bool flashFlag						= false;
 		bool eventFlag						= false;
+		bool needleCatchFlag				= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;

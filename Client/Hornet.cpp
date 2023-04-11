@@ -18,6 +18,7 @@
 #include "Barb03.h"
 #include "Barb04.h"
 #include "SphereBall.h"
+#include "HornetNeedle.h"
 
 namespace ya
 {
@@ -39,6 +40,7 @@ namespace ya
 		mCollider = AddComponent<Collider>();
 		hp = 900;
 		stunHp = 300;
+		mTime = 0.0f;
 	}
 
 	Hornet::~Hornet()
@@ -178,6 +180,9 @@ namespace ya
 		ball = object::Instantiate<SphereBall>(eLayerType::Monster);
 		ball->SetShereBallState(SphereBall::eSphereBallState::Disable);
 
+		needle = object::Instantiate<HornetNeedle>(eLayerType::Monster);
+		needle->SetNeedeState(HornetNeedle::eHornetNeedleState::Disable);
+
 		GameObject::Initialize();
 	}
 
@@ -188,7 +193,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::SphereAnticipateG;
+			mState = eHornetState::ThrowNeedleAnticipate;
 
 			initializeFlag();
 		}
@@ -400,7 +405,6 @@ namespace ya
 				stunHp -= Player::GetInstance()->GetNeilAtk();
 				//armorDamagedSound->Play(false);
 			}
-			
 			break;
 		case eLayerType::SpellEffect:
 			if (mState == eHornetState::CounterStance)
@@ -413,6 +417,32 @@ namespace ya
 				hp -= Player::GetInstance()->GetSpellAtk();
 				stunHp -= Player::GetInstance()->GetSpellAtk();
 				//armorDamagedSound->Play(false);
+			}
+			break;
+
+			// needle
+		case eLayerType::Monster:
+			float needleSpeed = needle->GetNeedleSpeed();
+			if (mState == eHornetState::ThrowNeedle
+				&& needleSpeed <= 0.0f)
+			{
+				if (mDirection == eDirection::Left)
+				{
+					Vector2 pos = tr->GetPos();
+					pos.x -= 50.0f;
+					tr->SetPos(pos);
+				}
+				else if (mDirection == eDirection::Right)
+				{
+					Vector2 pos = tr->GetPos();
+					pos.x += 50.0f;
+					tr->SetPos(pos);
+				}
+
+				mTime = 0.0f;
+				mState = eHornetState::ThrowNeedleRecover;
+				throwNeedleFlag = false;
+				needleCatchFlag = false;
 			}
 			break;
 		}
@@ -1022,6 +1052,8 @@ namespace ya
 				Vector2 pos = tr->GetPos();
 				pos.x += 50.0f;
 				tr->SetPos(pos);
+
+				needle->SetneedleDirection(eDirection::Left);
 			}
 			else if (mDirection == eDirection::Right)
 			{
@@ -1032,6 +1064,15 @@ namespace ya
 				Vector2 pos = tr->GetPos();
 				pos.x -= 50.0f;
 				tr->SetPos(pos);
+				needle->SetneedleDirection(eDirection::Right);
+			}
+			needle->SetState(eState::Active);
+			needle->SetNeedeState(HornetNeedle::eHornetNeedleState::Active);
+
+			mTime += Time::DeltaTime();
+			if (mTime >= 0.5f)
+			{
+				needleCatchFlag = true;
 			}
 
 			throwNeedleFlag = true;
@@ -1494,6 +1535,7 @@ namespace ya
 
 	void Hornet::throwNeedleCompleteEvent()
 	{
+		/*
 		if (mDirection == eDirection::Left)
 		{
 			Vector2 pos = tr->GetPos();
@@ -1509,6 +1551,7 @@ namespace ya
 
 		mState = eHornetState::ThrowNeedleRecover;
 		throwNeedleFlag = false;
+		*/
 	}
 
 	void Hornet::throwNeedleRecoverCompleteEvent()

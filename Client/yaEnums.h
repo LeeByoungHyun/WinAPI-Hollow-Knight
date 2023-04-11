@@ -42,3 +42,9 @@ enum class eComponentType
 	Audio,
 	End
 };
+
+enum class eDirection
+{
+	Left,
+	Right
+};

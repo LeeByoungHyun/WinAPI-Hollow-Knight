@@ -200,6 +200,15 @@
     <Filter Include="Contents\Objects\Charactor\Hornet\Sphere">
       <UniqueIdentifier>{0726660e-02cc-4437-86fe-e6b74df7ca9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet\Needle">
+      <UniqueIdentifier>{ee9e9d43-3bf7-4b93-ba9f-f7f72e06ef41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet\Needle Thread">
+      <UniqueIdentifier>{fe65ab7b-be18-4d42-b751-d943df29412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Charactor\Hornet\Throw Effect">
+      <UniqueIdentifier>{2a9489f5-2908-4c10-9497-f9bf04c4ae5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -442,6 +451,9 @@
     <ClInclude Include="SphereBall.h">
       <Filter>Contents\Objects\Charactor\Hornet\Sphere</Filter>
     </ClInclude>
+    <ClInclude Include="HornetNeedle.h">
+      <Filter>Contents\Objects\Charactor\Hornet\Needle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -662,6 +674,9 @@
     </ClCompile>
     <ClCompile Include="SphereBall.cpp">
       <Filter>Contents\Objects\Charactor\Hornet\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="HornetNeedle.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet\Needle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
