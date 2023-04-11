@@ -61,5 +61,6 @@ namespace ya
 		bool looseFlag = false;
 		bool breakFlag = false;
 		bool hitFlag = false;
+		bool testFlag = false;
 	};
 }

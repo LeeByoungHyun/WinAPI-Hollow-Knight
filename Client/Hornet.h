@@ -131,6 +131,9 @@ namespace ya
 		void evadeAnticipateCompleteEvent();
 		void evadeCompleteEvent();
 		void runCompleteEvent();
+		void barbThrowAnticipateCompleteEvent();
+		void barbThrowCompleteEvent();
+		void barbThrowRecoverCompleteEvent();
 
 		void initializeFlag();
 
@@ -140,6 +143,11 @@ namespace ya
 		class Scene*		curScene;
 		class RigidBody*	mRigidBody;
 		class Collider*		mCollider;
+
+		class Barb01* barb01;
+		class Barb02* barb02;
+		class Barb03* barb03;
+		class Barb04* barb04;
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;

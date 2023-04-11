@@ -49,6 +49,8 @@ namespace ya
 
 	void Barb01::Update()
 	{
+		GameObject::Update();
+
 		switch (mState)
 		{
 		case ya::Barb01::eBarbState::Disable:
@@ -79,7 +81,6 @@ namespace ya
 			break;
 		}
 
-		GameObject::Update();
 	}
 
 	void Barb01::Render(HDC hdc)
@@ -131,8 +132,14 @@ namespace ya
 			disableFlag = true;
 
 			tr->SetPos(Vector2::Zero);
-			this->SetState(eState::Pause);
 			mCollider->SetSize(Vector2::Zero);
+
+			threadFlag = false;
+			spikeFlag = false;
+			looseFlag = false;
+			breakFlag = false;
+			hitFlag = false;
+			//this->SetState(eState::Pause);
 
 		}
 	}
@@ -157,6 +164,7 @@ namespace ya
 		if (threadFlag == false)
 		{
 			mAnimator->Play(L"Hornet_Barb ThreadBarb01", false);
+			//tr->SetPos(Vector2(1300.0f, 1200.0f));
 
 			threadFlag = true;
 		}
@@ -176,11 +184,13 @@ namespace ya
 		}
 
 		// 일정 시간이 지나면 자연소멸
+		/*
 		mTime += Time::DeltaTime();
 		if (mTime >= 8.0f)
 		{
 			mState = eBarbState::Loose;
 		}
+		*/
 	}
 
 	void Barb01::loose()
@@ -200,7 +210,6 @@ namespace ya
 
 		if (hitFlag == true)
 		{
-			// 플레이어 방향으로 돌진
 			Vector2 pos = tr->GetPos();
 			pos.x -= SPEED * Barb01PlayerDir.x * Time::DeltaTime();
 			pos.y -= SPEED * Barb01PlayerDir.y * Time::DeltaTime();
@@ -215,6 +224,14 @@ namespace ya
 			mAnimator->Play(L"Hornet_Barb Breakneutral", false);
 
 			breakFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.3f)
+		{
+			mTime = 0.0f;
+			mState = eBarbState::Disable;
+			breakFlag = false;
 		}
 	}
 
@@ -232,7 +249,7 @@ namespace ya
 
 	void Barb01::breakCompleteEvent()
 	{
-		mState = eBarbState::Disable;
-		breakFlag = false;
+		//mState = eBarbState::Disable;
+		//breakFlag = false;
 	}
 }

@@ -102,6 +102,12 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade(Anticipate)\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade(Anticipate)\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Anticipate)\\left", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Anticipate)\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\left", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\left", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\right", Vector2::Zero, 0.066f);
 
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)left") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
@@ -147,17 +153,26 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Evaderight") = std::bind(&Hornet::evadeCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Runleft") = std::bind(&Hornet::runCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Runright") = std::bind(&Hornet::runCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Anticipate)left") = std::bind(&Hornet::barbThrowAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Anticipate)right") = std::bind(&Hornet::barbThrowAnticipateCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throwleft") = std::bind(&Hornet::barbThrowCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throwright") = std::bind(&Hornet::barbThrowCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)left") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)right") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
 		mState = eHornetState::Idle;
 
 		// barb 미리 생성
-		Barb01* barb01 = object::Instantiate<Barb01>(eLayerType::Monster);
-		Barb02* barb02 = object::Instantiate<Barb02>(eLayerType::Monster);
-		Barb03* barb03 = object::Instantiate<Barb03>(eLayerType::Monster);
-		Barb04* barb04 = object::Instantiate<Barb04>(eLayerType::Monster);
-		//barb->SetBarbState(Barb::eBarbState::Disable);
+		barb01 = object::Instantiate<Barb01>(eLayerType::Monster);
+		barb02 = object::Instantiate<Barb02>(eLayerType::Monster);
+		barb03 = object::Instantiate<Barb03>(eLayerType::Monster);
+		barb04 = object::Instantiate<Barb04>(eLayerType::Monster);
+		barb01->SetBarbState(Barb01::eBarbState::Disable);
+		barb02->SetBarbState(Barb02::eBarbState::Disable);
+		barb03->SetBarbState(Barb03::eBarbState::Disable);
+		barb04->SetBarbState(Barb04::eBarbState::Disable);
 
 		GameObject::Initialize();
 	}
@@ -169,7 +184,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::EvadeAnticipate;
+			mState = eHornetState::BarbThrowAnticipate;
 
 			initializeFlag();
 		}
@@ -466,7 +481,7 @@ namespace ya
 		// 8) counter
 		srand((unsigned int)time(NULL));
 		idlePattern = rand() % 8;
-		//idlePattern = 1;	// test
+		//idlePattern = 6;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
 		{
@@ -498,7 +513,7 @@ namespace ya
 			}
 			else if (idlePattern == 6)
 			{
-				//mState = eHornetState::BarbThrowAnticipate;
+				mState = eHornetState::BarbThrowAnticipate;
 			}
 			else if (idlePattern == 7)
 			{
@@ -1232,17 +1247,81 @@ namespace ya
 
 	void Hornet::barbThrowAnticipate()
 	{
+		if (barbThrowAnticipateFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Barb Throw(Anticipate)left", false);
 
+				Vector2 pos = tr->GetPos();
+				pos.x += 13.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Barb Throw(Anticipate)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 13.0f;
+				tr->SetPos(pos);
+			}
+
+			barbThrowAnticipateFlag = true;
+		}
 	}
 
 	void Hornet::barbThrow()
 	{
+		if (barbThrowFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Barb Throwleft", false);
 
+				Vector2 pos = tr->GetPos();
+				pos.x += 13.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Barb Throwright", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 13.0f;
+				tr->SetPos(pos);
+			}
+
+			barbThrowFlag = true;
+		}
 	}
 
 	void Hornet::barbThrowRecover()
 	{
+		if (barbThrowRecoverFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Barb Throw(Recover)left", false);
 
+				Vector2 pos = tr->GetPos();
+				pos.x += 13.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Barb Throw(Recover)right", false);
+
+				Vector2 pos = tr->GetPos();
+				pos.x -= 13.0f;
+				tr->SetPos(pos);
+			}
+
+			barbThrowRecoverFlag = true;
+		}
 	}
 
 	void Hornet::stunAir()
@@ -1541,6 +1620,72 @@ namespace ya
 	{
 		mState = eHornetState::Idle;
 		runFlag = false;
+	}
+
+	void Hornet::barbThrowAnticipateCompleteEvent()
+	{
+		mState = eHornetState::BarbThrow;
+		barbThrowAnticipateFlag = false;
+
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 13.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 13.0f;
+			tr->SetPos(pos);
+		}
+	}
+
+	void Hornet::barbThrowCompleteEvent()
+	{
+		mState = eHornetState::BarbThrowRecover;
+		barbThrowFlag = false;
+
+		//barb01->SetState(eState::Active);
+		//barb02->SetState(eState::Active);
+		//barb03->SetState(eState::Active);
+		//barb04->SetState(eState::Active);
+		barb01->SetBarbState(Barb01::eBarbState::Active);
+		barb02->SetBarbState(Barb02::eBarbState::Active);
+		barb03->SetBarbState(Barb03::eBarbState::Active);
+		barb04->SetBarbState(Barb04::eBarbState::Active);
+
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 13.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 13.0f;
+			tr->SetPos(pos);
+		}
+	}
+
+	void Hornet::barbThrowRecoverCompleteEvent()
+	{
+		mState = eHornetState::Idle;
+		barbThrowRecoverFlag = false;
+
+		if (mDirection == eDirection::Left)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x -= 13.0f;
+			tr->SetPos(pos);
+		}
+		else if (mDirection == eDirection::Right)
+		{
+			Vector2 pos = tr->GetPos();
+			pos.x += 13.0f;
+			tr->SetPos(pos);
+		}
 	}
 
 	void Hornet::initializeFlag()
