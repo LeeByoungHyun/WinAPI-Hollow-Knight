@@ -193,7 +193,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::CounterAnticipate;
+			mState = eHornetState::JumpAnticipate;
 
 			initializeFlag();
 		}
@@ -357,41 +357,48 @@ namespace ya
 		switch (otherType)
 		{
 		case eLayerType::Ground:	// 땅과 충돌할 경우
-			if (mState == eHornetState::Idle)	
+		{
+			if (mState == eHornetState::Idle)
 			{
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 
 			}
-			else if (mState == eHornetState::Jump 
-				&& mRigidBody->GetVelocity().Normalize().y >= 0.0f)	
+			else if (mState == eHornetState::Jump
+				&& mRigidBody->GetVelocity().Normalize().y >= 0.0f)
 			{
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 			}
-			else if (mState == eHornetState::SphereRecover)	
+			else if (mState == eHornetState::SphereRecover)
 			{
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
 			}
-			else if (mState == eHornetState::ADash)	
+			else if (mState == eHornetState::ADash)
 			{
 				mRigidBody->SetGround(true);
+				mState = eHornetState::GDashRecover;
 			}
 			else if (mState == eHornetState::ADashRecover)
 			{
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
-				mRigidBody->SetVelocity(Vector2::Zero);
+				//mRigidBody->SetVelocity(Vector2::Zero);
 			}
 			else if (mState == eHornetState::GDashRecover)
 			{
 				mRigidBody->SetGround(true);
 			}
-			break;
 
+			Vector2 pos = tr->GetPos();
+			pos.y = other->GetPos().y - 1.0f;
+			tr->SetPos(pos);
+			break;
+		}
+			
 			// 플레이어의 공격일 경우
 		case eLayerType::NeilEffect:
 			if (mState == eHornetState::CounterStance)
@@ -638,10 +645,30 @@ namespace ya
 			jumpPattern = rand() % 3;
 			//jumpPattern = 0;	// 테스트
 
-			// 앞뒤로 점프거리 랜덤하게 
-			// 지금은 테스트
-			mRigidBody->SetVelocity(Vector2(0.0f, -1200.0f));
-			mRigidBody->SetGround(false);
+			// sphere 패턴은 플레이어 위치까지 점프
+			// 그외 점프는 앞뒤로 200
+			if (jumpPattern == 1)
+			{
+				mRigidBody->SetGround(false);
+				Vector2 distance = Vector2::Zero;
+				distance.x = Player::GetInstance()->GetComponent<Transform>()->GetPos().x - tr->GetPos().x;
+				mRigidBody->SetVelocity(Vector2(distance.x / 1.5f, -1200.0f));
+			}
+			else
+			{
+				srand((unsigned int)time(NULL));
+				int dir = rand() % 2;
+				if (dir == 0)
+				{
+					mRigidBody->SetGround(false);
+					mRigidBody->SetVelocity(Vector2(150.0f, -1200.0f));
+				}
+				else
+				{
+					mRigidBody->SetGround(false);
+					mRigidBody->SetVelocity(Vector2(-150.0f, -1200.0f));
+				}
+			}
 
 			jumpFlag = true;
 			jumpAnticipateFlag = false;
@@ -875,17 +902,36 @@ namespace ya
 		tr->SetPos(pos);
 		mRigidBody->SetVelocity(Vector2::Zero);
 
-		if (playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
+		if (mDirection == eDirection::Left)
 		{
-			if (mRigidBody->GetGround() == true)
+			if (playerPos.x - 50.0f >= pos.x)	// dash 도중 playerPos.x 에 도달하면 dashrecover
 			{
-				mState = eHornetState::GDashRecover;
-			}
-			else
-			{
-				mState = eHornetState::ADashRecover;
+				if (mRigidBody->GetGround() == true)
+				{
+					mState = eHornetState::GDashRecover;
+				}
+				else
+				{
+					mState = eHornetState::ADashRecover;
+				}
 			}
 		}
+		else if (mDirection == eDirection::Right)
+		{
+			if (playerPos.x + 50.0f <= pos.x)	// dash 도중 playerPos.x 에 도달하면 dashrecover
+			{
+				if (mRigidBody->GetGround() == true)
+				{
+					mState = eHornetState::GDashRecover;
+				}
+				else
+				{
+					mState = eHornetState::ADashRecover;
+				}
+			}
+		}
+
+		
 	}
 
 	void Hornet::aDashRecover()
