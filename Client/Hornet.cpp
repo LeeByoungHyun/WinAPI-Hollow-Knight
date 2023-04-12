@@ -19,6 +19,7 @@
 #include "Barb04.h"
 #include "SphereBall.h"
 #include "HornetNeedle.h"
+#include "CounterAttackCollider.h"
 
 namespace ya
 {
@@ -176,12 +177,11 @@ namespace ya
 		barb02->SetBarbState(Barb02::eBarbState::Disable);
 		barb03->SetBarbState(Barb03::eBarbState::Disable);
 		barb04->SetBarbState(Barb04::eBarbState::Disable);
-
 		ball = object::Instantiate<SphereBall>(eLayerType::Monster);
 		ball->SetShereBallState(SphereBall::eSphereBallState::Disable);
-
 		needle = object::Instantiate<HornetNeedle>(eLayerType::Monster);
 		needle->SetNeedeState(HornetNeedle::eHornetNeedleState::Disable);
+		caCol = object::Instantiate<CounterAttackCollider>(eLayerType::Monster);
 
 		GameObject::Initialize();
 	}
@@ -193,7 +193,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::ThrowNeedleAnticipate;
+			mState = eHornetState::CounterAnticipate;
 
 			initializeFlag();
 		}
@@ -1265,10 +1265,11 @@ namespace ya
 				mCollider->SetSize(Vector2(130.0f, 90.0f));
 				mAnimator->Play(L"Hornet_Counter Attackright", false);
 			}
+			caCol->SetState(eState::Active);
+			caCol->SetCAState(CounterAttackCollider::eCounterAttackColliderState::Active);
 
 			counterAttackFlag = true;
 		}
-		
 	}
 
 	void Hornet::counterAttackRecover()

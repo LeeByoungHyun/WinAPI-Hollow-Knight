@@ -154,6 +154,7 @@ namespace ya
 		class Barb04* barb04;
 		class SphereBall* ball;
 		class HornetNeedle* needle;
+		class CounterAttackCollider* caCol;
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;

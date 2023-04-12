@@ -136,6 +136,7 @@
     <ClInclude Include="BossDoor.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="CounterAttackCollider.h" />
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
     <ClInclude Include="FalseBarrel.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Barb03.cpp" />
     <ClCompile Include="Barb04.cpp" />
     <ClCompile Include="BossDoor.cpp" />
+    <ClCompile Include="CounterAttackCollider.cpp" />
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
     <ClCompile Include="FalseBarrel.cpp" />
