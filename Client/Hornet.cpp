@@ -27,7 +27,7 @@ namespace ya
 	Hornet* Hornet::instance = nullptr;
 	Vector2 playerPos;
 	Vector2 playerDir;
-	const float WAITTIME = 0.5f;
+	const float WAITTIME = 0.2f;
 	const float DASHSPEED = 1000.0f;
 	const float EVADESPEED = 700.0f;
 	const float RUNSPEED = 500.0f;
@@ -40,7 +40,7 @@ namespace ya
 		mRigidBody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
 		hp = 900;
-		stunHp = 300;
+		stunHp = 10;
 		mTime = 0.0f;
 	}
 
@@ -112,6 +112,14 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Stance)\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Stance)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Air)\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Air)\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded\\right", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)left") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
@@ -163,6 +171,9 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throwright") = std::bind(&Hornet::barbThrowCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)left") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)right") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Stunleft") = std::bind(&Hornet::stunCompleteFlag, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Stunright") = std::bind(&Hornet::stunCompleteFlag, this);
+
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -325,6 +336,10 @@ namespace ya
 			stun();
 			break;
 
+		case ya::Hornet::eHornetState::StunStance:
+			stunStance();
+			break;
+
 		case ya::Hornet::eHornetState::Wounded:
 			wounded();
 			break;
@@ -392,6 +407,23 @@ namespace ya
 			{
 				mRigidBody->SetGround(true);
 			}
+			else if (mState == eHornetState::StunAir)
+			{
+				mRigidBody->SetGround(true);
+				mState = eHornetState::Stun;
+				mRigidBody->SetVelocity(Vector2::Zero);
+				airToGFlag = true;
+			}
+			else if (mState == eHornetState::Stun)
+			{
+				mRigidBody->SetGround(true);
+				mRigidBody->SetVelocity(Vector2::Zero);
+			}
+			else if (mState == eHornetState::StunStance)
+			{
+				mRigidBody->SetGround(true);
+				mRigidBody->SetVelocity(Vector2::Zero);
+			}
 
 			Vector2 pos = tr->GetPos();
 			pos.y = other->GetPos().y - 1.0f;
@@ -411,6 +443,20 @@ namespace ya
 				hp -= Player::GetInstance()->GetNeilAtk();
 				stunHp -= Player::GetInstance()->GetNeilAtk();
 				//armorDamagedSound->Play(false);
+
+				if (stunHp <= 0)	// stun
+				{
+					initializeFlag();
+					if (mRigidBody->GetGround() == true)
+					{
+						mState = eHornetState::Stun;
+						mRigidBody->SetGround(false);
+					}
+					else
+					{
+						mState = eHornetState::StunAir;
+					}
+				}
 			}
 			break;
 		case eLayerType::SpellEffect:
@@ -424,6 +470,19 @@ namespace ya
 				hp -= Player::GetInstance()->GetSpellAtk();
 				stunHp -= Player::GetInstance()->GetSpellAtk();
 				//armorDamagedSound->Play(false);
+
+				if (stunHp <= 0)	// stun
+				{
+					initializeFlag();
+					if (mRigidBody->GetGround() == true)
+					{
+						mState = eHornetState::Stun;
+					}
+					else
+					{
+						mState = eHornetState::StunAir;
+					}
+				}
 			}
 			break;
 
@@ -470,7 +529,7 @@ namespace ya
 				pos.y = other->GetPos().y - 1;
 				tr->SetPos(pos);
 				mRigidBody->SetVelocity(Vector2::Zero);
-				mRigidBody->SetGround(true);
+				//mRigidBody->SetGround(true);
 			}
 			break;
 		}
@@ -510,7 +569,7 @@ namespace ya
 			// 플레그 초기화
 			initializeFlag();
 		}
-
+	
 		// 중립상태에서 일정시간이 지나면 랜덤하게 패턴 실행
 		// 1) run
 		// 2) evade
@@ -568,6 +627,77 @@ namespace ya
 				mState = eHornetState::CounterAnticipate;
 			}
 		}
+
+		/*
+		// attack
+		// move
+		// jump
+		srand((unsigned int)time(NULL));
+		idlePattern = rand() % 3;
+		//idlePattern = 6;	// test
+		mTime += Time::DeltaTime();
+
+		if (idlePattern == 0)	// attack
+		{
+			srand((unsigned int)time(NULL));
+			attackPattern = rand() % 5;
+			idleFlag = false;
+			if (idlePattern == 0)
+			{
+				mState = eHornetState::ThrowNeedleAnticipate;
+			}
+			else if (idlePattern == 1)
+			{
+				mState = eHornetState::GDashAnticipate;
+			}
+			else if (idlePattern == 2)
+			{
+				mState = eHornetState::SphereAnticipateG;
+			}
+			else if (idlePattern == 3)
+			{
+				// Barb가 scene에 남아있으면 continue
+				if (barb01->GetBarbState() == Barb01::eBarbState::Disable
+					&& barb02->GetBarbState() == Barb02::eBarbState::Disable
+					&& barb03->GetBarbState() == Barb03::eBarbState::Disable
+					&& barb04->GetBarbState() == Barb04::eBarbState::Disable)
+				{
+					mState = eHornetState::BarbThrowAnticipate;
+				}
+			}
+			else if (idlePattern == 4)
+			{
+				mState = eHornetState::CounterAnticipate;
+			}
+		}
+		else if (idlePattern == 1)	// move
+		{
+			if (moveFlag == true)
+			{
+				mState = eHornetState::JumpAnticipate;
+				moveFlag = false;
+			}
+			
+			srand((unsigned int)time(NULL));
+			movePattern = rand() % 2;
+			idleFlag = false;
+			if (movePattern == 0)
+			{
+				mState = eHornetState::Run;
+			}
+			else if (movePattern == 1)
+			{
+				mState = eHornetState::Evade;
+			}
+			moveFlag = true;
+		}
+		else if (idlePattern == 2)	// jump
+		{
+			idleFlag = false;
+			mState = eHornetState::JumpAnticipate;
+		}
+		*/
+
 	}
 
 	void Hornet::run()
@@ -1428,12 +1558,132 @@ namespace ya
 
 	void Hornet::stunAir()
 	{
+		if (stunAirFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Stun(Air)left", false);
 
+				Vector2 pos = tr->GetPos();
+				//pos.x += 13.0f;
+				tr->SetPos(pos);
+				mRigidBody->SetGround(false);
+				mRigidBody->SetVelocity(Vector2(300.0f, -300.0f));
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Stun(Air)right", false);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x -= 13.0f;
+				tr->SetPos(pos);
+				mRigidBody->SetGround(false);
+				mRigidBody->SetVelocity(Vector2(-300.0f, -300.0f));
+			}
+
+			stunAirFlag = true;
+		}
+
+		/*
+		mTime += Time::DeltaTime();
+		if (mTime <= 0.2f)
+		{
+			mRigidBody->SetGround(false);
+			Vector2 velocity;
+			if (mDirection == eDirection::Left)
+				velocity = Vector2(150.0f, -100.0f);
+			else if (mDirection == eDirection::Right)
+				velocity = Vector2(-150.0f, -100.0f);
+
+			mRigidBody->SetVelocity(velocity);
+		}
+		if (mTime > 0.2f)
+			mTime = 0.0f;
+		*/
 	}
 
 	void Hornet::stun()
 	{
+		if (stunFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Stunleft", false);
 
+				Vector2 pos = tr->GetPos();
+				//pos.x += 13.0f;
+				tr->SetPos(pos);
+
+				if (airToGFlag == false)
+				{
+					mRigidBody->SetGround(false);
+					mRigidBody->SetVelocity(Vector2(300.0f, -300.0f));
+				}
+				airToGFlag = false;
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Stunright", false);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x -= 13.0f;
+				tr->SetPos(pos);
+
+				if (airToGFlag == false)
+				{
+					mRigidBody->SetGround(false);
+					mRigidBody->SetVelocity(Vector2(-300.0f, -300.0f));
+				}
+				airToGFlag = false;
+			}
+
+
+			stunFlag = true;
+			stunAirFlag = false;
+		}
+
+		/*
+		mTime += Time::DeltaTime();
+		if (mTime <= 0.2f)
+		{
+			mRigidBody->SetGround(false);
+			Vector2 velocity;
+			if (mDirection == eDirection::Left)
+				velocity = Vector2(150.0f, -100.0f);
+			else if (mDirection == eDirection::Right)
+				velocity = Vector2(-150.0f, -100.0f);
+
+			mRigidBody->SetVelocity(velocity);
+		}
+		if (mTime > 0.2f)
+			mTime = 0.0f;
+		*/
+	}
+
+	void Hornet::stunStance()
+	{
+		if (stunStanceFlag == false)
+		{
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Stun(Stance)left", true);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x += 13.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Stun(Stance)right", true);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x -= 13.0f;
+				tr->SetPos(pos);
+			}
+
+			stunStanceFlag = true;
+			stunFlag = false;
+		}
 	}
 
 	void Hornet::wounded()
@@ -1449,6 +1699,7 @@ namespace ya
 	void Hornet::jumpAnticipateCompleteEvent()
 	{
 		mState = eHornetState::Jump;
+		mRigidBody->SetGround(false);
 	}
 
 	void Hornet::jumpCompleteEvent()
@@ -1471,6 +1722,7 @@ namespace ya
 			mState = eHornetState::ADashAnticipate;
 		}
 
+		mRigidBody->SetGround(false);
 		//jumpPattern = -1;
 	}
 
@@ -1792,6 +2044,12 @@ namespace ya
 		}
 	}
 
+	void Hornet::stunCompleteFlag()
+	{
+		mState = eHornetState::StunStance;
+		stunFlag = false;
+	}
+
 	void Hornet::initializeFlag()
 	{
 		//idleFlag = false;
@@ -1828,5 +2086,9 @@ namespace ya
 		woundedFlag = false;
 		flashFlag = false;
 		eventFlag = false;
+		needleCatchFlag = false;
+		moveFlag = false;
+		airToGFlag = false;
+		stunStanceFlag = false;
 	}
 }

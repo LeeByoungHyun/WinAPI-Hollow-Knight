@@ -39,6 +39,7 @@ namespace ya
 			BarbThrowRecover,
 			StunAir,
 			Stun,
+			StunStance,
 			Wounded,
 			Flash
 		};
@@ -107,6 +108,7 @@ namespace ya
 		void barbThrowRecover();
 		void stunAir();
 		void stun();
+		void stunStance();
 		void wounded();
 		void flash();
 
@@ -138,6 +140,7 @@ namespace ya
 		void barbThrowAnticipateCompleteEvent();
 		void barbThrowCompleteEvent();
 		void barbThrowRecoverCompleteEvent();
+		void stunCompleteFlag();
 
 		void initializeFlag();
 
@@ -160,6 +163,8 @@ namespace ya
 		eDirection mDirection = eDirection::Left;
 		int jumpPattern;
 		int idlePattern;
+		int attackPattern;
+		int movePattern;
 		double mTime;
 		int hp;
 		int stunHp;
@@ -199,6 +204,9 @@ namespace ya
 		bool flashFlag						= false;
 		bool eventFlag						= false;
 		bool needleCatchFlag				= false;
+		bool moveFlag						= false;
+		bool airToGFlag						= false;
+		bool stunStanceFlag					= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;
