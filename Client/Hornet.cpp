@@ -564,6 +564,7 @@ namespace ya
 				mAnimator->Play(L"Hornet_Idleright", true);
 			}
 			mRigidBody->SetVelocity(Vector2::Zero);
+			mRigidBody->SetActive(true);
 			idleFlag = true;
 
 			// 플레그 초기화
@@ -2090,5 +2091,6 @@ namespace ya
 		moveFlag = false;
 		airToGFlag = false;
 		stunStanceFlag = false;
+		mRigidBody->SetActive(true);
 	}
 }
