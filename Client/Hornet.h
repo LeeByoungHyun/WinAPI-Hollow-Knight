@@ -140,7 +140,7 @@ namespace ya
 		void barbThrowAnticipateCompleteEvent();
 		void barbThrowCompleteEvent();
 		void barbThrowRecoverCompleteEvent();
-		void stunCompleteFlag();
+		void stunCompleteEvent();
 
 		void initializeFlag();
 
@@ -207,6 +207,7 @@ namespace ya
 		bool moveFlag						= false;
 		bool airToGFlag						= false;
 		bool stunStanceFlag					= false;
+		bool deathFlag						= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;

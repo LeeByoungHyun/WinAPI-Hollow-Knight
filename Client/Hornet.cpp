@@ -39,7 +39,7 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		mRigidBody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
-		hp = 900;
+		hp = 20;
 		stunHp = 10;
 		mTime = 0.0f;
 	}
@@ -120,6 +120,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Air)\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded2\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded2\\right", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)left") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
@@ -171,9 +173,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throwright") = std::bind(&Hornet::barbThrowCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)left") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Barb Throw(Recover)right") = std::bind(&Hornet::barbThrowRecoverCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"Hornet_Stunleft") = std::bind(&Hornet::stunCompleteFlag, this);
-		mAnimator->GetCompleteEvent(L"Hornet_Stunright") = std::bind(&Hornet::stunCompleteFlag, this);
-
+		mAnimator->GetCompleteEvent(L"Hornet_Stunleft") = std::bind(&Hornet::stunCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Hornet_Stunright") = std::bind(&Hornet::stunCompleteEvent, this);
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
@@ -409,10 +410,19 @@ namespace ya
 			}
 			else if (mState == eHornetState::StunAir)
 			{
-				mRigidBody->SetGround(true);
-				mState = eHornetState::Stun;
-				mRigidBody->SetVelocity(Vector2::Zero);
-				airToGFlag = true;
+				if (deathFlag == false)
+				{
+					mRigidBody->SetGround(true);
+					mState = eHornetState::Stun;
+					mRigidBody->SetVelocity(Vector2::Zero);
+					airToGFlag = true;
+				}
+				else
+				{
+					mRigidBody->SetGround(true);
+					mState = eHornetState::Wounded;
+					mRigidBody->SetVelocity(Vector2::Zero);
+				}
 			}
 			else if (mState == eHornetState::Stun)
 			{
@@ -440,25 +450,56 @@ namespace ya
 			}
 			else
 			{
-				hp -= Player::GetInstance()->GetNeilAtk();
-				stunHp -= Player::GetInstance()->GetNeilAtk();
-				//armorDamagedSound->Play(false);
-
-				if (stunHp <= 0)	// stun
+				if (mState != eHornetState::StunStance)
 				{
-					initializeFlag();
-					if (mRigidBody->GetGround() == true)
+					hp -= Player::GetInstance()->GetNeilAtk();
+					stunHp -= Player::GetInstance()->GetNeilAtk();
+					//armorDamagedSound->Play(false);
+
+					if (stunHp <= 0)	// stun
 					{
-						mState = eHornetState::Stun;
-						mRigidBody->SetGround(false);
+						initializeFlag();
+
+						// 플레이어 반대방향으로 전환
+						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
+							mDirection = eDirection::Right;
+						else
+							mDirection = eDirection::Left;
+
+						if (mRigidBody->GetGround() == true)
+						{
+							mState = eHornetState::Stun;
+							mRigidBody->SetGround(false);
+						}
+						else
+						{
+							mState = eHornetState::StunAir;
+						}
 					}
-					else
+
+					if (hp <= 0)	// wounded
 					{
+						initializeFlag();
+						deathFlag = true;
+
+						// 플레이어 반대방향으로 전환
+						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
+							mDirection = eDirection::Right;
+						else
+							mDirection = eDirection::Left;
+
 						mState = eHornetState::StunAir;
 					}
 				}
+				else	// stun state일 경우
+				{
+					hp -= Player::GetInstance()->GetNeilAtk();
+					mState = eHornetState::Idle;
+					stunHp = 300;
+				}
 			}
 			break;
+
 		case eLayerType::SpellEffect:
 			if (mState == eHornetState::CounterStance)
 			{
@@ -467,21 +508,51 @@ namespace ya
 			}
 			else
 			{
-				hp -= Player::GetInstance()->GetSpellAtk();
-				stunHp -= Player::GetInstance()->GetSpellAtk();
-				//armorDamagedSound->Play(false);
-
-				if (stunHp <= 0)	// stun
+				if (mState != eHornetState::StunStance)
 				{
-					initializeFlag();
-					if (mRigidBody->GetGround() == true)
+					hp -= Player::GetInstance()->GetSpellAtk();
+					stunHp -= Player::GetInstance()->GetSpellAtk();
+					//armorDamagedSound->Play(false);
+
+					if (stunHp <= 0)	// stun
 					{
-						mState = eHornetState::Stun;
+						initializeFlag();
+
+						// 플레이어 반대방향으로 전환
+						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
+							mDirection = eDirection::Right;
+						else
+							mDirection = eDirection::Left;
+
+						if (mRigidBody->GetGround() == true)
+						{
+							mState = eHornetState::Stun;
+						}
+						else
+						{
+							mState = eHornetState::StunAir;
+						}
 					}
-					else
+
+					if (hp <= 0)	// wounded
 					{
+						initializeFlag();
+						deathFlag = true;
+
+						// 플레이어 반대방향으로 전환
+						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
+							mDirection = eDirection::Right;
+						else
+							mDirection = eDirection::Left;
+
 						mState = eHornetState::StunAir;
 					}
+				}
+				else	// stun state일 경우
+				{
+					hp -= Player::GetInstance()->GetSpellAtk();
+					mState = eHornetState::Idle;
+					stunHp = 300;
 				}
 			}
 			break;
@@ -1689,7 +1760,30 @@ namespace ya
 
 	void Hornet::wounded()
 	{
+		if (woundedFlag == false)
+		{
+			mCollider->SetActive(false);
+			mCollider->SetSize(Vector2::Zero);
 
+			if (mDirection == eDirection::Left)
+			{
+				mAnimator->Play(L"Hornet_Woundedleft", true);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x += 13.0f;
+				tr->SetPos(pos);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mAnimator->Play(L"Hornet_Woundedright", true);
+
+				Vector2 pos = tr->GetPos();
+				//pos.x -= 13.0f;
+				tr->SetPos(pos);
+			}
+
+			woundedFlag = true;
+		}
 	}
 
 	void Hornet::flash()
@@ -2045,7 +2139,7 @@ namespace ya
 		}
 	}
 
-	void Hornet::stunCompleteFlag()
+	void Hornet::stunCompleteEvent()
 	{
 		mState = eHornetState::StunStance;
 		stunFlag = false;
