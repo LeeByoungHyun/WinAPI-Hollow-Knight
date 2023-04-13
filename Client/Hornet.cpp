@@ -39,8 +39,8 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		mRigidBody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
-		hp = 20;
-		stunHp = 10;
+		hp = 900;
+		stunHp = 300;
 		mTime = 0.0f;
 	}
 
@@ -123,6 +123,33 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded2\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wounded2\\right", Vector2::Zero, 0.1f);
 
+		runSound = ResourceManager::Load<Sound>(L"HornetRunSound", L"..\\Resources\\Sound\\Hornet\\hornet_footstep_run_loop.wav");
+		landSound = ResourceManager::Load<Sound>(L"HornetLandSound", L"..\\Resources\\Sound\\Hornet\\hornet_ground_land.wav");
+		jumpSound = ResourceManager::Load<Sound>(L"HornetJumpSound", L"..\\Resources\\Sound\\Hornet\\hornet_jump.wav");
+		dashSound = ResourceManager::Load<Sound>(L"HornetDashSound", L"..\\Resources\\Sound\\Hornet\\hornet_dash.wav");
+		deathSound = ResourceManager::Load<Sound>(L"HornetDeathSound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Death_01.wav");
+		laugh01Sound = ResourceManager::Load<Sound>(L"HornetLaugh01Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Laugh_01.wav");
+		laugh02Sound = ResourceManager::Load<Sound>(L"HornetLaugh02Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Laugh_02.wav");
+		stun01Sound = ResourceManager::Load<Sound>(L"HornetStun01ound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Stun_01.wav");
+		stun02Sound = ResourceManager::Load<Sound>(L"HornetStun02ound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Stun_02.wav");
+		stun03Sound = ResourceManager::Load<Sound>(L"HornetStun03ound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Stun_03.wav");
+		stun03Sound = ResourceManager::Load<Sound>(L"HornetStun03ound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Stun_03.wav");
+		attack01Sound = ResourceManager::Load<Sound>(L"HornetAttack01Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_03.wav");
+		attack02Sound = ResourceManager::Load<Sound>(L"HornetAttack02Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_04.wav");
+		attack03Sound = ResourceManager::Load<Sound>(L"HornetAttack03Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_05.wav");
+		attack04Sound = ResourceManager::Load<Sound>(L"HornetAttack04Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_06.wav");
+		attack05Sound = ResourceManager::Load<Sound>(L"HornetAttack05Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_07.wav");
+		attack06Sound = ResourceManager::Load<Sound>(L"HornetAttack06Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_08.wav");
+		attack07Sound = ResourceManager::Load<Sound>(L"HornetAttack07Sound", L"..\\Resources\\Sound\\Hornet\\Hornet_Fight_Yell_09.wav");
+		needleThrowSound = ResourceManager::Load<Sound>(L"HornetNeedleThrowSound", L"..\\Resources\\Sound\\Hornet\\hornet_needle_throw_and_return.wav");
+		needleCatchSound = ResourceManager::Load<Sound>(L"HornetNeedleCatchSound", L"..\\Resources\\Sound\\Hornet\\hornet_needle_catch.wav");
+		sphereSound = ResourceManager::Load<Sound>(L"HornetSphereSound", L"..\\Resources\\Sound\\Hornet\\hornet_needle_thow.wav");
+		barbThrowSound = ResourceManager::Load<Sound>(L"HornetBarbThrowSound", L"..\\Resources\\Sound\\Hornet\\hornet_cast_multiple_attack.wav");
+		parrySound = ResourceManager::Load<Sound>(L"HornetParrySound", L"..\\Resources\\Sound\\Hornet\\hornet_parry_prepare.wav");
+		slashSound = ResourceManager::Load<Sound>(L"HornetSlashSound", L"..\\Resources\\Sound\\Hornet\\hornet_sword.wav");
+		hitSound = ResourceManager::Load<Sound>(L"hitSound", L"..\\Resources\\Sound\\enemy_damage.wav");
+		bossStunSound = ResourceManager::Load<Sound>(L"bossStunSound", L"..\\Resources\\Sound\\boss_stun.wav");
+			
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)left") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jump(Anticipate)right") = std::bind(&Hornet::jumpAnticipateCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Hornet_Jumpleft") = std::bind(&Hornet::jumpCompleteEvent, this);
@@ -209,6 +236,10 @@ namespace ya
 
 			initializeFlag();
 		}
+
+		// run 상태가 끝나면 sound stop
+		if (mState != eHornetState::Run)
+			runSound->Stop(true);
 
 		// FSM
 		switch (mState)
@@ -386,23 +417,27 @@ namespace ya
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
+				landSound->Play(false);
 			}
 			else if (mState == eHornetState::SphereRecover)
 			{
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				mRigidBody->SetVelocity(Vector2::Zero);
+				landSound->Play(false);
 			}
 			else if (mState == eHornetState::ADash)
 			{
 				mRigidBody->SetGround(true);
 				mState = eHornetState::GDashRecover;
+				landSound->Play(false);
 			}
 			else if (mState == eHornetState::ADashRecover)
 			{
 				mState = eHornetState::Land;
 				mRigidBody->SetGround(true);
 				//mRigidBody->SetVelocity(Vector2::Zero);
+				landSound->Play(false);
 			}
 			else if (mState == eHornetState::GDashRecover)
 			{
@@ -446,7 +481,7 @@ namespace ya
 			if (mState == eHornetState::CounterStance)
 			{
 				mState = eHornetState::CounterAttackAnticipate;
-				// 팅소리
+				parrySound->Play(false);
 			}
 			else
 			{
@@ -454,11 +489,21 @@ namespace ya
 				{
 					hp -= Player::GetInstance()->GetNeilAtk();
 					stunHp -= Player::GetInstance()->GetNeilAtk();
-					//armorDamagedSound->Play(false);
+					hitSound->Play(false);
 
 					if (stunHp <= 0)	// stun
 					{
 						initializeFlag();
+
+						srand((unsigned int)time(NULL));
+						int randSound = rand() % 3;
+						if (randSound == 0)
+							stun01Sound->Play(false);
+						else if (randSound == 1)
+							stun02Sound->Play(false);
+						else if (randSound == 2)
+							stun03Sound->Play(false);
+						bossStunSound->Play(false);
 
 						// 플레이어 반대방향으로 전환
 						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
@@ -481,6 +526,8 @@ namespace ya
 					{
 						initializeFlag();
 						deathFlag = true;
+						deathSound->Play(false);
+						bossStunSound->Play(false);
 
 						// 플레이어 반대방향으로 전환
 						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
@@ -496,6 +543,7 @@ namespace ya
 					hp -= Player::GetInstance()->GetNeilAtk();
 					mState = eHornetState::Idle;
 					stunHp = 300;
+					hitSound->Play(false);
 				}
 			}
 			break;
@@ -504,7 +552,7 @@ namespace ya
 			if (mState == eHornetState::CounterStance)
 			{
 				mState = eHornetState::CounterAttackAnticipate;
-				// 팅소리
+				parrySound->Play(false);
 			}
 			else
 			{
@@ -512,11 +560,21 @@ namespace ya
 				{
 					hp -= Player::GetInstance()->GetSpellAtk();
 					stunHp -= Player::GetInstance()->GetSpellAtk();
-					//armorDamagedSound->Play(false);
+					hitSound->Play(false);
 
 					if (stunHp <= 0)	// stun
 					{
 						initializeFlag();
+
+						srand((unsigned int)time(NULL));
+						int randSound = rand() % 3;
+						if (randSound == 0)
+							stun01Sound->Play(false);
+						else if (randSound == 1)
+							stun02Sound->Play(false);
+						else if (randSound == 2)
+							stun03Sound->Play(false);
+						bossStunSound->Play(false);
 
 						// 플레이어 반대방향으로 전환
 						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
@@ -538,7 +596,8 @@ namespace ya
 					{
 						initializeFlag();
 						deathFlag = true;
-
+						deathSound->Play(false);
+						bossStunSound->Play(false);
 						// 플레이어 반대방향으로 전환
 						if (Player::GetInstance()->GetComponent<Transform>()->GetPos().x > tr->GetPos().x)
 							mDirection = eDirection::Right;
@@ -553,6 +612,7 @@ namespace ya
 					hp -= Player::GetInstance()->GetSpellAtk();
 					mState = eHornetState::Idle;
 					stunHp = 300;
+					hitSound->Play(false);
 				}
 			}
 			break;
@@ -563,6 +623,7 @@ namespace ya
 			if (mState == eHornetState::ThrowNeedle
 				&& needleSpeed <= 0.0f)
 			{
+				needleCatchSound->Play(false);
 				if (mDirection == eDirection::Left)
 				{
 					Vector2 pos = tr->GetPos();
@@ -776,6 +837,7 @@ namespace ya
 	{
 		if (runFlag == false)
 		{
+			runSound->Play(false);
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
@@ -804,6 +866,15 @@ namespace ya
 	{
 		if (jumpAnticipateFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 3;
+			if (sound == 0)
+				attack01Sound->Play(false);
+			else if (sound == 1)
+				attack03Sound->Play(false);
+			else if (sound == 2)
+				attack05Sound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -140.0f));
@@ -825,6 +896,10 @@ namespace ya
 	{
 		if (jumpFlag == false)
 		{
+			// sound
+			
+			jumpSound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -180.0f));
@@ -952,6 +1027,13 @@ namespace ya
 	{
 		if (gDashAnticipateFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 2;
+			if (sound == 0)
+				attack02Sound->Play(false);
+			else if (sound == 1)
+				attack04Sound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -100.0f));
@@ -982,6 +1064,8 @@ namespace ya
 	{
 		if (gDashFlag == false)
 		{
+			dashSound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(0.0f, -100.0f));
@@ -1045,6 +1129,13 @@ namespace ya
 	{
 		if (aDashAnticipateFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 2;
+			if (sound == 0)
+				attack02Sound->Play(false);
+			else if (sound == 1)
+				attack04Sound->Play(false);
+
 			// 플레이어 방향으로 방향 전환
 			Vector2 playerPos = Player::GetInstance()->GetPos();
 			if (playerPos.x > tr->GetPos().x)
@@ -1077,6 +1168,10 @@ namespace ya
 	{
 		if (aDashFlag == false)
 		{
+			// sound
+			
+			dashSound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(0.0f, -100.0f));
@@ -1162,6 +1257,17 @@ namespace ya
 	{
 		if (sphereAnticipateGFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 4;
+			if (sound == 0)
+				attack02Sound->Play(false);
+			else if (sound == 1)
+				attack04Sound->Play(false);
+			else if (sound == 2)
+				attack06Sound->Play(false);
+			else if (sound == 3)
+				attack07Sound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -130.0f));
@@ -1184,6 +1290,17 @@ namespace ya
 	{
 		if (sphereAnticipateAFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 4;
+			if (sound == 0)
+				attack02Sound->Play(false);
+			else if (sound == 1)
+				attack04Sound->Play(false);
+			else if (sound == 2)
+				attack06Sound->Play(false);
+			else if (sound == 3)
+				attack07Sound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-80.0f, -110.0f));
@@ -1210,6 +1327,8 @@ namespace ya
 	{
 		if (sphereFlag == false)
 		{
+			sphereSound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -130.0f));
@@ -1261,6 +1380,17 @@ namespace ya
 	{
 		if (throwNeedleAnticipateFlag == false)
 		{
+			srand((unsigned int)time(NULL));
+			int sound = rand() % 4;
+			if (sound == 0)
+				attack02Sound->Play(false);
+			else if (sound == 1)
+				attack04Sound->Play(false);
+			else if (sound == 2)
+				attack06Sound->Play(false);
+			else if (sound == 3)
+				attack07Sound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-20.0f, -140.0f));
@@ -1291,6 +1421,7 @@ namespace ya
 	{
 		if (throwNeedleFlag == false)
 		{
+			needleThrowSound->Play(false);
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-65.0f, -100.0f));
@@ -1501,6 +1632,7 @@ namespace ya
 	{
 		if (counterAttackFlag == false)
 		{
+			slashSound->Play(false);
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-20.0f, -90.0f));
@@ -1553,6 +1685,8 @@ namespace ya
 	{
 		if (barbThrowAnticipateFlag == false)
 		{
+			barbThrowSound->Play(false);
+
 			if (mDirection == eDirection::Left)
 			{
 				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
@@ -1764,7 +1898,6 @@ namespace ya
 		{
 			mCollider->SetActive(false);
 			mCollider->SetSize(Vector2::Zero);
-
 			if (mDirection == eDirection::Left)
 			{
 				mAnimator->Play(L"Hornet_Woundedleft", true);

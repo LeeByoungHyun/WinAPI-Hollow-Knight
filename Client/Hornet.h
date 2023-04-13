@@ -158,6 +158,32 @@ namespace ya
 		class SphereBall* ball;
 		class HornetNeedle* needle;
 		class CounterAttackCollider* caCol;
+		
+		class Sound* runSound;
+		class Sound* landSound;
+		class Sound* jumpSound;
+		class Sound* dashSound;
+		class Sound* deathSound;
+		class Sound* laugh01Sound;
+		class Sound* laugh02Sound;
+		class Sound* stun01Sound;
+		class Sound* stun02Sound;
+		class Sound* stun03Sound;
+		class Sound* attack01Sound;
+		class Sound* attack02Sound;
+		class Sound* attack03Sound;
+		class Sound* attack04Sound;
+		class Sound* attack05Sound;
+		class Sound* attack06Sound;
+		class Sound* attack07Sound;
+		class Sound* needleCatchSound;
+		class Sound* needleThrowSound;
+		class Sound* sphereSound;
+		class Sound* barbThrowSound;
+		class Sound* parrySound;
+		class Sound* slashSound;
+		class Sound* hitSound;
+		class Sound* bossStunSound;
 
 		eHornetState mState;
 		eDirection mDirection = eDirection::Left;
