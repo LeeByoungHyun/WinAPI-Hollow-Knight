@@ -209,6 +209,15 @@
     <Filter Include="Contents\Objects\Charactor\Hornet\Throw Effect">
       <UniqueIdentifier>{2a9489f5-2908-4c10-9497-f9bf04c4ae5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\HornetWall">
+      <UniqueIdentifier>{07cc9c0b-cc77-4126-9955-de9e75e19d4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\HornetWall\left">
+      <UniqueIdentifier>{ec5bdc57-0481-4009-ae0d-cd0e783871dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\HornetWall\right">
+      <UniqueIdentifier>{b73c6957-8aaa-4c03-b7fe-0fb9aea4085c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -454,6 +463,15 @@
     <ClInclude Include="HornetNeedle.h">
       <Filter>Contents\Objects\Charactor\Hornet\Needle</Filter>
     </ClInclude>
+    <ClInclude Include="CounterAttackCollider.h">
+      <Filter>Contents\Objects\Charactor\Hornet</Filter>
+    </ClInclude>
+    <ClInclude Include="HornetWallLeft.h">
+      <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
+    </ClInclude>
+    <ClInclude Include="HornetWallLeftBack.h">
+      <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -503,9 +521,6 @@
     </ClCompile>
     <ClCompile Include="yaTransform.cpp">
       <Filter>Engine\Component\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="yaPlayer.cpp">
-      <Filter>Contents\Objects\Charactor\Player</Filter>
     </ClCompile>
     <ClCompile Include="yaCursor.cpp">
       <Filter>Contents\Objects\Struct\Cursor</Filter>
@@ -677,6 +692,18 @@
     </ClCompile>
     <ClCompile Include="HornetNeedle.cpp">
       <Filter>Contents\Objects\Charactor\Hornet\Needle</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayer.cpp">
+      <Filter>Contents\Objects\Charactor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CounterAttackCollider.cpp">
+      <Filter>Contents\Objects\Charactor\Hornet</Filter>
+    </ClCompile>
+    <ClCompile Include="HornetWallLeft.cpp">
+      <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
+    </ClCompile>
+    <ClCompile Include="HornetWallLeftBack.cpp">
+      <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
