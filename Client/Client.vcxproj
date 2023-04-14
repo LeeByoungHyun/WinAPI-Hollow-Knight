@@ -156,6 +156,12 @@
     <ClInclude Include="HornetNeedle.h" />
     <ClInclude Include="HornetWallLeft.h" />
     <ClInclude Include="HornetWallLeftBack.h" />
+    <ClInclude Include="HPInterface.h" />
+    <ClInclude Include="HPobject01.h" />
+    <ClInclude Include="HPobject02.h" />
+    <ClInclude Include="HPobject03.h" />
+    <ClInclude Include="HPobject04.h" />
+    <ClInclude Include="HPobject05.h" />
     <ClInclude Include="LongPlatform.h" />
     <ClInclude Include="LongPlatformBackPixel.h" />
     <ClInclude Include="MantisBossPlatform.h" />
@@ -239,6 +245,12 @@
     <ClCompile Include="HornetNeedle.cpp" />
     <ClCompile Include="HornetWallLeft.cpp" />
     <ClCompile Include="HornetWallLeftBack.cpp" />
+    <ClCompile Include="HPInterface.cpp" />
+    <ClCompile Include="HPobject01.cpp" />
+    <ClCompile Include="HPobject02.cpp" />
+    <ClCompile Include="HPobject03.cpp" />
+    <ClCompile Include="HPobject04.cpp" />
+    <ClCompile Include="HPobject05.cpp" />
     <ClCompile Include="LongPlatform.cpp" />
     <ClCompile Include="LongPlatformBackPixel.cpp" />
     <ClCompile Include="main.cpp" />

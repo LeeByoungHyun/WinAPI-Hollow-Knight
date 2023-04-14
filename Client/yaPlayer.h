@@ -64,6 +64,7 @@ namespace ya
 		ePlayerState GetPlayerState() { return mState; }
 		void SetPlayerState(ePlayerState state) { mState = state; }
 		eDirection GetPlayerDirection() { return mDirection; }
+		int GetHp() { return hp; }
 
 		bool GetIdleFlag() { return idleFlag; }
 		void SetIdleFlag(bool flag) { idleFlag = flag; }

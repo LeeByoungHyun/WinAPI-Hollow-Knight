@@ -218,6 +218,12 @@
     <Filter Include="Contents\Objects\Struct\HornetWall\right">
       <UniqueIdentifier>{b73c6957-8aaa-4c03-b7fe-0fb9aea4085c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\UI">
+      <UniqueIdentifier>{f8ce54e0-49ac-4df5-9a9f-6172e84f0c29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\UI\HP">
+      <UniqueIdentifier>{77aeb189-39fd-4bba-9af8-613605dd8b45}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -472,6 +478,24 @@
     <ClInclude Include="HornetWallLeftBack.h">
       <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
     </ClInclude>
+    <ClInclude Include="HPInterface.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="HPobject01.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="HPobject02.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="HPobject03.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="HPobject04.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
+    <ClInclude Include="HPobject05.h">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -704,6 +728,24 @@
     </ClCompile>
     <ClCompile Include="HornetWallLeftBack.cpp">
       <Filter>Contents\Objects\Struct\HornetWall\left</Filter>
+    </ClCompile>
+    <ClCompile Include="HPInterface.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="HPobject01.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="HPobject02.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="HPobject03.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="HPobject04.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="HPobject05.cpp">
+      <Filter>Contents\Objects\UI\HP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

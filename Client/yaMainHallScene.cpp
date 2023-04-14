@@ -15,6 +15,7 @@
 #include "LongPlatform.h"
 #include "LongPlatformBackPixel.h"
 #include "BossDoor.h"
+#include "HPInterface.h"
 
 namespace ya
 {
@@ -46,7 +47,7 @@ namespace ya
 		mPlayer->SetType(eLayerType::Player);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
-
+		object::Instantiate<HPInterface>(eLayerType::UI);
 	}
 
 	void MainHallScene::Update()
