@@ -86,7 +86,10 @@ namespace ya
 		mantisLordsTheme = ResourceManager::Load<Sound>(L"MantisLordstheme", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_theme2.wav");
 
 		// UI
-		object::Instantiate<HPInterface>(eLayerType::UI);
+		hpUI = ya::HPInterface::GetInstance();
+		scene->AddGameObject(hpUI, eLayerType::UI);
+		hpUI->Initialize();
+		hpUI->SetType(eLayerType::UI);
 		hp01 = ya::HPobject01::GetInstance();
 		scene->AddGameObject(hp01, eLayerType::UI);
 		hp01->Initialize();

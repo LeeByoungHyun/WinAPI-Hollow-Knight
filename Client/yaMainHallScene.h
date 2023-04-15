@@ -23,6 +23,7 @@ namespace ya
 		class LongPlatform* platform1;
 		class LongPlatform* platform2;
 
+		class HPInterface* hpUI;
 		class HPobject01* hp01;
 		class HPobject02* hp02;
 		class HPobject03* hp03;

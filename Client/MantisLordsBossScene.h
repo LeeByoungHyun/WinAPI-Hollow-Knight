@@ -27,6 +27,7 @@ namespace ya
 		bool enterFlag = false;
 		float mTime = 0.0f;
 
+		class HPInterface* hpUI;
 		class HPobject01* hp01;
 		class HPobject02* hp02;
 		class HPobject03* hp03;

@@ -56,7 +56,10 @@ namespace ya
 		falseBossTheme = ResourceManager::Load<Sound>(L"falseKnightTheme", L"..\\Resources\\Sound\\False Knight\\Boss Battle 1.wav");
 
 		// UI
-		object::Instantiate<HPInterface>(eLayerType::UI);
+		hpUI = ya::HPInterface::GetInstance();
+		scene->AddGameObject(hpUI, eLayerType::UI);
+		hpUI->Initialize();
+		hpUI->SetType(eLayerType::UI);
 		hp01 = ya::HPobject01::GetInstance();
 		scene->AddGameObject(hp01, eLayerType::UI);
 		hp01->Initialize();

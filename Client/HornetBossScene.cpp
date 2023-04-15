@@ -52,7 +52,10 @@ namespace ya
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
 		// UI
-		object::Instantiate<HPInterface>(eLayerType::UI);
+		hpUI = ya::HPInterface::GetInstance();
+		scene->AddGameObject(hpUI, eLayerType::UI);
+		hpUI->Initialize();
+		hpUI->SetType(eLayerType::UI);
 		hp01 = ya::HPobject01::GetInstance();
 		scene->AddGameObject(hp01, eLayerType::UI);
 		hp01->Initialize();
