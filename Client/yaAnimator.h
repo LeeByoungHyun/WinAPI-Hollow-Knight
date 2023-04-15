@@ -58,6 +58,7 @@ namespace ya
 		std::function<void()>& GetEndEvent(const std::wstring& name);
 
 		bool IsComplte() { return mActiveAnimation->IsComplete(); }
+		void setUseCamera(bool camera) { useCamera = camera; }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
@@ -65,5 +66,6 @@ namespace ya
 		Animation* mActiveAnimation;
 		Image* mSpriteSheet;
 		bool mbLoop;
+		bool useCamera = true;
 	};
 }

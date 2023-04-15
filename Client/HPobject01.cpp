@@ -4,9 +4,13 @@
 #include "yaObject.h"
 #include "yaAnimator.h"
 #include "yaTransform.h"
+#include "yaCamera.h"
 
 namespace ya
 {
+	// ½Ì±ÛÅæ °´Ã¼ ÃÊ±âÈ­
+	HPobject01* HPobject01::instance = nullptr;
+
 	HPobject01::HPobject01()
 	{
 
@@ -33,6 +37,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Health004.Health Refill") = std::bind(&HPobject01::reFillCompleteEvent, this);
 
 		mAnimator->Play(L"Health002.Health Idle", true);
+		mAnimator->setUseCamera(false);
+
+		tr->SetPos(Vector2(150.0f, 70.0f));
+		tr->SetSize(Vector2(0.5f, 0.5f));
+
+		mHPstate = eHPState::Idle;
 	}
 
 	void HPobject01::Update()

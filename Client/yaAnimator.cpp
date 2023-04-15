@@ -56,7 +56,13 @@ namespace ya
 	{
 		if (mActiveAnimation)
 		{
-			mActiveAnimation->Render(hdc);
+			if (useCamera == true)
+			{
+				mActiveAnimation->Render(hdc);
+			}
+			else
+				mActiveAnimation->Render2(hdc);
+			
 		}
 	}
 

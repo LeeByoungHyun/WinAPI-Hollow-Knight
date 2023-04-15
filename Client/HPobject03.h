@@ -17,6 +17,16 @@ namespace ya
 		HPobject03();
 		~HPobject03();
 
+		// 싱글톤
+		// 이미 인스턴스가 존재하면 인스턴스를 반환, 없다면 인스턴스 생성
+		static HPobject03* GetInstance()
+		{
+			if (instance == nullptr)
+				instance = new HPobject03();
+
+			return instance;
+		}
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -44,6 +54,9 @@ namespace ya
 		bool idleFlag = false;
 		bool breakHpFlag = false;
 		bool reFillFlag = false;
+
+		// 싱글톤 객체 인스턴스
+		static HPobject03* instance;
 	};
 }
 

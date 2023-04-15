@@ -7,6 +7,9 @@
 
 namespace ya
 {
+	// ½Ì±ÛÅæ °´Ã¼ ÃÊ±âÈ­
+	HPobject04* HPobject04::instance = nullptr;
+
 	HPobject04::HPobject04()
 	{
 
@@ -33,6 +36,12 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Health004.Health Refill") = std::bind(&HPobject04::reFillCompleteEvent, this);
 
 		mAnimator->Play(L"Health002.Health Idle", true);
+		mAnimator->setUseCamera(false);
+
+		tr->SetPos(Vector2(270.0f, 70.0f));
+		tr->SetSize(Vector2(0.5f, 0.5f));
+
+		mHPstate = eHPState::Idle;
 	}
 
 	void HPobject04::Update()

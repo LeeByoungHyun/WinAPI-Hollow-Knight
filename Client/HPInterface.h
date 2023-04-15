@@ -45,6 +45,7 @@ namespace ya
 		class HPobject05* hp05;
 		class Image* mImage;
 		class Transform* tr;
+		class Animator* mAnimator;
 
 		eHPState mHPstate;
 		class Scene* activeScene;
@@ -56,6 +57,9 @@ namespace ya
 		bool remainFlag03 = false;
 		bool remainFlag04 = false;
 		bool remainFlag05 = false;
+
+		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
+		static HPInterface* instance;
 	};
 }
 

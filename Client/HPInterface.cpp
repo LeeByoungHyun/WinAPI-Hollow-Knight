@@ -4,6 +4,7 @@
 #include "yaTime.h"
 #include "yaObject.h"
 #include "yaImage.h"
+#include "yaAnimator.h"
 
 #include "yaPlayer.h"
 #include "HPobject01.h"
@@ -14,6 +15,9 @@
 
 namespace ya
 {
+	// ΩÃ±€≈Ê ∞¥√º √ ±‚»≠
+	HPInterface* HPInterface::instance = nullptr;
+
 	HPInterface::HPInterface()
 	{
 
@@ -29,16 +33,24 @@ namespace ya
 		GameObject::Initialize();
 
 		mPlayer = Player::GetInstance();
-		hp01 = object::Instantiate<HPobject01>(Vector2(100.0f, 100.0f), eLayerType::UI);
-		hp02 = object::Instantiate<HPobject02>(Vector2(150.0f, 100.0f), eLayerType::UI);
-		hp03 = object::Instantiate<HPobject03>(Vector2(200.0f, 100.0f), eLayerType::UI);
-		hp04 = object::Instantiate<HPobject04>(Vector2(250.0f, 100.0f), eLayerType::UI);
-		hp05 = object::Instantiate<HPobject05>(Vector2(300.0f, 100.0f), eLayerType::UI);
+
+		hp01 = HPobject01::GetInstance();
+		hp02 = HPobject02::GetInstance();
+		hp03 = HPobject03::GetInstance();
+		hp04 = HPobject04::GetInstance();
+		hp05 = HPobject05::GetInstance();
 
 		tr = AddComponent<Transform>();
+		mAnimator = AddComponent<Animator>();
 		tr->SetPos(Vector2(50.0f, 50.0f));
+		tr->SetSize(Vector2(0.7f, 0.7f));
 
-		mImage = ResourceManager::Load<Image>(L"HUD", L"..\\Resources\\UI\\HUD\\018.HUD Frame\\018-05-118.bmp");
+		mAnimator->CreateAnimations(L"..\\Resources\\UI\\HUD\\018.HUD Frame", Vector2::Zero, 0.066f);
+		mAnimator->setUseCamera(false);
+
+		mAnimator->Play(L"HUD018.HUD Frame", false);
+
+		//mImage = ResourceManager::Load<Image>(L"HUD", L"..\\Resources\\UI\\HUD\\018.HUD Frame\\018-05-118.bmp");
 
 		mHPstate = eHPState::Remain05;
 	}
@@ -78,9 +90,11 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
+		/*
 		Vector2 pos = tr->GetPos();
 		TransparentBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight()
 			, mImage->GetHdc(), 0, 0, mImage->GetWidth(), mImage->GetHeight(), RGB(255, 0, 255));
+		*/
 	}
 
 	void HPInterface::Release()

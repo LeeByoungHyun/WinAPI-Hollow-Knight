@@ -16,6 +16,11 @@
 #include "LongPlatformBackPixel.h"
 #include "BossDoor.h"
 #include "HPInterface.h"
+#include "HPobject01.h"
+#include "HPobject02.h"
+#include "HPobject03.h"
+#include "HPobject04.h"
+#include "HPobject05.h"
 
 namespace ya
 {
@@ -35,7 +40,7 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에	
-		//object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
@@ -47,7 +52,30 @@ namespace ya
 		mPlayer->SetType(eLayerType::Player);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
+
+		// UI
 		object::Instantiate<HPInterface>(eLayerType::UI);
+		hp01 = ya::HPobject01::GetInstance();
+		scene->AddGameObject(hp01, eLayerType::UI);
+		hp01->Initialize();
+		hp01->SetType(eLayerType::UI);
+		hp02 = ya::HPobject02::GetInstance();
+		scene->AddGameObject(hp02, eLayerType::UI);
+		hp02->Initialize();
+		hp02->SetType(eLayerType::UI);
+		hp03 = ya::HPobject03::GetInstance();
+		scene->AddGameObject(hp03, eLayerType::UI);
+		hp03->Initialize();
+		hp03->SetType(eLayerType::UI);
+		hp04 = ya::HPobject04::GetInstance();
+		scene->AddGameObject(hp04, eLayerType::UI);
+		hp04->Initialize();
+		hp04->SetType(eLayerType::UI);
+		hp05 = ya::HPobject05::GetInstance();
+		scene->AddGameObject(hp05, eLayerType::UI);
+		hp05->Initialize();
+		hp05->SetType(eLayerType::UI);
+
 	}
 
 	void MainHallScene::Update()

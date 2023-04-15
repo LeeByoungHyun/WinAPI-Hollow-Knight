@@ -7,6 +7,9 @@
 
 namespace ya
 {
+	// ½Ì±ÛÅæ °´Ã¼ ÃÊ±âÈ­
+	HPobject05* HPobject05::instance = nullptr;
+
 	HPobject05::HPobject05()
 	{
 
@@ -32,7 +35,13 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Health003.Health Break") = std::bind(&HPobject05::breakHPCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Health004.Health Refill") = std::bind(&HPobject05::reFillCompleteEvent, this);
 
+		tr->SetPos(Vector2(310.0f, 70.0f));
+		tr->SetSize(Vector2(0.5f, 0.5f));
+
 		mAnimator->Play(L"Health002.Health Idle", true);
+		mAnimator->setUseCamera(false);
+
+		mHPstate = eHPState::Idle;
 	}
 
 	void HPobject05::Update()
