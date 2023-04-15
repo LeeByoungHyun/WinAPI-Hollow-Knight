@@ -12,6 +12,12 @@
 #include "yaPlayer.h"
 #include "GodBG.h"
 #include "FalseKnightPlatform.h"
+#include "HPInterface.h"
+#include "HPobject01.h"
+#include "HPobject02.h"
+#include "HPobject03.h"
+#include "HPobject04.h"
+#include "HPobject05.h"
 
 namespace ya
 {
@@ -45,6 +51,28 @@ namespace ya
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
+		// UI
+		object::Instantiate<HPInterface>(eLayerType::UI);
+		hp01 = ya::HPobject01::GetInstance();
+		scene->AddGameObject(hp01, eLayerType::UI);
+		hp01->Initialize();
+		hp01->SetType(eLayerType::UI);
+		hp02 = ya::HPobject02::GetInstance();
+		scene->AddGameObject(hp02, eLayerType::UI);
+		hp02->Initialize();
+		hp02->SetType(eLayerType::UI);
+		hp03 = ya::HPobject03::GetInstance();
+		scene->AddGameObject(hp03, eLayerType::UI);
+		hp03->Initialize();
+		hp03->SetType(eLayerType::UI);
+		hp04 = ya::HPobject04::GetInstance();
+		scene->AddGameObject(hp04, eLayerType::UI);
+		hp04->Initialize();
+		hp04->SetType(eLayerType::UI);
+		hp05 = ya::HPobject05::GetInstance();
+		scene->AddGameObject(hp05, eLayerType::UI);
+		hp05->Initialize();
+		hp05->SetType(eLayerType::UI);
 	}
 
 	void HornetBossScene::Update()
