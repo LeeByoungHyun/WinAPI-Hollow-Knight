@@ -35,11 +35,11 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Health003.Health Break") = std::bind(&HPobject02::breakHPCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Health004.Health Refill") = std::bind(&HPobject02::reFillCompleteEvent, this);
 
-		mAnimator->Play(L"Health002.Health Idle", true);
-		mAnimator->setUseCamera(false);
-
 		tr->SetPos(Vector2(190.0f, 70.0f));
 		tr->SetSize(Vector2(0.5f, 0.5f));
+
+		mAnimator->Play(L"Health002.Health Idle", true);
+		mAnimator->setUseCamera(false);
 
 		mHPstate = eHPState::Idle;
 	}
@@ -84,7 +84,20 @@ namespace ya
 		if (emptyFlag == false)
 		{
 			emptyFlag = true;
+			reFillFlag = false;
 			mAnimator->Play(L"Health001.Health Empty", false);
+
+			Vector2 pos = tr->GetPos();
+
+			if (breakHpFlag == true)
+			{
+				breakHpFlag = false;
+				pos.x += 2.5f;
+				pos.y += 19.0f;
+			}
+
+			pos.y -= 14.0f;
+			tr->SetPos(pos);
 		}
 	}
 	void HPobject02::idle()
@@ -93,6 +106,17 @@ namespace ya
 		{
 			idleFlag = true;
 			mAnimator->Play(L"Health002.Health Idle", true);
+
+			Vector2 pos = tr->GetPos();
+
+			if (reFillFlag == true)
+			{
+				pos.x += 15.5f;
+				pos.y += 15.0f;
+				reFillFlag == false;
+			}
+
+			tr->SetPos(pos);
 		}
 	}
 	void HPobject02::breakHp()
@@ -102,6 +126,12 @@ namespace ya
 			breakHpFlag = true;
 			idleFlag = false;
 			mAnimator->Play(L"Health003.Health Break", false);
+
+			Vector2 pos = tr->GetPos();
+			pos.x -= 2.5f;
+			pos.y -= 19.0f;
+			tr->SetPos(pos);
+
 		}
 	}
 	void HPobject02::reFill()
@@ -111,19 +141,23 @@ namespace ya
 			reFillFlag = true;
 			emptyFlag = false;
 			mAnimator->Play(L"Health004.Health Refill", false);
+
+			Vector2 pos = tr->GetPos();
+			pos.y += 14.0f;
+			pos.x -= 15.5f;
+			pos.y -= 15.0f;
+			tr->SetPos(pos);
 		}
 	}
 
 	void HPobject02::breakHPCompleteEvent()
 	{
 		mHPstate = eHPState::Empty;
-		breakHpFlag = false;
 	}
 
 	void HPobject02::reFillCompleteEvent()
 	{
 		mHPstate = eHPState::Idle;
-		reFillFlag = false;
 	}
 }
 

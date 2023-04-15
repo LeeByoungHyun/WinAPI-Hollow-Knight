@@ -221,7 +221,9 @@ namespace ya
 		}
 
 		if (mPlayer->GetHp() == 4)	
+		{
 			mHPstate = eHPState::Remain04;
+		}
 	}
 }
 
