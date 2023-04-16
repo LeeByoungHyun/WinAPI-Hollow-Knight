@@ -45,10 +45,10 @@ namespace ya
 		mPlayer->SetType(eLayerType::Player);
 
 		mHornet = ya::Hornet::GetInstance();
-		scene->AddGameObject(mHornet, eLayerType::Monster);
+		scene->AddGameObject(mHornet, eLayerType::Hornet);
 		mHornet->Initialize();
 		mHornet->GetComponent<Transform>()->SetPos(Vector2(1724.0f, 670.0f + 80.0f));
-		mHornet->SetType(eLayerType::Monster);
+		mHornet->SetType(eLayerType::Hornet);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
@@ -104,11 +104,15 @@ namespace ya
 
 		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Hornet, true);
+		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Hornet, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Hornet, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Hornet, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Hornet, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Hornet, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(1725.0f);

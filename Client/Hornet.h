@@ -75,6 +75,7 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		eHornetState GetHornetState() { return mState; }
+		eDirection GetHornetDirection() { return mDirection; }
 
 	private:
 		void idle();

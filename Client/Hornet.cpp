@@ -232,7 +232,7 @@ namespace ya
 		// 테스트용
 		if (Input::GetKeyDown(eKeyCode::O))
 		{
-			mState = eHornetState::JumpAnticipate;
+			mState = eHornetState::GDashAnticipate;
 
 			initializeFlag();
 		}
@@ -1094,8 +1094,8 @@ namespace ya
 		tr->SetPos(pos);
 
 		mTime += Time::DeltaTime();
-		if (playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f
-			|| mTime >= 0.5f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
+		if (/*playerPos.x - 10.0f <= pos.x && pos.x <= playerPos.x + 10.0f
+			|| */mTime >= 0.5f)	// dash 도중 playerPos.x 에 도달하면 dashrecover
 		{
 			mTime = 0.0f;
 			mState = eHornetState::GDashRecover;

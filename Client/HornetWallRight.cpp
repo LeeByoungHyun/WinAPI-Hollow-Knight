@@ -102,7 +102,7 @@ namespace ya
 			}
 
 		}
-		if (otherType == eLayerType::Monster)
+		if (otherType == eLayerType::Hornet)
 		{
 			Hornet* mHornet = Hornet::GetInstance();
 			if (mHornet == nullptr)
@@ -120,9 +120,9 @@ namespace ya
 			Vector2 objectPos = objectTr->GetPos();
 
 			Vector2 dir = mHornet->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
-			if (0 < dir.x && dir.x <= 1)
+			if (mHornet->GetHornetDirection() == eDirection::Right)
 			{
-				hornetPos.x = objectPos.x - hornetCol->GetSize().x - 10.0f;
+				hornetPos.x = objectPos.x - hornetCol->GetSize().x / 2 - 10.0f;
 				hornetTr->SetPos(hornetPos);
 			}
 

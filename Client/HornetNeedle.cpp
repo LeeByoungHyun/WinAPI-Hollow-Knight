@@ -73,7 +73,7 @@ namespace ya
 		switch (otherType)
 		{
 			// hornet
-		case eLayerType::Monster:
+		case eLayerType::Hornet:
 			if (NEEDLESPEED <= 0.0f)
 			{
 				mState = eHornetNeedleState::Disable;
