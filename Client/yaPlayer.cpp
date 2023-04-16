@@ -1099,6 +1099,8 @@ namespace ya
 			focusChargeSound->Play(false);
 		}
 
+		mRigidBody->SetVelocity(Vector2::Zero);
+
 		// 회복키에서 손 때면 회복종료
 		if (Input::GetKeyUp(eKeyCode::A))
 		{
