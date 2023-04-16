@@ -496,6 +496,12 @@
     <ClInclude Include="HPobject05.h">
       <Filter>Contents\Objects\UI\HP</Filter>
     </ClInclude>
+    <ClInclude Include="TestCollider.h">
+      <Filter>Contents\Objects\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="HornetWallRight.h">
+      <Filter>Contents\Objects\Struct\HornetWall\right</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -746,6 +752,12 @@
     </ClCompile>
     <ClCompile Include="HPobject05.cpp">
       <Filter>Contents\Objects\UI\HP</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCollider.cpp">
+      <Filter>Contents\Objects\Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="HornetWallRight.cpp">
+      <Filter>Contents\Objects\Struct\HornetWall\right</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

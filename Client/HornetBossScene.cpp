@@ -18,6 +18,8 @@
 #include "HPobject03.h"
 #include "HPobject04.h"
 #include "HPobject05.h"
+#include "HornetWallLeft.h"
+#include "HornetWallRight.h"
 
 namespace ya
 {
@@ -50,6 +52,9 @@ namespace ya
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+
+		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
+		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
 
 		// UI
 		hpUI = ya::HPInterface::GetInstance();

@@ -156,6 +156,7 @@
     <ClInclude Include="HornetNeedle.h" />
     <ClInclude Include="HornetWallLeft.h" />
     <ClInclude Include="HornetWallLeftBack.h" />
+    <ClInclude Include="HornetWallRight.h" />
     <ClInclude Include="HPInterface.h" />
     <ClInclude Include="HPobject01.h" />
     <ClInclude Include="HPobject02.h" />
@@ -182,6 +183,7 @@
     <ClInclude Include="SlashEffect.h" />
     <ClInclude Include="SphereBall.h" />
     <ClInclude Include="StunHead.h" />
+    <ClInclude Include="TestCollider.h" />
     <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaDashEffectLeft.h" />
     <ClInclude Include="yaDashEffectRight.h" />
@@ -245,6 +247,7 @@
     <ClCompile Include="HornetNeedle.cpp" />
     <ClCompile Include="HornetWallLeft.cpp" />
     <ClCompile Include="HornetWallLeftBack.cpp" />
+    <ClCompile Include="HornetWallRight.cpp" />
     <ClCompile Include="HPInterface.cpp" />
     <ClCompile Include="HPobject01.cpp" />
     <ClCompile Include="HPobject02.cpp" />
@@ -271,6 +274,7 @@
     <ClCompile Include="SlashEffect.cpp" />
     <ClCompile Include="SphereBall.cpp" />
     <ClCompile Include="StunHead.cpp" />
+    <ClCompile Include="TestCollider.cpp" />
     <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaDashEffectLeft.cpp" />
     <ClCompile Include="yaDashEffectRight.cpp" />
