@@ -30,8 +30,8 @@ namespace ya
 
 		void Initialize();
 		void Update();
-		void Render(HDC hdc);
-		void Render2(HDC hdc);
+		void Render(HDC hdc, int alpha);
+		void Render2(HDC hdc, int alpha);
 		void Create(Image* sheet, Vector2 leftTop, UINT coulmn, UINT row, UINT spriteLength, Vector2 offset, float duration);
 		void Reset();
 

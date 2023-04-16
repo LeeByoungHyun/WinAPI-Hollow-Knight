@@ -48,7 +48,7 @@ namespace ya
         }
     }
 
-    void Animation::Render(HDC hdc)
+    void Animation::Render(HDC hdc, int alpha)
     {
         Transform* tr
             = mAnimator->GetOwner()->GetComponent<Transform>();
@@ -80,7 +80,7 @@ namespace ya
             func.BlendOp = AC_SRC_OVER;
             func.BlendFlags = 0;
             func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
-            func.SourceConstantAlpha += Time::DeltaTime(); // 0(투명) ~ 255(불투명) 알파값
+            func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
 
             AlphaBlend(hdc, pos.x, pos.y
                 , mSpriteSheet[mSpriteIndex].size.x * scale.x
@@ -92,7 +92,7 @@ namespace ya
         }
     }
 
-    void Animation::Render2(HDC hdc)
+    void Animation::Render2(HDC hdc, int alpha)
     {
         Transform* tr
             = mAnimator->GetOwner()->GetComponent<Transform>();
@@ -127,7 +127,7 @@ namespace ya
             func.BlendOp = AC_SRC_OVER;
             func.BlendFlags = 0;
             func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
-            func.SourceConstantAlpha += Time::DeltaTime(); // 0(투명) ~ 255(불투명) 알파값
+            func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
 
             AlphaBlend(hdc, pos.x, pos.y
                 , mSpriteSheet[mSpriteIndex].size.x * scale.x

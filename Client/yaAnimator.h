@@ -59,6 +59,7 @@ namespace ya
 
 		bool IsComplte() { return mActiveAnimation->IsComplete(); }
 		void setUseCamera(bool camera) { useCamera = camera; }
+		void SetAlpha(int alpha) { mAlpha = alpha; }
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
@@ -67,5 +68,6 @@ namespace ya
 		Image* mSpriteSheet;
 		bool mbLoop;
 		bool useCamera = true;
+		int mAlpha = 0;
 	};
 }

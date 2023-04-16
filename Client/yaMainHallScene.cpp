@@ -6,6 +6,7 @@
 #include "yaCamera.h"
 #include "yaObject.h"
 #include "yaResourceManager.h"
+#include "yaTime.h"
 
 #include "yaPlayer.h"
 #include "yaCrawlid.h"
@@ -22,6 +23,7 @@
 #include "HPobject04.h"
 #include "HPobject05.h"
 #include "TestCollider.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -45,6 +47,11 @@ namespace ya
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+
+		fade = ya::Fade::GetInstance();
+		scene->AddGameObject(fade, eLayerType::Fade);
+		fade->Initialize();
+		fade->SetType(eLayerType::Fade);
 
 		// test
 		//object::Instantiate<TestCollider>(Vector2(1724.0f, 900.0f), eLayerType::Object);
@@ -102,6 +109,13 @@ namespace ya
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::HornetBoss);
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 2.0f)
+		{
+			//fade->SetFadeState(Fade::eFadeState::FadeOut);
+			//= 0.0f;
 		}
 	}
 

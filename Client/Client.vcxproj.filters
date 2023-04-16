@@ -224,6 +224,9 @@
     <Filter Include="Contents\Objects\UI\HP">
       <UniqueIdentifier>{77aeb189-39fd-4bba-9af8-613605dd8b45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\Fade">
+      <UniqueIdentifier>{77e3c445-c1ca-495b-85e6-2dcb9ec6a73f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -502,6 +505,9 @@
     <ClInclude Include="HornetWallRight.h">
       <Filter>Contents\Objects\Struct\HornetWall\right</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>Contents\Objects\Struct\Fade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -758,6 +764,9 @@
     </ClCompile>
     <ClCompile Include="HornetWallRight.cpp">
       <Filter>Contents\Objects\Struct\HornetWall\right</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>Contents\Objects\Struct\Fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
