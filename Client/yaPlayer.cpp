@@ -210,6 +210,9 @@ namespace ya
 			}
 		}
 
+		if (mState != ePlayerState::Walk)
+			walkSound->Stop(true);
+
 		// 좌우이동 멈추면 rigidbody 속도 0으로
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKeyUp(eKeyCode::LEFT))
