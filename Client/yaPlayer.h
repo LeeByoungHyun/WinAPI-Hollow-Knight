@@ -20,6 +20,7 @@ namespace ya
 			UpSlash,
 			DownSlash,
 			Recoil,
+			Spike,
 			Focus,
 			FocusEnd,
 			FocusGet,
@@ -84,6 +85,7 @@ namespace ya
 		void fall();
 		void castFireball();
 		void recoil();
+		void spike();
 		void death();
 		void focus();
 		void focusEnd();
@@ -96,6 +98,7 @@ namespace ya
 		void upSlashEndEvent();
 		void downSlashEndEvent();
 		void recoilEndEvent();
+		void spikeCompleteEvent();
 		void dashEndEvent();
 		void deathEndEvent();
 		void focusEndEvent();
@@ -142,7 +145,7 @@ namespace ya
 		bool recoilFlag			= false;
 		bool enterFlag			= false;
 		bool enterComplateFlag	= false;
-
+		bool spikeFlag			= false;
 		// sound
 		class Sound* walkSound;
 		class Sound* damageSound;

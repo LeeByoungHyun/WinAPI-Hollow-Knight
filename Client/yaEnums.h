@@ -19,6 +19,7 @@ enum class eLayerType
 	BG,
 	BGObject,
 	Object,
+	Spike,
 	Ground,
 	BackEffect,
 	Monster,

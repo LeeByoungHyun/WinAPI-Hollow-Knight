@@ -26,6 +26,7 @@
 #include "FireballCastEffectRight.h"
 #include "SlashEffect.h"
 #include "SlashAltEffect.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -72,6 +73,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_FireballCast\\right", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\left", Vector2::Zero, 0.05f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Recoil\\right", Vector2::Zero, 0.05f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Spike\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Spike\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\left", Vector2::Zero, 1.0f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Stun\\right", Vector2::Zero, 1.0f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Death\\neutral", Vector2::Zero, 0.066f);
@@ -203,7 +206,7 @@ namespace ya
 				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil)
 				&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
 				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball)
-				&& (mState != ePlayerState::DownSlash))
+				&& (mState != ePlayerState::DownSlash) && (mState != ePlayerState::Spike))
 			{
 				mState = ePlayerState::Fall;
 				idleFlag = false;
@@ -267,6 +270,10 @@ namespace ya
 			recoil();
 			break;
 
+		case ya::Player::ePlayerState::Spike:
+			spike();
+			break;
+
 		case ya::Player::ePlayerState::Death:
 			death();
 			break;
@@ -328,14 +335,28 @@ namespace ya
 
 			// 충돌한 객체가 땅일 경우 idle
 			case eLayerType::Ground:
-				mState = ePlayerState::Idle;
-				if (mDirection == eDirection::Left)
-					mAnimator->Play(L"Knight_Idleleft", true);
-				else if (mDirection == eDirection::Right)
-					mAnimator->Play(L"Knight_Idleright", true);
+				if (mState != ePlayerState::Spike)
+				{
+					mState = ePlayerState::Idle;
+					if (mDirection == eDirection::Left)
+						mAnimator->Play(L"Knight_Idleleft", true);
+					else if (mDirection == eDirection::Right)
+						mAnimator->Play(L"Knight_Idleright", true);
 
-				mRigidBody->SetGround(true);
-				landSound->Play(false);
+					mRigidBody->SetGround(true);
+					landSound->Play(false);
+				}
+				else
+				{
+					mRigidBody->SetGround(true);
+				}
+				
+				break;
+
+				// spike
+			case eLayerType::Spike:
+				mState = ePlayerState::Spike;
+				spikeFlag = false;
 				break;
 			}
 		}
@@ -1067,6 +1088,44 @@ namespace ya
 		}
 	}
 
+	void Player::spike()
+	{
+		if (spikeFlag == false)
+		{
+			invincibilityFlag = true;
+			hp -= 1;	// 피격당한 오브젝트의 공격력 값을 가져와야함
+			if (mDirection == eDirection::Left)
+				mAnimator->Play(L"Knight_Spikeleft", false);
+
+			else if (mDirection == eDirection::Right)
+				mAnimator->Play(L"Knight_Spikeright", false);
+
+			damageSound->Play(false);
+			spikeFlag = true;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime < 0.2f)
+		{
+			mRigidBody->SetVelocity((Vector2::Zero));
+		}
+
+		if (mTime >= 0.2f)
+		{
+			mRigidBody->SetGround(false);
+			Vector2 velocity;
+			if (mDirection == eDirection::Left)
+				velocity = Vector2(200.0f, -200.0f);
+			else if (mDirection == eDirection::Right)
+				velocity = Vector2(-200.0f, -200.0f);
+
+			Fade::GetInstance()->SetFadeColor(Fade::eColor::Black);
+			Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+
 	void Player::death()
 	{
 		if (deathFlag == false)
@@ -1396,6 +1455,10 @@ namespace ya
 		}
 
 		invincibilityFlag = false;
+	}
+
+	void Player::spikeCompleteEvent()
+	{
 	}
 
 	void Player::dashEndEvent()

@@ -23,10 +23,13 @@ namespace ya
 
 	void Fade::Initialize()
 	{
-		mImage = ResourceManager::Load<Image>(L"fade", L"..\\Resources\\Fade.bmp");
+		mWhite = ResourceManager::Load<Image>(L"fadeWhite", L"..\\Resources\\Fade.bmp");
+		mBlack = ResourceManager::Load<Image>(L"fadeBlack", L"..\\Resources\\FadeBlack.bmp");
+		mImage = mWhite;
 		tr = AddComponent<Transform>();
 
 		mState = eFadeState::Neutral;
+		mColor = eColor::White;
 
 		GameObject::Initialize();
 	}
@@ -84,6 +87,14 @@ namespace ya
 
 	}
 
+	void Fade::SetFadeColor(eColor color)
+	{
+		if (color == eColor::White)
+			mImage = mWhite;
+		else if (color == eColor::Black)
+			mImage = mBlack;
+	}
+
 	void Fade::neutral()
 	{
 
@@ -91,7 +102,7 @@ namespace ya
 
 	void Fade::fadeIn()
 	{
-		alpha -= 255 * Time::DeltaTime();
+		alpha -= FadeSpeed * Time::DeltaTime();
 		if (alpha <= 0)
 		{
 			alpha = 0;
@@ -101,7 +112,7 @@ namespace ya
 
 	void Fade::fadeOut()
 	{
-		alpha += 255 * Time::DeltaTime();
+		alpha += FadeSpeed * Time::DeltaTime();
 		if (alpha >= 255)
 		{
 			alpha = 255;

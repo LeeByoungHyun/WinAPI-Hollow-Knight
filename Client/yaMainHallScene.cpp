@@ -24,6 +24,7 @@
 #include "HPobject05.h"
 #include "TestCollider.h"
 #include "Fade.h"
+#include "Spike.h"
 
 namespace ya
 {
@@ -47,6 +48,8 @@ namespace ya
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+
+		object::Instantiate<Spike>(Vector2(1300.0f, 1200.0f), eLayerType::Spike);
 
 		fade = ya::Fade::GetInstance();
 		scene->AddGameObject(fade, eLayerType::Fade);
@@ -114,8 +117,8 @@ namespace ya
 		mTime += Time::DeltaTime();
 		if (mTime >= 2.0f)
 		{
+			//fade->SetFadeColor(Fade::eColor::Black);
 			//fade->SetFadeState(Fade::eFadeState::FadeOut);
-			//= 0.0f;
 		}
 	}
 
@@ -140,6 +143,7 @@ namespace ya
 
 		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Spike, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Object, true);
 

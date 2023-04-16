@@ -15,6 +15,12 @@ namespace ya
 			FadeOut
 		};
 
+		enum class eColor
+		{
+			White,
+			Black
+		};
+
 		Fade();
 		~Fade();
 
@@ -32,15 +38,21 @@ namespace ya
 		virtual void Release() override;
 
 		void SetFadeState(eFadeState state) { mState = state; }
+		void SetFadeSpeed(int speed) { FadeSpeed = speed; }
+		void SetFadeColor(eColor color);
 
 	private:
+		Image* mWhite;
+		Image* mBlack;
 		Image* mImage;
 		Transform* tr;
 		class Animator* mAnimator;
 		HDC* mHdc;
 		eFadeState mState;
-		int alpha = 0;
+		eColor mColor;
 
+		int alpha = 0;
+		int FadeSpeed = 255;
 		void neutral();
 		void fadeIn();
 		void fadeOut();

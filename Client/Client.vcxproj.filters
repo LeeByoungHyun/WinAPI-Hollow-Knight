@@ -227,6 +227,9 @@
     <Filter Include="Contents\Objects\Struct\Fade">
       <UniqueIdentifier>{77e3c445-c1ca-495b-85e6-2dcb9ec6a73f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\Spike">
+      <UniqueIdentifier>{a82e4674-ca67-4f77-a7df-ba635b856a66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -508,6 +511,9 @@
     <ClInclude Include="Fade.h">
       <Filter>Contents\Objects\Struct\Fade</Filter>
     </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>Contents\Objects\Struct\Spike</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -767,6 +773,9 @@
     </ClCompile>
     <ClCompile Include="Fade.cpp">
       <Filter>Contents\Objects\Struct\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="Spike.cpp">
+      <Filter>Contents\Objects\Struct\Spike</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
