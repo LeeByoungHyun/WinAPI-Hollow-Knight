@@ -93,6 +93,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Enter\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WakeUp\\neutral", Vector2::Zero, 0.066f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
@@ -118,6 +119,7 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpleft") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Enterneutral") = std::bind(&Player::enterComplateEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_WakeUpneutral") = std::bind(&Player::wakeUpCompleteEvent, this);
 
 		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight\\Knight Walk.wav");
 		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight\\Knight_damage.wav");
@@ -180,6 +182,7 @@ namespace ya
 			downSlashFlag = false;
 			dashFlag = false;
 			deathFlag = false;
+			//invincibilityFlag = false;
 			focusFlag = false;
 			focusEndFlag = false;
 			focusGetFlag = false;
@@ -188,9 +191,12 @@ namespace ya
 			jumpFlag = false;
 			doubleJumpFlag = false;
 			fallFlag = false;
+			stunFlag = false;
+			recoilFlag = false;
 			enterFlag = false;
 			enterComplateFlag = false;
-			//invincibilityFlag = false;
+			spikeFlag = false;
+			wakeUpFlag = false;
 
 			// 속도 0으로
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -300,6 +306,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::Enter:
 			enter();
+			break;
+
+		case ya::Player::ePlayerState::WakeUp:
+			wakeUp();
 			break;
 
 		default:
@@ -1305,6 +1315,16 @@ namespace ya
 		}
 	}
 
+	void Player::wakeUp()
+	{
+		if (wakeUpFlag == false)
+		{
+			mDirection = eDirection::Left;
+			mAnimator->Play(L"Knight_WakeUpneutral", false);
+			wakeUpFlag = true;
+		}
+	}
+
 	void Player::slashEndEvent()
 	{
 		// 공중, 지상일 경우 구분
@@ -1583,5 +1603,10 @@ namespace ya
 	void Player::enterComplateEvent()
 	{
 		enterComplateFlag = true;
+	}
+	void Player::wakeUpCompleteEvent()
+	{
+		mState = ePlayerState::Idle;
+		invincibilityFlag = false;
 	}
 }

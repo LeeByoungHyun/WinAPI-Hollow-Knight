@@ -49,7 +49,6 @@ namespace ya
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
-		object::Instantiate<Spike>(Vector2(1300.0f, 1200.0f), eLayerType::Spike);
 
 		fade = ya::Fade::GetInstance();
 		scene->AddGameObject(fade, eLayerType::Fade);

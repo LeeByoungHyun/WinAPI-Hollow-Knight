@@ -27,7 +27,8 @@ namespace ya
 			FocusGetOnce,
 			Death,
 			CastFireball,
-			Enter
+			Enter,
+			WakeUp
 		};
 
 		enum class eDirection
@@ -92,6 +93,7 @@ namespace ya
 		void focusGet();
 		void focusGetOnce();
 		void enter();
+		void wakeUp();
 
 		void slashEndEvent();
 		void slashAltEndEvent();
@@ -108,6 +110,7 @@ namespace ya
 		void castFireballEndEvent();
 		void doubleJumpEndEvent();
 		void enterComplateEvent();
+		void wakeUpCompleteEvent();
 
 	private:
 		class Transform* tr;
@@ -146,6 +149,7 @@ namespace ya
 		bool enterFlag			= false;
 		bool enterComplateFlag	= false;
 		bool spikeFlag			= false;
+		bool wakeUpFlag			= false;
 		// sound
 		class Sound* walkSound;
 		class Sound* damageSound;

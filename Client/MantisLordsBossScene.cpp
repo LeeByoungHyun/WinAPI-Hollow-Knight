@@ -28,6 +28,8 @@
 #include "HPobject03.h"
 #include "HPobject04.h"
 #include "HPobject05.h"
+#include "Spike.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -76,6 +78,10 @@ namespace ya
 		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 		object::Instantiate<MantisBossWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<MantisBossWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
+		object::Instantiate<Spike>(Vector2(1724.0f - 691.0f, 1300.0f), eLayerType::Spike);
+		object::Instantiate<Spike>(Vector2(1724.0f + 691.0f, 1300.0f), eLayerType::Spike);
+		object::Instantiate<Spike>(Vector2(1724.0f - 631.0f, 1300.0f), eLayerType::Spike);
+		object::Instantiate<Spike>(Vector2(1724.0f + 631.0f, 1300.0f), eLayerType::Spike);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
@@ -110,6 +116,12 @@ namespace ya
 		scene->AddGameObject(hp05, eLayerType::UI);
 		hp05->Initialize();
 		hp05->SetType(eLayerType::UI);
+
+		fade = ya::Fade::GetInstance();
+		scene->AddGameObject(fade, eLayerType::Fade);
+		fade->Initialize();
+		fade->SetType(eLayerType::Fade);
+
 	}
 
 	void MantisLordsBossScene::Update()
@@ -156,6 +168,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Spike, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(1725.0f);

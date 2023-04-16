@@ -10,6 +10,7 @@
 #include "yaCollider.h"
 
 #include "yaPlayer.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -37,6 +38,22 @@ namespace ya
 	void Spike::Update()
 	{
 		GameObject::Update();
+
+		if (testFlag == true)
+		{
+			mTime += Time::DeltaTime();
+
+			if (mTime >= 2.0f)
+			{
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				Player::GetInstance()->SetPlayerState(Player::ePlayerState::WakeUp);
+				Player::GetInstance()->GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 100.0f));
+				Player::GetInstance()->GetComponent<RigidBody>()->SetGround(true);
+				Player::GetInstance()->GetComponent<RigidBody>()->SetVelocity(Vector2::Zero);
+				testFlag = false;
+				mTime = 0.0f;
+			}
+		}
 	}
 
 	void Spike::Render(HDC hdc)
@@ -69,6 +86,7 @@ namespace ya
 			if (mplayer == nullptr)
 				return;
 
+			testFlag = true;
 			//mplayer->SetPlayerState(Player::ePlayerState::Recoil);
 		}
 	}

@@ -23,6 +23,9 @@ namespace ya
 		class Image* mImage;
 		class Transform* tr;
 		class Collider* mCollider;
+
+		double mTime = 0.0f;
+		bool testFlag = false;
 	};
 }
 
