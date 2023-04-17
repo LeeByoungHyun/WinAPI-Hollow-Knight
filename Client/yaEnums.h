@@ -25,6 +25,7 @@ enum class eLayerType
 	Monster,
 	Player,
 	Hornet,
+	FalseKnight,
 	NeilEffect,
 	SpellEffect,
 	Effect,

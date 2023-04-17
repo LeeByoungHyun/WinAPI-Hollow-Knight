@@ -12,6 +12,7 @@
 
 #include "yaPlayer.h"
 #include "Hornet.h"
+#include "FalseKnight.h"
 
 namespace ya
 {
@@ -125,7 +126,18 @@ namespace ya
 				hornetPos.x = objectPos.x - hornetCol->GetSize().x / 2 - 10.0f;
 				hornetTr->SetPos(hornetPos);
 			}
+		}
+		if (otherType == eLayerType::FalseKnight)
+		{
+			FalseKnight* mFalseKnight = FalseKnight::GetInstance();
+			if (mFalseKnight == nullptr)
+				return;
 
+			Transform* falseTr = mFalseKnight->GetComponent<Transform>();
+			Vector2 falsePos = falseTr->GetPos();
+
+			falsePos.x -= 1.0f;
+			falseTr->SetPos(falsePos);
 		}
 	}
 

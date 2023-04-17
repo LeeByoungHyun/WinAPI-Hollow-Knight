@@ -603,11 +603,11 @@ namespace ya
 		{
 			swingSound->Play(false);
 			
-			if (rageFlag == true && rageCount >= 1)
+			if (rageFlag == true)
 			{
 				// 세부위치조정
 				Vector2 pos = tr->GetPos();
-				pos.y += 20.0f;
+				pos.y = 1200.0f;
 				tr->SetPos(pos);
 			}
 
@@ -641,13 +641,22 @@ namespace ya
 	{
 		if (attackRecoverFlag == false)
 		{
-			// 세부위치조정
-			Vector2 pos = tr->GetPos();
-			pos.y -= 20.0f;
-			tr->SetPos(pos);
+			if (rageFlag == false)
+			{
+				// 세부위치조정
+				Vector2 pos = tr->GetPos();
+				pos.y -= 20.0f;
+				tr->SetPos(pos);
+			}
 
-			int a = 0;
-			
+			if (rageFlag == true)
+			{
+				// 세부위치조정
+				Vector2 pos = tr->GetPos();
+				pos.y = 1170.0f;
+				tr->SetPos(pos);
+			}
+
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

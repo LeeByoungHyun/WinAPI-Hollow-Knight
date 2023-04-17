@@ -12,6 +12,7 @@
 
 #include "yaPlayer.h"
 #include "Hornet.h"
+#include "FalseKnight.h"
 
 namespace ya
 {
@@ -71,7 +72,7 @@ namespace ya
 
 	void HornetWallLeft::OnCollisionEnter(Collider* other)
 	{
-
+		
 	}
 
 	void HornetWallLeft::OnCollisionStay(Collider* other)
@@ -126,6 +127,18 @@ namespace ya
 				hornetTr->SetPos(hornetPos);
 			}
 
+		}
+		if (otherType == eLayerType::FalseKnight)
+		{
+			FalseKnight* mFalseKnight = FalseKnight::GetInstance();
+			if (mFalseKnight == nullptr)
+				return;
+
+			Transform* falseTr = mFalseKnight->GetComponent<Transform>();
+			Vector2 falsePos = falseTr->GetPos();
+
+			falsePos.x += 1.0f;
+			falseTr->SetPos(falsePos);
 		}
 	}
 

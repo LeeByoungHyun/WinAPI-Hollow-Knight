@@ -20,6 +20,8 @@
 #include "HPobject03.h"
 #include "HPobject04.h"
 #include "HPobject05.h"
+#include "HornetWallLeft.h"
+#include "HornetWallRight.h"
 
 namespace ya
 {
@@ -41,12 +43,14 @@ namespace ya
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 991.0f, 1300.0f), eLayerType::Wall);
+		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 891.0f, 1300.0f), eLayerType::Wall);
 
 		mFalseManager = object::Instantiate<FalseKnightManager>(eLayerType::Manager);
 		mFalseKnight = ya::FalseKnight::GetInstance();
-		scene->AddGameObject(mFalseKnight, eLayerType::Monster);
+		scene->AddGameObject(mFalseKnight, eLayerType::FalseKnight);
 		mFalseKnight->Initialize();
-		mFalseKnight->SetType(eLayerType::Monster);
+		mFalseKnight->SetType(eLayerType::FalseKnight);
 
 		mPlayer = ya::Player::GetInstance();
 		scene->AddGameObject(mPlayer, eLayerType::Player);
@@ -123,12 +127,15 @@ namespace ya
 	{
 		Scene::Enter();
 
-		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::FalseKnight, true);
+		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::FalseKnight, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::FalseKnight, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Wall, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(1525.0f);
