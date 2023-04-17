@@ -58,28 +58,30 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		// 카메라 위치에 맞추어 좌표 계산
-		tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-		/*
-		pos = Camera::CalculatePos(pos);
-		pos.x -= mImage->GetWidth() / 2;
-		pos.y -= mImage->GetHeight();
-		*/
-		BLENDFUNCTION func = {};
-		func.BlendOp = AC_SRC_OVER;
-		func.BlendFlags = 0;
-		func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
-		func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
+		if (neutralFlag == false)
+		{
+			// 카메라 위치에 맞추어 좌표 계산
+			tr = GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+			/*
+			pos = Camera::CalculatePos(pos);
+			pos.x -= mImage->GetWidth() / 2;
+			pos.y -= mImage->GetHeight();
+			*/
+			BLENDFUNCTION func = {};
+			func.BlendOp = AC_SRC_OVER;
+			func.BlendFlags = 0;
+			func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
+			func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
 
-		AlphaBlend(hdc, 0, 0
-			, mImage->GetWidth()
-			, mImage->GetHeight()
-			, mImage->GetHdc()
-			, 0, 0
-			, mImage->GetWidth(), mImage->GetHeight()
-			, func);
-
+			AlphaBlend(hdc, 0, 0
+				, mImage->GetWidth()
+				, mImage->GetHeight()
+				, mImage->GetHdc()
+				, 0, 0
+				, mImage->GetWidth(), mImage->GetHeight()
+				, func);
+		}
 	}
 	void Fade::Release()
 	{
@@ -97,12 +99,16 @@ namespace ya
 
 	void Fade::neutral()
 	{
-
+		if (neutralFlag == false)
+		{
+			neutralFlag = true;
+		}
 	}
 
 	void Fade::fadeIn()
 	{
 		alpha -= FadeSpeed * Time::DeltaTime();
+		neutralFlag = false;
 		if (alpha <= 0)
 		{
 			alpha = 0;
@@ -113,6 +119,7 @@ namespace ya
 	void Fade::fadeOut()
 	{
 		alpha += FadeSpeed * Time::DeltaTime();
+		neutralFlag = false;
 		if (alpha >= 255)
 		{
 			alpha = 255;

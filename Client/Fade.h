@@ -57,6 +57,8 @@ namespace ya
 		void fadeIn();
 		void fadeOut();
 
+		bool neutralFlag;
+
 		static Fade* instance;
 	};
 }
