@@ -27,6 +27,7 @@
 #include "SlashEffect.h"
 #include "SlashAltEffect.h"
 #include "Fade.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -1172,6 +1173,8 @@ namespace ya
 		}
 
 		mRigidBody->SetVelocity(Vector2::Zero);
+
+		SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() - 1.0f * Time::DeltaTime());
 
 		// 회복키에서 손 때면 회복종료
 		if (Input::GetKeyUp(eKeyCode::A))

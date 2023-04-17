@@ -182,6 +182,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SlashAltEffect.h" />
     <ClInclude Include="SlashEffect.h" />
+    <ClInclude Include="SoulUI.h" />
     <ClInclude Include="SphereBall.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="StunHead.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="PlayerSkull.cpp" />
     <ClCompile Include="SlashAltEffect.cpp" />
     <ClCompile Include="SlashEffect.cpp" />
+    <ClCompile Include="SoulUI.cpp" />
     <ClCompile Include="SphereBall.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="StunHead.cpp" />

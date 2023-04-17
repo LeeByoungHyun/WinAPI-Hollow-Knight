@@ -29,7 +29,7 @@ namespace ya
 		class HPobject03* hp03;
 		class HPobject04* hp04;
 		class HPobject05* hp05;
-
+		class SoulUI* soulUI;
 		double mTime = 0.0f;
 	};
 }
