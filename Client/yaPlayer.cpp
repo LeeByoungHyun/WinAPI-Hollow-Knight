@@ -454,6 +454,9 @@ namespace ya
 		// S 입력시 원거리 공격
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (SoulUI::GetInstance()->GetSoul() < 30)
+				return;
+
 			mState = ePlayerState::CastFireball;
 			idleFlag = false;
 			return;
@@ -462,6 +465,9 @@ namespace ya
 		// A 입력시 체력회복
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			if (SoulUI::GetInstance()->GetSoul() <= 0.0f)
+				return;
+
 			mState = ePlayerState::Focus;
 			idleFlag = false;
 			return;
@@ -474,8 +480,6 @@ namespace ya
 			mDirection = eDirection::Left;
 		if (Input::GetKey(eKeyCode::RIGHT))
 			mDirection = eDirection::Right;
-
-		
 
 		// 이동키에서 손을 땔 경우 Idle상태로 변경
 		if (Input::GetKeyUp(eKeyCode::LEFT) || Input::GetKeyUp(eKeyCode::RIGHT))
@@ -526,6 +530,9 @@ namespace ya
 		// S 입력시 원거리 공격
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (SoulUI::GetInstance()->GetSoul() < 30)
+				return;
+
 			mState = ePlayerState::CastFireball;
 			walkSound->Stop(true);
 			return;
@@ -534,6 +541,9 @@ namespace ya
 		// A 입력시 체력회복
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			if (SoulUI::GetInstance()->GetSoul() <= 0.0f)
+				return;
+
 			mState = ePlayerState::Focus;
 			walkSound->Stop(true);
 			return;
@@ -833,6 +843,9 @@ namespace ya
 		// S 입력시 원거리 공격
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (SoulUI::GetInstance()->GetSoul() < 30)
+				return;
+
 			mState = ePlayerState::CastFireball;
 			jumpFlag = false;
 			return;
@@ -914,6 +927,9 @@ namespace ya
 		// S 입력시 원거리 공격
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (SoulUI::GetInstance()->GetSoul() < 30)
+				return;
+
 			mState = ePlayerState::CastFireball;
 			return;
 		}
@@ -1003,6 +1019,9 @@ namespace ya
 		// S 입력시 원거리 공격
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			if (SoulUI::GetInstance()->GetSoul() < 30)
+				return;
+
 			mState = ePlayerState::CastFireball;
 			fallFlag = false;
 			return;
