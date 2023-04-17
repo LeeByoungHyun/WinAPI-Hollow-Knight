@@ -94,7 +94,7 @@ namespace ya
 			playerTr->SetPos(playerPos);
 		}
 
-		else if (otherType == eLayerType::Monster)
+		else if (otherType == eLayerType::FalseKnight)
 		{
 			FalseKnight* mFalseKnight = FalseKnight::GetInstance();
 			if (mFalseKnight == nullptr)

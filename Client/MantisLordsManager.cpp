@@ -2,11 +2,14 @@
 #include "yaSceneManager.h"
 #include "yaTime.h"
 #include "yaObject.h"
+#include "yaResourceManager.h"
+#include "yaSound.h"
 
 #include "MantisLord1.h"
 #include "MantisLord2.h"
 #include "MantisLord3.h"
 #include "MantisLordsProjectile.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -35,6 +38,9 @@ namespace ya
 		projectile1->SetState(eState::Pause);
 		projectile2->SetState(eState::Pause);
 		projectile3->SetState(eState::Pause);
+
+		fade = ya::Fade::GetInstance();
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 	}
 
 	void MantisLordsManager::Update()
@@ -94,11 +100,23 @@ namespace ya
 		// ¸ðµç º¸½º°¡ Á×À¸¸é ¸ÞÀÎ È¦ ¾ÀÀ¸·Î º¯°æ
 		if (flag4 == true)
 		{
-			mTime += Time::DeltaTime();
-			if (mTime >= 3.0f)
+			if (mantisLord1->GetEndFlag() == true)
 			{
-				SceneManager::LoadScene(eSceneType::MainHall);
-				mTime = 0.0f;
+				mTime += Time::DeltaTime();
+
+				if (mTime >= 1.0f && flag == false)
+				{
+					fade->SetFadeColor(Fade::eColor::White);
+					fade->SetFadeState(Fade::eFadeState::FadeOut);
+					victorySound->Play(false);
+					flag = true;
+				}
+				if (mTime >= 6.0f)
+				{
+					//fade->SetFadeState(Fade::eFadeState::FadeIn);
+					SceneManager::LoadScene(eSceneType::MainHall);
+					mTime = 0.0f;
+				}
 			}
 		}
 

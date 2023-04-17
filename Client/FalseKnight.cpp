@@ -980,7 +980,7 @@ namespace ya
 	{
 		if (stunOpenedFlag == false)
 		{
-			StunHead* head = object::Instantiate<StunHead>(tr->GetPos(), eLayerType::Monster);
+			StunHead* head = object::Instantiate<StunHead>(tr->GetPos(), eLayerType::FalseKnight);
 			Vector2 headPos = head->GetComponent<Transform>()->GetPos();
 			switch (mDirection)
 			{

@@ -32,7 +32,8 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 160;
+		//hp = 160;
+		hp = 10;
 
 		mAnimator = AddComponent<Animator>();
 

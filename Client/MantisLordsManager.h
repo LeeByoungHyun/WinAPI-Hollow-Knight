@@ -51,6 +51,8 @@ namespace ya
 		class MantisLordsProjectile* projectile1;
 		class MantisLordsProjectile* projectile2;
 		class MantisLordsProjectile* projectile3;
+		class Fade* fade;
+		class Sound* victorySound;
 
 		ePhaseState mPhase;
 		class Scene* activeScene;
@@ -66,6 +68,7 @@ namespace ya
 
 		bool mantis2DeathFlag = false;
 		bool mantis3DeathFlag = false;
+		bool flag = false;
 	};
 }
 

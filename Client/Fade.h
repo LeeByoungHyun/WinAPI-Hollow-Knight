@@ -51,7 +51,7 @@ namespace ya
 		eFadeState mState;
 		eColor mColor;
 
-		int alpha = 0;
+		int alpha;
 		int FadeSpeed = 255;
 		void neutral();
 		void fadeIn();

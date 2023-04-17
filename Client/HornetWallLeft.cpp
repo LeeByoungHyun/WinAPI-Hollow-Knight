@@ -137,6 +137,15 @@ namespace ya
 			Transform* falseTr = mFalseKnight->GetComponent<Transform>();
 			Vector2 falsePos = falseTr->GetPos();
 
+			Collider* hornetCol = mFalseKnight->GetComponent<Collider>();
+			Collider* objectCol = this->GetComponent<Collider>();
+
+			Transform* hornetTr = mFalseKnight->GetComponent<Transform>();
+			Transform* objectTr = this->GetComponent<Transform>();
+
+			Vector2 hornetPos = hornetTr->GetPos();
+			Vector2 objectPos = objectTr->GetPos();
+
 			falsePos.x += 1.0f;
 			falseTr->SetPos(falsePos);
 		}

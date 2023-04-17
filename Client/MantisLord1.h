@@ -65,6 +65,7 @@ namespace ya
 		eMantisLordsState GetState() { return mState; }
 		void SetState(eMantisLordsState state) { mState = state; }
 		eDirection GetDirection() { return mDirection; }
+		bool GetEndFlag() { return endFlag; }
 
 	private:
 		void idle();
@@ -91,6 +92,8 @@ namespace ya
 		void dStab();
 		void dStabLand();
 		void dStabLeave();
+
+		void throneBowCompleteEvent();
 
 	private:
 		eMantisLordsState mState;
@@ -126,6 +129,7 @@ namespace ya
 		bool gesture2Flag		= false;
 		bool deathFlag			= false;
 		bool deathLeaveFlag		= false;
+		bool endFlag			= false;
 
 		class Sound* landGroundSound;
 		class Sound* jumpOfGroundSound;

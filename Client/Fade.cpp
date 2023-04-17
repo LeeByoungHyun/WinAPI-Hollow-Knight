@@ -27,6 +27,7 @@ namespace ya
 		mBlack = ResourceManager::Load<Image>(L"fadeBlack", L"..\\Resources\\FadeBlack.bmp");
 		mImage = mWhite;
 		tr = AddComponent<Transform>();
+		alpha = 0;
 
 		mState = eFadeState::Neutral;
 		mColor = eColor::White;
@@ -63,15 +64,11 @@ namespace ya
 			// 카메라 위치에 맞추어 좌표 계산
 			tr = GetComponent<Transform>();
 			Vector2 pos = tr->GetPos();
-			/*
-			pos = Camera::CalculatePos(pos);
-			pos.x -= mImage->GetWidth() / 2;
-			pos.y -= mImage->GetHeight();
-			*/
+
 			BLENDFUNCTION func = {};
 			func.BlendOp = AC_SRC_OVER;
 			func.BlendFlags = 0;
-			func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
+			func.AlphaFormat = AC_SRC_ALPHA;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
 			func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
 
 			AlphaBlend(hdc, 0, 0

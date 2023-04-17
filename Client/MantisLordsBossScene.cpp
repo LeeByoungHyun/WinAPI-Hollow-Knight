@@ -146,6 +146,11 @@ namespace ya
 			enterFlag = false;
 			mTime = 0.0f;
 		}
+
+		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::ThroneBow)
+		{
+			mantisLordsTheme->Stop(true);
+		}
 	}
 
 	void MantisLordsBossScene::Render(HDC hdc)

@@ -33,8 +33,8 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 210;
-
+		//hp = 210;
+		hp = 10;
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\left", Vector2::Zero, 0.1f);
@@ -70,6 +70,8 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Leave(Part 2)\\right", Vector2::Zero, 0.02f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Wall Ready\\right", Vector2::Zero, 0.1f);
+
+		mAnimator->GetCompleteEvent(L"Mantis Lords_Throne Bowneutral") = std::bind(&MantisLord1::throneBowCompleteEvent, this);
 
 		landGroundSound = ResourceManager::Load<Sound>(L"MantisLords_LandonGround01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_Land on Ground.wav");
 		jumpOfGroundSound = ResourceManager::Load<Sound>(L"MantisLordsJumpoffGround01", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_jump off Ground.wav");
@@ -1033,5 +1035,9 @@ namespace ya
 
 			return;
 		}
+	}
+	void MantisLord1::throneBowCompleteEvent()
+	{
+		endFlag = true;
 	}
 }

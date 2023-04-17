@@ -32,8 +32,8 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		hp = 160;
-
+		//hp = 160;
+		hp = 10;
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\left", Vector2::Zero, 0.1f);
