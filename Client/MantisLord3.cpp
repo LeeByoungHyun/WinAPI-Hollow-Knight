@@ -12,6 +12,7 @@
 
 #include "yaPlayer.h"
 #include "LongPlatform.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -32,8 +33,8 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		//hp = 160;
-		hp = 10;
+		hp = 160;
+		//hp = 10;
 
 		mAnimator = AddComponent<Animator>();
 
@@ -264,6 +265,7 @@ namespace ya
 			{
 			case eLayerType::NeilEffect:
 				hp -= Player::GetInstance()->GetNeilAtk();
+				SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 				damagedSound->Play(false);
 				break;
 

@@ -20,6 +20,7 @@
 #include "SphereBall.h"
 #include "HornetNeedle.h"
 #include "CounterAttackCollider.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -489,6 +490,7 @@ namespace ya
 				{
 					hp -= Player::GetInstance()->GetNeilAtk();
 					stunHp -= Player::GetInstance()->GetNeilAtk();
+					SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 					hitSound->Play(false);
 
 					if (stunHp <= 0)	// stun
@@ -541,6 +543,7 @@ namespace ya
 				else	// stun stateÀÏ °æ¿ì
 				{
 					hp -= Player::GetInstance()->GetNeilAtk();
+					SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 					mState = eHornetState::Idle;
 					stunHp = 300;
 					hitSound->Play(false);

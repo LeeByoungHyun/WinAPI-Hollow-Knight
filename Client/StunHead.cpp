@@ -13,6 +13,7 @@
 
 #include "yaPlayer.h"
 #include "FalseKnight.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -113,6 +114,7 @@ namespace ya
 		case eLayerType::NeilEffect:
 			mState = eStunHeadState::Hit;
 			hp -= mPlayer->GetNeilAtk();
+			SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 			mFalseKnight->SetTrueHP(hp);
 			break;
 

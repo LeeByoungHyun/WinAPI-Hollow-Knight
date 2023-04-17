@@ -30,6 +30,7 @@
 #include "HPobject05.h"
 #include "Spike.h"
 #include "Fade.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -116,6 +117,10 @@ namespace ya
 		scene->AddGameObject(hp05, eLayerType::UI);
 		hp05->Initialize();
 		hp05->SetType(eLayerType::UI);
+		soulUI = ya::SoulUI::GetInstance();
+		scene->AddGameObject(soulUI, eLayerType::UI);
+		soulUI->Initialize();
+		soulUI->SetType(eLayerType::UI);
 
 		fade = ya::Fade::GetInstance();
 		scene->AddGameObject(fade, eLayerType::Fade);

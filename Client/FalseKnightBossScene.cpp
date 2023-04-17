@@ -22,6 +22,7 @@
 #include "HPobject05.h"
 #include "HornetWallLeft.h"
 #include "HornetWallRight.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -84,6 +85,10 @@ namespace ya
 		scene->AddGameObject(hp05, eLayerType::UI);
 		hp05->Initialize();
 		hp05->SetType(eLayerType::UI);
+		soulUI = ya::SoulUI::GetInstance();
+		scene->AddGameObject(soulUI, eLayerType::UI);
+		soulUI->Initialize();
+		soulUI->SetType(eLayerType::UI);
 	}
 
 	void FalseKnightBossScene::Update()

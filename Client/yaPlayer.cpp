@@ -1039,6 +1039,7 @@ namespace ya
 				break;
 			}
 			fireballSound->Play(false);
+			SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() - 30.0f);
 		}
 
 		mRigidBody->SetVelocity((Vector2::Zero));
@@ -1174,7 +1175,12 @@ namespace ya
 
 		mRigidBody->SetVelocity(Vector2::Zero);
 
-		SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() - 1.0f * Time::DeltaTime());
+		if (SoulUI::GetInstance()->GetSoul() <= 0.0f)
+		{
+			focusFlag = false; 
+			mState = ePlayerState::FocusEnd;
+		}
+		SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() - 30.0f * Time::DeltaTime());
 
 		// 회복키에서 손 때면 회복종료
 		if (Input::GetKeyUp(eKeyCode::A))
@@ -1245,6 +1251,13 @@ namespace ya
 			focusSuccessSound->Play(false);
 			focusChargeSound->Play(false);
 		}
+
+		if (SoulUI::GetInstance()->GetSoul() <= 0.0f)
+		{
+			focusFlag = false;
+			mState = ePlayerState::FocusEnd;
+		}
+		SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() - 30.0f * Time::DeltaTime());
 
 		// 회복키에서 손 때면 회복종료
 		if (Input::GetKeyUp(eKeyCode::A))

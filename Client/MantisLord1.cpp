@@ -13,6 +13,7 @@
 #include "yaPlayer.h"
 #include "LongPlatform.h"
 #include "MantisLordsProjectile.h"
+#include "SoulUI.h"
 
 namespace ya
 {
@@ -33,8 +34,8 @@ namespace ya
 		Transform* tr = GetComponent<Transform>();
 		player = Player::GetInstance();
 
-		//hp = 210;
-		hp = 10;
+		hp = 210;
+		//hp = 10;
 		mAnimator = AddComponent<Animator>();
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Mantis Lords\\Mantis Lords_Dash\\left", Vector2::Zero, 0.1f);
@@ -243,6 +244,7 @@ namespace ya
 			case eLayerType::NeilEffect:
 				hp -= Player::GetInstance()->GetNeilAtk();	
 				damagedSound->Play(false);
+				SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 				break;
 
 			case eLayerType::SpellEffect:
