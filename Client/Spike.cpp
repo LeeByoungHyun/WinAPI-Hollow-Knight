@@ -43,7 +43,7 @@ namespace ya
 		{
 			mTime += Time::DeltaTime();
 
-			if (mTime >= 2.0f)
+			if (mTime >= 3.0f)
 			{
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
 				Player::GetInstance()->SetPlayerState(Player::ePlayerState::WakeUp);

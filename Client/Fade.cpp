@@ -68,7 +68,7 @@ namespace ya
 			BLENDFUNCTION func = {};
 			func.BlendOp = AC_SRC_OVER;
 			func.BlendFlags = 0;
-			func.AlphaFormat = AC_SRC_ALPHA;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
+			func.AlphaFormat = 0;    // 24비트 = 0, 32비트 = AC_SRC_ALPHA
 			func.SourceConstantAlpha = alpha; // 0(투명) ~ 255(불투명) 알파값
 
 			AlphaBlend(hdc, 0, 0
@@ -120,7 +120,7 @@ namespace ya
 		if (alpha >= 255)
 		{
 			alpha = 255;
-			mState = eFadeState::Neutral;
+			//mState = eFadeState::Neutral;
 		}
 	}
 }

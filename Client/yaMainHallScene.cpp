@@ -117,13 +117,6 @@ namespace ya
 		{
 			SceneManager::LoadScene(eSceneType::HornetBoss);
 		}
-
-		mTime += Time::DeltaTime();
-		if (mTime >= 2.0f)
-		{
-			//fade->SetFadeColor(Fade::eColor::Black);
-			//fade->SetFadeState(Fade::eFadeState::FadeOut);
-		}
 	}
 
 	void MainHallScene::Render(HDC hdc)

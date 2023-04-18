@@ -39,7 +39,7 @@ namespace ya
 		projectile2->SetState(eState::Pause);
 		projectile3->SetState(eState::Pause);
 
-		fade = ya::Fade::GetInstance();
+		//fade = ya::Fade::GetInstance();
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 	}
 
@@ -106,14 +106,14 @@ namespace ya
 
 				if (mTime >= 1.0f && flag == false)
 				{
-					fade->SetFadeColor(Fade::eColor::White);
-					fade->SetFadeState(Fade::eFadeState::FadeOut);
+					Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
 					victorySound->Play(false);
 					flag = true;
 				}
-				if (mTime >= 6.0f)
+				if (mTime >= 5.0f)
 				{
-					//fade->SetFadeState(Fade::eFadeState::FadeIn);
+					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
 					SceneManager::LoadScene(eSceneType::MainHall);
 					mTime = 0.0f;
 				}
