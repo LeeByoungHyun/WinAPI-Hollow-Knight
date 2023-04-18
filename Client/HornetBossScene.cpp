@@ -21,6 +21,7 @@
 #include "HornetWallLeft.h"
 #include "HornetWallRight.h"
 #include "SoulUI.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -57,6 +58,8 @@ namespace ya
 		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
 
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
+
 		// UI
 		hpUI = ya::HPInterface::GetInstance();
 		scene->AddGameObject(hpUI, eLayerType::UI);
@@ -86,11 +89,34 @@ namespace ya
 		scene->AddGameObject(soulUI, eLayerType::UI);
 		soulUI->Initialize();
 		soulUI->SetType(eLayerType::UI);
+		fade = ya::Fade::GetInstance();
+		scene->AddGameObject(fade, eLayerType::Fade);
+		fade->Initialize();
+		fade->SetType(eLayerType::Fade);
 	}
 
 	void HornetBossScene::Update()
 	{
 		Scene::Update();
+
+		if (mHornet->GetHornetState() == Hornet::eHornetState::Wounded)
+		{
+			mTime += Time::DeltaTime();
+
+			if (mTime >= 4.0f && flag == false)
+			{
+				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+				victorySound->Play(false);
+				flag = true;
+			}
+			if (mTime >= 8.0f)
+			{
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				SceneManager::LoadScene(eSceneType::MainHall);
+				mTime = 0.0f;
+			}
+		}
 	}
 
 	void HornetBossScene::Render(HDC hdc)
