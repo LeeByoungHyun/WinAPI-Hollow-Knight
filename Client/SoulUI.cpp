@@ -41,7 +41,6 @@ namespace ya
 		tr = AddComponent<Transform>();
 		tr->SetPos(Vector2(51.0f, 67.0f));
 		tr->SetSize(Vector2(0.7f, 0.7f));
-		
 	}
 
 	void SoulUI::Update()
@@ -53,13 +52,22 @@ namespace ya
 		if (soul <= 0.0f)
 			soul = 0.0f;
 
-		UINT empty = 100 - soul;
-		float mImageHeight = (mImage->GetHeight() / 100) * soul;
-		float mImagePos = (mImage->GetHeight() / 100) * empty;
+		float remain = 100 - soul;
+		//float mImageHeight = (mImage->GetHeight() / 100) * soul;
+		float mImagePos = (mImage->GetHeight() / 100.0f) * remain;
 
 		Vector2 pos = tr->GetPos();
 		pos.y = 67 + mImagePos * 0.7f;
 		tr->SetPos(pos);
+
+		HPEN hpen = CreatePen(PS_SOLID, 1, RGB(255, 0, 255));
+		HPEN oldPen = (HPEN)::SelectObject(temp->GetHdc(), hpen);
+		HBRUSH hBrush = CreateSolidBrush(RGB(255, 0, 255));
+		HBRUSH oldBrush = (HBRUSH)::SelectObject(temp->GetHdc(), hBrush);
+
+		Rectangle(temp->GetHdc(), 0, 0, 129, 126);
+		::DeleteObject(hpen);
+		DeleteObject(hBrush);
 
 		BitBlt(temp->GetHdc()
 			, 0, 0	// soul이 줄어들수록 증가해야 함
@@ -67,6 +75,8 @@ namespace ya
 			, mImage->GetHdc()	
 			, 0, mImagePos	// soul이 줄어들수록 감소해야 함
 			, SRCCOPY);		
+
+		//
 	}
 
 	void SoulUI::Render(HDC hdc)
@@ -76,7 +86,7 @@ namespace ya
 		Vector2 pos = tr->GetPos();
 		TransparentBlt(hdc
 			, pos.x, pos.y								
-			, temp->GetWidth() * 0.7, temp->GetHeight()* 0.7	
+			, temp->GetWidth() * 0.7, temp->GetHeight() * 0.7	
 			, temp->GetHdc()							
 			, 0, 0										
 			, temp->GetWidth(), temp->GetHeight()	
