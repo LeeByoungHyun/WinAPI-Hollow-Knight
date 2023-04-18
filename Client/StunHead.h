@@ -40,6 +40,7 @@ namespace ya
 
 		void hitCompleteEvent();
 		void deathHead1CompleteEvent();
+		void deathHead2CompleteEvent();
 
 	private:
 		class Animator* mAnimator;

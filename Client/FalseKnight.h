@@ -71,6 +71,7 @@ namespace ya
 		void InitializeFlag();
 		void SetRageFlag(bool flag) { rageFlag = flag; }
 		bool GetRageFlag() { return rageFlag; }
+		bool GetDeathFlag() { return deathFlag; }
 
 	private:
 		void idle();
@@ -160,6 +161,7 @@ namespace ya
 		class Sound* rollSound;
 		class Sound* stunSound;
 		class FalseAttackCollider* atCol;
+		class FalseAttackWave* FAWave;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static FalseKnight* instance;

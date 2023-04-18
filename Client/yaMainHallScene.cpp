@@ -57,7 +57,7 @@ namespace ya
 		fade->SetType(eLayerType::Fade);
 
 		// test
-		object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Object);
+		//object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Object);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
@@ -65,7 +65,7 @@ namespace ya
 		mPlayer->Initialize();
 		mPlayer->SetType(eLayerType::Player);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1400.0f, 1300.0f));
 
 		// UI
 		hpUI = ya::HPInterface::GetInstance();

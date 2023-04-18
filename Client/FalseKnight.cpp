@@ -14,6 +14,7 @@
 #include "yaPlayer.h"
 #include "StunHead.h"
 #include "FalseAttackCollider.h"
+#include "FalseAttackWave.h"
 
 namespace ya
 {
@@ -132,6 +133,7 @@ namespace ya
 		mRigidbody->SetGravity(Vector2(0.0f, 2000.0f));
 
 		atCol = object::Instantiate<FalseAttackCollider>(eLayerType::Monster);
+		FAWave = object::Instantiate<FalseAttackWave>(eLayerType::Monster);
 
 		GameObject::Initialize();
 	}
@@ -1017,7 +1019,10 @@ namespace ya
 
 	void FalseKnight::death()
 	{
-
+		if (deathFlag == false)
+		{
+			deathFlag = true;
+		}
 	}
 
 	void FalseKnight::jumpAnticipateCompleteEvent()
@@ -1062,6 +1067,7 @@ namespace ya
 		mState = eFalseKnightState::AttackRecover;
 		strikeGroundSound->Play(false);
 		atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Disable);
+		//FAWave->SetFAState(FalseAttackWave::eFalseAttackWaveState::Active);
 	}
 
 	void FalseKnight::attackRecoverCompleteEvent()

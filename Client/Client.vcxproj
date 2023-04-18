@@ -141,6 +141,7 @@
     <ClInclude Include="DownSlashEffect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="FalseAttackCollider.h" />
+    <ClInclude Include="FalseAttackWave.h" />
     <ClInclude Include="FalseBarrel.h" />
     <ClInclude Include="FalseKnight.h" />
     <ClInclude Include="FalseKnightBossScene.h" />
@@ -188,6 +189,9 @@
     <ClInclude Include="Spike.h" />
     <ClInclude Include="StunHead.h" />
     <ClInclude Include="TestCollider.h" />
+    <ClInclude Include="Wave01.h" />
+    <ClInclude Include="Wave02.h" />
+    <ClInclude Include="Wave03.h" />
     <ClInclude Include="yaCamera.h" />
     <ClInclude Include="yaDashEffectLeft.h" />
     <ClInclude Include="yaDashEffectRight.h" />
@@ -237,6 +241,7 @@
     <ClCompile Include="DownSlashEffect.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="FalseAttackCollider.cpp" />
+    <ClCompile Include="FalseAttackWave.cpp" />
     <ClCompile Include="FalseBarrel.cpp" />
     <ClCompile Include="FalseKnight.cpp" />
     <ClCompile Include="FalseKnightBossScene.cpp" />
@@ -283,6 +288,9 @@
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="StunHead.cpp" />
     <ClCompile Include="TestCollider.cpp" />
+    <ClCompile Include="Wave01.cpp" />
+    <ClCompile Include="Wave02.cpp" />
+    <ClCompile Include="Wave03.cpp" />
     <ClCompile Include="yaCamera.cpp" />
     <ClCompile Include="yaDashEffectLeft.cpp" />
     <ClCompile Include="yaDashEffectRight.cpp" />

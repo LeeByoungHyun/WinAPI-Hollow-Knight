@@ -45,10 +45,12 @@ namespace ya
 	private:
 		class FalseKnight* mFalseKnight;
 		class StunHead* mHead;
+		class Sound* victorySound;
 
 		ePhaseState mPhase;
 		class Scene* activeScene;
 		float mTime = 0.0f;
+		float endTime = 0.0f;
 		int pattern;
 
 		bool enterFlag = false;
@@ -63,6 +65,8 @@ namespace ya
 		bool rageAttackFlag = false;
 		int rageCount = 0;
 		bool stuned = false;
+		bool flag = false;
+		bool flag2 = false;
 	};
 }
 

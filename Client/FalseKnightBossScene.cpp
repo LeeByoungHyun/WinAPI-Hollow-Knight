@@ -23,6 +23,7 @@
 #include "HornetWallLeft.h"
 #include "HornetWallRight.h"
 #include "SoulUI.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -89,6 +90,11 @@ namespace ya
 		scene->AddGameObject(soulUI, eLayerType::UI);
 		soulUI->Initialize();
 		soulUI->SetType(eLayerType::UI);
+
+		fade = ya::Fade::GetInstance();
+		scene->AddGameObject(fade, eLayerType::Fade);
+		fade->Initialize();
+		fade->SetType(eLayerType::Fade);
 	}
 
 	void FalseKnightBossScene::Update()

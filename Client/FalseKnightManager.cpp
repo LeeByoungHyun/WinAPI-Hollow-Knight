@@ -2,10 +2,13 @@
 #include "yaSceneManager.h"
 #include "yaTime.h"
 #include "yaRigidBody.h"
+#include "yaResourceManager.h"
+#include "yaSound.h"
 
 #include "FalseKnight.h"
 #include "StunHead.h"
 #include "yaPlayer.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -22,6 +25,7 @@ namespace ya
 	void FalseKnightManager::Initialize()
 	{
 		mFalseKnight = FalseKnight::GetInstance();
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 
 		GameObject::Initialize();
 	}
@@ -53,7 +57,7 @@ namespace ya
 			// 본체 체력이 0이 되면 Death
 			if (mFalseKnight->GetTrueHP() <= 0)
 			{
-				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Death);
+				//mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Death);
 			}
 			// 본체 체력이 40*스턴배수가 되면 Idle
 			else if (mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
@@ -65,6 +69,27 @@ namespace ya
 				stunFlag = false;
 				stuned = false;
 				mPhase = ePhaseState::Rage;
+			}
+		}
+
+		// 보스가 죽으면 fadeout하면서 다음 씬으로
+		if (mFalseKnight->GetDeathFlag() == true)
+		{
+			endTime += Time::DeltaTime();
+
+			if (endTime >= 3.0f && flag == false)
+			{
+				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+				victorySound->Play(false);
+				flag = true;
+			}
+			if (endTime >= 7.0f && flag2 == false)
+			{
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				SceneManager::LoadScene(eSceneType::MainHall);
+				endTime = 0.0f;
+				flag2 = true;
 			}
 		}
 		
@@ -122,7 +147,7 @@ namespace ya
 		{
 			srand((unsigned int)time(NULL));
 			pattern = rand() % 4;	
-			pattern = 2;	// test
+			//pattern = 2;	// test
 			mTime = 0.0f;
 			switch (pattern)
 			{

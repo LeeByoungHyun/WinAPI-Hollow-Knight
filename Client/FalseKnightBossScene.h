@@ -31,6 +31,7 @@ namespace ya
 		class HPobject04* hp04;
 		class HPobject05* hp05;
 		class SoulUI* soulUI;
+		class Fade* fade;
 	};
 }
 

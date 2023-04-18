@@ -46,6 +46,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"False Knight_Head(Hit)right") = std::bind(&StunHead::hitCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)left") = std::bind(&StunHead::deathHead1CompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 1)right") = std::bind(&StunHead::deathHead1CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 2)left") = std::bind(&StunHead::deathHead2CompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"False Knight_Death(Head 2)right") = std::bind(&StunHead::deathHead2CompleteEvent, this);
 
 		damaged1Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged1Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_01.wav");
 		damaged2Sound = ResourceManager::Load<Sound>(L"falseKnightDamaged2Sound", L"..\\Resources\\Sound\\False Knight\\Fknight_hit_02.wav");
@@ -305,11 +307,8 @@ namespace ya
 
 		deathFlag3 = true;
 	}
-
-
-
-
-
-
-
+	void StunHead::deathHead2CompleteEvent()
+	{
+		mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Death);
+	}
 }
