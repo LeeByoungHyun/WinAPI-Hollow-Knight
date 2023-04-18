@@ -122,6 +122,7 @@ namespace ya
 		{
 			srand((unsigned int)time(NULL));
 			pattern = rand() % 4;	
+			pattern = 2;	// test
 			mTime = 0.0f;
 			switch (pattern)
 			{

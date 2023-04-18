@@ -13,6 +13,7 @@
 
 #include "yaPlayer.h"
 #include "StunHead.h"
+#include "FalseAttackCollider.h"
 
 namespace ya
 {
@@ -129,6 +130,8 @@ namespace ya
 
 		mRigidbody->SetMass(1.0f);
 		mRigidbody->SetGravity(Vector2(0.0f, 2000.0f));
+
+		atCol = object::Instantiate<FalseAttackCollider>(eLayerType::Monster);
 
 		GameObject::Initialize();
 	}
@@ -602,7 +605,8 @@ namespace ya
 		if (attackFlag == false)
 		{
 			swingSound->Play(false);
-			
+			atCol->SetState(eState::Active);
+			atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Active);
 			if (rageFlag == true)
 			{
 				// 세부위치조정
@@ -759,6 +763,8 @@ namespace ya
 		if (jumpAttackPart1Flag == false)
 		{
 			swingSound->Play(false);
+			atCol->SetState(eState::Active);
+			atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Active);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -1032,6 +1038,7 @@ namespace ya
 	void FalseKnight::jumpAttackPart1CompleteEvent()
 	{
 		mState = eFalseKnightState::JumpAttackPart2;
+		atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Disable);
 	}
 
 	void FalseKnight::jumpAttackPart2CompleteEvent()
@@ -1054,6 +1061,7 @@ namespace ya
 	{
 		mState = eFalseKnightState::AttackRecover;
 		strikeGroundSound->Play(false);
+		atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Disable);
 	}
 
 	void FalseKnight::attackRecoverCompleteEvent()
