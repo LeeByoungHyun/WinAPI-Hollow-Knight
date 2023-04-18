@@ -33,6 +33,7 @@ namespace ya
 		class SoulUI* soulUI;
 		class Fade* fade;
 		class Sound* victorySound;
+		class Sound* HornetBossSound;
 
 		bool flag = false;
 	};

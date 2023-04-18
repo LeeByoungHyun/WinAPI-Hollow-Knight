@@ -59,6 +59,7 @@ namespace ya
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
 
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
+		HornetBossSound = ResourceManager::Load<Sound>(L"HornetBossSound", L"..\\Resources\\Sound\\Hornet\\S45 HORNET-110.wav");
 
 		// UI
 		hpUI = ya::HPInterface::GetInstance();
@@ -153,10 +154,14 @@ namespace ya
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
 		mHornet->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
+
+		HornetBossSound->Play(true);
 	}
 
 	void HornetBossScene::Exit()
 	{
 		Scene::Exit();
+
+		HornetBossSound->Stop(true);
 	}
 }
