@@ -68,6 +68,7 @@ namespace ya
 			// 카메라 위치에 맞추어 좌표 계산
 			//tr = GetComponent<Transform>();
 			Vector2 pos = Camera::CalculatePos(mPos);
+
 			if (mDirection == eDirection::Left)
 			{
 				pos.x -= mImageL->GetWidth() / 2;
@@ -135,21 +136,19 @@ namespace ya
 			//Vector2 pos = FalseKnight::GetInstance()->GetComponent<Transform>()->GetPos();
 			//tr->SetPos(pos);
 			tr->SetPos(mPos);
-
 			mCollider->SetActive(true);
-			mCollider->SetSize(Vector2(26.0f, 27.0f));
+			mCollider->SetSize(Vector2(30.0f, 87.0f));
+			mCollider->SetCenter(Vector2(-15.0f, -87.0f));
 			mRigidbody->SetGround(true);
 
 			if (FalseKnight::GetInstance()->GetDirection() == FalseKnight::eDirection::Left)
 			{
 				mDirection = eDirection::Left;
-				mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			}
 
 			else if (FalseKnight::GetInstance()->GetDirection() == FalseKnight::eDirection::Right)
 			{
 				mDirection = eDirection::Right;
-				mCollider->SetCenter(Vector2(0.0f, 0.0f));
 			}
 		}
 
