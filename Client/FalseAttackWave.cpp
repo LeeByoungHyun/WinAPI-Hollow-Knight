@@ -122,6 +122,11 @@ namespace ya
 			activeFlag = true;
 
 			Vector2 pos = FalseKnight::GetInstance()->GetComponent<Transform>()->GetPos();
+			if (FalseKnight::GetInstance()->GetDirection() == FalseKnight::eDirection::Left)
+				pos.x -= 340.0f;
+			else
+				pos.x += 340.0f;
+
 			tr->SetPos(pos);
 		}
 
