@@ -101,6 +101,16 @@ namespace ya
 			tr->SetPos(Vector2::Zero);
 			mTime = 0.0f;
 			wave01Flag = false;
+			wave02Flag = false;
+			wave03Flag = false;
+			wave04Flag = false;
+			wave05Flag = false;
+			wave06Flag = false;
+			wave07Flag = false;
+			wave08Flag = false;
+			wave09Flag = false;
+			wave10Flag = false;
+			wave11Flag = false;
 		}
 	}
 
@@ -113,17 +123,6 @@ namespace ya
 
 			Vector2 pos = FalseKnight::GetInstance()->GetComponent<Transform>()->GetPos();
 			tr->SetPos(pos);
-
-			//wave02->SetWaveState(Wave01::eWave01State::Active);
-			//wave03->SetWaveState(Wave02::eWave02State::Active);
-			//wave04->SetWaveState(Wave02::eWave02State::Active);
-			//wave05->SetWaveState(Wave02::eWave02State::Active);
-			//wave06->SetWaveState(Wave03::eWave03State::Active);
-			//wave07->SetWaveState(Wave03::eWave03State::Active);
-			//wave08->SetWaveState(Wave03::eWave03State::Active);
-			//wave09->SetWaveState(Wave02::eWave02State::Active);
-			//wave10->SetWaveState(Wave02::eWave02State::Active);
-			//wave11->SetWaveState(Wave01::eWave01State::Active);
 		}
 
 		mTime += Time::DeltaTime();

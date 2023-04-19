@@ -140,6 +140,7 @@ namespace ya
 
 			mCollider->SetActive(true);
 			mCollider->SetSize(Vector2(26.0f, 27.0f));
+			//mCollider->SetCenter(Vector2(-13.0f, -27.0f));
 			mRigidbody->SetGround(true);
 
 			if (FalseKnight::GetInstance()->GetDirection() == FalseKnight::eDirection::Left)
