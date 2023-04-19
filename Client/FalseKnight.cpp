@@ -10,6 +10,7 @@
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
 #include "yaSound.h"
+#include "CommonInclude.h"
 
 #include "yaPlayer.h"
 #include "StunHead.h"
@@ -133,7 +134,16 @@ namespace ya
 		mRigidbody->SetGravity(Vector2(0.0f, 2000.0f));
 
 		atCol = object::Instantiate<FalseAttackCollider>(eLayerType::Monster);
-		FAWave = object::Instantiate<FalseAttackWave>(eLayerType::Monster);
+
+		// object pooling
+		waveContainer.resize(3);
+		for (size_t i = 0; i < 3; i++)
+		{
+			FalseAttackWave* wave = object::Instantiate<FalseAttackWave>(eLayerType::Monster);
+			waveContainer[i] = wave;
+			//wave->SetWaveState(FalseAttackWave::eFalseAttackWaveState::Disable);	
+		}
+		wavePivot = 0;
 
 		GameObject::Initialize();
 	}
@@ -1067,7 +1077,10 @@ namespace ya
 		mState = eFalseKnightState::AttackRecover;
 		strikeGroundSound->Play(false);
 		atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Disable);
-		//FAWave->SetFAState(FalseAttackWave::eFalseAttackWaveState::Active);
+
+		// object pooling
+		waveContainer[wavePivot++]->SetWaveState(FalseAttackWave::eFalseAttackWaveState::Active);
+		if (wavePivot == 3) wavePivot = 0;
 	}
 
 	void FalseKnight::attackRecoverCompleteEvent()

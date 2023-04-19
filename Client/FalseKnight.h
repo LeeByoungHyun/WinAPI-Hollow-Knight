@@ -143,6 +143,9 @@ namespace ya
 		bool rageFlag = false;
 		int rageCount = 0;
 
+		std::vector<class FalseAttackWave*> waveContainer;
+		int wavePivot;
+
 		class Sound* attack1Sound;
 		class Sound* attack2Sound;
 		class Sound* attack3Sound;

@@ -14,6 +14,8 @@
 
 namespace ya
 {
+	const float FALSEWAVESPEED = 1000.0f;
+
 	Wave01::Wave01()
 	{
 
@@ -33,7 +35,7 @@ namespace ya
 		mImageL = ResourceManager::Load<Image>(L"Wave01", L"..\\Resources\\False Knight\\FalseKnight_Attack Wave\\FalseWave01.bmp");
 		mImageR = ResourceManager::Load<Image>(L"Wave01", L"..\\Resources\\False Knight\\FalseKnight_Attack Wave\\FalseWave01r.bmp");
 
-		mState = eWave01State::Active;
+		mState = eWave01State::Disable;
 		mRigidbody->SetGround(true);
 
 		GameObject::Initialize();
@@ -62,24 +64,26 @@ namespace ya
 	{
 		GameObject::Render(hdc);
 
-		// 카메라 위치에 맞추어 좌표 계산
-		tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-		pos = Camera::CalculatePos(pos);
-
-		if (mDirection == eDirection::Left)
+		// active state에서만 render
+		if (mState == eWave01State::Active)
 		{
-			pos.x -= mImageL->GetWidth() / 2;
-			pos.y -= mImageL->GetHeight();
-			TransparentBlt(hdc, pos.x, pos.y, mImageL->GetWidth(), mImageL->GetHeight()
-				, mImageL->GetHdc(), 0, 0, mImageL->GetWidth(), mImageL->GetHeight(), RGB(255, 0, 255));
-		}
-		else if (mDirection == eDirection::Right)
-		{
-			pos.x -= mImageR->GetWidth() / 2;
-			pos.y -= mImageR->GetHeight();
-			TransparentBlt(hdc, pos.x, pos.y, mImageR->GetWidth(), mImageR->GetHeight()
-				, mImageR->GetHdc(), 0, 0, mImageR->GetWidth(), mImageR->GetHeight(), RGB(255, 0, 255));
+			// 카메라 위치에 맞추어 좌표 계산
+			//tr = GetComponent<Transform>();
+			Vector2 pos = Camera::CalculatePos(mPos);
+			if (mDirection == eDirection::Left)
+			{
+				pos.x -= mImageL->GetWidth() / 2;
+				pos.y -= mImageL->GetHeight();
+				TransparentBlt(hdc, pos.x, pos.y, mImageL->GetWidth(), mImageL->GetHeight()
+					, mImageL->GetHdc(), 0, 0, mImageL->GetWidth(), mImageL->GetHeight(), RGB(255, 0, 255));
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				pos.x -= mImageR->GetWidth() / 2;
+				pos.y -= mImageR->GetHeight();
+				TransparentBlt(hdc, pos.x, pos.y, mImageR->GetWidth(), mImageR->GetHeight()
+					, mImageR->GetHdc(), 0, 0, mImageR->GetWidth(), mImageR->GetHeight(), RGB(255, 0, 255));
+			}
 		}
 	}
 
@@ -91,6 +95,9 @@ namespace ya
 	void Wave01::OnCollisionEnter(Collider* other)
 	{
 		GameObject::OnCollisionEnter(other);
+
+		if (other->GetOwner()->GetType() == eLayerType::Wall) 
+			mState = eWave01State::Disable;
 	}
 
 	void Wave01::OnCollisionStay(Collider* other)
@@ -111,9 +118,11 @@ namespace ya
 			disableFlag = true;
 
 			tr->SetPos(Vector2::Zero);
+			speed.x = 0.0f;
 			mCollider->SetSize(Vector2::Zero);
 			mCollider->SetActive(false);
-			this->SetState(eState::Pause);
+			mRigidbody->SetVelocity(Vector2::Zero);
+			//this->SetState(eState::Pause);
 		}
 	}
 
@@ -124,13 +133,14 @@ namespace ya
 			disableFlag = false;
 			activeFlag = true;
 
-			// FalseKnight 위치에 생성
+			// 생성위치
 			//Vector2 pos = FalseKnight::GetInstance()->GetComponent<Transform>()->GetPos();
-			//pos.y -= 40.0f;
 			//tr->SetPos(pos);
+			tr->SetPos(mPos);
 
 			mCollider->SetActive(true);
 			mCollider->SetSize(Vector2(26.0f, 27.0f));
+			mRigidbody->SetGround(true);
 
 			if (FalseKnight::GetInstance()->GetDirection() == FalseKnight::eDirection::Left)
 			{
@@ -145,21 +155,22 @@ namespace ya
 			}
 		}
 
-		Vector2 speed = Vector2::Zero;
+		Vector2 pos = mPos;
 		if (mDirection == eDirection::Left)
 		{
-			speed.x -= 100.0f * Time::DeltaTime();
-			if (speed.x <= -700.0f)
-				speed.x = -700.0f;
+			speed.x -= FALSEWAVESPEED * Time::DeltaTime();
+			if (speed.x <= -FALSEWAVESPEED)
+				speed.x = -FALSEWAVESPEED;
+			pos.x += speed.x * Time::DeltaTime();
 		}
 		else if (mDirection == eDirection::Right)
 		{
-			speed += 100.0f * Time::DeltaTime();
-			if (speed.x >= 700.0f)
-				speed.x = 700.0f;
+			speed += FALSEWAVESPEED * Time::DeltaTime();
+			if (speed.x >= FALSEWAVESPEED)
+				speed.x = FALSEWAVESPEED;
+			pos.x += speed.x * Time::DeltaTime();
 		}
-
-		mRigidbody->SetVelocity(speed);
-
+		tr->SetPos(pos);
+		mPos = pos;
 	}
 }

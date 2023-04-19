@@ -27,6 +27,7 @@ namespace ya
 		void SetWaveState(eWave01State state) { mState = state; }
 		eWave01State GetWaveState() { return mState; }
 		bool GetActiveFlag() { return activeFlag; }
+		void SetPos(Vector2 pos) { mPos = pos; }
 
 	private:
 		void disable();
@@ -40,6 +41,9 @@ namespace ya
 		eWave01State mState;
 		class Image* mImageL;
 		class Image* mImageR;
+
+		Vector2 mPos;
+		Vector2 speed = Vector2::Zero;
 
 		float mTime = 0.0f;
 		bool disableFlag = false;
