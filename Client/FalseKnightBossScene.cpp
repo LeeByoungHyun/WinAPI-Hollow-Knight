@@ -121,6 +121,7 @@ namespace ya
 				mTime = 0.0f;
 			}
 		}
+
 	}
 
 	void FalseKnightBossScene::Render(HDC hdc)
@@ -165,5 +166,6 @@ namespace ya
 	{
 		Scene::Exit();
 		falseBossTheme->Stop(true);
+		mPlayer->SetState(GameObject::eState::Active);
 	}
 }

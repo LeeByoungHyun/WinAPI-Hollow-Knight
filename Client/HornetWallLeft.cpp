@@ -72,7 +72,44 @@ namespace ya
 
 	void HornetWallLeft::OnCollisionEnter(Collider* other)
 	{
-		
+		eLayerType otherType = other->GetOwner()->GetType();
+		if (otherType == eLayerType::Hornet)
+		{
+			Hornet* mHornet = Hornet::GetInstance();
+			if (mHornet == nullptr)
+				return;
+
+			RigidBody* rb = mHornet->GetComponent<RigidBody>();
+
+			Collider* hornetCol = mHornet->GetComponent<Collider>();
+			Collider* objectCol = this->GetComponent<Collider>();
+
+			Transform* hornetTr = mHornet->GetComponent<Transform>();
+			Transform* objectTr = this->GetComponent<Transform>();
+
+			Vector2 hornetPos = hornetTr->GetPos();
+			Vector2 objectPos = objectTr->GetPos();
+
+			hornetPos.x = objectPos.x + objectCol->GetSize().x / 2 + 1;
+			hornetTr->SetPos(hornetPos);
+		}
+		if (otherType == eLayerType::FalseKnight)
+		{
+			FalseKnight* mFalseKnight = FalseKnight::GetInstance();
+			if (mFalseKnight == nullptr)
+				return;
+
+			Collider* falseCol = mFalseKnight->GetComponent<Collider>();
+			Collider* objectCol = this->GetComponent<Collider>();
+			Transform* falseTr = mFalseKnight->GetComponent<Transform>();
+			Transform* objectTr = this->GetComponent<Transform>();
+			Vector2 falsePos = falseTr->GetPos();
+			Vector2 objectPos = objectTr->GetPos();
+
+			//falsePos.x -= 1.0f;
+			falsePos.x = objectPos.x + objectCol->GetSize().x / 2 + 1;
+			falseTr->SetPos(falsePos);
+		}
 	}
 
 	void HornetWallLeft::OnCollisionStay(Collider* other)
@@ -95,7 +132,7 @@ namespace ya
 			Vector2 playerPos = playerTr->GetPos();
 			Vector2 objectPos = objectTr->GetPos();
 
-			Vector2 dir = mplayer->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
+			Vector2 dir = mplayer->GetComponent<RigidBody>()->GetVelocity().Normalize();	
 			if (0 > dir.x && dir.x >= -1)
 			{
 				playerPos.x = objectPos.x + playerCol->GetSize().x + 10.0f;
@@ -103,6 +140,7 @@ namespace ya
 			}
 
 		}
+		/*
 		if (otherType == eLayerType::Hornet)
 		{
 			Hornet* mHornet = Hornet::GetInstance();
@@ -120,7 +158,7 @@ namespace ya
 			Vector2 hornetPos = hornetTr->GetPos();
 			Vector2 objectPos = objectTr->GetPos();
 
-			Vector2 dir = mHornet->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
+			Vector2 dir = mHornet->GetComponent<RigidBody>()->GetVelocity().Normalize();	
 			if (mHornet->GetHornetDirection() == eDirection::Left)
 			{
 				hornetPos.x = objectPos.x + hornetCol->GetSize().x / 2 + 10.0f;
@@ -149,6 +187,7 @@ namespace ya
 			falsePos.x += 1.0f;
 			falseTr->SetPos(falsePos);
 		}
+		*/
 	}
 
 	void HornetWallLeft::OnCollisionExit(Collider* other)

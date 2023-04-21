@@ -213,7 +213,8 @@ namespace ya
 				&& (mState != ePlayerState::DoubleJump) && (mState != ePlayerState::Recoil)
 				&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
 				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball)
-				&& (mState != ePlayerState::DownSlash) && (mState != ePlayerState::Spike))
+				&& (mState != ePlayerState::DownSlash) && (mState != ePlayerState::Spike)
+				&& (mState != ePlayerState::Death))
 			{
 				mState = ePlayerState::Fall;
 				idleFlag = false;
@@ -343,6 +344,22 @@ namespace ya
 					stunFlag = false;
 				}
 				break;
+			case eLayerType::FalseKnight:
+				if (!invincibilityFlag)
+				{
+					mState = ePlayerState::Recoil;
+					recoilFlag = false;
+					stunFlag = false;
+				}
+				break;
+			case eLayerType::Hornet:
+				if (!invincibilityFlag)
+				{
+					mState = ePlayerState::Recoil;
+					recoilFlag = false;
+					stunFlag = false;
+				}
+				break;
 
 			// 충돌한 객체가 땅일 경우 idle
 			case eLayerType::Ground:
@@ -401,6 +418,8 @@ namespace ya
 
 			mRigidBody->SetVelocity(Vector2::Zero);
 			idleFlag = true;
+			
+			mRigidBody->SetActive(true);
 		}
 		
 		// 좌우 이동키 입력시 Walk 상태로 변경
@@ -1162,10 +1181,12 @@ namespace ya
 		if (deathFlag == false)
 		{
 			mAnimator->Play(L"Knight_Deathneutral", false);
+			mRigidBody->SetVelocity((Vector2::Zero));
+			mRigidBody->SetActive(false);
 			deathFlag = true;
 		}
 
-		mRigidBody->SetVelocity((Vector2::Zero));
+		
 
 	}
 
@@ -1551,9 +1572,14 @@ namespace ya
 
 	void Player::deathEndEvent()
 	{
-		object::Destroy(this);
-
+		//object::Destroy(this);
+		Fade::GetInstance()->SetFadeColor(Fade::eColor::Black);
+		Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+		this->SetState(eState::Pause);
+		
 		object::Instantiate<PlayerSkull>(tr->GetPos(), eLayerType::Player);
+		// 위에 줄 삭제하고 플레이어 애니메이션을 하나 더 만들면 됨
+
 		Camera::SetTarget(nullptr);
 	}
 

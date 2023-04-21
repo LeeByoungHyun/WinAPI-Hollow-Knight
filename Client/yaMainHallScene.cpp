@@ -7,6 +7,7 @@
 #include "yaObject.h"
 #include "yaResourceManager.h"
 #include "yaTime.h"
+#include "yaGameObject.h"
 
 #include "yaPlayer.h"
 #include "yaCrawlid.h"
@@ -50,12 +51,6 @@ namespace ya
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
 
-
-		fade = ya::Fade::GetInstance();
-		scene->AddGameObject(fade, eLayerType::Fade);
-		fade->Initialize();
-		fade->SetType(eLayerType::Fade);
-
 		// test
 		//object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Object);
 
@@ -96,7 +91,10 @@ namespace ya
 		scene->AddGameObject(soulUI, eLayerType::UI);
 		soulUI->Initialize();
 		soulUI->SetType(eLayerType::UI);
-
+		fade = ya::Fade::GetInstance();
+		scene->AddGameObject(fade, eLayerType::Fade);
+		fade->Initialize();
+		fade->SetType(eLayerType::Fade);
 	}
 
 	void MainHallScene::Update()
@@ -116,6 +114,12 @@ namespace ya
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::HornetBoss);
+		}
+
+		if (Player::GetInstance()->GetPlayerState() == Player::ePlayerState::Death)
+		{
+			Player::GetInstance()->SetState(GameObject::eState::Active);
+			fade->SetFadeState(Fade::eFadeState::FadeIn);
 		}
 	}
 
