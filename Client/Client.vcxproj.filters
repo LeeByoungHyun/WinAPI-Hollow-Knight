@@ -239,6 +239,9 @@
     <Filter Include="Contents\Objects\Effect">
       <UniqueIdentifier>{bcc44097-4eb8-4dda-9066-c07b5a561183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\Platform">
+      <UniqueIdentifier>{9babce4e-cdbf-47ef-9c96-78c1cc360ef2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -550,6 +553,15 @@
     <ClInclude Include="StunEffect.h">
       <Filter>Contents\Objects\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Platform01.h">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform02.h">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform03.h">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -839,6 +851,15 @@
     </ClCompile>
     <ClCompile Include="StunEffect.cpp">
       <Filter>Contents\Objects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform01.cpp">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform02.cpp">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform03.cpp">
+      <Filter>Contents\Objects\Struct\Platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

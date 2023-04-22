@@ -182,6 +182,9 @@
     <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="MantisThroneBack.h" />
     <ClInclude Include="NailHitEffect.h" />
+    <ClInclude Include="Platform01.h" />
+    <ClInclude Include="Platform02.h" />
+    <ClInclude Include="Platform03.h" />
     <ClInclude Include="PlayerSkull.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SlashAltEffect.h" />
@@ -285,6 +288,9 @@
     <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="MantisThroneBack.cpp" />
     <ClCompile Include="NailHitEffect.cpp" />
+    <ClCompile Include="Platform01.cpp" />
+    <ClCompile Include="Platform02.cpp" />
+    <ClCompile Include="Platform03.cpp" />
     <ClCompile Include="PlayerSkull.cpp" />
     <ClCompile Include="SlashAltEffect.cpp" />
     <ClCompile Include="SlashEffect.cpp" />

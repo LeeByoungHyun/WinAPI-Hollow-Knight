@@ -27,6 +27,9 @@
 #include "TestCollider.h"
 #include "Fade.h"
 #include "Spike.h"
+#include "Platform01.h"
+#include "Platform02.h"
+#include "Platform03.h"
 
 namespace ya
 {
@@ -46,13 +49,16 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에	
-		object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		//object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		//object::Instantiate<Platform01>(Vector2(1724.0f, 1100.0f), eLayerType::Ground);
+		//object::Instantiate<Platform02>(Vector2(1324.0f, 1100.0f), eLayerType::Ground);
+		//object::Instantiate<Platform03>(Vector2(1124.0f, 1100.0f), eLayerType::Ground);
 
 		// test
-		//object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Object);
+		object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Object);
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
