@@ -4,6 +4,7 @@
 #include "yaCollider.h"
 #include "yaObject.h"
 #include "yaPlayer.h"
+#include "NailHitEffect.h"
 
 namespace ya
 {
@@ -92,6 +93,40 @@ namespace ya
 			{
 				player->SetPos(pos + Vector2(-15.0f, 0.0f));
 			}
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
+
+			hitFlag = true;
+		}
+
+		if ((other->GetOwner()->GetType() == eLayerType::FalseKnight) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			if (player->GetPlayerDirection() == Player::eDirection::Left)
+			{
+				player->SetPos(pos + Vector2(15.0f, 0.0f));
+			}
+			else if (player->GetPlayerDirection() == Player::eDirection::Right)
+			{
+				player->SetPos(pos + Vector2(-15.0f, 0.0f));
+			}
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
+
+			hitFlag = true;
+		}
+
+		if ((other->GetOwner()->GetType() == eLayerType::Hornet) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			if (player->GetPlayerDirection() == Player::eDirection::Left)
+			{
+				player->SetPos(pos + Vector2(15.0f, 0.0f));
+			}
+			else if (player->GetPlayerDirection() == Player::eDirection::Right)
+			{
+				player->SetPos(pos + Vector2(-15.0f, 0.0f));
+			}
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
+
 			hitFlag = true;
 		}
 	}

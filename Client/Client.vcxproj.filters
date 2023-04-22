@@ -230,6 +230,15 @@
     <Filter Include="Contents\Objects\Struct\Spike">
       <UniqueIdentifier>{a82e4674-ca67-4f77-a7df-ba635b856a66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\False_Knight\Wave">
+      <UniqueIdentifier>{8948be51-5d2f-4002-8acd-5849122218a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\UI\Soul">
+      <UniqueIdentifier>{3c3cf8e8-b565-49df-a2ab-81aae0a72ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Effect">
+      <UniqueIdentifier>{bcc44097-4eb8-4dda-9066-c07b5a561183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -514,6 +523,33 @@
     <ClInclude Include="Spike.h">
       <Filter>Contents\Objects\Struct\Spike</Filter>
     </ClInclude>
+    <ClInclude Include="FalseAttackWave.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave01.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave02.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="Wave03.h">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClInclude>
+    <ClInclude Include="FalseAttackCollider.h">
+      <Filter>Contents\Objects\Charactor\False_Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="SoulUI.h">
+      <Filter>Contents\Objects\UI\Soul</Filter>
+    </ClInclude>
+    <ClInclude Include="HitCrackEffect.h">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="NailHitEffect.h">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="StunEffect.h">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -776,6 +812,33 @@
     </ClCompile>
     <ClCompile Include="Spike.cpp">
       <Filter>Contents\Objects\Struct\Spike</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseAttackWave.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave01.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave02.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClCompile>
+    <ClCompile Include="Wave03.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight\Wave</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseAttackCollider.cpp">
+      <Filter>Contents\Objects\Charactor\False_Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="SoulUI.cpp">
+      <Filter>Contents\Objects\UI\Soul</Filter>
+    </ClCompile>
+    <ClCompile Include="HitCrackEffect.cpp">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="NailHitEffect.cpp">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="StunEffect.cpp">
+      <Filter>Contents\Objects\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

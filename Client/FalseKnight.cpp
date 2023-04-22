@@ -16,6 +16,7 @@
 #include "StunHead.h"
 #include "FalseAttackCollider.h"
 #include "FalseAttackWave.h"
+#include "NailHitEffect.h" 
 
 namespace ya
 {

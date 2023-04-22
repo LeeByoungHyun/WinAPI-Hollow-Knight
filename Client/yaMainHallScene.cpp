@@ -46,7 +46,7 @@ namespace ya
 		Scene* scene = SceneManager::GetActiveScene();
 
 		// 게임오브젝트 추가는 이곳에	
-		//object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
+		object::Instantiate<Crawlid>(Vector2(1400.0f, 1300.0f - 103.0f), eLayerType::Monster);
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<BossDoor>(Vector2(1724.0f, 1300.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
@@ -142,7 +142,7 @@ namespace ya
 	{
 		Scene::Enter();
 
-		CollisionManager::SetLayer(eLayerType::Effect, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Spike, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);

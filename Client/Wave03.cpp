@@ -31,7 +31,7 @@ namespace ya
 		mRigidbody = AddComponent<RigidBody>();
 
 		mImageL = ResourceManager::Load<Image>(L"Wave03", L"..\\Resources\\False Knight\\FalseKnight_Attack Wave\\FalseWave03.bmp");
-		mImageR = ResourceManager::Load<Image>(L"Wave03", L"..\\Resources\\False Knight\\FalseKnight_Attack Wave\\FalseWave03r.bmp");
+		mImageR = ResourceManager::Load<Image>(L"Wave03r", L"..\\Resources\\False Knight\\FalseKnight_Attack Wave\\FalseWave03r.bmp");
 
 		mState = eWave03State::Disable;
 		mRigidbody->SetGround(true);

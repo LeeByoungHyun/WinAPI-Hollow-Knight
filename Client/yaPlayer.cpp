@@ -28,6 +28,8 @@
 #include "SlashAltEffect.h"
 #include "Fade.h"
 #include "SoulUI.h"
+#include "HitCrackEffect.h"
+#include "StunEffect.h"
 
 namespace ya
 {
@@ -1109,6 +1111,9 @@ namespace ya
 
 			damageSound->Play(false);
 			stunFlag = true;
+
+			object::Instantiate<HitCrackEffect>(tr->GetPos(), eLayerType::BackEffect);
+			object::Instantiate<StunEffect>(tr->GetPos(), eLayerType::BackEffect);
 		}
 
 		mTime += Time::DeltaTime();

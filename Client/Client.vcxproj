@@ -154,6 +154,7 @@
     <ClInclude Include="FireballEffectRight.h" />
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HitCrackEffect.h" />
     <ClInclude Include="Hornet.h" />
     <ClInclude Include="HornetBossScene.h" />
     <ClInclude Include="HornetNeedle.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="MantisLordsProjectile.h" />
     <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="MantisThroneBack.h" />
+    <ClInclude Include="NailHitEffect.h" />
     <ClInclude Include="PlayerSkull.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SlashAltEffect.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="SoulUI.h" />
     <ClInclude Include="SphereBall.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="StunEffect.h" />
     <ClInclude Include="StunHead.h" />
     <ClInclude Include="TestCollider.h" />
     <ClInclude Include="Wave01.h" />
@@ -253,6 +256,7 @@
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
+    <ClCompile Include="HitCrackEffect.cpp" />
     <ClCompile Include="Hornet.cpp" />
     <ClCompile Include="HornetBossScene.cpp" />
     <ClCompile Include="HornetNeedle.cpp" />
@@ -280,12 +284,14 @@
     <ClCompile Include="MantisLordsProjectile.cpp" />
     <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="MantisThroneBack.cpp" />
+    <ClCompile Include="NailHitEffect.cpp" />
     <ClCompile Include="PlayerSkull.cpp" />
     <ClCompile Include="SlashAltEffect.cpp" />
     <ClCompile Include="SlashEffect.cpp" />
     <ClCompile Include="SoulUI.cpp" />
     <ClCompile Include="SphereBall.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="StunEffect.cpp" />
     <ClCompile Include="StunHead.cpp" />
     <ClCompile Include="TestCollider.cpp" />
     <ClCompile Include="Wave01.cpp" />

@@ -19,7 +19,7 @@ namespace ya
 	}
 	void Crawlid::Initialize()
 	{
-		hp = 3;
+		hp = 100;
 
 		Transform* tr = GetComponent<Transform>();
 		//tr->SetSize(Vector2(0.5f, 0.5f));
@@ -57,7 +57,7 @@ namespace ya
 	void Crawlid::OnCollisionEnter(Collider* other)
 	{
 		// 플레이어에게 공격당하면 체력감소
-		if (other->GetOwner()->GetType() == eLayerType::Effect)
+		if (other->GetOwner()->GetType() == eLayerType::NeilEffect)
 		{
 			hp -= 1;
 		}
