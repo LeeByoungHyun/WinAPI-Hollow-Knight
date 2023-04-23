@@ -79,28 +79,75 @@ namespace ya
 		eLayerType otherType = other->GetOwner()->GetType();
 		if (otherType == eLayerType::Player)
 		{
-			Player* mplayer = Player::GetInstance();
+			Player* mplayer = dynamic_cast<Player*>(other->GetOwner());
 			if (mplayer == nullptr)
 				return;
 
 			RigidBody* rb = mplayer->GetComponent<RigidBody>();
 
-			Collider* playerCol = mplayer->GetComponent<Collider>();
-			Collider* objectCol = this->GetComponent<Collider>();
+			Vector2 dir = mplayer->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
 
+			Collider* playerCol = mplayer->GetComponent<Collider>();
+			Vector2 playerColPos = playerCol->GetPos();
+			Collider* objectCol = this->GetComponent<Collider>();
+			Vector2 objectColPos = objectCol->GetPos();
 			Transform* playerTr = mplayer->GetComponent<Transform>();
 			Transform* objectTr = this->GetComponent<Transform>();
-
 			Vector2 playerPos = playerTr->GetPos();
 			Vector2 objectPos = objectTr->GetPos();
 
-			Vector2 dir = mplayer->GetComponent<RigidBody>()->GetVelocity().Normalize();	// 플레이어 벡터 방향
-			if (0 < dir.x && dir.x <= 1)
+			// to right
+			// 충돌시 플레이어 y좌표가 오브젝트 콜라이더 사이에 있고,
+			// 충돌시 플레이어 x좌표가 오브젝트 콜라이더보다 왼쪽에 있을때만 적용
+			if ((0 < dir.x && dir.x <= 1)	// 벡터방향이 right일 경우
+				&& playerPos.x < objectPos.x - objectCol->GetSize().x / 2
+				&& playerPos.y - playerCol->GetSize().y < objectPos.y
+				&& playerPos.y > objectPos.y - objectCol->GetSize().y)
 			{
-				playerPos.x = objectPos.x - playerCol->GetSize().x - 10.0f;
+				playerPos.x = objectPos.x - objectCol->GetSize().x / 2 - playerCol->GetSize().x / 2 + 1.0f;
 				playerTr->SetPos(playerPos);
+				return;
 			}
-			
+			// to left
+			// 충돌시 플레이어 y좌표가 오브젝트 콜라이더 사이에 있고,
+			// 플레이어 x좌표가 오브젝트 콜라이더보다 오른쪽에 있을때만 적용
+			if ((0 > dir.x && dir.x >= -1)	// 벡터방향이 left일 경우
+				&& playerPos.x > objectPos.x + objectCol->GetSize().x / 2
+				&& playerPos.y - playerCol->GetSize().y < objectPos.y
+				&& playerPos.y > objectPos.y - objectCol->GetSize().y)
+			{
+				playerPos.x = objectPos.x + objectCol->GetSize().x / 2 + playerCol->GetSize().x / 2 - 1.0f;
+				playerTr->SetPos(playerPos);
+				return;
+			}
+			// to up
+			// 충돌시 플레이어 y좌표가 오브젝트 콜라이더보다 아래에 있고,
+			// 플레이어 x좌표가 오브젝트콜라이더 사이에 위치한 경우 아래로 밀어냄
+			if ((0 > dir.y && dir.y >= -1)	// 벡터방향이 up일 경우
+				&& playerPos.y - playerCol->GetSize().y < objectPos.y
+				&& playerPos.y > objectPos.y
+				&& playerPos.x > objectPos.x - objectCol->GetSize().x
+				&& playerPos.x < objectPos.x + objectCol->GetSize().x)
+			{
+				playerPos.y = objectPos.y + playerCol->GetSize().y - 1.0f;
+				playerTr->SetPos(playerPos);
+				return;
+			}
+			// to down
+			// 충돌시 플레이어 y좌표가 오브젝트 콜라이더보다 위에 있고,
+			// 플레이어 x좌표가 오브젝트콜라이더 사이에 위치한 경우에만 적용
+			if ((0 < dir.y && dir.y <= 1)	// 벡터방향이 down일 경우
+				&& playerPos.y > objectPos.y - objectCol->GetSize().y
+				&& playerPos.y - playerCol->GetSize().y < objectPos.y - objectCol->GetSize().y
+				&& playerPos.x > objectPos.x - objectCol->GetSize().x
+				&& playerPos.x < objectPos.x + objectCol->GetSize().x)
+			{
+				playerPos.y = objectPos.y - objectCol->GetSize().y + 1;
+				playerTr->SetPos(playerPos);
+				rb->SetGround(true);
+				mplayer->SetPlayerState(Player::ePlayerState::Idle);
+				return;
+			}
 		}
 	}
 

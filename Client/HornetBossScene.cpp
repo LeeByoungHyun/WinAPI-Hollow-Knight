@@ -53,7 +53,7 @@ namespace ya
 		mHornet->SetType(eLayerType::Hornet);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
 
 		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
@@ -140,8 +140,8 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Hornet, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Hornet, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Hornet, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Platform, true);
+		CollisionManager::SetLayer(eLayerType::Hornet, eLayerType::Platform, true);
 		CollisionManager::SetLayer(eLayerType::Hornet, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Hornet, true);

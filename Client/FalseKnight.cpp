@@ -545,6 +545,7 @@ namespace ya
 				break;
 			}
 
+			landSound->Play(false);
 			jumpFlag = false;
 		}
 	}
@@ -800,6 +801,7 @@ namespace ya
 				break;
 			}
 
+			landSound->Play(false);
 			jumpAttackUpFlag = false;
 		}
 	}

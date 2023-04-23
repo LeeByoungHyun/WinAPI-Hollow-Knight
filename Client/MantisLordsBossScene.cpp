@@ -76,7 +76,7 @@ namespace ya
 		object::Instantiate<MantisThrone>(Vector2(1974.0f, 1430.0f), eLayerType::BGObject);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
 		object::Instantiate<MantisBossWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<MantisBossWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<Spike>(Vector2(1724.0f - 691.0f, 1300.0f), eLayerType::Spike);
@@ -176,7 +176,7 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::NeilEffect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Platform, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Spike, true);
 
@@ -186,7 +186,7 @@ namespace ya
 		Camera::SetMinY(850.0f);
 		Camera::SetMaxY(850.0f);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 99.0f));
 		enterFlag = true;
 	}
 

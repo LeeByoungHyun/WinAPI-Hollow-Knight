@@ -44,7 +44,7 @@ namespace ya
 		srand((unsigned int)time(NULL));
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Ground);
+		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
 		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 991.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 891.0f, 1300.0f), eLayerType::Wall);
 
@@ -143,12 +143,10 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::SpellEffect, eLayerType::FalseKnight, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::FalseKnight, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
-		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Platform, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Platform, true);
 
 		Camera::SetTarget(mPlayer);
 		Camera::SetMinX(1525.0f);
@@ -156,7 +154,7 @@ namespace ya
 		Camera::SetMinY(850.0f);
 		Camera::SetMaxY(850.0f);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 149.0f));
 		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
 
 		falseBossTheme->Play(true);

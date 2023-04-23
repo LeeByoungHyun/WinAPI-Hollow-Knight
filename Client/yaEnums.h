@@ -21,6 +21,7 @@ enum class eLayerType
 	Object,
 	Spike,
 	Ground,
+	Platform,
 	BackEffect,
 	Monster,
 	Player,
