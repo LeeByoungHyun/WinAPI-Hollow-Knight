@@ -29,7 +29,7 @@ namespace ya
 	Vector2 playerPos;
 	Vector2 playerDir;
 	const float WAITTIME = 0.2f;
-	const float DASHSPEED = 1000.0f;
+	const float DASHSPEED = 1500.0f;
 	const float EVADESPEED = 700.0f;
 	const float RUNSPEED = 500.0f;
 
@@ -61,36 +61,36 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Jump(Anticipate)\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Jump\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Jump\\right", Vector2::Zero, 0.1f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Land\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Land\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate A)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate A)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate G)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate G)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Recover)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Recover)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Anticipate)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Anticipate)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Recover)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Recover)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wall Impact\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wall Impact\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Anticipate)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Anticipate)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Recover)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Recover)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Anticipate)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Anticipate)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Recover)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Recover)\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Land\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Land\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate A)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate A)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate G)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Anticipate G)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Recover)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Sphere(Recover)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Anticipate)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Anticipate)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Recover)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Throw(Recover)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wall Impact\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Wall Impact\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Anticipate)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Anticipate)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Recover)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_A Dash(Recover)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Anticipate)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Anticipate)\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Recover)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_G Dash(Recover)\\right", Vector2::Zero, 0.055f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Counter Attack\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Counter Attack\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Counter Attack(Anticipate)\\left", Vector2::Zero, 0.066f);
@@ -109,10 +109,10 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Evade(Anticipate)\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Anticipate)\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Anticipate)\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\right", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\left", Vector2::Zero, 0.066f);
-		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw\\right", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\left", Vector2::Zero, 0.055f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Barb Throw(Recover)\\right", Vector2::Zero, 0.055f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun\\left", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Hornet\\Hornet_Stun(Stance)\\left", Vector2::Zero, 0.1f);
@@ -404,7 +404,7 @@ namespace ya
 		eLayerType otherType = other->GetOwner()->GetType();	// 충돌한 객체의 타입
 		switch (otherType)
 		{
-		case eLayerType::Ground:	// 땅과 충돌할 경우
+		case eLayerType::Platform:	// 땅과 충돌할 경우
 		{
 			if (mState == eHornetState::Idle)
 			{
@@ -716,7 +716,7 @@ namespace ya
 		// 7) burb 
 		// 8) counter
 		srand((unsigned int)time(NULL));
-		idlePattern = rand() % 8;
+		idlePattern = rand() % 9;
 		//idlePattern = 6;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
@@ -759,6 +759,10 @@ namespace ya
 				}
 			}
 			else if (idlePattern == 7)
+			{
+				mState = eHornetState::CounterAnticipate;
+			}
+			else if (idlePattern == 8)
 			{
 				mState = eHornetState::CounterAnticipate;
 			}

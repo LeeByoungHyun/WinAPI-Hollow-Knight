@@ -42,7 +42,7 @@ namespace ya
 		eHornetNeedleState mState;
 
 		float NEEDLESPEED = 1500.0f;
-		float DECELERATION = 1200.0f;
+		float DECELERATION = 1500.0f;
 
 		float mTime = 0.0f;
 		bool disableFlag = false;
