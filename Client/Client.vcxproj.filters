@@ -562,6 +562,9 @@
     <ClInclude Include="Platform03.h">
       <Filter>Contents\Objects\Struct\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="ExplodeBarrelEffect.h">
+      <Filter>Contents\Objects\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -860,6 +863,9 @@
     </ClCompile>
     <ClCompile Include="Platform03.cpp">
       <Filter>Contents\Objects\Struct\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplodeBarrelEffect.cpp">
+      <Filter>Contents\Objects\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

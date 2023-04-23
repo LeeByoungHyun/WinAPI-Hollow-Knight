@@ -9,6 +9,7 @@
 #include "yaResourceManager.h"
 #include "yaSceneManager.h"
 #include "yaRigidBody.h"
+#include "ExplodeBarrelEffect.h"
 
 namespace ya
 {
@@ -58,9 +59,10 @@ namespace ya
 	void FalseBarrel::OnCollisionEnter(Collider* other)
 	{
 		eLayerType otherType = other->GetOwner()->GetType();
-		if (otherType == eLayerType::Ground)
+		if (otherType == eLayerType::Platform)
 		{
 			// 파괴되는 이펙트 추가해야 함
+			object::Instantiate<ExplodeBarrelEffect>(tr->GetPos(), eLayerType::Effect);
 			object::Destroy(this);
 		}
 

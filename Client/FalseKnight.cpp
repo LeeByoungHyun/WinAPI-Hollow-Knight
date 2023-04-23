@@ -300,23 +300,6 @@ namespace ya
 		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
 		switch (otherType)
 		{
-		// 땅과 충돌할 경우
-		case eLayerType::Ground:
-			mRigidbody->SetGround(true);
-			mRigidbody->SetVelocity(Vector2::Zero);
-			// 점프애니메이션 도중 땅에 착지하면 Land animation 재생
-			if (mState == FalseKnight::eFalseKnightState::Jump)
-			{
-				mState = FalseKnight::eFalseKnightState::Land;
-				landSound->Play(false);
-			}
-			else if (mState == FalseKnight::eFalseKnightState::JumpAttackUp)
-			{
-				mState = FalseKnight::eFalseKnightState::JumpAttackPart1;
-				landSound->Play(false);
-			}
-			break;
-
 		// 플레이어의 공격일 경우
 		case eLayerType::NeilEffect:
 			armorHP -= Player::GetInstance()->GetNeilAtk();
@@ -625,7 +608,7 @@ namespace ya
 			{
 				// 세부위치조정
 				Vector2 pos = tr->GetPos();
-				pos.y = 1200.0f;
+				pos.y = 1300.0f - 129.0f;
 				tr->SetPos(pos);
 			}
 
@@ -671,7 +654,7 @@ namespace ya
 			{
 				// 세부위치조정
 				Vector2 pos = tr->GetPos();
-				pos.y = 1170.0f;
+				pos.y -= 20.0f;
 				tr->SetPos(pos);
 			}
 
@@ -1081,9 +1064,12 @@ namespace ya
 		strikeGroundSound->Play(false);
 		atCol->SetFAState(FalseAttackCollider::eFalseAttackColliderState::Disable);
 
-		// object pooling
-		waveContainer[wavePivot++]->SetWaveState(FalseAttackWave::eFalseAttackWaveState::Active);
-		if (wavePivot == 3) wavePivot = 0;
+		if (rageFlag == false)
+		{
+			// object pooling
+			waveContainer[wavePivot++]->SetWaveState(FalseAttackWave::eFalseAttackWaveState::Active);
+			if (wavePivot == 3) wavePivot = 0;
+		}
 	}
 
 	void FalseKnight::attackRecoverCompleteEvent()

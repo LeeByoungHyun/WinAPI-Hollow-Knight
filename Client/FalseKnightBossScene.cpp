@@ -145,6 +145,8 @@ namespace ya
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::FalseKnight, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Platform, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Wall, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Platform, true);
 		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Wall, true);
 		CollisionManager::SetLayer(eLayerType::FalseKnight, eLayerType::Platform, true);
 

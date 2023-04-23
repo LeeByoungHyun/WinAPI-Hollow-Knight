@@ -215,11 +215,10 @@ namespace ya
 				{
 					mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Land);
 				}
-				else if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::JumpAttackUp)
+				if (mFalseKnight->GetFalseKnightState() == FalseKnight::eFalseKnightState::JumpAttackUp)
 				{
 					mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::JumpAttackPart1);
 				}
-
 				return;
 			}
 		}

@@ -343,6 +343,7 @@ namespace ya
 		{
 			rageAttackFlag = true;
 			mFalseKnight->SetRageFlag(true);
+			mFalseKnight->SetDirection(FalseKnight::eDirection::Left);
 			mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::AttackAnticipate);
 		}
 
