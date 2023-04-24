@@ -97,6 +97,10 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DoubleJump\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Enter\\neutral", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WakeUp\\neutral", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallSlide\\left", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallSlide\\right", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\left", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\right", Vector2::Zero, 0.066f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
@@ -123,6 +127,8 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_DoubleJumpright") = std::bind(&Player::doubleJumpEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Enterneutral") = std::bind(&Player::enterComplateEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_WakeUpneutral") = std::bind(&Player::wakeUpCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_WallJumpleft") = std::bind(&Player::wallJumpCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_WallJumpright") = std::bind(&Player::wallJumpCompleteEvent, this);
 
 		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight\\Knight Walk.wav");
 		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight\\Knight_damage.wav");
@@ -174,40 +180,6 @@ namespace ya
 				invincibilityFlag = false;
 		}
 
-		// 중립 상태로 돌아오면 모든 상태변수 초기화
-		if (mState == ePlayerState::Idle)
-		{
-			//idleFlag = false;
-			walkFlag = false;
-			slashFlag = false;
-			slashAltFlag = false;
-			upSlashFlag = false;
-			downSlashFlag = false;
-			dashFlag = false;
-			deathFlag = false;
-			//invincibilityFlag = false;
-			focusFlag = false;
-			focusEndFlag = false;
-			focusGetFlag = false;
-			focusGetOnceFlag = false;
-			castFireballFlag = false;
-			jumpFlag = false;
-			doubleJumpFlag = false;
-			fallFlag = false;
-			stunFlag = false;
-			recoilFlag = false;
-			enterFlag = false;
-			enterComplateFlag = false;
-			spikeFlag = false;
-			wakeUpFlag = false;
-
-			// 속도 0으로
-			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.x = 0.0f;
-			mRigidBody->SetVelocity(velocity);
-			mTime = 0.0f;
-		}
-
 		// 현재 상태가 특정 상태가 아니고 onGround = true 가 아닐 경우 fall 상태로 
 		if (mRigidBody->GetGround() == false)
 		{
@@ -216,7 +188,8 @@ namespace ya
 				&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
 				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball)
 				&& (mState != ePlayerState::DownSlash) && (mState != ePlayerState::Spike)
-				&& (mState != ePlayerState::Death))
+				&& (mState != ePlayerState::Death) && (mState != ePlayerState::WallSlide)
+				&& (mState != ePlayerState::WallJump))
 			{
 				mState = ePlayerState::Fall;
 				idleFlag = false;
@@ -316,6 +289,14 @@ namespace ya
 			wakeUp();
 			break;
 
+		case ya::Player::ePlayerState::WallSlide:
+			wallSlide();
+			break;
+
+		case ya::Player::ePlayerState::WallJump:
+			wallJump();
+			break;
+
 		default:
 			break;
 		}
@@ -402,6 +383,17 @@ namespace ya
 	void Player::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionExit(other);
+		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
+
+		switch (otherType)
+		{
+		case eLayerType::Wall:
+			if (mState == ePlayerState::WallSlide)
+			{
+				mState = ePlayerState::Fall;
+			}
+			break;
+		}
 	}
 
 	void Player::idle()
@@ -422,6 +414,7 @@ namespace ya
 			idleFlag = true;
 			
 			mRigidBody->SetActive(true);
+			initializeFlag();
 		}
 		
 		// 좌우 이동키 입력시 Walk 상태로 변경
@@ -988,13 +981,7 @@ namespace ya
 				break;
 			}
 
-			//공중 관련 플래그 초기화
-			dashFlag = false;
-			castFireballFlag = false;
-			slashFlag = false;
-			slashAltFlag = false;
-			upSlashFlag = false;
-			downSlashFlag = false;
+			initializeFlag();
 		}
 
 		// 한번 더 점프키 입력시 더블점프
@@ -1386,6 +1373,100 @@ namespace ya
 		}
 	}
 
+	void Player::wallSlide()
+	{
+		if (wallSlideFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_WallSlideleft", true);
+				wallSlideFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_WallSlideright", true);
+				wallSlideFlag = true;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = ePlayerState::Idle;
+		}
+
+		// slide중 jump
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mState = ePlayerState::WallJump;
+			wallSlideFlag = false;
+			return;
+		}
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+		if (Input::GetKey(eKeyCode::LEFT))
+			velocity.x = -400.0f;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			velocity.x = 400.0f;
+		mRigidBody->SetVelocity(velocity);
+	}
+
+	void Player::wallJump()
+	{
+		if (wallJumpFlag == false)
+		{
+			Vector2 velocity = mRigidBody->GetVelocity();
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mAnimator->Play(L"Knight_WallJumpleft", false);
+				mDirection = eDirection::Right;
+				velocity.x = 400.0f;
+				velocity.y = -700.0f;
+				wallJumpFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mAnimator->Play(L"Knight_WallJumpright", false);
+				mDirection = eDirection::Left;
+				velocity.x = -400.0f;
+				velocity.y = -700.0f;
+				wallJumpFlag = true;
+				break;
+
+			default:
+				break;
+			}
+			mRigidBody->SetVelocity(velocity);
+			doubleJumpFlag = false;	// 벽점하면 더블점프 다시 가능
+		}
+
+		// 한번 더 점프키 입력시 더블점프
+		if (Input::GetKeyDown(eKeyCode::Z) && doubleJumpFlag == false)
+		{
+			mState = ePlayerState::DoubleJump;
+			jumpFlag = false;
+			wallJumpFlag = false;
+			return;
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.1f)
+		{
+			Vector2 velocity = mRigidBody->GetVelocity();
+			if (Input::GetKey(eKeyCode::LEFT))
+				velocity.x = -400.0f;
+			if (Input::GetKey(eKeyCode::RIGHT))
+				velocity.x = 400.0f;
+			mRigidBody->SetVelocity(velocity);
+		}
+		
+	}
+
 	void Player::slashEndEvent()
 	{
 		// 공중, 지상일 경우 구분
@@ -1674,5 +1755,45 @@ namespace ya
 	{
 		mState = ePlayerState::Idle;
 		invincibilityFlag = false;
+	}
+
+	void Player::wallJumpCompleteEvent()
+	{
+		mState = ePlayerState::Fall;
+		wallJumpFlag = false;
+	}
+
+	void Player::initializeFlag()
+	{
+		//idleFlag = false;
+		walkFlag = false;
+		slashFlag = false;
+		slashAltFlag = false;
+		upSlashFlag = false;
+		downSlashFlag = false;
+		dashFlag = false;
+		deathFlag = false;
+		//invincibilityFlag = false;
+		focusFlag = false;
+		focusEndFlag = false;
+		focusGetFlag = false;
+		focusGetOnceFlag = false;
+		castFireballFlag = false;
+		jumpFlag = false;
+		doubleJumpFlag = false;
+		fallFlag = false;
+		stunFlag = false;
+		recoilFlag = false;
+		enterFlag = false;
+		enterComplateFlag = false;
+		spikeFlag = false;
+		wakeUpFlag = false;
+		wallSlideFlag = false;
+		wallJumpFlag = false;
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+		velocity.x = 0.0f;
+		mRigidBody->SetVelocity(velocity);
+		mTime = 0.0f;
 	}
 }

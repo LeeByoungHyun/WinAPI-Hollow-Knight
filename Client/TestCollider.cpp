@@ -31,8 +31,8 @@ namespace ya
 		//mImage = ResourceManager::Load<Image>(L"Platform(Long)", L"..\\Resources\\GodHome\\Platform(Long).bmp");
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(700.0f, 100.0f));
-		mCollider->SetCenter(Vector2(-350.0f, -100.0f));
+		mCollider->SetSize(Vector2(100.0f, 700.0f));
+		mCollider->SetCenter(Vector2(-50.0f, -700.0f));
 
 		GameObject::Initialize();
 	}
@@ -106,6 +106,11 @@ namespace ya
 			{
 				playerPos.x = objectPos.x - objectCol->GetSize().x / 2 - playerCol->GetSize().x / 2 + 1.0f;
 				playerTr->SetPos(playerPos);
+
+				if (rb->GetGround() != true && mplayer->GetPlayerState() != Player::ePlayerState::WallJump)
+				{
+					mplayer->SetPlayerState(Player::ePlayerState::WallSlide);
+				}
 				return;
 			}
 			// to left
@@ -118,6 +123,11 @@ namespace ya
 			{
 				playerPos.x = objectPos.x + objectCol->GetSize().x / 2 + playerCol->GetSize().x / 2 - 1.0f;
 				playerTr->SetPos(playerPos);
+
+				if (rb->GetGround() != true && mplayer->GetPlayerState() != Player::ePlayerState::WallJump)
+				{
+					mplayer->SetPlayerState(Player::ePlayerState::WallSlide);
+				}
 				return;
 			}
 			// to up

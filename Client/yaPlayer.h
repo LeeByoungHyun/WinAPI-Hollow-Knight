@@ -28,7 +28,9 @@ namespace ya
 			Death,
 			CastFireball,
 			Enter,
-			WakeUp
+			WakeUp,
+			WallSlide,
+			WallJump
 		};
 
 		enum class eDirection
@@ -94,6 +96,8 @@ namespace ya
 		void focusGetOnce();
 		void enter();
 		void wakeUp();
+		void wallSlide();
+		void wallJump();
 
 		void slashEndEvent();
 		void slashAltEndEvent();
@@ -111,6 +115,9 @@ namespace ya
 		void doubleJumpEndEvent();
 		void enterComplateEvent();
 		void wakeUpCompleteEvent();
+		void wallJumpCompleteEvent();
+
+		void initializeFlag();
 
 	private:
 		class Transform* tr;
@@ -150,6 +157,9 @@ namespace ya
 		bool enterComplateFlag	= false;
 		bool spikeFlag			= false;
 		bool wakeUpFlag			= false;
+		bool wallSlideFlag		= false;
+		bool wallJumpFlag		= false;
+
 		// sound
 		class Sound* walkSound;
 		class Sound* damageSound;
