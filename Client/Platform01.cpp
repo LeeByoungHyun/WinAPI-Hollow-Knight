@@ -31,8 +31,8 @@ namespace ya
 		mImage = ResourceManager::Load<Image>(L"Platform01", L"..\\Resources\\GodHome\\gg_plat_small.bmp");
 
 		mCollider = AddComponent<Collider>();
-		mCollider->SetSize(Vector2(179.0f, 109.0f));
-		mCollider->SetCenter(Vector2(-89.5f, -109.0f));
+		mCollider->SetSize(Vector2(179.0f, 103.0f));
+		mCollider->SetCenter(Vector2(-89.5f, -103.0f));
 
 		GameObject::Initialize();
 	}

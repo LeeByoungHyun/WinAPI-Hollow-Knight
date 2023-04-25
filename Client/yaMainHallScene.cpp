@@ -55,11 +55,12 @@ namespace ya
 		object::Instantiate<LongPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
 
 		// test
-		object::Instantiate<TestCollider>(Vector2(1724.0f, 1000.0f), eLayerType::Platform);
-		object::Instantiate<TestCollider>(Vector2(1324.0f, 1000.0f), eLayerType::Platform);
-		//object::Instantiate<Platform01>(Vector2(1724.0f, 1000.0f), eLayerType::Ground);
-		//object::Instantiate<Platform02>(Vector2(1024.0f, 1000.0f), eLayerType::Ground);
-		//object::Instantiate<Platform03>(Vector2(2324.0f, 1000.0f), eLayerType::Ground);
+		object::Instantiate<TestCollider>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
+		object::Instantiate<TestCollider>(Vector2(1324.0f, 1300.0f), eLayerType::Platform);
+
+		object::Instantiate<Platform01>(Vector2(1724.0f, 1000.0f), eLayerType::Platform);
+		object::Instantiate<Platform02>(Vector2(1024.0f, 1000.0f), eLayerType::Platform);
+		object::Instantiate<Platform03>(Vector2(2324.0f, 1000.0f), eLayerType::Platform);
 		
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();

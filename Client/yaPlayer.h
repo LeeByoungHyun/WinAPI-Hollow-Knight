@@ -72,6 +72,7 @@ namespace ya
 
 		bool GetIdleFlag() { return idleFlag; }
 		void SetIdleFlag(bool flag) { idleFlag = flag; }
+		void SetFallFlag(bool flag) { fallFlag = flag; }
 
 		bool GetEnterComplateFlag() { return enterComplateFlag; }
 

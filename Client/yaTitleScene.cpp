@@ -50,6 +50,10 @@ namespace ya
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
+			SceneManager::LoadScene(eSceneType::Tutorial);
+		}
+		if (Input::GetKeyState(eKeyCode::O) == eKeyState::Down)
+		{
 			SceneManager::LoadScene(eSceneType::MainHall);
 		}
 	}

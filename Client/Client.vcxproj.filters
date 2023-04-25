@@ -242,6 +242,18 @@
     <Filter Include="Contents\Objects\Struct\Platform">
       <UniqueIdentifier>{9babce4e-cdbf-47ef-9c96-78c1cc360ef2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\BG_Large">
+      <UniqueIdentifier>{7cf2029c-258d-43d7-ac68-a5f0f2d2228c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scenes\TutorialScene">
+      <UniqueIdentifier>{dc8cbb40-e934-4626-b74e-fbf8567c6306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\Wall">
+      <UniqueIdentifier>{665c793e-4f0c-4bbf-998e-dc6e33a9f1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\Pillar">
+      <UniqueIdentifier>{0f96d677-10b6-43e8-82e2-b28cef2a7b68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -565,6 +577,24 @@
     <ClInclude Include="ExplodeBarrelEffect.h">
       <Filter>Contents\Objects\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialScene.h">
+      <Filter>Contents\Scenes\TutorialScene</Filter>
+    </ClInclude>
+    <ClInclude Include="BG_Large.h">
+      <Filter>Contents\Objects\Struct\BG_Large</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike_Large.h">
+      <Filter>Contents\Objects\Struct\Spike</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall_Middle_Left.h">
+      <Filter>Contents\Objects\Struct\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall_Middle_Right.h">
+      <Filter>Contents\Objects\Struct\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Pillar_Large.h">
+      <Filter>Contents\Objects\Struct\Pillar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -866,6 +896,24 @@
     </ClCompile>
     <ClCompile Include="ExplodeBarrelEffect.cpp">
       <Filter>Contents\Objects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialScene.cpp">
+      <Filter>Contents\Scenes\TutorialScene</Filter>
+    </ClCompile>
+    <ClCompile Include="BG_Large.cpp">
+      <Filter>Contents\Objects\Struct\BG_Large</Filter>
+    </ClCompile>
+    <ClCompile Include="Spike_Large.cpp">
+      <Filter>Contents\Objects\Struct\Spike</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall_Middle_Left.cpp">
+      <Filter>Contents\Objects\Struct\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall_Middle_Right.cpp">
+      <Filter>Contents\Objects\Struct\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Pillar_Large.cpp">
+      <Filter>Contents\Objects\Struct\Pillar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

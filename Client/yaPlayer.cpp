@@ -415,6 +415,10 @@ namespace ya
 			
 			mRigidBody->SetActive(true);
 			initializeFlag();
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			velocity.x = 0.0f;
+			mRigidBody->SetVelocity(velocity);
 		}
 		
 		// 좌우 이동키 입력시 Walk 상태로 변경
@@ -1375,6 +1379,11 @@ namespace ya
 
 	void Player::wallSlide()
 	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
+
 		if (wallSlideFlag == false)
 		{
 			switch (mDirection)
@@ -1406,17 +1415,22 @@ namespace ya
 			wallSlideFlag = false;
 			return;
 		}
-
 		Vector2 velocity = mRigidBody->GetVelocity();
 		if (Input::GetKey(eKeyCode::LEFT))
 			velocity.x = -400.0f;
 		if (Input::GetKey(eKeyCode::RIGHT))
 			velocity.x = 400.0f;
+		velocity.y = 200.0f;
 		mRigidBody->SetVelocity(velocity);
 	}
 
 	void Player::wallJump()
 	{
+		if (Input::GetKey(eKeyCode::LEFT))
+			mDirection = eDirection::Left;
+		if (Input::GetKey(eKeyCode::RIGHT))
+			mDirection = eDirection::Right;
+
 		if (wallJumpFlag == false)
 		{
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -1790,10 +1804,6 @@ namespace ya
 		wakeUpFlag = false;
 		wallSlideFlag = false;
 		wallJumpFlag = false;
-
-		Vector2 velocity = mRigidBody->GetVelocity();
-		velocity.x = 0.0f;
-		mRigidBody->SetVelocity(velocity);
 		mTime = 0.0f;
 	}
 }
