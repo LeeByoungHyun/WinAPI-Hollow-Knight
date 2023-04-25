@@ -139,6 +139,8 @@ namespace ya
 				&& playerPos.x > objectPos.x - objectCol->GetSize().x
 				&& playerPos.x < objectPos.x + objectCol->GetSize().x)
 			{
+				if (mplayer->GetPlayerState() == Player::ePlayerState::WallJump)
+					return;
 				playerPos.y = objectPos.y + playerCol->GetSize().y - 1.0f;
 				playerTr->SetPos(playerPos);
 				return;
@@ -152,6 +154,8 @@ namespace ya
 				&& playerPos.x > objectPos.x - objectCol->GetSize().x
 				&& playerPos.x < objectPos.x + objectCol->GetSize().x)
 			{
+				if (mplayer->GetPlayerState() == Player::ePlayerState::WallJump)
+					return;
 				playerPos.y = objectPos.y - objectCol->GetSize().y + 1;
 				playerTr->SetPos(playerPos);
 				rb->SetGround(true);
