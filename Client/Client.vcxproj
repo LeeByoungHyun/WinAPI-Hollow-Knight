@@ -242,6 +242,7 @@
     <ClInclude Include="yaTime.h" />
     <ClInclude Include="yaTransform.h" />
     <ClInclude Include="yaUpSlashEffect.h" />
+    <ClInclude Include="Zote_Statue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Barb01.cpp" />
@@ -350,6 +351,7 @@
     <ClCompile Include="yaTime.cpp" />
     <ClCompile Include="yaTransform.cpp" />
     <ClCompile Include="yaUpSlashEffect.cpp" />
+    <ClCompile Include="Zote_Statue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

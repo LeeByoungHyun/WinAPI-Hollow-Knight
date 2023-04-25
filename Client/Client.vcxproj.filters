@@ -254,6 +254,9 @@
     <Filter Include="Contents\Objects\Struct\Pillar">
       <UniqueIdentifier>{0f96d677-10b6-43e8-82e2-b28cef2a7b68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\Statue">
+      <UniqueIdentifier>{fd3c87f3-af01-45b7-ac7d-0cf715fef678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -595,6 +598,9 @@
     <ClInclude Include="Pillar_Large.h">
       <Filter>Contents\Objects\Struct\Pillar</Filter>
     </ClInclude>
+    <ClInclude Include="Zote_Statue.h">
+      <Filter>Contents\Objects\Struct\Statue</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -914,6 +920,9 @@
     </ClCompile>
     <ClCompile Include="Pillar_Large.cpp">
       <Filter>Contents\Objects\Struct\Pillar</Filter>
+    </ClCompile>
+    <ClCompile Include="Zote_Statue.cpp">
+      <Filter>Contents\Objects\Struct\Statue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

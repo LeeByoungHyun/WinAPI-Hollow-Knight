@@ -29,6 +29,7 @@
 #include "Wall_Middle_Left.h"
 #include "Wall_Middle_Right.h"
 #include "LongPlatform.h"
+#include "Zote_Statue.h"
 
 namespace ya
 {
@@ -61,6 +62,7 @@ namespace ya
 		object::Instantiate<Wall_Middle_Left>(Vector2(3560.0f, 1800.0f), eLayerType::Object);
 		object::Instantiate<LongPlatform>(Vector2(4750.0f, 1630.0f), eLayerType::Platform);
 		object::Instantiate<Pillar_Large>(Vector2(5400.0f - 145.0f, 2700.0f), eLayerType::Platform);
+		object::Instantiate<Zote_Statue>(Vector2(4750.0f, 1630.0f - 99.0f), eLayerType::Object);
 
 
 		mPlayer = ya::Player::GetInstance();
