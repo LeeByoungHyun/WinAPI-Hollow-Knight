@@ -878,6 +878,14 @@ namespace ya
 			}
 		}
 
+		Vector2 pos = tr->GetPos();
+		if (pos.y > 1300.0f - 149.0f)
+		{
+			pos.y = 1300.0f - 149.0f;
+			tr->SetPos(pos);
+			mRigidbody->SetGround(true);
+		}
+
 		mTime += Time::DeltaTime();
 		if (mTime <= 0.2f)
 		{
@@ -923,6 +931,14 @@ namespace ya
 			default:
 				break;
 			}
+		}
+
+		Vector2 pos = tr->GetPos();
+		if (pos.y > 1300.0f - 149.0f)
+		{
+			pos.y = 1300.0f - 149.0f;
+			tr->SetPos(pos);
+			mRigidbody->SetGround(true);
 		}
 
 		mTime += Time::DeltaTime();
