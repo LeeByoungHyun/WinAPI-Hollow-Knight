@@ -763,7 +763,7 @@ namespace ya
 		// 7) burb 
 		// 8) counter
 		srand((unsigned int)time(NULL));
-		idlePattern = rand() % 9;
+		idlePattern = rand() % 11;
 		//idlePattern = 6;	// test
 		mTime += Time::DeltaTime();
 		if (mTime >= WAITTIME)
@@ -807,9 +807,31 @@ namespace ya
 			}
 			else if (idlePattern == 7)
 			{
-				mState = eHornetState::CounterAnticipate;
+				// Barb가 scene에 남아있으면 continue
+				if (barb01->GetBarbState() == Barb01::eBarbState::Disable
+					&& barb02->GetBarbState() == Barb02::eBarbState::Disable
+					&& barb03->GetBarbState() == Barb03::eBarbState::Disable
+					&& barb04->GetBarbState() == Barb04::eBarbState::Disable)
+				{
+					mState = eHornetState::BarbThrowAnticipate;
+				}
 			}
 			else if (idlePattern == 8)
+			{
+				// Barb가 scene에 남아있으면 continue
+				if (barb01->GetBarbState() == Barb01::eBarbState::Disable
+					&& barb02->GetBarbState() == Barb02::eBarbState::Disable
+					&& barb03->GetBarbState() == Barb03::eBarbState::Disable
+					&& barb04->GetBarbState() == Barb04::eBarbState::Disable)
+				{
+					mState = eHornetState::BarbThrowAnticipate;
+				}
+			}
+			else if (idlePattern == 9)
+			{
+				mState = eHornetState::CounterAnticipate;
+			}
+			else if (idlePattern == 10)
 			{
 				mState = eHornetState::CounterAnticipate;
 			}
