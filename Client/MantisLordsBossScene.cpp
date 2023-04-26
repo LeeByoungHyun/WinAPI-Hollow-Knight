@@ -54,20 +54,18 @@ namespace ya
 		mantisLord1->Initialize();
 		mantisLord1->GetComponent<Transform>()->SetPos(Vector2(1724.0f, 670.0f + 80.0f));
 		mantisLord1->SetType(eLayerType::Monster);
-
 		mantisLord2 = ya::MantisLord2::GetInstance();
 		scene->AddGameObject(mantisLord2, eLayerType::Monster);
 		mantisLord2->Initialize();
 		mantisLord2->GetComponent<Transform>()->SetPos(Vector2(1474.0f, 800.0f + 80.0f));
 		mantisLord2->SetType(eLayerType::Monster);
-
 		mantisLord3 = ya::MantisLord3::GetInstance();
 		scene->AddGameObject(mantisLord3, eLayerType::Monster);
 		mantisLord3->Initialize();
 		mantisLord3->GetComponent<Transform>()->SetPos(Vector2(1974.0f, 800.0f + 80.0f));
 		mantisLord3->SetType(eLayerType::Monster);
+		manager = object::Instantiate<MantisLordsManager>(eLayerType::Manager);	// 패턴관리매니저
 
-		object::Instantiate<MantisLordsManager>(eLayerType::Manager);	// 패턴관리매니저
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1974.0f, 800.0f), eLayerType::BGObject);
@@ -91,6 +89,7 @@ namespace ya
 		mPlayer->SetType(eLayerType::Player);
 
 		mantisLordsTheme = ResourceManager::Load<Sound>(L"MantisLordstheme", L"..\\Resources\\Sound\\Mantis Lords\\Mantis Lords_theme2.wav");
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 
 		// UI
 		hpUI = ya::HPInterface::GetInstance();
@@ -143,13 +142,35 @@ namespace ya
 			SceneManager::LoadScene(eSceneType::Title);
 		}
 
-		if (enterFlag == true)
-			mTime += Time::DeltaTime();
-		if (mTime >= 2.0f && enterFlag == true)
+		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
 		{
-			mantisLordsTheme->Play(true);
-			enterFlag = false;
-			mTime = 0.0f;
+			mTime += Time::DeltaTime();
+			if (mTime >= 3.0f)
+			{
+				mantisLordsTheme->Play(true);
+				manager->SetManagerState(MantisLordsManager::ePhaseState::Phase1Start);
+				startFlag = true;
+				mTime = 0.0f;
+			}
+		}
+
+		if (manager->GetEndFlag() == true)
+		{
+			mTime += Time::DeltaTime();
+
+			if (mTime >= 5.0f && flag == false)
+			{
+				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+				victorySound->Play(false);
+				flag = true;
+			}
+			if (mTime >= 9.0f)
+			{
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				SceneManager::LoadScene(eSceneType::Tutorial);
+				mTime = 0.0f;
+			}
 		}
 
 		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::ThroneBow)

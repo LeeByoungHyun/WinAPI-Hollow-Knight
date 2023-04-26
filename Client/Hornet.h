@@ -41,7 +41,8 @@ namespace ya
 			Stun,
 			StunStance,
 			Wounded,
-			Flash
+			Flash,
+			Wait
 		};
 
 		/*
@@ -76,6 +77,7 @@ namespace ya
 
 		eHornetState GetHornetState() { return mState; }
 		eDirection GetHornetDirection() { return mDirection; }
+		void SetHornetState(eHornetState state) { mState = state; }
 
 	private:
 		void idle();
@@ -112,6 +114,7 @@ namespace ya
 		void stunStance();
 		void wounded();
 		void flash();
+		void wait();
 
 		void jumpAnticipateCompleteEvent();
 		void jumpCompleteEvent();
@@ -193,6 +196,7 @@ namespace ya
 		int attackPattern;
 		int movePattern;
 		double mTime;
+		double hitTime = 0.0f;;
 		int hp;
 		int stunHp;
 
@@ -235,6 +239,8 @@ namespace ya
 		bool airToGFlag						= false;
 		bool stunStanceFlag					= false;
 		bool deathFlag						= false;
+		bool waitFlag						= false;
+		bool hitFlag						= false;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Hornet* instance;

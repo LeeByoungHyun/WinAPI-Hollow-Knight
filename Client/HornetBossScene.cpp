@@ -100,21 +100,33 @@ namespace ya
 	{
 		Scene::Update();
 
+		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 3.0f)
+			{
+				HornetBossSound->Play(true);
+				mHornet->SetHornetState(Hornet::eHornetState::Idle);
+				startFlag = true;
+				mTime = 0.0f;
+			}
+		}
+
 		if (mHornet->GetHornetState() == Hornet::eHornetState::Wounded)
 		{
 			mTime += Time::DeltaTime();
-
-			if (mTime >= 4.0f && flag == false)
+			HornetBossSound->Stop(true);
+			if (mTime >= 5.0f && flag == false)
 			{
 				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
 				victorySound->Play(false);
 				flag = true;
 			}
-			if (mTime >= 8.0f)
+			if (mTime >= 9.0f)
 			{
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
-				SceneManager::LoadScene(eSceneType::MainHall);
+				SceneManager::LoadScene(eSceneType::MantisLordsBoss);
 				mTime = 0.0f;
 			}
 		}
@@ -152,10 +164,10 @@ namespace ya
 		Camera::SetMinY(850.0f);
 		Camera::SetMaxY(850.0f);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 148.0f));
 		mHornet->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
 
-		HornetBossSound->Play(true);
+		//HornetBossSound->Play(true);
 	}
 
 	void HornetBossScene::Exit()
@@ -163,5 +175,9 @@ namespace ya
 		Scene::Exit();
 
 		HornetBossSound->Stop(true);
+		mHornet->Initialize();
+		mTime = 0.0f;
+		flag = false;
+		startFlag = false;
 	}
 }

@@ -40,6 +40,7 @@ namespace ya
 		projectile3->SetState(eState::Pause);
 
 		//fade = ya::Fade::GetInstance();
+		mPhase = ePhaseState::Wait;
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 	}
 
@@ -52,7 +53,7 @@ namespace ya
 		// 플레이어가 보스룸 진입시 1페이즈 진입
 		if (activeScene->GetType() == eSceneType::MantisLordsBoss && StartFlag1 == false)
 		{
-			mPhase = ePhaseState::Phase1Start;
+			//mPhase = ePhaseState::Phase1Start;
 		}
 
 		// 모든 보스가 죽으면 보스 인사 애니메이션 출력 후 씬 종료
@@ -61,6 +62,7 @@ namespace ya
 			&& mantisLord3->GetState() == MantisLord3::eMantisLordsState::ThroneWounded
 			&& flag4 == false)
 		{
+			/*
 			mTime += Time::DeltaTime();
 			if (mTime >= 5.0f)
 			{
@@ -71,6 +73,8 @@ namespace ya
 				mTime = 0.0f;
 				flag4 = true;
 			}
+			*/
+			endFlag = true;
 		}
 
 		// 2페이즈에서 보스가 모두 대기상태일 경우 
@@ -166,6 +170,10 @@ namespace ya
 			phase3();
 			break;
 
+		case ya::MantisLordsManager::ePhaseState::Wait:
+			wait();
+			break;
+
 		default:
 			break;
 		}
@@ -179,13 +187,19 @@ namespace ya
 	void MantisLordsManager::phase1Start()
 	{
 		mTime += Time::DeltaTime();
-		if (mTime >= 2.0f)
+		/*
+		if (mTime >= 3.0f)
 		{
 			mantisLord1->SetState(MantisLord1::eMantisLordsState::ThroneStand);
 			mPhase = ePhaseState::Phase1;
 			mTime = 0.0f;
 			StartFlag1 = true;
 		}
+		*/
+		mantisLord1->SetState(MantisLord1::eMantisLordsState::ThroneStand);
+		mPhase = ePhaseState::Phase1;
+		mTime = 0.0f;
+		StartFlag1 = true;
 	}
 
 	void MantisLordsManager::phase1()
@@ -417,6 +431,10 @@ namespace ya
 					projectile2->SetDirection(MantisLordsProjectile::eDirection::Right);
 			}
 		}
+	}
+
+	void MantisLordsManager::wait()
+	{
 	}
 
 	void MantisLordsManager::phase2Combo1()

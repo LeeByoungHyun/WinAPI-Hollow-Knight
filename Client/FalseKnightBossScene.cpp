@@ -130,7 +130,7 @@ namespace ya
 		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
 		{
 			mTime += Time::DeltaTime();
-			if (mTime >= 2.0f)
+			if (mTime >= 3.0f)
 			{
 				falseBossTheme->Play(true);
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);

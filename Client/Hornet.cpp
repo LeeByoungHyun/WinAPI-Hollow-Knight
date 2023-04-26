@@ -206,7 +206,7 @@ namespace ya
 
 		mRigidBody->SetMass(1.0f);
 		mRigidBody->SetGravity(Vector2(0.0f, 2000.0f));
-		mState = eHornetState::Idle;
+		mState = eHornetState::Wait;
 
 		// barb 미리 생성
 		barb01 = object::Instantiate<Barb01>(eLayerType::Monster);
@@ -241,6 +241,23 @@ namespace ya
 		// run 상태가 끝나면 sound stop
 		if (mState != eHornetState::Run)
 			runSound->Stop(true);
+
+		Vector2 pos = tr->GetPos();
+		if (pos.x < 1003.0f)
+			pos.x = 1003.0f;
+		if (pos.x > 2445.0f)
+			pos.x = 2445.0f;
+		tr->SetPos(pos);
+
+		if (hitFlag == true)
+		{
+			hitTime += Time::DeltaTime();
+			if (hitTime >= 0.3f)
+			{
+				hitFlag = false;
+				hitTime = 0.0f;
+			}
+		}
 
 		// FSM
 		switch (mState)
@@ -381,6 +398,10 @@ namespace ya
 			flash();
 			break;
 
+		case ya::Hornet::eHornetState::Wait:
+			wait();
+			break;
+
 		default:
 			break;
 		}
@@ -493,6 +514,19 @@ namespace ya
 					SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 					hitSound->Play(false);
 
+					// 넉백
+					if (hitFlag == false)
+					{
+						Vector2 pos = tr->GetPos();
+						Vector2 playerPos = Player::GetInstance()->GetPos();
+						if (playerPos.x > tr->GetPos().x)
+							pos.x -= 50.0f;
+						else
+							pos.x += 50.0f;
+						tr->SetPos(pos);
+						hitFlag = true;
+					}
+
 					if (stunHp <= 0)	// stun
 					{
 						initializeFlag();
@@ -564,6 +598,19 @@ namespace ya
 					hp -= Player::GetInstance()->GetSpellAtk();
 					stunHp -= Player::GetInstance()->GetSpellAtk();
 					hitSound->Play(false);
+
+					// 넉백
+					if (hitFlag == false)
+					{
+						Vector2 pos = tr->GetPos();
+						Vector2 playerPos = Player::GetInstance()->GetPos();
+						if (playerPos.x > tr->GetPos().x)
+							pos.x -= 50.0f;
+						else
+							pos.x += 50.0f;
+						tr->SetPos(pos);
+						hitFlag = true;
+					}
 
 					if (stunHp <= 0)	// stun
 					{
@@ -1929,6 +1976,39 @@ namespace ya
 	void Hornet::flash()
 	{
 
+	}
+
+	void Hornet::wait()
+	{
+		if (waitFlag == false)
+		{
+			// 플레이어 방향으로 방향 전환
+			Vector2 playerPos = Player::GetInstance()->GetPos();
+			if (playerPos.x > tr->GetPos().x)
+				mDirection = eDirection::Right;
+			else
+				mDirection = eDirection::Left;
+
+			if (mDirection == eDirection::Left)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Idleleft", true);
+			}
+			else if (mDirection == eDirection::Right)
+			{
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 170.0f));
+				mAnimator->Play(L"Hornet_Idleright", true);
+			}
+			mRigidBody->SetVelocity(Vector2::Zero);
+			mRigidBody->SetActive(true);
+			mRigidBody->SetGround(true);
+			waitFlag = true;
+
+			// 플레그 초기화
+			initializeFlag();
+		}
 	}
 
 	void Hornet::jumpAnticipateCompleteEvent()

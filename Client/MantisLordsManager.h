@@ -19,7 +19,8 @@ namespace ya
 			Phase2Combo5,
 			Phase2Combo6,
 			Phase3,
-			End
+			End,
+			Wait
 		};
 
 		MantisLordsManager();
@@ -29,6 +30,9 @@ namespace ya
 		virtual void Update() override;
 		virtual void Release() override;
 
+		void SetManagerState(ePhaseState state) { mPhase = state; }
+		bool GetEndFlag() { return endFlag; }
+
 
 	private:
 		void phase1Start();
@@ -36,6 +40,7 @@ namespace ya
 		void phase2Start();
 		void phase2();
 		void phase3();
+		void wait();
 
 		void phase2Combo1();
 		void phase2Combo2();
@@ -69,6 +74,7 @@ namespace ya
 		bool mantis2DeathFlag = false;
 		bool mantis3DeathFlag = false;
 		bool flag = false;
+		bool endFlag = false;
 	};
 }
 
