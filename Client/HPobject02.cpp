@@ -97,7 +97,7 @@ namespace ya
 			}
 
 			pos.y -= 14.0f;
-			tr->SetPos(pos);
+			tr->SetPos(Vector2(190.0f, 70.0f - 14.0f));
 		}
 	}
 	void HPobject02::idle()
@@ -116,7 +116,7 @@ namespace ya
 				reFillFlag == false;
 			}
 
-			tr->SetPos(pos);
+			tr->SetPos(Vector2(190.0f, 70.0f));
 		}
 	}
 	void HPobject02::breakHp()
@@ -130,7 +130,7 @@ namespace ya
 			Vector2 pos = tr->GetPos();
 			pos.x -= 2.5f;
 			pos.y -= 19.0f;
-			tr->SetPos(pos);
+			tr->SetPos(Vector2(190.0f - 2.5f, 70.0f - 19.0f));
 
 		}
 	}
@@ -146,7 +146,7 @@ namespace ya
 			pos.y += 14.0f;
 			pos.x -= 15.5f;
 			pos.y -= 15.0f;
-			tr->SetPos(pos);
+			tr->SetPos(Vector2(190.0f - 15.0f, 70.0f - 15.0f));
 		}
 	}
 
