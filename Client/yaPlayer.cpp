@@ -101,6 +101,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallSlide\\right", Vector2::Zero, 0.1f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\right", Vector2::Zero, 0.066f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Challenge\\neutral", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
@@ -144,6 +145,7 @@ namespace ya
 		slash3Sound = ResourceManager::Load<Sound>(L"sword_3", L"..\\Resources\\Sound\\Knight\\sword_3.wav");
 		slash4Sound = ResourceManager::Load<Sound>(L"sword_4", L"..\\Resources\\Sound\\Knight\\sword_4.wav");
 		slash5Sound = ResourceManager::Load<Sound>(L"sword_5", L"..\\Resources\\Sound\\Knight\\sword_5.wav");
+		challengeSound = ResourceManager::Load<Sound>(L"challenge", L"..\\Resources\\Sound\\Knight\\hero_challenge.wav");
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -295,6 +297,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::WallJump:
 			wallJump();
+			break;
+
+		case ya::Player::ePlayerState::Challenge:
+			challenge();
 			break;
 
 		default:
@@ -1371,7 +1377,7 @@ namespace ya
 	{
 		if (wakeUpFlag == false)
 		{
-			mDirection = eDirection::Left;
+			mDirection = eDirection::Right;
 			mAnimator->Play(L"Knight_WakeUpneutral", false);
 			wakeUpFlag = true;
 		}
@@ -1479,6 +1485,17 @@ namespace ya
 			mRigidBody->SetVelocity(velocity);
 		}
 		
+	}
+
+	void Player::challenge()
+	{
+		if (challengeFlag == false)
+		{
+			mDirection = eDirection::Right;
+			mAnimator->Play(L"Knight_Challengeneutral", false);
+			challengeFlag = true;
+			challengeSound->Play(false);
+		}
 	}
 
 	void Player::slashEndEvent()

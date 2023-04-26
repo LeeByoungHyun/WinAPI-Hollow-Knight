@@ -30,7 +30,8 @@ namespace ya
 			Enter,
 			WakeUp,
 			WallSlide,
-			WallJump
+			WallJump,
+			Challenge
 		};
 
 		enum class eDirection
@@ -99,6 +100,7 @@ namespace ya
 		void wakeUp();
 		void wallSlide();
 		void wallJump();
+		void challenge();
 
 		void slashEndEvent();
 		void slashAltEndEvent();
@@ -160,6 +162,7 @@ namespace ya
 		bool wakeUpFlag			= false;
 		bool wallSlideFlag		= false;
 		bool wallJumpFlag		= false;
+		bool challengeFlag		= false;
 
 		// sound
 		class Sound* walkSound;
@@ -176,6 +179,7 @@ namespace ya
 		class Sound* slash3Sound;
 		class Sound* slash4Sound;
 		class Sound* slash5Sound;
+		class Sound* challengeSound;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
