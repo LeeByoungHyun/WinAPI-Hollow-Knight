@@ -22,6 +22,7 @@ namespace ya
 		class FalseKnight* mFalseKnight;
 		class FalseKnightManager* mFalseManager;
 		class Sound* falseBossTheme;
+		class Sound* victorySound;
 		float mTime = 0.0f;
 
 		class HPInterface* hpUI;
@@ -32,6 +33,10 @@ namespace ya
 		class HPobject05* hp05;
 		class SoulUI* soulUI;
 		class Fade* fade;
+
+		bool startFlag = false;
+		bool flag = false;
+		bool flag2 = false;
 	};
 }
 

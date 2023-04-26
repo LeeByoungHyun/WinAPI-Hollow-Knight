@@ -76,6 +76,7 @@ namespace ya
 		void SetFallFlag(bool flag) { fallFlag = flag; }
 
 		bool GetEnterComplateFlag() { return enterComplateFlag; }
+		bool GetChallengeComplateFlag() { return challengeCompleteFlag; }
 
 	private:
 		void idle();
@@ -119,6 +120,7 @@ namespace ya
 		void enterComplateEvent();
 		void wakeUpCompleteEvent();
 		void wallJumpCompleteEvent();
+		void challengeComplateEvent();
 
 		void initializeFlag();
 
@@ -163,6 +165,8 @@ namespace ya
 		bool wallSlideFlag		= false;
 		bool wallJumpFlag		= false;
 		bool challengeFlag		= false;
+		bool challengeCompleteFlag	= false;
+		bool challengeSoundFlag = false;
 
 		// sound
 		class Sound* walkSound;

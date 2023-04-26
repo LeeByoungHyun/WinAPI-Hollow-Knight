@@ -30,6 +30,9 @@ namespace ya
 		class HPobject04* hp04;
 		class HPobject05* hp05;
 		class SoulUI* soulUI;
+
+		class Sound* victorySound;
+
 		double mTime = 0.0f;
 	};
 }

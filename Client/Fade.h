@@ -40,6 +40,7 @@ namespace ya
 		void SetFadeState(eFadeState state) { mState = state; }
 		void SetFadeSpeed(int speed) { FadeSpeed = speed; }
 		void SetFadeColor(eColor color);
+		eFadeState GetFadeState() { return mState; }
 
 	private:
 		Image* mWhite;

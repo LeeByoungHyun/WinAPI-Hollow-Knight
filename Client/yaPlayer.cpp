@@ -130,6 +130,7 @@ namespace ya
 		mAnimator->GetCompleteEvent(L"Knight_WakeUpneutral") = std::bind(&Player::wakeUpCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_WallJumpleft") = std::bind(&Player::wallJumpCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_WallJumpright") = std::bind(&Player::wallJumpCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Knight_Challengeneutral") = std::bind(&Player::challengeComplateEvent, this);
 
 		walkSound = ResourceManager::Load<Sound>(L"knightWalk", L"..\\Resources\\Sound\\Knight\\Knight Walk.wav");
 		damageSound = ResourceManager::Load<Sound>(L"Knight_damage", L"..\\Resources\\Sound\\Knight\\Knight_damage.wav");
@@ -1494,7 +1495,14 @@ namespace ya
 			mDirection = eDirection::Right;
 			mAnimator->Play(L"Knight_Challengeneutral", false);
 			challengeFlag = true;
+			//challengeSound->Play(false);
+		}
+
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.7f && challengeSoundFlag == false)
+		{
 			challengeSound->Play(false);
+			challengeSoundFlag = true;
 		}
 	}
 
@@ -1792,6 +1800,11 @@ namespace ya
 	{
 		mState = ePlayerState::Fall;
 		wallJumpFlag = false;
+	}
+
+	void Player::challengeComplateEvent()
+	{
+		challengeCompleteFlag = true;
 	}
 
 	void Player::initializeFlag()

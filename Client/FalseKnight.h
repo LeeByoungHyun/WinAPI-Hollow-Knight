@@ -27,6 +27,7 @@ namespace ya
 			StunOpened,
 			StunHit,
 			Death,
+			Wait
 		};
 
 		enum class eDirection
@@ -93,6 +94,7 @@ namespace ya
 		void stunOpened();
 		void stunHit();
 		void death();
+		void wait();
 
 		void jumpAnticipateCompleteEvent();
 		void jumpCompleteEvent();
@@ -141,6 +143,7 @@ namespace ya
 		bool deathFlag = false;
 		bool jumpReadyFlag = false;
 		bool rageFlag = false;
+		bool waitFlag = false;
 		int rageCount = 0;
 
 		std::vector<class FalseAttackWave*> waveContainer;

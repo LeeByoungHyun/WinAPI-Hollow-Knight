@@ -128,7 +128,7 @@ namespace ya
 		rollSound = ResourceManager::Load<Sound>(L"falseKnightRollSound", L"..\\Resources\\Sound\\False Knight\\false_knight_roll.wav");
 		stunSound = ResourceManager::Load<Sound>(L"bossStunSound", L"..\\Resources\\Sound\\boss_stun.wav");
 
-		mState = eFalseKnightState::Idle;
+		mState = eFalseKnightState::Wait;
 		mDirection = eDirection::Left;
 
 		mRigidbody->SetMass(1.0f);
@@ -276,6 +276,10 @@ namespace ya
 
 		case ya::FalseKnight::eFalseKnightState::Death:
 			death();
+			break;
+
+		case ya::FalseKnight::eFalseKnightState::Wait:
+			wait();
 			break;
 
 		default:
@@ -1018,6 +1022,39 @@ namespace ya
 		if (deathFlag == false)
 		{
 			deathFlag = true;
+		}
+	}
+
+	void FalseKnight::wait()
+	{
+		if (waitFlag == false)
+		{
+			switch (mDirection)
+			{
+			case eDirection::Left:	// left
+				mCollider->SetCenter(Vector2(-135.0f, -300.0f));
+				mCollider->SetSize(Vector2(275.0f, 300.0f));
+
+				mAnimator->Play(L"False Knight_Idleleft", true);
+				waitFlag = true;
+				break;
+
+			case eDirection::Right:	// right
+				mCollider->SetCenter(Vector2(-140.0f, -300.0f));
+				mCollider->SetSize(Vector2(275.0f, 300.0f));
+
+				mAnimator->Play(L"False Knight_Idleright", true);
+				waitFlag = true;
+				break;
+
+			default:
+				break;
+			}
+
+			runFlag = false;
+			landFlag = false;
+			attackRecoverFlag = false;
+			jumpAttackPart3Flag = false;
 		}
 	}
 

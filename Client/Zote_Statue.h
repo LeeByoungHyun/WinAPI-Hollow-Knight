@@ -23,6 +23,12 @@ namespace ya
 		class Image* mImage;
 		class Transform* tr;
 		class Collider* mCollider;
+
+		double mTime = 0.0f;
+		class Sound* victorySound;
+
+		bool flag1 = false;
+
 	};
 }
 

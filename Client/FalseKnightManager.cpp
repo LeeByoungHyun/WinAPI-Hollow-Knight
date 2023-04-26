@@ -72,6 +72,7 @@ namespace ya
 			}
 		}
 
+		/*
 		// 보스가 죽으면 fadeout하면서 다음 씬으로
 		if (mFalseKnight->GetDeathFlag() == true)
 		{
@@ -92,7 +93,8 @@ namespace ya
 				flag2 = true;
 			}
 		}
-		
+		*/
+
 		switch (mPhase)
 		{
 		case ya::FalseKnightManager::ePhaseState::Phase1:

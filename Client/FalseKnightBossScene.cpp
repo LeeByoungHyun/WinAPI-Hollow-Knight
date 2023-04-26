@@ -60,6 +60,7 @@ namespace ya
 		mPlayer->SetType(eLayerType::Player);
 
 		falseBossTheme = ResourceManager::Load<Sound>(L"falseKnightTheme", L"..\\Resources\\Sound\\False Knight\\Boss Battle 1.wav");
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 
 		// UI
 		hpUI = ya::HPInterface::GetInstance();
@@ -90,7 +91,6 @@ namespace ya
 		scene->AddGameObject(soulUI, eLayerType::UI);
 		soulUI->Initialize();
 		soulUI->SetType(eLayerType::UI);
-
 		fade = ya::Fade::GetInstance();
 		scene->AddGameObject(fade, eLayerType::Fade);
 		fade->Initialize();
@@ -122,12 +122,43 @@ namespace ya
 			}
 		}
 
+		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 2.0f)
+			{
+				falseBossTheme->Play(true);
+				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);
+				startFlag = true;
+				mTime = 0.0f;
+			}
+		}
+
+		// 보스가 죽으면 fadeout하면서 다음 씬으로
+		if (mFalseKnight->GetDeathFlag() == true)
+		{
+			mTime += Time::DeltaTime();
+
+			if (mTime >= 3.0f && flag == false)
+			{
+				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+				victorySound->Play(false);
+				flag = true;
+			}
+			if (mTime >= 8.0f && flag2 == false)
+			{
+				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				SceneManager::LoadScene(eSceneType::HornetBoss);
+				mTime = 0.0f;
+				flag2 = true;
+			}
+		}
 	}
 
 	void FalseKnightBossScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
 	}
 
 	void FalseKnightBossScene::Release()
@@ -156,10 +187,10 @@ namespace ya
 		Camera::SetMinY(850.0f);
 		Camera::SetMaxY(850.0f);
 
-		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 149.0f));
+		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1200.0f, 1300.0f - 149.0f));
 		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
 
-		falseBossTheme->Play(true);
+		//falseBossTheme->Play(true);
 	}
 
 	void FalseKnightBossScene::Exit()
@@ -167,5 +198,8 @@ namespace ya
 		Scene::Exit();
 		falseBossTheme->Stop(true);
 		mPlayer->SetState(GameObject::eState::Active);
+		startFlag = false;
+		mTime = 0.0f;
+		mFalseKnight->Initialize();
 	}
 }

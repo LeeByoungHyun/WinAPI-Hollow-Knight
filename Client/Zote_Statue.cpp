@@ -8,8 +8,11 @@
 #include "yaRigidBody.h"
 #include "yaCamera.h"
 #include "yaCollider.h"
+#include "yaSound.h"
+#include "yaSoundManager.h"
 
 #include "yaPlayer.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -31,6 +34,9 @@ namespace ya
 
 		mCollider->SetSize(Vector2(160.0f, 50.0f));
 		mCollider->SetCenter(Vector2(-80.0f, -50.0f));
+
+		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
+
 		GameObject::Initialize();
 	}
 
@@ -77,12 +83,27 @@ namespace ya
 			if (Input::GetKeyState(eKeyCode::UP) == eKeyState::Down
 				&& mplayer->GetComponent<RigidBody>()->GetGround() == true)
 			{
-				mplayer->SetPlayerState(Player::ePlayerState::Enter);
+				mplayer->SetPlayerState(Player::ePlayerState::Challenge);
 			}
 
-			if (mplayer->GetEnterComplateFlag() == true)
+			if (mplayer->GetChallengeComplateFlag() == true)
 			{
-				SceneManager::LoadScene(eSceneType::FalseKnightBoss);
+				mTime += Time::DeltaTime();
+				if (mTime >= 1.0f && flag1 == false)
+				{
+					Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
+					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
+					victorySound->Play(false);
+					flag1 = true;
+				}
+				if (mTime >= 4.0f)
+				{
+					SceneManager::LoadScene(eSceneType::FalseKnightBoss);
+					mplayer->SetIdleFlag(false);
+					mplayer->SetPlayerState(Player::ePlayerState::Idle);
+					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+
+				}
 			}
 		}
 	}
