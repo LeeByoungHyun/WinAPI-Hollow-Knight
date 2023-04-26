@@ -262,6 +262,13 @@ namespace ya
 			default:
 				break;
 			}
+
+			Vector2 pos = tr->GetPos();
+			pos.y += 10.0f;
+			tr->SetPos(pos);
+
+			// 여기서 bgm 종료
+			mFalseKnight->SetDeathSoundCheckFlag(true);
 		}
 
 		if (mTime >= 5.0f && deathFlag3 == false)
