@@ -111,6 +111,11 @@ namespace ya
 			SceneManager::LoadScene(eSceneType::Title);
 		}
 
+		if (mFalseKnight->GetDeathSoundCheckFlag() == true)
+		{
+			falseBossTheme->Stop(true);
+		}
+
 		if (mFalseManager->GetPhaseState() == FalseKnightManager::ePhaseState::RageAttack)
 		{
 			mTime += Time::DeltaTime();

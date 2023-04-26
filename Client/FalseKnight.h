@@ -73,6 +73,8 @@ namespace ya
 		void SetRageFlag(bool flag) { rageFlag = flag; }
 		bool GetRageFlag() { return rageFlag; }
 		bool GetDeathFlag() { return deathFlag; }
+		bool GetDeathSoundCheckFlag() { return deathSoundCheckFlag; }
+		void SetDeathSoundCheckFlag(bool flag) { deathSoundCheckFlag = flag; }
 
 	private:
 		void idle();
@@ -144,6 +146,7 @@ namespace ya
 		bool jumpReadyFlag = false;
 		bool rageFlag = false;
 		bool waitFlag = false;
+		bool deathSoundCheckFlag = false;
 		int rageCount = 0;
 
 		std::vector<class FalseAttackWave*> waveContainer;
