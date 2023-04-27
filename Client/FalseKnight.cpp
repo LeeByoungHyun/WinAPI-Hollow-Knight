@@ -879,9 +879,9 @@ namespace ya
 		}
 
 		Vector2 pos = tr->GetPos();
-		if (pos.y > 1300.0f - 149.0f)
+		if (pos.y > 1300.0f - 148.0f)
 		{
-			pos.y = 1300.0f - 149.0f;
+			pos.y = 1300.0f - 148.0f;
 			tr->SetPos(pos);
 			mRigidbody->SetGround(true);
 		}
@@ -934,9 +934,9 @@ namespace ya
 		}
 
 		Vector2 pos = tr->GetPos();
-		if (pos.y > 1300.0f - 149.0f)
+		if (pos.y > 1300.0f - 148.0f)
 		{
-			pos.y = 1300.0f - 149.0f;
+			pos.y = 1300.0f - 148.0f;
 			tr->SetPos(pos);
 			mRigidbody->SetGround(true);
 		}
