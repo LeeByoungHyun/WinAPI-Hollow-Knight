@@ -23,3 +23,6 @@
 #pragma comment(lib, "Msimg32.lib")
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "dsound.lib")
+
+#include <Vfw.h>
+#pragma comment(lib, "vfw32.lib")

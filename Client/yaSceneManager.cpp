@@ -7,6 +7,7 @@
 #include "FalseKnightBossScene.h"
 #include "HornetBossScene.h"
 #include "TutorialScene.h"
+#include "EndingScene.h"
 
 namespace ya
 {
@@ -30,6 +31,8 @@ namespace ya
         mScenes[(UINT)eSceneType::HornetBoss]->SetType(eSceneType::HornetBoss);
         mScenes[(UINT)eSceneType::Tutorial] = new TutorialScene();
         mScenes[(UINT)eSceneType::Tutorial]->SetType(eSceneType::Tutorial);
+        mScenes[(UINT)eSceneType::Ending] = new EndingScene();
+        mScenes[(UINT)eSceneType::Ending]->SetType(eSceneType::Ending);
 
         for (Scene* scene : mScenes)
         {

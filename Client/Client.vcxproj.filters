@@ -257,6 +257,9 @@
     <Filter Include="Contents\Objects\Struct\Statue">
       <UniqueIdentifier>{fd3c87f3-af01-45b7-ac7d-0cf715fef678}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scenes\Ending Scene">
+      <UniqueIdentifier>{484be304-6b9c-4766-97ac-382fa2cedc42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -601,6 +604,12 @@
     <ClInclude Include="Zote_Statue.h">
       <Filter>Contents\Objects\Struct\Statue</Filter>
     </ClInclude>
+    <ClInclude Include="yaVideo.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScene.h">
+      <Filter>Contents\Scenes\Ending Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -923,6 +932,12 @@
     </ClCompile>
     <ClCompile Include="Zote_Statue.cpp">
       <Filter>Contents\Objects\Struct\Statue</Filter>
+    </ClCompile>
+    <ClCompile Include="yaVideo.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>Contents\Scenes\Ending Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

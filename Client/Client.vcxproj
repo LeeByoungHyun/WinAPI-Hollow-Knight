@@ -71,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>../lib/x64/fmod_vc.lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -110,6 +113,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>vfw32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,6 +144,7 @@
     <ClInclude Include="CounterAttackCollider.h" />
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="ExplodeBarrelEffect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="FalseAttackCollider.h" />
@@ -242,6 +247,7 @@
     <ClInclude Include="yaTime.h" />
     <ClInclude Include="yaTransform.h" />
     <ClInclude Include="yaUpSlashEffect.h" />
+    <ClInclude Include="yaVideo.h" />
     <ClInclude Include="Zote_Statue.h" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +260,7 @@
     <ClCompile Include="CounterAttackCollider.cpp" />
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="ExplodeBarrelEffect.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="FalseAttackCollider.cpp" />
@@ -351,6 +358,7 @@
     <ClCompile Include="yaTime.cpp" />
     <ClCompile Include="yaTransform.cpp" />
     <ClCompile Include="yaUpSlashEffect.cpp" />
+    <ClCompile Include="yaVideo.cpp" />
     <ClCompile Include="Zote_Statue.cpp" />
   </ItemGroup>
   <ItemGroup>
