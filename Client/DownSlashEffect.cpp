@@ -24,6 +24,7 @@ namespace ya
 		player = Player::GetInstance();
 		Collider* mCollider = AddComponent<Collider>();
 		tr = AddComponent<Transform>();
+		tr->SetSize(Vector2(1.2f, 1.2f));
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DownSlashEffect\\neutral", Vector2::Zero, 0.033f);
 
@@ -32,14 +33,14 @@ namespace ya
 		mAnimator->Play(L"Knight_DownSlashEffectneutral", false);
 
 		mCollider->SetCenter(Vector2(-60.0f, -165.0f));
-		mCollider->SetSize(Vector2(120.0f, 150.0f));
+		mCollider->SetSize(Vector2(160.0f, 180.0f));
 
 		GameObject::Initialize();
 	}
 
 	void DownSlashEffect::Update()
 	{
-		Vector2 corPos = Vector2(0.0f, 70.0f);
+		Vector2 corPos = Vector2(-36.0f, 112.0f);
 		tr->SetPos(player->GetPos() + corPos);
 
 		GameObject::Update();

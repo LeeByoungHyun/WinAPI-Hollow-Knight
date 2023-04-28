@@ -24,6 +24,7 @@ namespace ya
 		player = Player::GetInstance();
 		Collider* mCollider = AddComponent<Collider>();
 		tr = AddComponent<Transform>();
+		tr->SetSize(Vector2(1.5f, 1.5f));
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\left", Vector2::Zero, 0.015f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_SlashAltEffect\\right", Vector2::Zero, 0.015f);
@@ -35,13 +36,13 @@ namespace ya
 		{
 			mAnimator->Play(L"Knight_SlashAltEffectleft", false);
 			mCollider->SetCenter(Vector2(-100.0f, -90.0f));
-			mCollider->SetSize(Vector2(120.0f, 90.0f));
+			mCollider->SetSize(Vector2(180.0f, 135.0f));
 		}
 		else if (player->GetPlayerDirection() == Player::eDirection::Right)
 		{
 			mAnimator->Play(L"Knight_SlashAltEffectright", false);
-			mCollider->SetCenter(Vector2(-20.0f, -90.0f));
-			mCollider->SetSize(Vector2(120.0f, 90.0f));
+			mCollider->SetCenter(Vector2(25.0f, -90.0f));
+			mCollider->SetSize(Vector2(180.0f, 135.0f));
 		}
 
 		GameObject::Initialize();
@@ -51,13 +52,13 @@ namespace ya
 	{
 		if (player->GetPlayerDirection() == Player::eDirection::Left)
 		{
-			Vector2 corPos = Vector2(-40.0f, -10.0f);
+			Vector2 corPos = Vector2(-110.0f, -40.0f);
 			tr->SetPos(player->GetPos() + corPos);
 		}
 
 		else if (player->GetPlayerDirection() == Player::eDirection::Right)
 		{
-			Vector2 corPos = Vector2(40.0f, -10.0f);
+			Vector2 corPos = Vector2(0.0f, -40.0f);
 			tr->SetPos(player->GetPos() + corPos);
 		}
 

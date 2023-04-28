@@ -24,6 +24,7 @@ namespace ya
 		player = Player::GetInstance();
 		Collider* mCollider = AddComponent<Collider>();
 		tr = AddComponent<Transform>();
+		tr->SetSize(Vector2(1.2f, 1.2f));
 
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_UpSlashEffect\\neutral", Vector2::Zero, 0.015f);
 
@@ -32,14 +33,14 @@ namespace ya
 		mAnimator->Play(L"Knight_UpSlashEffectneutral", true);
 
 		mCollider->SetCenter(Vector2(-60.0f, -180.0f));
-		mCollider->SetSize(Vector2(120.0f, 150.0f));
+		mCollider->SetSize(Vector2(160.0f, 150.0f));
 
 		GameObject::Initialize();
 	}
 
 	void UpSlashEffect::Update()
 	{
-		Vector2 corPos = Vector2(0.0f, 0.0f);
+		Vector2 corPos = Vector2(-34.0f, -58.0f);
 		tr->SetPos(player->GetPos() + corPos);
 
 		GameObject::Update();
