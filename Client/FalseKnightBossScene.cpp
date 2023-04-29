@@ -103,12 +103,12 @@ namespace ya
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::MainHall);
+			//SceneManager::LoadScene(eSceneType::MainHall);
 		}
 
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Title);
+			//SceneManager::LoadScene(eSceneType::Title);
 		}
 
 		if (mFalseKnight->GetDeathSoundCheckFlag() == true)

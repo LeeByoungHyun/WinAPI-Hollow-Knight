@@ -63,7 +63,7 @@ namespace ya
 		object::Instantiate<LongPlatform>(Vector2(4750.0f, 1630.0f), eLayerType::Platform);
 		object::Instantiate<Pillar_Large>(Vector2(5400.0f - 145.0f, 2700.0f), eLayerType::Platform);
 		object::Instantiate<Zote_Statue>(Vector2(4750.0f, 1630.0f - 99.0f), eLayerType::Object);
-		object::Instantiate<Zote_Statue>(Vector2(600.0f, 2200.0f - 100.0f), eLayerType::Object);
+		//object::Instantiate<Zote_Statue>(Vector2(600.0f, 2200.0f - 100.0f), eLayerType::Object);
 
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 
@@ -117,6 +117,17 @@ namespace ya
 		{
 			Player::GetInstance()->SetState(GameObject::eState::Active);
 			fade->SetFadeState(Fade::eFadeState::FadeIn);
+		}
+
+		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 3.0f)
+			{
+				mPlayer->SetPlayerState(Player::ePlayerState::Idle);
+				startFlag = true;
+				mTime = 0.0f;
+			}
 		}
 	}
 

@@ -96,14 +96,14 @@ namespace ya
 					victorySound->Play(false);
 					flag1 = true;
 				}
-				if (mTime >= 4.0f)
+				if (mTime >= 4.0f && flag2 == false)
 				{
-					//SceneManager::LoadScene(eSceneType::FalseKnightBoss);
 					SceneManager::LoadScene(eSceneType::FalseKnightBoss);
+					//SceneManager::LoadScene(eSceneType::Ending);
 					mplayer->SetIdleFlag(false);
 					mplayer->SetPlayerState(Player::ePlayerState::Idle);
 					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
-
+					flag2 = true;
 				}
 			}
 		}

@@ -19,6 +19,7 @@ namespace ya
 		HDC GetHdc() { return mHdc; }
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
+		void SetBackBuffer(bool flag) { backBufferFlag = flag; }
 
 	private:
 		void Clear();
@@ -36,6 +37,8 @@ namespace ya
 		UINT mHeight;
 
 		Vector2 mPos;
+
+		bool backBufferFlag = true;
 	};
 }
 

@@ -1,14 +1,15 @@
 #pragma once
 #include "yaGameObject.h"
+#include "yaImage.h"
 
 namespace ya
 {
-	class Zote_Statue : public GameObject
+	class MenuGameStart : public GameObject
 	{
 	public:
 
-		Zote_Statue();
-		~Zote_Statue();
+		MenuGameStart();
+		~MenuGameStart();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -20,16 +21,13 @@ namespace ya
 		virtual void OnCollisionExit(class Collider* other);
 
 	private:
-		class Image* mImage;
-		class Transform* tr;
+		Image* mImage;
 		class Collider* mCollider;
-
+		class Transform* tr;
 		double mTime = 0.0f;
-		class Sound* victorySound;
-
-		bool flag1 = false;
-		bool flag2 = false;
+		bool flag = false;
 	};
 }
+
 
 

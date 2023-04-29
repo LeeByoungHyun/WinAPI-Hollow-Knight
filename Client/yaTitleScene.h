@@ -26,6 +26,8 @@ namespace ya
 		Cursor* mCursor;
 		MenuTitle* mMenuTitle;
 		class Sound* titletheme;
+		class Fade* fade;
+		bool enterFlag = false;
 	};
 }
 

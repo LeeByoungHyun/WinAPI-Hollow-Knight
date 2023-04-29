@@ -43,7 +43,16 @@ namespace ya
 		if (flag == false)
 		{
 			MCIWndPlay(videoHwnd);
+			application.SetBackBuffer(false);
 			flag = true;
+		}
+
+		// 동영상 재생이 끝나면
+		if (MCIWndGetLength(videoHwnd) <= MCIWndGetPosition(videoHwnd) && endFlag == false)
+		{
+			SceneManager::LoadScene(eSceneType::Title);
+			application.SetBackBuffer(true);
+			endFlag = true;
 		}
 	}
 

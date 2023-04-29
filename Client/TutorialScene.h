@@ -34,6 +34,7 @@ namespace ya
 		class Sound* victorySound;
 
 		double mTime = 0.0f;
+		bool startFlag = false;
 	};
 }
 

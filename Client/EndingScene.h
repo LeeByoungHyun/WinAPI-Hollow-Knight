@@ -27,6 +27,7 @@ namespace ya
 		MenuTitle* mMenuTitle;
 		class Sound* titletheme;
 		bool flag = false;
+		bool endFlag = false;
 
 		HWND videoHwnd;
 	};

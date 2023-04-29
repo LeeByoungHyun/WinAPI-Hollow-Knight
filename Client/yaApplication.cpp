@@ -69,15 +69,25 @@ namespace ya
 
 	void Application::Render()
 	{
-		// 백버퍼에서 랜더링 작업
-		Rectangle(mBackHdc, -1, -1, 1601, 901);
+		if (backBufferFlag == true)
+		{
+			// 백버퍼에서 랜더링 작업
+			Rectangle(mBackHdc, -1, -1, 1601, 901);
 
-		Input::Render(mBackHdc);
-		Time::Render(mBackHdc);
-		SceneManager::Render(mBackHdc);
+			Input::Render(mBackHdc);
+			Time::Render(mBackHdc);
+			SceneManager::Render(mBackHdc);
 
-		// 백버퍼에 있는 그림을 원본버퍼에 그려준다
-		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
+			// 백버퍼에 있는 그림을 원본버퍼에 그려준다
+			BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
+		}
+		else
+		{
+			Input::Render(mHdc);
+			Time::Render(mHdc);
+			SceneManager::Render(mHdc);
+		}
+		
 	}
 
 	void Application::Clear()

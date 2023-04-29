@@ -6,6 +6,7 @@
 #include "yaTransform.h"
 #include "yaImage.h"
 #include <windowsx.h>
+#include "yaCollider.h"
 
 namespace ya
 {
@@ -22,6 +23,10 @@ namespace ya
 	void Cursor::Initialize()
 	{
 		mImage = ResourceManager::Load<Image>(L"Cursor", L"..\\Resources\\TitleScene\\Cursor.bmp");
+		mCollider = AddComponent<Collider>();
+		tr = AddComponent<Transform>();
+
+		mCollider->SetSize(Vector2(1.0f, 1.0f));
 
 		GameObject::Initialize();
 	}

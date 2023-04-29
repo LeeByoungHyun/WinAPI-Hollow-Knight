@@ -260,6 +260,9 @@
     <Filter Include="Contents\Scenes\Ending Scene">
       <UniqueIdentifier>{484be304-6b9c-4766-97ac-382fa2cedc42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Struct\menu_GameStart">
+      <UniqueIdentifier>{fe44114a-f442-4dce-9aef-860d22834a61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -610,6 +613,9 @@
     <ClInclude Include="EndingScene.h">
       <Filter>Contents\Scenes\Ending Scene</Filter>
     </ClInclude>
+    <ClInclude Include="MenuGameStart.h">
+      <Filter>Contents\Objects\Struct\menu_GameStart</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -938,6 +944,9 @@
     </ClCompile>
     <ClCompile Include="EndingScene.cpp">
       <Filter>Contents\Scenes\Ending Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGameStart.cpp">
+      <Filter>Contents\Objects\Struct\menu_GameStart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

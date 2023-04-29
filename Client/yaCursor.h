@@ -18,6 +18,7 @@ namespace ya
 	private:
 		class Image* mImage;
 		class Transform* tr;
+		class Collider* mCollider;
 	};
 }
 

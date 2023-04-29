@@ -36,6 +36,7 @@ namespace ya
 		class Sound* HornetBossSound;
 
 		bool flag = false;
+		bool flag2 = false;
 		bool startFlag = false;
 	};
 }

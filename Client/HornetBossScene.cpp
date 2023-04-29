@@ -123,11 +123,12 @@ namespace ya
 				victorySound->Play(false);
 				flag = true;
 			}
-			if (mTime >= 9.0f)
+			if (mTime >= 9.0f && flag2 == false)
 			{
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
 				SceneManager::LoadScene(eSceneType::MantisLordsBoss);
 				mTime = 0.0f;
+				flag2 = true;
 			}
 		}
 	}

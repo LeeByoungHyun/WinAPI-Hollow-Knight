@@ -62,7 +62,6 @@ namespace ya
 			&& mantisLord3->GetState() == MantisLord3::eMantisLordsState::ThroneWounded
 			&& flag4 == false)
 		{
-			/*
 			mTime += Time::DeltaTime();
 			if (mTime >= 5.0f)
 			{
@@ -71,10 +70,18 @@ namespace ya
 				mantisLord3->SetState(MantisLord3::eMantisLordsState::ThroneBow);
 
 				mTime = 0.0f;
-				flag4 = true;
+				//flag4 = true;
 			}
-			*/
-			endFlag = true;
+
+		}
+
+		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::ThroneBow)
+		{
+			mTime += Time::DeltaTime();
+			if (mTime >= 5.0f)
+			{
+				endFlag = true;
+			}
 		}
 
 		// 2페이즈에서 보스가 모두 대기상태일 경우 
@@ -101,6 +108,7 @@ namespace ya
 				mantis3DeathFlag = true;
 		}
 
+		/*
 		// 모든 보스가 죽으면 메인 홀 씬으로 변경
 		if (flag4 == true)
 		{
@@ -123,7 +131,7 @@ namespace ya
 				}
 			}
 		}
-
+		*/
 		switch (mPhase)
 		{
 		case ya::MantisLordsManager::ePhaseState::Phase1Start:

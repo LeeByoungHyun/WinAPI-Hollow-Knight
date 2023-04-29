@@ -134,12 +134,12 @@ namespace ya
 
 		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::MainHall);
+			//SceneManager::LoadScene(eSceneType::MainHall);
 		}
 
 		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Title);
+			//SceneManager::LoadScene(eSceneType::Title);
 		}
 
 		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
@@ -168,7 +168,7 @@ namespace ya
 			if (mTime >= 9.0f)
 			{
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
-				SceneManager::LoadScene(eSceneType::Tutorial);
+				SceneManager::LoadScene(eSceneType::Ending);
 				mTime = 0.0f;
 			}
 		}
