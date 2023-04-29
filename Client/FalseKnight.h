@@ -169,6 +169,7 @@ namespace ya
 		class Sound* landSound;
 		class Sound* rollSound;
 		class Sound* stunSound;
+		class Sound* rageSound;
 		class FalseAttackCollider* atCol;
 		class FalseAttackWave* FAWave;
 

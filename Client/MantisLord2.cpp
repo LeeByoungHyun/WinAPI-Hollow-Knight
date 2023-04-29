@@ -922,6 +922,7 @@ namespace ya
 	{
 		if (deathLeaveFlag == false)
 		{
+			jumpOfGroundSound->Play(false);
 			mAnimator->Play(L"Mantis Lords_Death Leaveneutral", false);
 			deathLeaveFlag = true;
 		}

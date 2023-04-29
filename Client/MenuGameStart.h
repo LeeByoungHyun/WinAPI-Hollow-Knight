@@ -24,6 +24,7 @@ namespace ya
 		Image* mImage;
 		class Collider* mCollider;
 		class Transform* tr;
+		class Sound* buttonSound;
 		double mTime = 0.0f;
 		bool flag = false;
 	};

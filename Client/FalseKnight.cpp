@@ -127,6 +127,7 @@ namespace ya
 		landSound = ResourceManager::Load<Sound>(L"falseKnightLandSound", L"..\\Resources\\Sound\\False Knight\\false_knight_land.wav");
 		rollSound = ResourceManager::Load<Sound>(L"falseKnightRollSound", L"..\\Resources\\Sound\\False Knight\\false_knight_roll.wav");
 		stunSound = ResourceManager::Load<Sound>(L"bossStunSound", L"..\\Resources\\Sound\\boss_stun.wav");
+		rageSound = ResourceManager::Load<Sound>(L"falserageSound", L"..\\Resources\\Sound\\False Knight\\FKnight_Rage.wav");
 
 		mState = eFalseKnightState::Wait;
 		mDirection = eDirection::Left;
@@ -546,35 +547,42 @@ namespace ya
 			pos.y += 20.0f;
 			tr->SetPos(pos);
 
-			// 공격마다 보이스 랜덤하게 재생
-			srand((unsigned int)time(NULL));
-			int voice = rand() % 5;
-			switch (voice)
+			if (rageFlag == true)
 			{
-			case 0:
-				attack1Sound->Play(false);
-				break;
-
-			case 1:
-				attack2Sound->Play(false);
-				break;
-
-			case 2:
-				attack3Sound->Play(false);
-				break;
-
-			case 3:
-				attack4Sound->Play(false);
-				break;
-
-			case 4:
-				attack5Sound->Play(false);
-				break;
-
-			default:
-				break;
+				rageSound->Play(false);
 			}
+			else
+			{
+				// 공격마다 보이스 랜덤하게 재생
+				srand((unsigned int)time(NULL));
+				int voice = rand() % 5;
+				switch (voice)
+				{
+				case 0:
+					attack1Sound->Play(false);
+					break;
 
+				case 1:
+					attack2Sound->Play(false);
+					break;
+
+				case 2:
+					attack3Sound->Play(false);
+					break;
+
+				case 3:
+					attack4Sound->Play(false);
+					break;
+
+				case 4:
+					attack5Sound->Play(false);
+					break;
+
+				default:
+					break;
+				}
+			}
+			
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left

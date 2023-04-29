@@ -6,6 +6,7 @@
 #include "yaTransform.h"
 #include "yaCollider.h"
 #include "Fade.h"
+#include "yaSound.h"
 
 namespace ya
 {
@@ -28,6 +29,8 @@ namespace ya
 		tr->SetPos(Vector2(700.0f, 500.0f));
 		mCollider->SetSize(Vector2(160.0f, 40.0f));
 		mCollider->SetCenter(Vector2(22.0f, 16.0f));
+
+		buttonSound = ResourceManager::Load<Sound>(L"buttonSound", L"..\\Resources\\Sound\\ui_button_confirm.wav");
 
 		GameObject::Initialize();
 	}
@@ -73,7 +76,7 @@ namespace ya
 			{
 				Fade::GetInstance()->SetFadeColor(Fade::eColor::Black);
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
-
+				buttonSound->Play(false);
 				flag = true;
 			}
 
