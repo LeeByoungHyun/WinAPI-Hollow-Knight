@@ -6,7 +6,9 @@
 
 namespace ya
 {
+	extern bool colliderRender;
 	UINT Collider::ColliderNumber = 0;
+
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
@@ -36,22 +38,25 @@ namespace ya
 
 	void Collider::Render(HDC hdc)
 	{
-		HPEN pen = NULL;
-		if (mCollisionCount == false)
-			pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
-		else
-			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
+		if (colliderRender == true)
+		{
+			HPEN pen = NULL;
+			if (mCollisionCount == false)
+				pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+			else
+				pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
 
-		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
+			HPEN oldPen = (HPEN)SelectObject(hdc, pen);
+			HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		Vector2 pos = Camera::CalculatePos(mPos);
-		Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
+			Vector2 pos = Camera::CalculatePos(mPos);
+			Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 
-		(HPEN)SelectObject(hdc, oldPen);
-		(HBRUSH)SelectObject(hdc, oldBrush);
-		DeleteObject(pen);
+			(HPEN)SelectObject(hdc, oldPen);
+			(HBRUSH)SelectObject(hdc, oldBrush);
+			DeleteObject(pen);
+		}
 
 		mCollisionCount = false;
 	}

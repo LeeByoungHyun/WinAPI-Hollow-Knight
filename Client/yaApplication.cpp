@@ -4,9 +4,12 @@
 #include "yaInput.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
+#include "yaSoundManager.h"
 
 namespace ya
 {
+	static bool colliderRender = false;
+
 	Application::Application()
 		: mHwnd(NULL)
 		, mHdc(NULL)
@@ -65,6 +68,14 @@ namespace ya
 		Camera::Update();
 		SceneManager::Update();
 		CollisionManager::Update();
+
+		if (Input::GetKeyState(eKeyCode::R) == eKeyState::Down)
+		{
+			if (colliderRender == true)
+				colliderRender = false;
+			else
+				colliderRender = true;
+		}
 	}
 
 	void Application::Render()
