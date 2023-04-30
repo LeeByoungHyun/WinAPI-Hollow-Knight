@@ -65,7 +65,7 @@ namespace ya
 				mFalseKnight->SetTrueHP(160 - (mFalseKnight->GetStunCount() * 40));
 				mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Idle);	// 일어나는 애니메이션으로 추후 변경
 				mFalseKnight->InitializeFlag();
-				mFalseKnight->SetArmorHP(75);
+				mFalseKnight->SetArmorHP(150);
 				stunFlag = false;
 				stuned = false;
 				mPhase = ePhaseState::Rage;

@@ -30,7 +30,7 @@ namespace ya
 		tr = AddComponent<Transform>();
 
 		trueHP = 160;
-		armorHP = 75;
+		armorHP = 150;
 	}
 
 	FalseKnight::~FalseKnight()

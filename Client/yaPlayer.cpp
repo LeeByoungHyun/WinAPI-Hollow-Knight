@@ -1145,6 +1145,8 @@ namespace ya
 	{
 		if (spikeFlag == false)
 		{
+			object::Instantiate<HitCrackEffect>(tr->GetPos(), eLayerType::BackEffect);
+			object::Instantiate<StunEffect>(tr->GetPos(), eLayerType::BackEffect);
 			invincibilityFlag = true;
 			hp -= 1;	// 피격당한 오브젝트의 공격력 값을 가져와야함
 			if (mDirection == eDirection::Left)

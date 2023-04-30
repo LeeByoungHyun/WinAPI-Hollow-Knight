@@ -40,8 +40,8 @@ namespace ya
 		curScene = SceneManager::GetActiveScene();
 		mRigidBody = AddComponent<RigidBody>();
 		mCollider = AddComponent<Collider>();
-		hp = 900;
-		stunHp = 300;
+		hp = 600;
+		stunHp = 200;
 		mTime = 0.0f;
 	}
 
@@ -527,7 +527,9 @@ namespace ya
 						hitFlag = true;
 					}
 
-					if (stunHp <= 0)	// stun
+					if (stunHp <= 0 
+						&& mState != eHornetState::Stun
+						&& mState != eHornetState::StunAir)	// stun
 					{
 						initializeFlag();
 
@@ -1894,7 +1896,11 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x += 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
+
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 150.0f));
 
 				if (airToGFlag == false)
 				{
@@ -1909,7 +1915,11 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x -= 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
+
+				mCollider->SetCenter(Vector2(-30.0f, -170.0f));
+				mCollider->SetSize(Vector2(60.0f, 150.0f));
 
 				if (airToGFlag == false)
 				{
@@ -1952,6 +1962,7 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x += 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
@@ -1960,6 +1971,7 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x -= 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
 			}
 
@@ -1980,6 +1992,7 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x += 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
 			}
 			else if (mDirection == eDirection::Right)
@@ -1988,6 +2001,7 @@ namespace ya
 
 				Vector2 pos = tr->GetPos();
 				//pos.x -= 13.0f;
+				pos.y += 17.0f;
 				tr->SetPos(pos);
 			}
 

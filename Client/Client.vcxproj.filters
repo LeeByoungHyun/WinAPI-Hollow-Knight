@@ -263,6 +263,9 @@
     <Filter Include="Contents\Objects\Struct\menu_GameStart">
       <UniqueIdentifier>{fe44114a-f442-4dce-9aef-860d22834a61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Objects\Charactor\Player\FireballHitEffect">
+      <UniqueIdentifier>{86522cf2-7f7e-4cc2-8785-a34fdbb22781}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -616,6 +619,9 @@
     <ClInclude Include="MenuGameStart.h">
       <Filter>Contents\Objects\Struct\menu_GameStart</Filter>
     </ClInclude>
+    <ClInclude Include="FireballHitEffect.h">
+      <Filter>Contents\Objects\Charactor\Player\FireballHitEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -947,6 +953,9 @@
     </ClCompile>
     <ClCompile Include="MenuGameStart.cpp">
       <Filter>Contents\Objects\Struct\menu_GameStart</Filter>
+    </ClCompile>
+    <ClCompile Include="FireballHitEffect.cpp">
+      <Filter>Contents\Objects\Charactor\Player\FireballHitEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

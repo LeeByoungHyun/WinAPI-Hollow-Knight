@@ -159,6 +159,7 @@
     <ClInclude Include="FireballCastEffectRight.h" />
     <ClInclude Include="FireballEffectLeft.h" />
     <ClInclude Include="FireballEffectRight.h" />
+    <ClInclude Include="FireballHitEffect.h" />
     <ClInclude Include="FocusEffect.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HitCrackEffect.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="FireballCastEffectRight.cpp" />
     <ClCompile Include="FireballEffectLeft.cpp" />
     <ClCompile Include="FireballEffectRight.cpp" />
+    <ClCompile Include="FireballHitEffect.cpp" />
     <ClCompile Include="FocusEffect.cpp" />
     <ClCompile Include="HitCrackEffect.cpp" />
     <ClCompile Include="Hornet.cpp" />
