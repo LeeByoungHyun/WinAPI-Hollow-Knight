@@ -189,6 +189,8 @@
     <ClInclude Include="MantisLordsProjectile.h" />
     <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="MantisThroneBack.h" />
+    <ClInclude Include="Mantis_Cage_L.h" />
+    <ClInclude Include="Mantis_Cage_R.h" />
     <ClInclude Include="MenuGameStart.h" />
     <ClInclude Include="Menu_Pointer_L.h" />
     <ClInclude Include="Menu_Pointer_R.h" />
@@ -309,6 +311,8 @@
     <ClCompile Include="MantisLordsProjectile.cpp" />
     <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="MantisThroneBack.cpp" />
+    <ClCompile Include="Mantis_Cage_L.cpp" />
+    <ClCompile Include="Mantis_Cage_R.cpp" />
     <ClCompile Include="MenuGameStart.cpp" />
     <ClCompile Include="Menu_Pointer_L.cpp" />
     <ClCompile Include="Menu_Pointer_R.cpp" />

@@ -31,6 +31,8 @@
 #include "Spike.h"
 #include "Fade.h"
 #include "SoulUI.h"
+#include "Mantis_Cage_L.h"
+#include "Mantis_Cage_R.h"
 
 namespace ya
 {
@@ -66,12 +68,19 @@ namespace ya
 		mantisLord3->SetType(eLayerType::Monster);
 		manager = object::Instantiate<MantisLordsManager>(eLayerType::Manager);	// 패턴관리매니저
 
+		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 700.0f, 1330.0f), eLayerType::BGObject);
+		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 550.0f, 1430.0f), eLayerType::BGObject);
+		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 400.0f, 1530.0f), eLayerType::BGObject);
+		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 700.0f, 1330.0f), eLayerType::BGObject);
+		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 550.0f, 1430.0f), eLayerType::BGObject);
+		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 400.0f, 1530.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1974.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1474.0f, 1430.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1724.0f, 1300.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1974.0f, 1430.0f), eLayerType::BGObject);
+		
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
@@ -81,6 +90,7 @@ namespace ya
 		object::Instantiate<Spike>(Vector2(1724.0f + 691.0f, 1300.0f), eLayerType::Spike);
 		object::Instantiate<Spike>(Vector2(1724.0f - 631.0f, 1300.0f), eLayerType::Spike);
 		object::Instantiate<Spike>(Vector2(1724.0f + 631.0f, 1300.0f), eLayerType::Spike);
+
 
 		// 싱글톤을 이용하여 모든 씬에서 플레이어가 1개만 존재하도록 함
 		mPlayer = ya::Player::GetInstance();
