@@ -39,6 +39,8 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		void initializeHP();
+
 	private:
 		void remain00();
 		void remain01();

@@ -75,6 +75,7 @@ namespace ya
 		bool GetDeathFlag() { return deathFlag; }
 		bool GetDeathSoundCheckFlag() { return deathSoundCheckFlag; }
 		void SetDeathSoundCheckFlag(bool flag) { deathSoundCheckFlag = flag; }
+		void Reset();
 
 	private:
 		void idle();

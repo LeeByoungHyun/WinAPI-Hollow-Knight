@@ -31,7 +31,8 @@ namespace ya
 			WakeUp,
 			WallSlide,
 			WallJump,
-			Challenge
+			Challenge,
+			Skull
 		};
 
 		enum class eDirection
@@ -70,6 +71,7 @@ namespace ya
 		void SetPlayerState(ePlayerState state) { mState = state; }
 		eDirection GetPlayerDirection() { return mDirection; }
 		int GetHp() { return hp; }
+		void SetHP(int n) { hp = n; }
 
 		bool GetIdleFlag() { return idleFlag; }
 		void SetIdleFlag(bool flag) { idleFlag = flag; }
@@ -102,6 +104,7 @@ namespace ya
 		void wallSlide();
 		void wallJump();
 		void challenge();
+		void skull();
 
 		void slashEndEvent();
 		void slashAltEndEvent();
@@ -167,6 +170,7 @@ namespace ya
 		bool challengeFlag		= false;
 		bool challengeCompleteFlag	= false;
 		bool challengeSoundFlag = false;
+		bool skullFlag = false;
 
 		// sound
 		class Sound* walkSound;

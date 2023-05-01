@@ -103,7 +103,9 @@ namespace ya
 					mplayer->SetIdleFlag(false);
 					mplayer->SetPlayerState(Player::ePlayerState::Idle);
 					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
-					flag2 = true;
+					flag1 = false;
+					flag2 = false;
+					mTime = 0.0f;
 				}
 			}
 		}
@@ -112,5 +114,9 @@ namespace ya
 	void Zote_Statue::OnCollisionExit(Collider* other)
 	{
 
+	}
+	void Zote_Statue::InitializeFlag()
+	{
+		
 	}
 }

@@ -33,6 +33,7 @@ namespace ya
 		virtual void Release() override;
 
 		void SetState(eHPState state) { mHPstate = state; }
+		void initializeFlag();
 
 	private:
 		void empty();

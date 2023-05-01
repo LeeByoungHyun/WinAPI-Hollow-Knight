@@ -286,6 +286,36 @@ namespace ya
 		GameObject::OnCollisionExit(other);
 	}
 
+	void MantisLord2::Reset()
+	{
+		throneStandFlag = false;
+		throneBowFlag = false;
+		throneLeaveFlag = false;
+		throneWoundedFlag = false;
+		dashArriveFlag = false;
+		dashAnticipateFlag = false;
+		dashFlag = false;
+		dashRecoverFlag = false;
+		dashLeaveFlag = false;
+		dStabArriveFlag = false;
+		dStabFlag = false;
+		dStabLandFlag = false;
+		dStabLeaveFlag = false;
+		wallArriveFlag = false;
+		wallReadyFlag = false;
+		throwFlag = false;
+		wallLeave1Flag = false;
+		wallLeave2Flag = false;
+		gesture1Flag = false;
+		gesture2Flag = false;
+		deathFlag = false;
+		deathLeaveFlag = false;
+		mTime = 0.0f;
+		hp = 160;
+		tr->SetPos(Vector2(1474.0f, 800.0f + 80.0f));
+		mState = eMantisLordsState::ThroneIdle;
+	}
+
 	void MantisLord2::idle()
 	{
 		tr->SetPos(Vector2::Zero);

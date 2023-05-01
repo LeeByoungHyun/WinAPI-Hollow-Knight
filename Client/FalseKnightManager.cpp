@@ -141,6 +141,28 @@ namespace ya
 		GameObject::Release();
 	}
 
+	void FalseKnightManager::Reset()
+	{
+		enterFlag = false;
+		pattern1Flag = false;
+		pattern2Flag = false;
+		pattern3Flag = false;
+		pattern4Flag = false;
+		check1Flag = false;
+		check2Flag = false;
+		stunFlag = false;
+		rageFlag = false;
+		rageAttackFlag = false;
+		rageCount = 0;
+		stuned = false;
+		flag = false;
+		flag2 = false;
+		mTime = 0.0f;
+		endTime = 0.0f;
+		mPhase = ePhaseState::Phase1;
+		mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Wait);
+	}
+
 	void FalseKnightManager::phase1()
 	{
 		// Idle 상태에서 일정 시간이 지나면 패턴중 하나를 랜덤하게 실행

@@ -32,6 +32,7 @@ namespace ya
 
 		void SetManagerState(ePhaseState state) { mPhase = state; }
 		bool GetEndFlag() { return endFlag; }
+		void Reset();
 
 
 	private:

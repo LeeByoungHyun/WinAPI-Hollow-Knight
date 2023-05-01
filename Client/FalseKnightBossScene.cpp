@@ -122,16 +122,6 @@ namespace ya
 	{
 		Scene::Update();
 
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			//SceneManager::LoadScene(eSceneType::MainHall);
-		}
-
-		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
-		{
-			//SceneManager::LoadScene(eSceneType::Title);
-		}
-
 		if (mFalseKnight->GetDeathSoundCheckFlag() == true)
 		{
 			falseBossTheme->Stop(true);
@@ -175,10 +165,24 @@ namespace ya
 			if (mTime >= 8.0f && flag2 == false)
 			{
 				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+				mFalseKnight->Reset();
+				mFalseManager->Reset();
 				SceneManager::LoadScene(eSceneType::HornetBoss);
 				mTime = 0.0f;
 				flag2 = true;
 			}
+		}
+
+		if (mPlayer->GetPlayerState() == Player::ePlayerState::Skull && fade->GetAlpha() >= 255)
+		{
+			mFalseKnight->Reset();
+			mFalseManager->Reset();
+			SceneManager::LoadScene(eSceneType::Tutorial);
+			Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+			mPlayer->SetPlayerState(Player::ePlayerState::WakeUp);
+			mPlayer->SetHP(5);
+			hpUI->initializeHP();
+			
 		}
 	}
 
@@ -214,7 +218,8 @@ namespace ya
 		Camera::SetMaxY(850.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1200.0f, 1300.0f - 149.0f));
-		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
+		mFalseKnight->SetFalseKnightState(FalseKnight::eFalseKnightState::Wait);
+		mFalseKnight->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1300.0f - 148.0f));
 
 		//falseBossTheme->Play(true);
 	}
@@ -224,8 +229,12 @@ namespace ya
 		Scene::Exit();
 		falseBossTheme->Stop(true);
 		mPlayer->SetState(GameObject::eState::Active);
-		startFlag = false;
 		mTime = 0.0f;
-		mFalseKnight->Initialize();
+		mFalseKnight->Reset();
+		mFalseManager->Reset();
+
+		startFlag = false;
+		flag = false;
+		flag2 = false;
 	}
 }

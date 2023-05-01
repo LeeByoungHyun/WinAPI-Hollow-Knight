@@ -102,6 +102,7 @@ namespace ya
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\left", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_WallJump\\right", Vector2::Zero, 0.066f);
 		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_Challenge\\neutral", Vector2::Zero, 0.1f);
+		mAnimator->CreateAnimations(L"..\\Resources\\Knight\\Knight_DeathSkull\\Neutral", Vector2::Zero, 0.1f);
 
 		mAnimator->GetCompleteEvent(L"Knight_Slashleft") = std::bind(&Player::slashEndEvent, this);
 		mAnimator->GetCompleteEvent(L"Knight_Slashright") = std::bind(&Player::slashEndEvent, this);
@@ -169,7 +170,7 @@ namespace ya
 		tr = GetComponent<Transform>();
 
 		// HP가 0이하가 되면 죽음
-		if (hp <= 0)
+		if (hp <= 0 && deathFlag == false)
 		{
 			mState = ePlayerState::Death;
 		}
@@ -192,7 +193,8 @@ namespace ya
 				&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::CastFireball)
 				&& (mState != ePlayerState::DownSlash) && (mState != ePlayerState::Spike)
 				&& (mState != ePlayerState::Death) && (mState != ePlayerState::WallSlide)
-				&& (mState != ePlayerState::WallJump))
+				&& (mState != ePlayerState::WallJump) && (mState != ePlayerState::Skull)
+				&& (mState != ePlayerState::WakeUp))
 			{
 				mState = ePlayerState::Fall;
 				idleFlag = false;
@@ -302,6 +304,10 @@ namespace ya
 
 		case ya::Player::ePlayerState::Challenge:
 			challenge();
+			break;
+
+		case ya::Player::ePlayerState::Skull:
+			skull();
 			break;
 
 		default:
@@ -1508,6 +1514,16 @@ namespace ya
 		}
 	}
 
+	void Player::skull()
+	{
+		if (skullFlag == false)
+		{
+			mAnimator->Play(L"Knight_DeathSkullNeutral", false);
+			skullFlag = true;
+			mRigidBody->SetActive(true);
+		}
+	}
+
 	void Player::slashEndEvent()
 	{
 		// 공중, 지상일 경우 구분
@@ -1702,12 +1718,11 @@ namespace ya
 		//object::Destroy(this);
 		Fade::GetInstance()->SetFadeColor(Fade::eColor::Black);
 		Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
-		this->SetState(eState::Pause);
+		mState = ePlayerState::Skull;
 		
-		object::Instantiate<PlayerSkull>(tr->GetPos(), eLayerType::Player);
-		// 위에 줄 삭제하고 플레이어 애니메이션을 하나 더 만들면 됨
+		//object::Instantiate<PlayerSkull>(tr->GetPos(), eLayerType::Player);
 
-		Camera::SetTarget(nullptr);
+		//Camera::SetTarget(nullptr);
 	}
 
 	void Player::focusEndEvent()
@@ -1836,6 +1851,10 @@ namespace ya
 		wakeUpFlag = false;
 		wallSlideFlag = false;
 		wallJumpFlag = false;
+		challengeFlag = false;
+		challengeCompleteFlag = false;
+		challengeSoundFlag = false;
+		skullFlag = false;
 		mTime = 0.0f;
 	}
 }

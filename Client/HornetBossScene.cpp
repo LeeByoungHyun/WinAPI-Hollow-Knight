@@ -131,6 +131,17 @@ namespace ya
 				flag2 = true;
 			}
 		}
+
+		if (mPlayer->GetPlayerState() == Player::ePlayerState::Skull && fade->GetAlpha() >= 255)
+		{
+			SceneManager::LoadScene(eSceneType::Tutorial);
+			mHornet->Reset();
+			Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+			mPlayer->SetPlayerState(Player::ePlayerState::WakeUp);
+			mPlayer->SetHP(5);
+			hpUI->initializeHP();
+		}
+
 	}
 
 	void HornetBossScene::Render(HDC hdc)
@@ -166,7 +177,7 @@ namespace ya
 		Camera::SetMaxY(850.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1600.0f, 1300.0f - 148.0f));
-		mHornet->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1100.0f));
+		mHornet->GetComponent<Transform>()->SetPos(Vector2(2100.0f, 1300.0f - 148.0f));
 
 		//HornetBossSound->Play(true);
 	}
@@ -176,9 +187,11 @@ namespace ya
 		Scene::Exit();
 
 		HornetBossSound->Stop(true);
-		mHornet->Initialize();
+		mHornet->Reset();
 		mTime = 0.0f;
 		flag = false;
+		flag2 = false;
 		startFlag = false;
+		enterFlag = false;
 	}
 }

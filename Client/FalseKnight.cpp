@@ -350,6 +350,19 @@ namespace ya
 		stunHitFlag = false;
 		deathFlag = false;
 		jumpReadyFlag = false;
+		waitFlag = false;
+	}
+
+	void FalseKnight::Reset()
+	{
+		InitializeFlag();
+
+		mState = eFalseKnightState::Wait;
+		mDirection = eDirection::Left;
+
+		trueHP = 160;
+		armorHP = 150;
+		stunCount = 0;
 	}
 
 	void FalseKnight::idle()

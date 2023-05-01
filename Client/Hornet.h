@@ -78,6 +78,7 @@ namespace ya
 		eHornetState GetHornetState() { return mState; }
 		eDirection GetHornetDirection() { return mDirection; }
 		void SetHornetState(eHornetState state) { mState = state; }
+		void Reset();
 
 	private:
 		void idle();

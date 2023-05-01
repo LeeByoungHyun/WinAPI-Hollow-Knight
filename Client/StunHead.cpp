@@ -14,6 +14,7 @@
 #include "yaPlayer.h"
 #include "FalseKnight.h"
 #include "SoulUI.h"
+#include "Fade.h"
 
 namespace ya
 {
@@ -71,6 +72,11 @@ namespace ya
 			mState = eStunHeadState::Death;
 		}
 		else if(mFalseKnight->GetTrueHP() <= 160 - (mFalseKnight->GetStunCount() * 40))
+		{
+			object::Destroy(this);
+		}
+
+		if (Fade::GetInstance()->GetAlpha() == 255 && mState == eStunHeadState::Death)
 		{
 			object::Destroy(this);
 		}

@@ -102,6 +102,27 @@ namespace ya
 		GameObject::Release();
 	}
 
+	void HPInterface::initializeHP()
+	{
+		hp01->SetState(HPobject01::eHPState::Idle);
+		hp02->SetState(HPobject02::eHPState::Idle);
+		hp03->SetState(HPobject03::eHPState::Idle);
+		hp04->SetState(HPobject04::eHPState::Idle);
+		hp05->SetState(HPobject05::eHPState::Idle);
+		hp01->initializeFlag();
+		hp02->initializeFlag();
+		hp03->initializeFlag();
+		hp04->initializeFlag();
+		hp05->initializeFlag();
+		remainFlag00 = false;
+		remainFlag01 = false;
+		remainFlag02 = false;
+		remainFlag03 = false;
+		remainFlag04 = false;
+		remainFlag05 = false;
+		mHPstate = eHPState::Remain05;
+	}
+
 	void HPInterface::remain00()
 	{
 		if (remainFlag00 == false)

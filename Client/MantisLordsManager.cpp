@@ -192,6 +192,28 @@ namespace ya
 		GameObject::Release();
 	}
 
+	void MantisLordsManager::Reset()
+	{
+		StartFlag1 = false;
+		StartFlag2 = false;
+		startFlag3 = false;
+		flag4 = false;
+		mantis2AttackFlag = false;
+		mantis3AttackFlag = false;
+		mantis2DeathFlag = false;
+		mantis3DeathFlag = false;
+		flag = false;
+		endFlag = false;
+		mTime = 0.0f;
+		projectile1->SetState(eState::Pause);
+		projectile2->SetState(eState::Pause);
+		projectile3->SetState(eState::Pause);
+		mPhase = ePhaseState::Wait;
+		mantisLord1->Reset();
+		mantisLord2->Reset();
+		mantisLord3->Reset();
+	}
+
 	void MantisLordsManager::phase1Start()
 	{
 		mTime += Time::DeltaTime();

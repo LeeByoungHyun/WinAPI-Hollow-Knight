@@ -155,16 +155,6 @@ namespace ya
 	{
 		Scene::Update();
 
-		if (Input::GetKeyState(eKeyCode::P) == eKeyState::Down)
-		{
-			//SceneManager::LoadScene(eSceneType::MainHall);
-		}
-
-		if (Input::GetKeyState(eKeyCode::T) == eKeyState::Down)
-		{
-			//SceneManager::LoadScene(eSceneType::Title);
-		}
-
 		if (Fade::GetInstance()->GetFadeState() == Fade::eFadeState::Neutral && startFlag == false)
 		{
 			mTime += Time::DeltaTime();
@@ -199,6 +189,16 @@ namespace ya
 		if (mantisLord1->GetState() == MantisLord1::eMantisLordsState::ThroneBow)
 		{
 			mantisLordsTheme->Stop(true);
+		}
+
+		if (mPlayer->GetPlayerState() == Player::ePlayerState::Skull && fade->GetAlpha() >= 255)
+		{
+			SceneManager::LoadScene(eSceneType::Tutorial);
+			manager->Reset();
+			Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
+			mPlayer->SetPlayerState(Player::ePlayerState::WakeUp);
+			mPlayer->SetHP(5);
+			hpUI->initializeHP();
 		}
 	}
 
@@ -240,5 +240,10 @@ namespace ya
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(1724.0f, 1300.0f));
 		mantisLordsTheme->Stop(true);
+		manager->Reset();
+		enterFlag = false;
+		startFlag = false;
+		flag = false;
+		mTime = 0.0f;
 	}
 }

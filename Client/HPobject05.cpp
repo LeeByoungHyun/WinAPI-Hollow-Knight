@@ -79,6 +79,14 @@ namespace ya
 		GameObject::Release();
 	}
 
+	void HPobject05::initializeFlag()
+	{
+		emptyFlag = false;
+		idleFlag = false;
+		breakHpFlag = false;
+		reFillFlag = false;
+	}
+
 	void HPobject05::empty()
 	{
 		if (emptyFlag == false)

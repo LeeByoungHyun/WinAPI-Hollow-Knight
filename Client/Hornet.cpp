@@ -514,6 +514,7 @@ namespace ya
 					SoulUI::GetInstance()->SetSoul(SoulUI::GetInstance()->GetSoul() + 10.0f);
 					hitSound->Play(false);
 
+					/*
 					// ³Ë¹é
 					Vector2 pos = tr->GetPos();
 					Vector2 playerPos = Player::GetInstance()->GetPos();
@@ -523,7 +524,7 @@ namespace ya
 						pos.x += 50.0f;
 					tr->SetPos(pos);
 					hitFlag = true;
-
+					*/
 					/*
 					if (stunHp <= 0 
 						&& mState != eHornetState::Stun
@@ -723,6 +724,16 @@ namespace ya
 	void Hornet::OnCollisionExit(Collider* other)
 	{
 		GameObject::OnCollisionExit(other);
+	}
+
+	void Hornet::Reset()
+	{
+		initializeFlag();
+
+		hp = 600;
+		stunHp = 200;
+		mTime = 0.0f;
+		mState = eHornetState::Wait;
 	}
 
 	void Hornet::idle()

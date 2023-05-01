@@ -66,6 +66,7 @@ namespace ya
 		void SetState(eMantisLordsState state) { mState = state; }
 		eDirection GetDirection() { return mDirection; }
 		bool GetEndFlag() { return endFlag; }
+		void Reset();
 
 	private:
 		void idle();
