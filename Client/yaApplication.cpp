@@ -29,6 +29,8 @@ namespace ya
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
 
+		ShowCursor(false);
+
 		// 해상도 설정
 		mWidth = 1600;
 		mHeight = 900;
