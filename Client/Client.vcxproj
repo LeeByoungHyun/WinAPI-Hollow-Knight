@@ -190,6 +190,8 @@
     <ClInclude Include="MantisThrone.h" />
     <ClInclude Include="MantisThroneBack.h" />
     <ClInclude Include="MenuGameStart.h" />
+    <ClInclude Include="Menu_Pointer_L.h" />
+    <ClInclude Include="Menu_Pointer_R.h" />
     <ClInclude Include="NailHitEffect.h" />
     <ClInclude Include="Pillar_Large.h" />
     <ClInclude Include="Platform01.h" />
@@ -308,6 +310,8 @@
     <ClCompile Include="MantisThrone.cpp" />
     <ClCompile Include="MantisThroneBack.cpp" />
     <ClCompile Include="MenuGameStart.cpp" />
+    <ClCompile Include="Menu_Pointer_L.cpp" />
+    <ClCompile Include="Menu_Pointer_R.cpp" />
     <ClCompile Include="NailHitEffect.cpp" />
     <ClCompile Include="Pillar_Large.cpp" />
     <ClCompile Include="Platform01.cpp" />

@@ -27,6 +27,9 @@ namespace ya
 		class Sound* buttonSound;
 		double mTime = 0.0f;
 		bool flag = false;
+
+		class Menu_Pointer_L* pointerL;
+		class Menu_Pointer_R* pointerR;
 	};
 }
 

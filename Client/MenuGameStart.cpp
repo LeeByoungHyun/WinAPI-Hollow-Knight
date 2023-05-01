@@ -7,6 +7,9 @@
 #include "yaCollider.h"
 #include "Fade.h"
 #include "yaSound.h"
+#include "yaObject.h"
+#include "Menu_Pointer_L.h"
+#include "Menu_Pointer_R.h"
 
 namespace ya
 {
@@ -31,6 +34,9 @@ namespace ya
 		mCollider->SetCenter(Vector2(22.0f, 16.0f));
 
 		buttonSound = ResourceManager::Load<Sound>(L"buttonSound", L"..\\Resources\\Sound\\ui_button_confirm.wav");
+
+		pointerL = object::Instantiate<Menu_Pointer_L>(eLayerType::BGObject);
+		pointerR = object::Instantiate<Menu_Pointer_R>(eLayerType::BGObject);
 
 		GameObject::Initialize();
 	}
@@ -66,6 +72,17 @@ namespace ya
 	}
 	void MenuGameStart::OnCollisionEnter(Collider* other)
 	{
+		eLayerType otherType = other->GetOwner()->GetType();
+		if (otherType == eLayerType::Object)
+		{
+			pointerL->SetPointerState(Menu_Pointer_L::ePointerState::OnUI);
+			pointerR->SetPointerState(Menu_Pointer_R::ePointerState::OnUI);
+
+			pointerL->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(0.0f, 75.0f));
+			pointerR->GetComponent<Transform>()->SetPos(tr->GetPos() + Vector2(225.0f, 75.0f));
+		}
+
+		GameObject::OnCollisionEnter(other);
 	}
 	void MenuGameStart::OnCollisionStay(Collider* other)
 	{
@@ -79,30 +96,20 @@ namespace ya
 				buttonSound->Play(false);
 				flag = true;
 			}
-
-			/*
-			mTime += Time::DeltaTime();
-
-			if (mTime >= 3.0f && flag == false)
-			{
-				Fade::GetInstance()->SetFadeColor(Fade::eColor::White);
-				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeOut);
-				//victorySound->Play(false);
-				flag = true;
-			}
-			if (mTime >= 8.0f && flag2 == false)
-			{
-				Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);
-				SceneManager::LoadScene(eSceneType::HornetBoss);
-				mTime = 0.0f;
-				flag2 = true;
-			}
-			*/
 		}
 
 		GameObject::OnCollisionStay(other);
 	}
+
 	void MenuGameStart::OnCollisionExit(Collider* other)
 	{
+		eLayerType otherType = other->GetOwner()->GetType();
+		if (otherType == eLayerType::Object)
+		{
+			pointerL->SetPointerState(Menu_Pointer_L::ePointerState::OffUI);
+			pointerR->SetPointerState(Menu_Pointer_R::ePointerState::OffUI);
+		}
+
+		GameObject::OnCollisionEnter(other);
 	}
 }
