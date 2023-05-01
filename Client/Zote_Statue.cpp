@@ -99,7 +99,7 @@ namespace ya
 				if (mTime >= 4.0f && flag2 == false)
 				{
 					//SceneManager::LoadScene(eSceneType::FalseKnightBoss);
-					SceneManager::LoadScene(eSceneType::HornetBoss);
+					SceneManager::LoadScene(eSceneType::FalseKnightBoss);
 					mplayer->SetIdleFlag(false);
 					mplayer->SetPlayerState(Player::ePlayerState::Idle);
 					Fade::GetInstance()->SetFadeState(Fade::eFadeState::FadeIn);

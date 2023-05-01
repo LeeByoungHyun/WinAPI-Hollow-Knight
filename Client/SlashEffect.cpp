@@ -77,11 +77,6 @@ namespace ya
 
 	void SlashEffect::OnCollisionEnter(Collider* other)
 	{
-
-	}
-
-	void SlashEffect::OnCollisionStay(Collider* other)
-	{
 		// 몬스터와 충돌시 1회에 한해 뒤로 넉백 + 충돌한 몬스터 체력 감소
 		if ((other->GetOwner()->GetType() == eLayerType::Monster) && hitFlag == false)
 		{
@@ -130,6 +125,11 @@ namespace ya
 
 			hitFlag = true;
 		}
+	}
+
+	void SlashEffect::OnCollisionStay(Collider* other)
+	{
+		
 	}
 
 	void SlashEffect::OnCollisionExit(Collider* other)

@@ -24,6 +24,11 @@
 #include "HornetWallRight.h"
 #include "SoulUI.h"
 #include "Fade.h"
+#include "FalseObject01.h"
+#include "FalseObject02.h"
+#include "Egg_01.h"
+#include "Egg_02.h"
+#include "Egg_03.h"
 
 namespace ya
 {
@@ -47,6 +52,22 @@ namespace ya
 		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
 		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 991.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 891.0f, 1300.0f), eLayerType::Wall);
+
+		object::Instantiate<FalseObject01>(Vector2(1350.0f, 1300.0f - 140.0f), eLayerType::BGObject);
+		object::Instantiate<FalseObject01>(Vector2(1950.0f, 1300.0f - 140.0f), eLayerType::BGObject);
+		object::Instantiate<FalseObject02>(Vector2(1050.0f, 1300.0f - 140.0f), eLayerType::BGObject);
+		object::Instantiate<FalseObject02>(Vector2(1650.0f, 1300.0f - 140.0f), eLayerType::BGObject);
+		object::Instantiate<FalseObject02>(Vector2(2250.0f, 1300.0f - 140.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_01>(Vector2(950.0f, 1300.0f - 50.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_02>(Vector2(880.0f, 1300.0f - 40.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_03>(Vector2(1180.0f, 1300.0f - 40.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_01>(Vector2(1510.0f, 1300.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_01>(Vector2(2050.0f, 1300.0f - 50.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_02>(Vector2(1980.0f, 1300.0f - 40.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_03>(Vector2(1740.0f, 1300.0f - 30.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_01>(Vector2(2380.0f, 1300.0f - 50.0f), eLayerType::BGObject);
+		object::Instantiate<Egg_02>(Vector2(2300.0f, 1300.0f - 40.0f), eLayerType::BGObject);
+
 
 		mFalseManager = object::Instantiate<FalseKnightManager>(eLayerType::Manager);
 		mFalseKnight = ya::FalseKnight::GetInstance();

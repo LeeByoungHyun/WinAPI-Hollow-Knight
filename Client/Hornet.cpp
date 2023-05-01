@@ -507,7 +507,7 @@ namespace ya
 			}
 			else
 			{
-				if (mState != eHornetState::StunStance)
+				if (mState != eHornetState::StunStance && hitFlag == false)
 				{
 					hp -= Player::GetInstance()->GetNeilAtk();
 					stunHp -= Player::GetInstance()->GetNeilAtk();
@@ -515,18 +515,16 @@ namespace ya
 					hitSound->Play(false);
 
 					// 넉백
-					if (hitFlag == false)
-					{
-						Vector2 pos = tr->GetPos();
-						Vector2 playerPos = Player::GetInstance()->GetPos();
-						if (playerPos.x > tr->GetPos().x)
-							pos.x -= 50.0f;
-						else
-							pos.x += 50.0f;
-						tr->SetPos(pos);
-						hitFlag = true;
-					}
+					Vector2 pos = tr->GetPos();
+					Vector2 playerPos = Player::GetInstance()->GetPos();
+					if (playerPos.x > tr->GetPos().x)
+						pos.x -= 50.0f;
+					else
+						pos.x += 50.0f;
+					tr->SetPos(pos);
+					hitFlag = true;
 
+					/*
 					if (stunHp <= 0 
 						&& mState != eHornetState::Stun
 						&& mState != eHornetState::StunAir)	// stun
@@ -559,6 +557,7 @@ namespace ya
 							mState = eHornetState::StunAir;
 						}
 					}
+					*/
 
 					if (hp <= 0)	// wounded
 					{
@@ -595,26 +594,26 @@ namespace ya
 			}
 			else
 			{
-				if (mState != eHornetState::StunStance)
+				if (mState != eHornetState::StunStance && hitFlag == false)
 				{
 					hp -= Player::GetInstance()->GetSpellAtk();
 					stunHp -= Player::GetInstance()->GetSpellAtk();
 					hitSound->Play(false);
 
 					// 넉백
-					if (hitFlag == false)
-					{
-						Vector2 pos = tr->GetPos();
-						Vector2 playerPos = Player::GetInstance()->GetPos();
-						if (playerPos.x > tr->GetPos().x)
-							pos.x -= 50.0f;
-						else
-							pos.x += 50.0f;
-						tr->SetPos(pos);
-						hitFlag = true;
-					}
+					Vector2 pos = tr->GetPos();
+					Vector2 playerPos = Player::GetInstance()->GetPos();
+					if (playerPos.x > tr->GetPos().x)
+						pos.x -= 50.0f;
+					else
+						pos.x += 50.0f;
+					tr->SetPos(pos);
+					hitFlag = true;
 
-					if (stunHp <= 0)	// stun
+					/*
+					if (stunHp <= 0
+						&& mState != eHornetState::Stun
+						&& mState != eHornetState::StunAir)	// stun
 					{
 						initializeFlag();
 
@@ -637,12 +636,14 @@ namespace ya
 						if (mRigidBody->GetGround() == true)
 						{
 							mState = eHornetState::Stun;
+							mRigidBody->SetGround(false);
 						}
 						else
 						{
 							mState = eHornetState::StunAir;
 						}
 					}
+					*/
 
 					if (hp <= 0)	// wounded
 					{
@@ -838,77 +839,6 @@ namespace ya
 				mState = eHornetState::CounterAnticipate;
 			}
 		}
-
-		/*
-		// attack
-		// move
-		// jump
-		srand((unsigned int)time(NULL));
-		idlePattern = rand() % 3;
-		//idlePattern = 6;	// test
-		mTime += Time::DeltaTime();
-
-		if (idlePattern == 0)	// attack
-		{
-			srand((unsigned int)time(NULL));
-			attackPattern = rand() % 5;
-			idleFlag = false;
-			if (idlePattern == 0)
-			{
-				mState = eHornetState::ThrowNeedleAnticipate;
-			}
-			else if (idlePattern == 1)
-			{
-				mState = eHornetState::GDashAnticipate;
-			}
-			else if (idlePattern == 2)
-			{
-				mState = eHornetState::SphereAnticipateG;
-			}
-			else if (idlePattern == 3)
-			{
-				// Barb가 scene에 남아있으면 continue
-				if (barb01->GetBarbState() == Barb01::eBarbState::Disable
-					&& barb02->GetBarbState() == Barb02::eBarbState::Disable
-					&& barb03->GetBarbState() == Barb03::eBarbState::Disable
-					&& barb04->GetBarbState() == Barb04::eBarbState::Disable)
-				{
-					mState = eHornetState::BarbThrowAnticipate;
-				}
-			}
-			else if (idlePattern == 4)
-			{
-				mState = eHornetState::CounterAnticipate;
-			}
-		}
-		else if (idlePattern == 1)	// move
-		{
-			if (moveFlag == true)
-			{
-				mState = eHornetState::JumpAnticipate;
-				moveFlag = false;
-			}
-			
-			srand((unsigned int)time(NULL));
-			movePattern = rand() % 2;
-			idleFlag = false;
-			if (movePattern == 0)
-			{
-				mState = eHornetState::Run;
-			}
-			else if (movePattern == 1)
-			{
-				mState = eHornetState::Evade;
-			}
-			moveFlag = true;
-		}
-		else if (idlePattern == 2)	// jump
-		{
-			idleFlag = false;
-			mState = eHornetState::JumpAnticipate;
-		}
-		*/
-
 	}
 
 	void Hornet::run()
@@ -974,8 +904,6 @@ namespace ya
 	{
 		if (jumpFlag == false)
 		{
-			// sound
-			
 			jumpSound->Play(false);
 
 			if (mDirection == eDirection::Left)
@@ -2120,7 +2048,6 @@ namespace ya
 
 	void Hornet::aDashCompleteEvent()
 	{
-		
 	}
 
 	void Hornet::gDashAnticipateCompleteEvent()
@@ -2161,7 +2088,6 @@ namespace ya
 
 	void Hornet::gDashCompleteEvent()
 	{
-
 	}
 
 	void Hornet::throwNeedleAnticipateCompleteEvent()
@@ -2244,7 +2170,6 @@ namespace ya
 
 	void Hornet::counterStanceCompleteEvent()
 	{
-
 	}
 
 	void Hornet::counterEndCompleteEvent()

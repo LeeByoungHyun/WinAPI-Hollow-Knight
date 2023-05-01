@@ -5,6 +5,7 @@
 #include "yaObject.h"
 #include "yaPlayer.h"
 #include "yaRigidBody.h"
+#include "NailHitEffect.h"
 
 namespace ya
 {
@@ -69,7 +70,23 @@ namespace ya
 		{
 			Vector2 pos = player->GetPos();
 			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -400.0f));
-
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
+			hitFlag = true;
+		}
+		// 몬스터와 충돌시 1회에 한해 뒤로 넉백 + 충돌한 몬스터 체력 감소
+		if ((other->GetOwner()->GetType() == eLayerType::Hornet) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -400.0f));
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
+			hitFlag = true;
+		}
+		// 몬스터와 충돌시 1회에 한해 뒤로 넉백 + 충돌한 몬스터 체력 감소
+		if ((other->GetOwner()->GetType() == eLayerType::FalseKnight) && hitFlag == false)
+		{
+			Vector2 pos = player->GetPos();
+			player->GetComponent<RigidBody>()->SetVelocity(Vector2(0.0f, -400.0f));
+			object::Instantiate<NailHitEffect>(tr->GetPos(), eLayerType::Effect);
 			hitFlag = true;
 		}
 	}

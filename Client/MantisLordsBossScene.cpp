@@ -33,6 +33,11 @@
 #include "SoulUI.h"
 #include "Mantis_Cage_L.h"
 #include "Mantis_Cage_R.h"
+#include "Mantis_Cage_T.h"
+#include "Pillar_Large.h"
+#include "Egg_01.h"
+#include "Egg_02.h"
+#include "Egg_03.h"
 
 namespace ya
 {
@@ -68,19 +73,27 @@ namespace ya
 		mantisLord3->SetType(eLayerType::Monster);
 		manager = object::Instantiate<MantisLordsManager>(eLayerType::Manager);	// 패턴관리매니저
 
+		object::Instantiate<Pillar_Large>(Vector2(1724.0f - 500.0f, 1530.0f), eLayerType::BGObject);
+		object::Instantiate<Pillar_Large>(Vector2(1724.0f + 500.0f, 1530.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 700.0f, 1330.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 550.0f, 1430.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_L>(Vector2(1724.0f - 400.0f, 1530.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 700.0f, 1330.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 550.0f, 1430.0f), eLayerType::BGObject);
 		object::Instantiate<Mantis_Cage_R>(Vector2(1724.0f + 400.0f, 1530.0f), eLayerType::BGObject);
+		//object::Instantiate<Mantis_Cage_T>(Vector2(1724.0f, 700.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1474.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1724.0f, 670.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThroneBack>(Vector2(1974.0f, 800.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1474.0f, 1430.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1724.0f, 1300.0f), eLayerType::BGObject);
 		object::Instantiate<MantisThrone>(Vector2(1974.0f, 1430.0f), eLayerType::BGObject);
-		
+
+		//object::Instantiate<Egg_02>(Vector2(1500.0f, 1300.0f), eLayerType::BGObject);
+		//object::Instantiate<Egg_01>(Vector2(1400.0f, 1320.0f), eLayerType::BGObject);
+		//object::Instantiate<Egg_03>(Vector2(1570.0f, 1310.0f), eLayerType::BGObject);
+
+
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
 		object::Instantiate<MantisBossPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);

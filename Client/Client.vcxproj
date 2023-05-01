@@ -144,6 +144,9 @@
     <ClInclude Include="CounterAttackCollider.h" />
     <ClInclude Include="DoubleJumpEffect.h" />
     <ClInclude Include="DownSlashEffect.h" />
+    <ClInclude Include="Egg_01.h" />
+    <ClInclude Include="Egg_02.h" />
+    <ClInclude Include="Egg_03.h" />
     <ClInclude Include="EndingScene.h" />
     <ClInclude Include="ExplodeBarrelEffect.h" />
     <ClInclude Include="Fade.h" />
@@ -154,6 +157,8 @@
     <ClInclude Include="FalseKnightBossScene.h" />
     <ClInclude Include="FalseKnightManager.h" />
     <ClInclude Include="FalseKnightPlatform.h" />
+    <ClInclude Include="FalseObject01.h" />
+    <ClInclude Include="FalseObject02.h" />
     <ClInclude Include="FireballCastEffect.h" />
     <ClInclude Include="FireballCastEffectLeft.h" />
     <ClInclude Include="FireballCastEffectRight.h" />
@@ -191,6 +196,7 @@
     <ClInclude Include="MantisThroneBack.h" />
     <ClInclude Include="Mantis_Cage_L.h" />
     <ClInclude Include="Mantis_Cage_R.h" />
+    <ClInclude Include="Mantis_Cage_T.h" />
     <ClInclude Include="MenuGameStart.h" />
     <ClInclude Include="Menu_Pointer_L.h" />
     <ClInclude Include="Menu_Pointer_R.h" />
@@ -266,6 +272,9 @@
     <ClCompile Include="CounterAttackCollider.cpp" />
     <ClCompile Include="DoubleJumpEffect.cpp" />
     <ClCompile Include="DownSlashEffect.cpp" />
+    <ClCompile Include="Egg_01.cpp" />
+    <ClCompile Include="Egg_02.cpp" />
+    <ClCompile Include="Egg_03.cpp" />
     <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="ExplodeBarrelEffect.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -276,6 +285,8 @@
     <ClCompile Include="FalseKnightBossScene.cpp" />
     <ClCompile Include="FalseKnightManager.cpp" />
     <ClCompile Include="FalseKnightPlatform.cpp" />
+    <ClCompile Include="FalseObject01.cpp" />
+    <ClCompile Include="FalseObject02.cpp" />
     <ClCompile Include="FireballCastEffect.cpp" />
     <ClCompile Include="FireballCastEffectLeft.cpp" />
     <ClCompile Include="FireballCastEffectRight.cpp" />
@@ -313,6 +324,7 @@
     <ClCompile Include="MantisThroneBack.cpp" />
     <ClCompile Include="Mantis_Cage_L.cpp" />
     <ClCompile Include="Mantis_Cage_R.cpp" />
+    <ClCompile Include="Mantis_Cage_T.cpp" />
     <ClCompile Include="MenuGameStart.cpp" />
     <ClCompile Include="Menu_Pointer_L.cpp" />
     <ClCompile Include="Menu_Pointer_R.cpp" />
