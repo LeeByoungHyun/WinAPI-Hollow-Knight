@@ -734,6 +734,8 @@ namespace ya
 		stunHp = 200;
 		mTime = 0.0f;
 		mState = eHornetState::Wait;
+		mRigidBody->SetGround(true);
+		mRigidBody->SetVelocity(Vector2::Zero);
 	}
 
 	void Hornet::idle()

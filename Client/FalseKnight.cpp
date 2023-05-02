@@ -359,7 +359,8 @@ namespace ya
 
 		mState = eFalseKnightState::Wait;
 		mDirection = eDirection::Left;
-
+		mRigidbody->SetGround(true);
+		mRigidbody->SetVelocity(Vector2::Zero);
 		trueHP = 160;
 		armorHP = 150;
 		stunCount = 0;
