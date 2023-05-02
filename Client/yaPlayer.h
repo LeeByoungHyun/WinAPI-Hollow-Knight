@@ -141,7 +141,7 @@ namespace ya
 		int neilAtk;
 		int spellAtk;
 		double mTime = 0.0f;
-
+		double hitTime = 0.0f;
 		bool idleFlag			= false;
 		bool walkFlag			= false;
 		bool slashFlag			= false;
@@ -171,6 +171,7 @@ namespace ya
 		bool challengeCompleteFlag	= false;
 		bool challengeSoundFlag = false;
 		bool skullFlag = false;
+		bool hitFlag = false;
 
 		// sound
 		class Sound* walkSound;

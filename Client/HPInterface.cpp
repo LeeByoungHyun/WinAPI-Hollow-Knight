@@ -5,6 +5,7 @@
 #include "yaObject.h"
 #include "yaImage.h"
 #include "yaAnimator.h"
+#include "yaInput.h"
 
 #include "yaPlayer.h"
 #include "HPobject01.h"
@@ -60,6 +61,12 @@ namespace ya
 		GameObject::Update();
 
 		activeScene = SceneManager::GetActiveScene();
+
+		// F 체력회복
+		if (Input::GetKeyDown(eKeyCode::F))
+		{
+			initializeHP();
+		}
 
 		switch (mHPstate)
 		{
@@ -121,6 +128,7 @@ namespace ya
 		remainFlag04 = false;
 		remainFlag05 = false;
 		mHPstate = eHPState::Remain05;
+		Player::GetInstance()->SetHP(5);
 	}
 
 	void HPInterface::remain00()

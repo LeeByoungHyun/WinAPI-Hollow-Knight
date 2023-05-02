@@ -184,6 +184,16 @@ namespace ya
 				invincibilityFlag = false;
 		}
 
+		if (hitFlag == true)
+		{
+			hitTime += Time::DeltaTime();
+			if (hitTime >= 2.0f)
+			{
+				hitTime = 0.0f;
+				hitFlag = false;
+			}
+		}
+
 		// 현재 상태가 특정 상태가 아니고 onGround = true 가 아닐 경우 fall 상태로 
 		if (mRigidBody->GetGround() == false)
 		{
@@ -333,27 +343,30 @@ namespace ya
 			switch (otherType)
 			{
 			case eLayerType::Monster:
-				if (!invincibilityFlag)
+				if (!invincibilityFlag && hitFlag == false)
 				{
 					mState = ePlayerState::Recoil;
 					recoilFlag = false;
 					stunFlag = false;
+					hitFlag = true;
 				}
 				break;
 			case eLayerType::FalseKnight:
-				if (!invincibilityFlag)
+				if (!invincibilityFlag && hitFlag == false)
 				{
 					mState = ePlayerState::Recoil;
 					recoilFlag = false;
 					stunFlag = false;
+					hitFlag = true;
 				}
 				break;
 			case eLayerType::Hornet:
-				if (!invincibilityFlag)
+				if (!invincibilityFlag && hitFlag == false)
 				{
 					mState = ePlayerState::Recoil;
 					recoilFlag = false;
 					stunFlag = false;
+					hitFlag = true;
 				}
 				break;
 
@@ -390,6 +403,41 @@ namespace ya
 
 	void Player::OnCollisionStay(Collider* other)
 	{
+		eLayerType otherType = other->GetOwner()->GetType();	// 플레이어와 충돌한 객체의 타입
+		if (mState != ePlayerState::Death)
+		{
+			switch (otherType)
+			{
+			case eLayerType::Monster:
+				if (!invincibilityFlag && hitFlag == false)
+				{
+					mState = ePlayerState::Recoil;
+					recoilFlag = false;
+					stunFlag = false;
+					hitFlag = true;
+				}
+				break;
+			case eLayerType::FalseKnight:
+				if (!invincibilityFlag && hitFlag == false)
+				{
+					mState = ePlayerState::Recoil;
+					recoilFlag = false;
+					stunFlag = false;
+					hitFlag = true;
+				}
+				break;
+			case eLayerType::Hornet:
+				if (!invincibilityFlag && hitFlag == false)
+				{
+					mState = ePlayerState::Recoil;
+					recoilFlag = false;
+					stunFlag = false;
+					hitFlag = true;
+				}
+				break;
+			}
+		}
+
 		GameObject::OnCollisionStay(other);
 	}
 
