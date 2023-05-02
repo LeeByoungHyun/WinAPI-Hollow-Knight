@@ -351,6 +351,9 @@ namespace ya
 		deathFlag = false;
 		jumpReadyFlag = false;
 		waitFlag = false;
+		rageFlag = false;
+		deathSoundCheckFlag = false;
+		rageCount = 0;
 	}
 
 	void FalseKnight::Reset()
