@@ -22,6 +22,14 @@
 #include "HornetWallRight.h"
 #include "SoulUI.h"
 #include "Fade.h"
+#include "WhiteTree01.h"
+#include "WhiteTree02.h"
+#include "WhiteTree03.h"
+#include "Snow01.h"
+#include "Snow02.h"
+#include "Snow03.h"
+#include "Snow04.h"
+#include "Snow05.h"
 
 namespace ya
 {
@@ -53,11 +61,18 @@ namespace ya
 		mHornet->SetType(eLayerType::Hornet);
 
 		object::Instantiate<GodBG>(Vector2(1724.0f, 1800.0f), eLayerType::BG);
-		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform);
-
+		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 1300.0f), eLayerType::Platform); 
+		object::Instantiate<FalseKnightPlatform>(Vector2(1724.0f, 500.0f), eLayerType::Platform);
+		object::Instantiate<WhiteTree01>(Vector2(1724.0f - 600.0f, 1200.0f), eLayerType::BGObject);
+		object::Instantiate<WhiteTree03>(Vector2(1724.0f + 200.0f, 1200.0f), eLayerType::BGObject);
+		object::Instantiate<WhiteTree02>(Vector2(1724.0f + 650.0f, 900.0f), eLayerType::BGObject);
+		object::Instantiate<Snow02>(Vector2(1724.0f - 330.0f, 1300.0f - 80.0f), eLayerType::Wall);
+		object::Instantiate<Snow01>(Vector2(1724.0f - 700.0f, 1300.0f - 80.0f), eLayerType::Wall);
+		object::Instantiate<Snow03>(Vector2(1724.0f + 100.0f, 1300.0f - 108.0f), eLayerType::Wall);
+		object::Instantiate<Snow04>(Vector2(1724.0f + 100.0f, 1300.0f - 108.0f), eLayerType::Wall);
+		object::Instantiate<Snow05>(Vector2(1724.0f + 420.0f, 1300.0f - 90.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallLeft>(Vector2(1724.0f - 791.0f, 1300.0f), eLayerType::Wall);
 		object::Instantiate<HornetWallRight>(Vector2(1724.0f + 791.0f, 1300.0f), eLayerType::Wall);
-
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 		HornetBossSound = ResourceManager::Load<Sound>(L"HornetBossSound", L"..\\Resources\\Sound\\Hornet\\S45 HORNET-110.wav");
 

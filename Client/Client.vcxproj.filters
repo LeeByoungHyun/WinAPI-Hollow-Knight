@@ -11,9 +11,6 @@
     <Filter Include="main">
       <UniqueIdentifier>{87717b6d-6213-4dde-b2f5-9563e8b958f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Common">
-      <UniqueIdentifier>{a6566301-8b41-49ed-a858-829fee67bc73}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject">
       <UniqueIdentifier>{1bdc5aa9-e413-49f4-bf8a-2cfde68c09b3}</UniqueIdentifier>
     </Filter>
@@ -265,6 +262,27 @@
     </Filter>
     <Filter Include="Contents\Objects\Charactor\Player\FireballHitEffect">
       <UniqueIdentifier>{86522cf2-7f7e-4cc2-8785-a34fdbb22781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\White_Tree">
+      <UniqueIdentifier>{6029cd72-0925-4c5f-b402-e4409bffd029}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\Snow">
+      <UniqueIdentifier>{46266c15-a970-4ff3-96fb-98b1bd5685f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\Egg">
+      <UniqueIdentifier>{0f937651-073d-43e4-9f4e-98fe0b041ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\FalseObject">
+      <UniqueIdentifier>{9404bf01-fd7c-4f72-b817-ff74cf1a94ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\Cage">
+      <UniqueIdentifier>{ae7429f2-7635-40c9-967e-8ba6551e7553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Objects\Struct\menu_Pointer">
+      <UniqueIdentifier>{ab219d0b-55d9-4cd3-8bdf-ce08360e9155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Common">
+      <UniqueIdentifier>{a6566301-8b41-49ed-a858-829fee67bc73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +640,63 @@
     <ClInclude Include="FireballHitEffect.h">
       <Filter>Contents\Objects\Charactor\Player\FireballHitEffect</Filter>
     </ClInclude>
+    <ClInclude Include="WhiteTree01.h">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteTree02.h">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteTree03.h">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow01.h">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow02.h">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow03.h">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow04.h">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Snow05.h">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClInclude>
+    <ClInclude Include="Egg_01.h">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClInclude>
+    <ClInclude Include="Egg_02.h">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClInclude>
+    <ClInclude Include="Egg_03.h">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClInclude>
+    <ClInclude Include="FalseObject01.h">
+      <Filter>Contents\Objects\Struct\FalseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FalseObject02.h">
+      <Filter>Contents\Objects\Struct\FalseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mantis_Cage_L.h">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClInclude>
+    <ClInclude Include="Mantis_Cage_R.h">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClInclude>
+    <ClInclude Include="Mantis_Cage_T.h">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Pointer_L.h">
+      <Filter>Contents\Objects\Struct\menu_Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu_Pointer_R.h">
+      <Filter>Contents\Objects\Struct\menu_Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Pillar_Small.h">
+      <Filter>Contents\Objects\Struct\Pillar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -956,6 +1031,63 @@
     </ClCompile>
     <ClCompile Include="FireballHitEffect.cpp">
       <Filter>Contents\Objects\Charactor\Player\FireballHitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteTree01.cpp">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteTree02.cpp">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteTree03.cpp">
+      <Filter>Contents\Objects\Struct\White_Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow01.cpp">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow02.cpp">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow03.cpp">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow04.cpp">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Snow05.cpp">
+      <Filter>Contents\Objects\Struct\Snow</Filter>
+    </ClCompile>
+    <ClCompile Include="Egg_01.cpp">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClCompile>
+    <ClCompile Include="Egg_02.cpp">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClCompile>
+    <ClCompile Include="Egg_03.cpp">
+      <Filter>Contents\Objects\Struct\Egg</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseObject01.cpp">
+      <Filter>Contents\Objects\Struct\FalseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="FalseObject02.cpp">
+      <Filter>Contents\Objects\Struct\FalseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Mantis_Cage_L.cpp">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClCompile>
+    <ClCompile Include="Mantis_Cage_R.cpp">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClCompile>
+    <ClCompile Include="Mantis_Cage_T.cpp">
+      <Filter>Contents\Objects\Struct\Cage</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Pointer_L.cpp">
+      <Filter>Contents\Objects\Struct\menu_Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_Pointer_R.cpp">
+      <Filter>Contents\Objects\Struct\menu_Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="Pillar_Small.cpp">
+      <Filter>Contents\Objects\Struct\Pillar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

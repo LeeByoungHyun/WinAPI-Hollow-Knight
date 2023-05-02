@@ -30,6 +30,7 @@
 #include "Wall_Middle_Right.h"
 #include "LongPlatform.h"
 #include "Zote_Statue.h"
+#include "Pillar_Small.h"
 
 namespace ya
 {
@@ -64,6 +65,9 @@ namespace ya
 		object::Instantiate<Pillar_Large>(Vector2(5400.0f - 145.0f, 2700.0f), eLayerType::Platform);
 		object::Instantiate<Zote_Statue>(Vector2(4750.0f, 1630.0f - 99.0f), eLayerType::Object);
 		Zote_Statue* zote = object::Instantiate<Zote_Statue>(Vector2(1100.0f, 2200.0f - 100.0f), eLayerType::Object);
+
+		Pillar_Small* test = object::Instantiate<Pillar_Small>(Vector2(1100.0f, 2700.0f), eLayerType::Wall);
+
 
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 

@@ -187,7 +187,7 @@ namespace ya
 		if (hitFlag == true)
 		{
 			hitTime += Time::DeltaTime();
-			if (hitTime >= 2.0f)
+			if (hitTime >= 1.5f)
 			{
 				hitTime = 0.0f;
 				hitFlag = false;

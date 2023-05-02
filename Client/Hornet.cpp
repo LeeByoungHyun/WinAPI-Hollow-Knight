@@ -736,6 +736,15 @@ namespace ya
 		mState = eHornetState::Wait;
 		mRigidBody->SetGround(true);
 		mRigidBody->SetVelocity(Vector2::Zero);
+		waitFlag = false;
+
+		barb01->SetBarbState(Barb01::eBarbState::Disable);
+		barb02->SetBarbState(Barb02::eBarbState::Disable);
+		barb03->SetBarbState(Barb03::eBarbState::Disable);
+		barb04->SetBarbState(Barb04::eBarbState::Disable);
+		ball->SetShereBallState(SphereBall::eSphereBallState::Disable);
+		needle->SetNeedeState(HornetNeedle::eHornetNeedleState::Disable);
+		caCol->SetCAState(CounterAttackCollider::eCounterAttackColliderState::Disable);
 	}
 
 	void Hornet::idle()
