@@ -174,7 +174,8 @@ namespace ya
 				return;
 
 			RigidBody* rb = mplayer->GetComponent<RigidBody>();
-			mplayer->SetPlayerState(Player::ePlayerState::Idle);
+			if (mplayer->GetPlayerState() != Player::ePlayerState::WallJump)
+				mplayer->SetPlayerState(Player::ePlayerState::Idle);
 			rb->SetGround(false);
 		}
 	}

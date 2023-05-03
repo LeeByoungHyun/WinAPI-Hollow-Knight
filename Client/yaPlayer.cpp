@@ -148,6 +148,8 @@ namespace ya
 		slash4Sound = ResourceManager::Load<Sound>(L"sword_4", L"..\\Resources\\Sound\\Knight\\sword_4.wav");
 		slash5Sound = ResourceManager::Load<Sound>(L"sword_5", L"..\\Resources\\Sound\\Knight\\sword_5.wav");
 		challengeSound = ResourceManager::Load<Sound>(L"challenge", L"..\\Resources\\Sound\\Knight\\hero_challenge.wav");
+		wallSlideSound = ResourceManager::Load<Sound>(L"wallSlideSound", L"..\\Resources\\Sound\\Knight\\hero_wall_slide.wav");
+		wallJumpSound = ResourceManager::Load<Sound>(L"wallJumpSound", L"..\\Resources\\Sound\\Knight\\hero_wall_jump.wav");
 
 		mAnimator->Play(L"Knight_Idleright", true);
 		
@@ -213,6 +215,8 @@ namespace ya
 
 		if (mState != ePlayerState::Walk)
 			walkSound->Stop(true);
+		if (mState != ePlayerState::WallSlide)
+			wallSlideSound->Stop(true);
 
 		// 좌우이동 멈추면 rigidbody 속도 0으로
 		Vector2 velocity = mRigidBody->GetVelocity();
@@ -475,7 +479,7 @@ namespace ya
 
 			mRigidBody->SetVelocity(Vector2::Zero);
 			idleFlag = true;
-			
+			doubleJumpFlag = false;
 			mRigidBody->SetActive(true);
 			initializeFlag();
 
@@ -1451,6 +1455,7 @@ namespace ya
 
 		if (wallSlideFlag == false)
 		{
+			wallSlideSound->Play(false);
 			switch (mDirection)
 			{
 			case eDirection::Left:	// left
@@ -1498,6 +1503,7 @@ namespace ya
 
 		if (wallJumpFlag == false)
 		{
+			wallJumpSound->Play(false);
 			Vector2 velocity = mRigidBody->GetVelocity();
 			switch (mDirection)
 			{
@@ -1734,6 +1740,7 @@ namespace ya
 	{
 		// 대쉬 끝나면 대쉬 재사용 가능하도록
 		dashFlag = false;
+		fallFlag = false;
 		mRigidBody->SetVelocity(Vector2::Zero);
 
 		// 대쉬 끝났을 때 공중, 지상일 경우 구분
@@ -1891,8 +1898,8 @@ namespace ya
 		focusGetOnceFlag = false;
 		castFireballFlag = false;
 		jumpFlag = false;
-		doubleJumpFlag = false;
-		fallFlag = false;
+		//doubleJumpFlag = false;
+		//fallFlag = false;
 		stunFlag = false;
 		recoilFlag = false;
 		enterFlag = false;

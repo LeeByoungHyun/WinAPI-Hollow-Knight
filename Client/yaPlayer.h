@@ -189,6 +189,8 @@ namespace ya
 		class Sound* slash4Sound;
 		class Sound* slash5Sound;
 		class Sound* challengeSound;
+		class Sound* wallSlideSound;
+		class Sound* wallJumpSound;
 
 		// ΩÃ±€≈Ê ∞¥√º ¿ŒΩ∫≈œΩ∫
 		static Player* instance;
