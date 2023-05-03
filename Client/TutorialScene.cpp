@@ -31,6 +31,9 @@
 #include "LongPlatform.h"
 #include "Zote_Statue.h"
 #include "Pillar_Small.h"
+#include "Cloud01.h"
+#include "Cloud02.h"
+#include "Cloud03.h"
 
 namespace ya
 {
@@ -66,8 +69,18 @@ namespace ya
 		object::Instantiate<Zote_Statue>(Vector2(4750.0f, 1630.0f - 99.0f), eLayerType::Object);
 		Zote_Statue* zote = object::Instantiate<Zote_Statue>(Vector2(1100.0f, 2200.0f - 100.0f), eLayerType::Object);
 
-		Pillar_Small* test = object::Instantiate<Pillar_Small>(Vector2(1100.0f, 2700.0f), eLayerType::Wall);
-
+		//object::Instantiate<Cloud01>(Vector2(700.0f, 1700.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud02>(Vector2(1400.0f, 1650.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud03>(Vector2(1900.0f, 1680.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud02>(Vector2(2200.0f, 1730.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud03>(Vector2(2600.0f, 1780.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud01>(Vector2(3300.0f, 1690.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud03>(Vector2(3500.0f, 1740.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud02>(Vector2(4000.0f, 1600.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud01>(Vector2(4500.0f, 1550.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud02>(Vector2(4900.0f, 1600.0f), eLayerType::Wall);
+		//object::Instantiate<Cloud01>(Vector2(5500.0f, 1580.0f), eLayerType::Wall);
+		//Pillar_Small* test = object::Instantiate<Pillar_Small>(Vector2(1100.0f, 2700.0f), eLayerType::Wall);
 
 		victorySound = ResourceManager::Load<Sound>(L"VictorySound", L"..\\Resources\\Sound\\Hallownest_Call.wav");
 
@@ -169,6 +182,7 @@ namespace ya
 		Camera::SetMaxY(0.0f);
 
 		mPlayer->GameObject::GetComponent<Transform>()->SetPos(Vector2(500.0f, 2100.0f));
+		mPlayer->SetPlayerState(Player::ePlayerState::WakeUp);
 	}
 
 	void TutorialScene::Exit()

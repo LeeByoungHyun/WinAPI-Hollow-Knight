@@ -372,7 +372,10 @@ namespace ya
 
 			// 面倒茄 按眉啊 顶老 版快 idle
 			case eLayerType::Ground:
-				if (mState != ePlayerState::Spike)
+				if (mState != ePlayerState::Spike && (mState != ePlayerState::Skull)
+					&& (mState != ePlayerState::Slash) && (mState != ePlayerState::SlashAlt)
+					&& (mState != ePlayerState::UpSlash) && (mState != ePlayerState::DownSlash)
+					&& (mState != ePlayerState::CastFireball) && (mState != ePlayerState::Dash))
 				{
 					mState = ePlayerState::Idle;
 					if (mDirection == eDirection::Left)
@@ -387,9 +390,8 @@ namespace ya
 				{
 					mRigidBody->SetGround(true);
 				}
-				
 				break;
-
+			
 				// spike
 			case eLayerType::Spike:
 				mState = ePlayerState::Spike;

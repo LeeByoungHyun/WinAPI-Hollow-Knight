@@ -82,7 +82,7 @@ namespace ya
 		{
 			activeFlag = false;
 			disableFlag = true;
-
+			mTime = 0.0f;
 			tr->SetPos(Vector2::Zero);
 			mCollider->SetSize(Vector2::Zero);
 			mCollider->SetActive(false);
@@ -114,6 +114,12 @@ namespace ya
 				mCollider->SetSize(Vector2(370.0f, 450.0f));
 				mCollider->SetCenter(Vector2(0.0f, -450.0f));
 			}
+		}
+		mTime += Time::DeltaTime();
+		if (mTime >= 0.1f)
+		{
+			mState = eFalseAttackColliderState::Disable;
+			mTime = 0.0f;
 		}
 	}
 }

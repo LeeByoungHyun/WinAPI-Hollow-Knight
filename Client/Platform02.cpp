@@ -142,7 +142,14 @@ namespace ya
 				playerPos.y = objectPos.y - objectCol->GetSize().y + 1;
 				playerTr->SetPos(playerPos);
 				rb->SetGround(true);
-				mplayer->SetPlayerState(Player::ePlayerState::Idle);
+				if (mplayer->GetPlayerState() != Player::ePlayerState::Spike && (mplayer->GetPlayerState() != Player::ePlayerState::Skull)
+					&& (mplayer->GetPlayerState() != Player::ePlayerState::Slash) && (mplayer->GetPlayerState() != Player::ePlayerState::SlashAlt)
+					&& (mplayer->GetPlayerState() != Player::ePlayerState::UpSlash) && (mplayer->GetPlayerState() != Player::ePlayerState::DownSlash)
+					&& (mplayer->GetPlayerState() != Player::ePlayerState::CastFireball) && (mplayer->GetPlayerState() != Player::ePlayerState::Dash)
+					&& (mplayer->GetPlayerState() != Player::ePlayerState::WakeUp)) 
+				{
+					mplayer->SetPlayerState(Player::ePlayerState::Idle);
+				}
 				return;
 			}
 		}

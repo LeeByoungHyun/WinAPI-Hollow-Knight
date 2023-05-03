@@ -22,5 +22,7 @@ namespace ya
 		class Transform* tr;
 		class Animator* mAnimator;
 		class Collider* mCollider;
+		class Sound* explodeSound01;
+		class Sound* explodeSound02;
 	};
 }
